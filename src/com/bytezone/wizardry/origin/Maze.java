@@ -29,15 +29,11 @@ public class Maze
   public Maze (byte[] buffer, int offset, int length)
   // ---------------------------------------------------------------------------------//
   {
-    System.out.println (buffer.length);
-    System.out.println (offset);
-    System.out.println (length);
-
     int levels = length / LEVEL_SIZE;
     mazeLevels = new ArrayList<> (levels);
 
     for (int i = 0; i < levels; i++)
-      mazeLevels.add (new MazeLevel (buffer, offset + i * LEVEL_SIZE, LEVEL_SIZE));
+      mazeLevels.add (new MazeLevel (i + 1, buffer, offset + i * LEVEL_SIZE, LEVEL_SIZE));
   }
 
   // ---------------------------------------------------------------------------------//

@@ -43,6 +43,7 @@ public class WizardryOrigin
 
       scenarioName = Utility.getPascalString (buffer, 0);
       System.out.println (scenarioName);
+      System.out.println ();
 
       for (int i = 0; i < typeText.length; i++)
         scenarioData.add (new ScenarioData (buffer, i));
