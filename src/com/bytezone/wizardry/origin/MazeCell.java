@@ -7,7 +7,7 @@ public class MazeCell
 // -----------------------------------------------------------------------------------//
 {
   Location location;
-  Walls box;
+  Walls walls;
   Extra extra;
   boolean fight;
 
@@ -17,16 +17,13 @@ public class MazeCell
   {
     this.location = location;
     this.fight = fight;
-    this.box = box;
+    this.walls = box;
   }
 
   // ---------------------------------------------------------------------------------//
-  public MazeCell (Location location, Walls box, boolean fight, Extra extra)
+  public void addExtra (Extra extra)
   // ---------------------------------------------------------------------------------//
   {
-    this.location = location;
-    this.fight = fight;
-    this.box = box;
     this.extra = extra;
   }
 
@@ -47,6 +44,8 @@ public class MazeCell
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%s %s %s, %s", location, box, fight, extra);
+    if (extra == null)
+      return String.format ("%s %s %s", location, walls, fight);
+    return String.format ("%s %s %s %s", location, walls, fight, extra);
   }
 }

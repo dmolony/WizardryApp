@@ -6,19 +6,19 @@ import com.bytezone.wizardry.origin.Maze.Wall;
 public class Walls
 // -----------------------------------------------------------------------------------//
 {
-  Wall east;
   Wall west;
-  Wall north;
   Wall south;
+  Wall east;
+  Wall north;
 
   // ---------------------------------------------------------------------------------//
-  public Walls (Wall west, Wall north, Wall south, Wall east)
+  public Walls (Wall west, Wall south, Wall east, Wall north)
   // ---------------------------------------------------------------------------------//
   {
     this.west = west;
-    this.north = north;
     this.south = south;
     this.east = east;
+    this.north = north;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -26,6 +26,6 @@ public class Walls
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%s %s %s, %s", west, north, south, east);
+    return String.format ("%s %s %s %s", west, south, east, north);
   }
 }

@@ -1,5 +1,7 @@
 package com.bytezone.wizardry.origin;
 
+import java.awt.Graphics2D;
+
 import com.bytezone.wizardry.origin.Maze.Square;
 import com.bytezone.wizardry.origin.Maze.Wall;
 
@@ -12,18 +14,22 @@ public class MazeLevel
 
   private int level;
 
-  private Wall[][] west = new Wall[20][20];
-  private Wall[][] south = new Wall[20][20];
-  private Wall[][] east = new Wall[20][20];
-  private Wall[][] north = new Wall[20][20];
+  private MazeCell[][] mazeCells = new MazeCell[20][20];
 
-  private boolean[][] fights = new boolean[20][20];
-  private byte[][] sqrextra = new byte[20][20];
-  private Square[] squares = new Square[16];
+  Wall[][] west = new Wall[20][20];
+  Wall[][] south = new Wall[20][20];
+  Wall[][] east = new Wall[20][20];
+  Wall[][] north = new Wall[20][20];
 
-  private int[] aux0 = new int[16];
-  private int[] aux1 = new int[16];
-  private int[] aux2 = new int[16];
+  boolean[][] fights = new boolean[20][20];
+  byte[][] sqrextra = new byte[20][20];
+  Square[] squares = new Square[16];
+
+  int[] aux0 = new int[16];
+  int[] aux1 = new int[16];
+  int[] aux2 = new int[16];
+
+  EnemyCalc[] enemyCalc = new EnemyCalc[3];
 
   // ---------------------------------------------------------------------------------//
   public MazeLevel (int level, byte[] buffer, int offset, int length)
@@ -32,34 +38,36 @@ public class MazeLevel
     this.level = level;
 
     addWalls (west, buffer, offset);
-    addWalls (south, buffer, offset + 120);
-    addWalls (east, buffer, offset + 240);
-    addWalls (north, buffer, offset + 360);
+    addWalls (south, buffer, offset + 0x78);
+    addWalls (east, buffer, offset + 0xF0);
+    addWalls (north, buffer, offset + 0x168);
 
-    addEncounters (fights, buffer, offset + 480);
-    addExtras (sqrextra, buffer, offset + 560);
-    addSquares (squares, buffer, offset + 760);
+    addEncounters (fights, buffer, offset + 0x1E0);
+    addExtras (sqrextra, buffer, offset + 0x230);
+    addSquares (squares, buffer, offset + 0x2F8);
 
-    addAux (aux0, buffer, offset + 768);
-    addAux (aux1, buffer, offset + 800);
-    addAux (aux2, buffer, offset + 832);
+    addAux (aux0, buffer, offset + 0x300);
+    addAux (aux1, buffer, offset + 0x320);
+    addAux (aux2, buffer, offset + 0x340);
 
-    MazeCell mazeCell = null;
+    addEnemyCalc (enemyCalc, buffer, offset + 0x360);
+
     for (int col = 0; col < 20; col++)
     {
       for (int row = 0; row < 20; row++)
       {
         Location location = new Location (level, col, row);
-        Walls walls = new Walls (west[col][row], north[col][row], south[col][row], east[col][row]);
+        Walls walls = new Walls (west[col][row], south[col][row], east[col][row], north[col][row]);
+        MazeCell mazeCell = new MazeCell (location, walls, fights[col][row]);
+
         if (sqrextra[col][row] != 0)
         {
           int index = sqrextra[col][row];
-          Extra extra = new Extra (squares[index], aux0[index], aux1[index], aux2[index]);
-          mazeCell = new MazeCell (location, walls, fights[col][row], extra);
+          mazeCell.addExtra (new Extra (squares[index], aux0[index], aux1[index], aux2[index]));
         }
-        else
-          mazeCell = new MazeCell (location, walls, fights[col][row]);
-        //        System.out.println (mazeCell);
+
+        System.out.println (mazeCell);
+        mazeCells[col][row] = mazeCell;
       }
     }
 
@@ -67,9 +75,12 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  void draw ()
+  void draw (Graphics2D graphics)
   // ---------------------------------------------------------------------------------//
   {
+    for (int col = 0; col < 20; col++)
+      for (int row = 0; row < 20; row++)
+        mazeCells[col][row].draw (graphics);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -84,13 +95,11 @@ public class MazeLevel
         int val = buffer[ptr++] & 0xFF;
         for (int j = 0; j < 4; j++)
         {
-          int wall = (val & 0x03);                   // right to left ordering
-          walls[col][row++] = Wall.values ()[wall];
+          walls[col][row++] = Wall.values ()[val & 0x03];
           val >>>= 2;
         }
       }
 
-      assert buffer[ptr] == 0;
       ptr++;                                        // skip last byte
     }
   }
@@ -144,6 +153,21 @@ public class MazeLevel
     {
       aux[i] = Utility.getShort (buffer, ptr);
       ptr += 2;
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void addEnemyCalc (EnemyCalc[] enemyCalc, byte[] buffer, int ptr)
+  // ---------------------------------------------------------------------------------//
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      enemyCalc[i] = new EnemyCalc ();
+      for (int j = 0; j < 5; j++)
+      {
+        enemyCalc[i].value[j] = Utility.getShort (buffer, ptr);
+        ptr += 2;
+      }
     }
   }
 
