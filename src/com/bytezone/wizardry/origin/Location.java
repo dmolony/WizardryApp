@@ -16,4 +16,12 @@ public class Location
     this.row = row;
     this.column = column;
   }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return String.format ("%2d %2d %2d", level, column, row);
+  }
 }

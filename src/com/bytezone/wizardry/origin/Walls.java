@@ -20,4 +20,12 @@ public class Walls
     this.south = south;
     this.east = east;
   }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return String.format ("%s %s %s, %s", west, north, south, east);
+  }
 }

@@ -44,10 +44,10 @@ public class MazeLevel
     addAux (aux1, buffer, offset + 800);
     addAux (aux2, buffer, offset + 832);
 
-    System.out.println (this);
-    MazeCell mazeCell;
-    for (int col = 0; col < 19; col++)
-      for (int row = 0; row < 19; row++)
+    MazeCell mazeCell = null;
+    for (int col = 0; col < 20; col++)
+    {
+      for (int row = 0; row < 20; row++)
       {
         Location location = new Location (level, col, row);
         Walls walls = new Walls (west[col][row], north[col][row], south[col][row], east[col][row]);
@@ -57,8 +57,13 @@ public class MazeLevel
           Extra extra = new Extra (squares[index], aux0[index], aux1[index], aux2[index]);
           mazeCell = new MazeCell (location, walls, fights[col][row], extra);
         }
-        mazeCell = new MazeCell (location, walls, fights[col][row]);
+        else
+          mazeCell = new MazeCell (location, walls, fights[col][row]);
+        //        System.out.println (mazeCell);
       }
+    }
+
+    //    System.out.println (this);
   }
 
   // ---------------------------------------------------------------------------------//
