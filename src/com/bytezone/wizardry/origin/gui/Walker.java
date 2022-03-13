@@ -6,12 +6,10 @@ import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.StatusBar;
 
 import javafx.application.Application;
-import javafx.geometry.Side;
 import javafx.scene.Parent;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Menu;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.layout.BorderPane;
 
 // -----------------------------------------------------------------------------------//
 public class Walker extends AppBase
@@ -19,28 +17,25 @@ public class Walker extends AppBase
 {
   private final Menu menuFile = new Menu ("File");
 
-  private final TabPane tabPane = new TabPane ();
-  private final Tab mazeTab = new Tab ("Maze");
-  private final Tab viewTab = new Tab ("View");
+  Canvas maze;
+  Canvas view;
+  private final BorderPane mainPane = new BorderPane ();
 
   // ---------------------------------------------------------------------------------//
   @Override
   protected Parent createContent ()
   // ---------------------------------------------------------------------------------//
   {
-    primaryStage.setTitle ("Vista Access Control");
+    primaryStage.setTitle ("Wizardry Dungeon Walker");
 
     menuBar.getMenus ().addAll (menuFile);
+    maze = new MazePane ();
+    view = new ViewPane ();
 
-    tabPane.setSide (Side.BOTTOM);
-    tabPane.setTabClosingPolicy (TabClosingPolicy.UNAVAILABLE);
-    tabPane.setTabMinWidth (100);
-    tabPane.getTabs ().addAll (viewTab, mazeTab);
+    mainPane.setLeft (view);
+    mainPane.setRight (maze);
 
-    viewTab.setContent (new ViewPane ());
-    mazeTab.setContent (new MazePane ());
-
-    return tabPane;
+    return mainPane;
   }
 
   // ---------------------------------------------------------------------------------//

@@ -8,7 +8,7 @@ public class MazeLevel
 // -----------------------------------------------------------------------------------//
 {
   private static final String line =
-      "-----------------------------------------------------------------\n";
+      "---+------------------------------------------------------------+\n";
 
   private int level;
 
@@ -45,6 +45,26 @@ public class MazeLevel
     addAux (aux2, buffer, offset + 832);
 
     System.out.println (this);
+    MazeCell mazeCell;
+    for (int col = 0; col < 19; col++)
+      for (int row = 0; row < 19; row++)
+      {
+        Location location = new Location (level, col, row);
+        Walls walls = new Walls (west[col][row], north[col][row], south[col][row], east[col][row]);
+        if (sqrextra[col][row] != 0)
+        {
+          int index = sqrextra[col][row];
+          Extra extra = new Extra (squares[index], aux0[index], aux1[index], aux2[index]);
+          mazeCell = new MazeCell (location, walls, fights[col][row], extra);
+        }
+        mazeCell = new MazeCell (location, walls, fights[col][row]);
+      }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void draw ()
+  // ---------------------------------------------------------------------------------//
+  {
   }
 
   // ---------------------------------------------------------------------------------//
