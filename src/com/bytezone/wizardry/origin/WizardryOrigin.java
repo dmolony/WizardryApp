@@ -23,7 +23,7 @@ public class WizardryOrigin
   List<ScenarioData> scenarioData = new ArrayList<> ();
   String scenarioName;
 
-  Maze maze;
+  public Maze maze;
 
   // ---------------------------------------------------------------------------------//
   public WizardryOrigin ()
@@ -42,8 +42,6 @@ public class WizardryOrigin
       byte[] buffer = Files.readAllBytes (file.toPath ());
 
       scenarioName = Utility.getPascalString (buffer, 0);
-      System.out.println (scenarioName);
-      System.out.println ();
 
       for (int i = 0; i < typeText.length; i++)
         scenarioData.add (new ScenarioData (buffer, i));

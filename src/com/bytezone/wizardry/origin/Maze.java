@@ -23,7 +23,12 @@ public class Maze
     ENCOUNTE
   }
 
-  List<MazeLevel> mazeLevels;
+  public enum Direction
+  {
+    NORTH, SOUTH, EAST, WEST
+  }
+
+  public List<MazeLevel> mazeLevels;
 
   // ---------------------------------------------------------------------------------//
   public Maze (byte[] buffer, int offset, int length)

@@ -1,9 +1,9 @@
 package com.bytezone.wizardry.origin;
 
-import java.awt.Graphics2D;
-
 import com.bytezone.wizardry.origin.Maze.Square;
 import com.bytezone.wizardry.origin.Maze.Wall;
+
+import javafx.scene.canvas.GraphicsContext;
 
 // -----------------------------------------------------------------------------------//
 public class MazeLevel
@@ -66,21 +66,26 @@ public class MazeLevel
           mazeCell.addExtra (new Extra (squares[index], aux0[index], aux1[index], aux2[index]));
         }
 
-        System.out.println (mazeCell);
+        //        System.out.println (mazeCell);
         mazeCells[col][row] = mazeCell;
       }
     }
-
-    //    System.out.println (this);
   }
 
   // ---------------------------------------------------------------------------------//
-  void draw (Graphics2D graphics)
+  public void draw (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
     for (int col = 0; col < 20; col++)
       for (int row = 0; row < 20; row++)
-        mazeCells[col][row].draw (graphics);
+        mazeCells[col][row].draw (gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public MazeCell getMazeCell (int column, int row)
+  // ---------------------------------------------------------------------------------//
+  {
+    return mazeCells[column][row];
   }
 
   // ---------------------------------------------------------------------------------//

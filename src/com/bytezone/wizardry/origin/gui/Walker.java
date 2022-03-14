@@ -4,6 +4,7 @@ import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.StatusBar;
+import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -28,9 +29,11 @@ public class Walker extends AppBase
   {
     primaryStage.setTitle ("Wizardry Dungeon Walker");
 
+    WizardryOrigin wizardry = new WizardryOrigin ();
+
     menuBar.getMenus ().addAll (menuFile);
-    maze = new MazePane ();
-    view = new ViewPane ();
+    maze = new MazePane (wizardry);
+    view = new ViewPane (wizardry);
 
     mainPane.setLeft (view);
     mainPane.setRight (maze);
