@@ -9,7 +9,10 @@ import javafx.scene.paint.Color;
 public class MazeCell
 // -----------------------------------------------------------------------------------//
 {
-  private static final int SIZE = 40;
+  private static final int[] corners = { 0, 30, 80, 120, 155, 175, 190 };
+  private static final int CELL_SIZE = 40;
+  private static final int PANE_SIZE = 400;
+
   Location location;
   Walls walls;
   Extra extra;
@@ -35,10 +38,10 @@ public class MazeCell
   public void draw (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
-    int top = (19 - location.row) * SIZE + 5;
-    int bottom = top + SIZE - 2;
-    int left = location.column * SIZE + 5;
-    int right = left + SIZE - 2;
+    int top = (19 - location.row) * CELL_SIZE + 5;
+    int bottom = top + CELL_SIZE - 2;
+    int left = location.column * CELL_SIZE + 5;
+    int right = left + CELL_SIZE - 2;
 
     if (extra != null)
     {
@@ -49,7 +52,7 @@ public class MazeCell
 
         case DARK:
           gc.setFill (Color.DARKGRAY);
-          gc.fillRect (left - 1, top - 1, SIZE, SIZE);
+          gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
           break;
 
         case TRANSFER:
@@ -92,7 +95,7 @@ public class MazeCell
     if (fight)
     {
       gc.setFill (Color.GAINSBORO);
-      gc.fillRect (left - 1, top - 1, SIZE, SIZE);
+      gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
     }
 
     gc.setStroke (Color.BLACK);
@@ -151,39 +154,59 @@ public class MazeCell
         break;
     }
 
-    int[] corners = { 0, 30, 80, 120, 155, 175, 190 };
-    int size = 400;
-
     gc.setStroke (Color.GREEN);
 
-    for (int i = 1; i < corners.length; i++)
+    //    for (int i = 1; i < corners.length; i++)
     {
-      // left diagonal top
-      gc.strokeLine (corners[i], corners[i], corners[i - 1], corners[i - 1]);
-
-      // left diagonal bottom
-      gc.strokeLine (corners[i], size - corners[i], corners[i - 1], size - corners[i - 1]);
-
-      // left vertical far
-      gc.strokeLine (corners[i], corners[i], corners[i], size - corners[i]);
-
-      // left vertical near
-      gc.strokeLine (corners[i - 1], corners[i - 1], corners[i - 1], size - corners[i - 1]);
-
-      // right diagonal bottom
-      gc.strokeLine (size - corners[i], size - corners[i], size - corners[i - 1],
-          size - corners[i - 1]);
-
-      // right diagonal top
-      gc.strokeLine (size - corners[i], corners[i], size - corners[i - 1], corners[i - 1]);
-
-      // right vertical far
-      gc.strokeLine (size - corners[i], corners[i], size - corners[i], size - corners[i]);
-
-      // right vertical near
-      gc.strokeLine (size - corners[i - 1], corners[i - 1], size - corners[i - 1],
-          size - corners[i - 1]);
+      int i = 4;
+      drawLeft (gc, i);
+      drawRight (gc, i);
+      drawFront (gc, i);
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawFront (GraphicsContext gc, int i)
+  // ---------------------------------------------------------------------------------//
+  {
+    gc.strokeRect (corners[i], corners[i], PANE_SIZE - 2 * corners[i], PANE_SIZE - 2 * corners[i]);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawLeft (GraphicsContext gc, int i)
+  // ---------------------------------------------------------------------------------//
+  {
+    // left diagonal top
+    gc.strokeLine (corners[i], corners[i], corners[i - 1], corners[i - 1]);
+
+    // left diagonal bottom
+    gc.strokeLine (corners[i], PANE_SIZE - corners[i], corners[i - 1], PANE_SIZE - corners[i - 1]);
+
+    // left vertical far
+    gc.strokeLine (corners[i], corners[i], corners[i], PANE_SIZE - corners[i]);
+
+    // left vertical near
+    gc.strokeLine (corners[i - 1], corners[i - 1], corners[i - 1], PANE_SIZE - corners[i - 1]);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawRight (GraphicsContext gc, int i)
+  // ---------------------------------------------------------------------------------//
+  {
+    // right diagonal bottom
+    gc.strokeLine (PANE_SIZE - corners[i], PANE_SIZE - corners[i], PANE_SIZE - corners[i - 1],
+        PANE_SIZE - corners[i - 1]);
+
+    // right diagonal top
+    gc.strokeLine (PANE_SIZE - corners[i], corners[i], PANE_SIZE - corners[i - 1], corners[i - 1]);
+
+    // right vertical far
+    gc.strokeLine (PANE_SIZE - corners[i], corners[i], PANE_SIZE - corners[i],
+        PANE_SIZE - corners[i]);
+
+    // right vertical near
+    gc.strokeLine (PANE_SIZE - corners[i - 1], corners[i - 1], PANE_SIZE - corners[i - 1],
+        PANE_SIZE - corners[i - 1]);
   }
 
   // ---------------------------------------------------------------------------------//
