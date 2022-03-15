@@ -156,57 +156,91 @@ public class MazeCell
 
     gc.setStroke (Color.GREEN);
 
-    //    for (int i = 1; i < corners.length; i++)
+    distance = 4;
+    drawLeftSide (gc, distance);
+    //    drawRightSide (gc, distance);
+
+    drawFront (gc, distance, 0, false);
+    drawFront (gc, distance, 1, true);
+    drawFront (gc, distance - 1, -1, true);
+    //    drawFront (gc, distance - 1, 1, false);
+    //    drawFront (gc, distance - 1, 2, false);
+
+    drawLeftSide (gc, distance - 2);
+    drawLeftSide (gc, distance - 3);
+    drawRightSide (gc, distance - 1);
+    drawRightSide (gc, distance - 3);
+    drawRightSide (gc, distance - 4);
+
+    drawFront (gc, distance - 4, -1, false);
+    drawFront (gc, distance - 2, 1, true);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawFront (GraphicsContext gc, int distance, int offset, boolean obscured)
+  // ---------------------------------------------------------------------------------//
+  {
+    int nearPoint = corners[distance];
+    int farPoint = corners[distance + 1];
+    int height = PANE_SIZE - 2 * farPoint;
+    int width = PANE_SIZE - 2 * farPoint;
+
+    int x = farPoint + offset * width;
+    int y = farPoint;
+
+    if (obscured)
     {
-      int i = 4;
-      drawLeft (gc, i);
-      drawRight (gc, i);
-      drawFront (gc, i);
+      assert offset != 0;                 // cannot obscure centre pane
+      width = farPoint - nearPoint;
+      if (offset < 0)
+        x = (farPoint - width);
     }
+
+    gc.strokeRect (x, y, width, height);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawFront (GraphicsContext gc, int i)
+  private void drawLeftSide (GraphicsContext gc, int distance)
   // ---------------------------------------------------------------------------------//
   {
-    gc.strokeRect (corners[i], corners[i], PANE_SIZE - 2 * corners[i], PANE_SIZE - 2 * corners[i]);
-  }
+    int nearPoint = corners[distance];
+    int farPoint = corners[distance + 1];
+    int farX = PANE_SIZE - farPoint;
+    int nearX = PANE_SIZE - nearPoint;
 
-  // ---------------------------------------------------------------------------------//
-  private void drawLeft (GraphicsContext gc, int i)
-  // ---------------------------------------------------------------------------------//
-  {
     // left diagonal top
-    gc.strokeLine (corners[i], corners[i], corners[i - 1], corners[i - 1]);
+    gc.strokeLine (farPoint, farPoint, nearPoint, nearPoint);
 
     // left diagonal bottom
-    gc.strokeLine (corners[i], PANE_SIZE - corners[i], corners[i - 1], PANE_SIZE - corners[i - 1]);
+    gc.strokeLine (farPoint, farX, nearPoint, nearX);
 
     // left vertical far
-    gc.strokeLine (corners[i], corners[i], corners[i], PANE_SIZE - corners[i]);
+    gc.strokeLine (farPoint, farPoint, farPoint, farX);
 
     // left vertical near
-    gc.strokeLine (corners[i - 1], corners[i - 1], corners[i - 1], PANE_SIZE - corners[i - 1]);
+    gc.strokeLine (nearPoint, nearPoint, nearPoint, nearX);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawRight (GraphicsContext gc, int i)
+  private void drawRightSide (GraphicsContext gc, int distance)
   // ---------------------------------------------------------------------------------//
   {
+    int nearPoint = corners[distance];
+    int farPoint = corners[distance + 1];
+    int farX = PANE_SIZE - farPoint;
+    int nearX = PANE_SIZE - nearPoint;
+
     // right diagonal bottom
-    gc.strokeLine (PANE_SIZE - corners[i], PANE_SIZE - corners[i], PANE_SIZE - corners[i - 1],
-        PANE_SIZE - corners[i - 1]);
+    gc.strokeLine (farX, farX, nearX, nearX);
 
     // right diagonal top
-    gc.strokeLine (PANE_SIZE - corners[i], corners[i], PANE_SIZE - corners[i - 1], corners[i - 1]);
+    gc.strokeLine (farX, farPoint, nearX, nearPoint);
 
     // right vertical far
-    gc.strokeLine (PANE_SIZE - corners[i], corners[i], PANE_SIZE - corners[i],
-        PANE_SIZE - corners[i]);
+    gc.strokeLine (farX, farPoint, farX, farX);
 
     // right vertical near
-    gc.strokeLine (PANE_SIZE - corners[i - 1], corners[i - 1], PANE_SIZE - corners[i - 1],
-        PANE_SIZE - corners[i - 1]);
+    gc.strokeLine (nearX, nearPoint, nearX, nearX);
   }
 
   // ---------------------------------------------------------------------------------//
