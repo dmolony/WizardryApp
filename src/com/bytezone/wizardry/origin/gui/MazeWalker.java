@@ -1,9 +1,13 @@
 package com.bytezone.wizardry.origin.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.StatusBar;
+import com.bytezone.wizardry.origin.Location;
+import com.bytezone.wizardry.origin.Maze.Direction;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.event.ActionEvent;
@@ -31,6 +35,10 @@ public class MazeWalker extends AppBase
   private final BorderPane mainPane = new BorderPane ();
   WizardryOrigin wizardry = new WizardryOrigin ();
 
+  private Walker[] walker;
+  Walker currentWalker;
+  List<WalkerListener> listeners = new ArrayList<> ();
+
   // ---------------------------------------------------------------------------------//
   @Override
   protected Parent createContent ()
@@ -52,10 +60,20 @@ public class MazeWalker extends AppBase
       item.setId ("" + i);
     }
 
+    walker = new Walker[levels];
+
+    for (int i = 0; i < levels; i++)
+      walker[i] = new Walker (wizardry.maze.mazeLevels.get (i), Direction.NORTH,
+          new Location (i + 1, 0, 0));
+
     menuBar.getMenus ().addAll (menuFile, menuLevels);
 
     mazePane = new MazePane (wizardry);
     viewPane = new ViewPane (wizardry);
+
+    addWalkerListener (mazePane);
+    addWalkerListener (viewPane);
+    setLevel (0);
 
     VBox leftPane = new VBox (10);
     VBox rightPane = new VBox (10);
@@ -79,8 +97,33 @@ public class MazeWalker extends AppBase
   private void selectMazeLevel (ActionEvent actionEvent)
   // ---------------------------------------------------------------------------------//
   {
-    int level = Integer.parseInt (((MenuItem) actionEvent.getSource ()).getId ());
-    mazePane.setCurrentLevel (level);
+    setLevel (Integer.parseInt (((MenuItem) actionEvent.getSource ()).getId ()));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void setLevel (int level)
+  // ---------------------------------------------------------------------------------//
+  {
+    //    mazePane.setCurrentLevel (level);
+
+    currentWalker = walker[level];
+    notifyListeners ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void addWalkerListener (WalkerListener listener)
+  // ---------------------------------------------------------------------------------//
+  {
+    if (!listeners.contains (listener))
+      listeners.add (listener);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void notifyListeners ()
+  // ---------------------------------------------------------------------------------//
+  {
+    for (WalkerListener listener : listeners)
+      listener.walkerMoved (currentWalker);
   }
 
   // ---------------------------------------------------------------------------------//

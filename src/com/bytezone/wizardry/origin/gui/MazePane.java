@@ -1,7 +1,6 @@
 package com.bytezone.wizardry.origin.gui;
 
-import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.Maze.Direction;
+import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.scene.canvas.Canvas;
@@ -10,13 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 // -----------------------------------------------------------------------------------//
-public class MazePane extends Canvas
+public class MazePane extends Canvas implements WalkerListener
 // -----------------------------------------------------------------------------------//
 {
   WizardryOrigin wizardry;
-  int currentLevel;
-
-  private Walker[] walker;
+  int currentLevel = -1;
 
   // ---------------------------------------------------------------------------------//
   public MazePane (WizardryOrigin wizardry)
@@ -25,27 +22,28 @@ public class MazePane extends Canvas
     super (808, 808);
 
     this.wizardry = wizardry;
-    int levels = wizardry.maze.mazeLevels.size ();
-    walker = new Walker[levels];
-    for (int i = 0; i < levels; i++)
-      walker[i] = new Walker (wizardry.maze.mazeLevels.get (i), Direction.NORTH,
-          new Location (i + 1, 0, 0));
 
     GraphicsContext gc = getGraphicsContext2D ();
     gc.setFill (Color.BLACK);
     gc.setFont (Font.font (18));
-
-    setCurrentLevel (0);
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setCurrentLevel (int level)
+  @Override
+  public void walkerMoved (Walker walker)
   // ---------------------------------------------------------------------------------//
   {
-    currentLevel = level;
     GraphicsContext gc = getGraphicsContext2D ();
-    gc.setFill (Color.LIGHTGRAY);
-    gc.fillRect (0, 0, getWidth (), getHeight ());
-    wizardry.maze.mazeLevels.get (level).draw (gc);
+
+    if (currentLevel != walker.location.getLevel ())
+    {
+      currentLevel = walker.location.getLevel ();
+      gc.setFill (Color.LIGHTGRAY);
+      gc.fillRect (0, 0, getWidth (), getHeight ());
+      walker.mazeLevel.draw (gc);
+    }
+
+    MazeCell cell = walker.mazeLevel.getMazeCell (walker.location);
+    cell.drawWalker (gc, walker);
   }
 }

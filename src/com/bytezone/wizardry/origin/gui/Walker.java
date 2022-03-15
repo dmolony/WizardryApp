@@ -8,9 +8,9 @@ import com.bytezone.wizardry.origin.MazeLevel;
 public class Walker
 // -----------------------------------------------------------------------------------//
 {
-  Location location;
-  Direction direction;
-  MazeLevel mazeLevel;
+  public Location location;
+  public Direction direction;
+  public MazeLevel mazeLevel;
 
   // ---------------------------------------------------------------------------------//
   public Walker (MazeLevel mazeLevel, Direction direction, Location location)
