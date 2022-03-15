@@ -229,7 +229,8 @@ public class MazeCell
     gc.strokeLine (farPoint, farPoint, farPoint, farX);
 
     // left vertical near
-    gc.strokeLine (nearPoint, nearPoint, nearPoint, nearX);
+    if (distance > 0)
+      gc.strokeLine (nearPoint, nearPoint, nearPoint, nearX);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -251,7 +252,8 @@ public class MazeCell
     gc.strokeLine (farX, farPoint, farX, farX);
 
     // right vertical near
-    gc.strokeLine (nearX, nearPoint, nearX, nearX);
+    if (distance > 0)
+      gc.strokeLine (nearX, nearPoint, nearX, nearX);
   }
 
   // ---------------------------------------------------------------------------------//
