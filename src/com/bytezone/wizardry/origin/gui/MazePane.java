@@ -12,6 +12,7 @@ public class MazePane extends Canvas
 // -----------------------------------------------------------------------------------//
 {
   WizardryOrigin wizardry;
+  int currentLevel;
 
   // ---------------------------------------------------------------------------------//
   public MazePane (WizardryOrigin wizardry)
@@ -25,12 +26,17 @@ public class MazePane extends Canvas
     gc.setFill (Color.BLACK);
     gc.setFont (Font.font (20));
 
-    double width = getWidth ();
-    double height = getHeight ();
+    setCurrentLevel (0);
+  }
 
+  // ---------------------------------------------------------------------------------//
+  public void setCurrentLevel (int level)
+  // ---------------------------------------------------------------------------------//
+  {
+    currentLevel = level;
+    GraphicsContext gc = getGraphicsContext2D ();
     gc.setFill (Color.LIGHTGRAY);
-    gc.fillRect (0, 0, width, height);
-
-    wizardry.maze.mazeLevels.get (0).draw (gc);
+    gc.fillRect (0, 0, getWidth (), getHeight ());
+    wizardry.maze.mazeLevels.get (level).draw (gc);
   }
 }

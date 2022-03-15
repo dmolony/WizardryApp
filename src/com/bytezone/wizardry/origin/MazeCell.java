@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 public class MazeCell
 // -----------------------------------------------------------------------------------//
 {
-  private static final int[] corners = { 0, 30, 80, 120, 155, 175, 190 };
+  private static final int[] corners = { 0, 25, 80, 120, 155, 175, 190 };
   private static final int CELL_SIZE = 40;
   private static final int PANE_SIZE = 400;
 
@@ -43,6 +43,12 @@ public class MazeCell
     int left = location.column * CELL_SIZE + 5;
     int right = left + CELL_SIZE - 2;
 
+    if (fight)
+    {
+      gc.setFill (Color.GAINSBORO);
+      gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
+    }
+
     if (extra != null)
     {
       switch (extra.square)
@@ -67,6 +73,8 @@ public class MazeCell
           break;
 
         case ROCKWATE:
+          gc.setFill (Color.BEIGE);
+          gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
           break;
 
         case SPINNER:
@@ -88,14 +96,10 @@ public class MazeCell
           break;
 
         case SCNMSG:
+          gc.setFill (Color.GREEN);
+          gc.fillText ("M", left + 10, top + 25);
           break;
       }
-    }
-
-    if (fight)
-    {
-      gc.setFill (Color.GAINSBORO);
-      gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
     }
 
     gc.setStroke (Color.BLACK);
@@ -156,28 +160,35 @@ public class MazeCell
 
     gc.setStroke (Color.GREEN);
 
-    distance = 4;
-    drawLeftSide (gc, distance);
-    //    drawRightSide (gc, distance);
+    distance = 5;
 
-    drawFront (gc, distance, 0, false);
-    drawFront (gc, distance, 1, true);
-    drawFront (gc, distance - 1, -1, true);
-    //    drawFront (gc, distance - 1, 1, false);
-    //    drawFront (gc, distance - 1, 2, false);
+    drawFace (gc, distance, 0, false);
+    drawLeft (gc, distance);
+    drawRight (gc, distance);
 
-    drawLeftSide (gc, distance - 2);
-    drawLeftSide (gc, distance - 3);
-    drawRightSide (gc, distance - 1);
-    drawRightSide (gc, distance - 3);
-    drawRightSide (gc, distance - 4);
+    --distance;
+    drawLeft (gc, distance);
+    drawFace (gc, distance, 1, true);
 
-    drawFront (gc, distance - 4, -1, false);
-    drawFront (gc, distance - 2, 1, true);
+    --distance;
+    drawFace (gc, distance, -1, true);
+    drawRight (gc, distance);
+
+    --distance;
+    drawLeft (gc, distance);
+    drawFace (gc, distance, 1, true);
+
+    --distance;
+    drawLeft (gc, distance);
+    drawRight (gc, distance);
+
+    --distance;
+    drawRight (gc, distance);
+    drawFace (gc, distance, -1, false);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawFront (GraphicsContext gc, int distance, int offset, boolean obscured)
+  private void drawFace (GraphicsContext gc, int distance, int offset, boolean obscured)
   // ---------------------------------------------------------------------------------//
   {
     int nearPoint = corners[distance];
@@ -200,7 +211,7 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawLeftSide (GraphicsContext gc, int distance)
+  private void drawLeft (GraphicsContext gc, int distance)
   // ---------------------------------------------------------------------------------//
   {
     int nearPoint = corners[distance];
@@ -222,7 +233,7 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawRightSide (GraphicsContext gc, int distance)
+  private void drawRight (GraphicsContext gc, int distance)
   // ---------------------------------------------------------------------------------//
   {
     int nearPoint = corners[distance];
