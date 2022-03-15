@@ -1,7 +1,5 @@
 package com.bytezone.wizardry.origin.gui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
@@ -18,6 +16,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -37,7 +36,6 @@ public class MazeWalker extends AppBase
 
   private Walker[] walker;
   Walker currentWalker;
-  List<WalkerListener> listeners = new ArrayList<> ();
 
   // ---------------------------------------------------------------------------------//
   @Override
@@ -45,6 +43,9 @@ public class MazeWalker extends AppBase
   // ---------------------------------------------------------------------------------//
   {
     primaryStage.setTitle ("Wizardry Dungeon Walker");
+
+    mazePane = new MazePane (wizardry);
+    viewPane = new ViewPane (wizardry);
 
     int levels = wizardry.maze.mazeLevels.size ();
     KeyCode[] keyCodes =
@@ -63,16 +64,15 @@ public class MazeWalker extends AppBase
     walker = new Walker[levels];
 
     for (int i = 0; i < levels; i++)
+    {
       walker[i] = new Walker (wizardry.maze.mazeLevels.get (i), Direction.NORTH,
           new Location (i + 1, 0, 0));
+      walker[i].addWalkerListener (mazePane);
+      walker[i].addWalkerListener (viewPane);
+    }
 
     menuBar.getMenus ().addAll (menuFile, menuLevels);
 
-    mazePane = new MazePane (wizardry);
-    viewPane = new ViewPane (wizardry);
-
-    addWalkerListener (mazePane);
-    addWalkerListener (viewPane);
     setLevel (0);
 
     VBox leftPane = new VBox (10);
@@ -94,6 +94,32 @@ public class MazeWalker extends AppBase
   }
 
   // ---------------------------------------------------------------------------------//
+  @Override
+  protected void keyPressed (KeyEvent keyEvent)
+  // ---------------------------------------------------------------------------------//
+  {
+    super.keyPressed (keyEvent);
+
+    switch (keyEvent.getCode ())
+    {
+      case A:       // turn left
+        currentWalker.turnLeft ();
+        break;
+
+      case W:       // move forward
+        currentWalker.move ();
+        break;
+
+      case D:       // turn right
+        currentWalker.turnRight ();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
   private void selectMazeLevel (ActionEvent actionEvent)
   // ---------------------------------------------------------------------------------//
   {
@@ -104,26 +130,8 @@ public class MazeWalker extends AppBase
   private void setLevel (int level)
   // ---------------------------------------------------------------------------------//
   {
-    //    mazePane.setCurrentLevel (level);
-
     currentWalker = walker[level];
-    notifyListeners ();
-  }
-
-  // ---------------------------------------------------------------------------------//
-  public void addWalkerListener (WalkerListener listener)
-  // ---------------------------------------------------------------------------------//
-  {
-    if (!listeners.contains (listener))
-      listeners.add (listener);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void notifyListeners ()
-  // ---------------------------------------------------------------------------------//
-  {
-    for (WalkerListener listener : listeners)
-      listener.walkerMoved (currentWalker);
+    currentWalker.activate ();
   }
 
   // ---------------------------------------------------------------------------------//

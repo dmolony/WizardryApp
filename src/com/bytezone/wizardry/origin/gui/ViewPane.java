@@ -37,6 +37,8 @@ public class ViewPane extends Canvas implements WalkerListener
     gc.setFill (Color.LIGHTGRAY);
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
+    //    System.out.println (walker);
+
     //    Wall[] facingWalls = new Wall[5];
 
     //    switch (direction)

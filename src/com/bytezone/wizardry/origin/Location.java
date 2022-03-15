@@ -39,13 +39,13 @@ public class Location
   {
     switch (direction)
     {
-      case NORTH:
+      case SOUTH:
         row--;
         if (row < 0)
           row = 19;
         break;
 
-      case SOUTH:
+      case NORTH:
         row++;
         if (row > 19)
           row = 0;
