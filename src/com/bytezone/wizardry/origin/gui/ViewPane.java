@@ -14,8 +14,13 @@ import javafx.scene.text.Font;
 public class ViewPane extends Canvas implements WalkerListener
 // -----------------------------------------------------------------------------------//
 {
-  private static final int[] corners = { 0, 25, 80, 120, 155, 175, 190 };
+  private static final int[] corners = { 0, 30, 90, 130, 155, 170, 180, 187 };
   private static final int PANE_SIZE = 400;
+  private static final int MIDDLE = 2;
+  private static final int LEFT_1 = 1;
+  private static final int LEFT_2 = 0;
+  private static final int RIGHT_1 = 3;
+  private static final int RIGHT_2 = 4;
 
   WizardryOrigin wizardry;
 
@@ -44,15 +49,19 @@ public class ViewPane extends Canvas implements WalkerListener
     boolean leftObscured = false;
     boolean rightObscured = false;
 
-    for (int distance = 0; distance < 6; distance++)
+    for (int distance = 0; distance < corners.length - 1; distance++)
     {
       MazeCell[] cells = walker.getCells (distance);
-      //      System.out.printf ("%s%n%s%n%s%n%n", cells[0], cells[1], cells[2]);
-      if (walker.getLeftWall (cells[1]) == OPEN)
+
+      if (walker.getLeftWall (cells[MIDDLE]) == OPEN)
       {
-        if (walker.getCentreWall (cells[0]) != OPEN)
+        if (walker.getCentreWall (cells[LEFT_1]) != OPEN)
+        {
           drawFace (gc, distance, -1, leftObscured);
-        leftObscured = false;
+          leftObscured = true;
+        }
+        else
+          leftObscured = false;
       }
       else
       {
@@ -60,11 +69,15 @@ public class ViewPane extends Canvas implements WalkerListener
         leftObscured = true;
       }
 
-      if (walker.getRightWall (cells[1]) == OPEN)
+      if (walker.getRightWall (cells[MIDDLE]) == OPEN)
       {
-        if (walker.getCentreWall (cells[2]) != OPEN)
+        if (walker.getCentreWall (cells[RIGHT_1]) != OPEN)
+        {
           drawFace (gc, distance, 1, rightObscured);
-        rightObscured = false;
+          rightObscured = true;
+        }
+        else
+          rightObscured = false;
       }
       else
       {
@@ -72,44 +85,12 @@ public class ViewPane extends Canvas implements WalkerListener
         rightObscured = true;
       }
 
-      if (walker.getCentreWall (cells[1]) != OPEN)
+      if (walker.getCentreWall (cells[MIDDLE]) != OPEN)
       {
         drawFace (gc, distance, 0, false);
         break;
       }
     }
-  }
-
-  private void old ()
-  {
-    GraphicsContext gc = getGraphicsContext2D ();
-    gc.setStroke (Color.GREEN);
-
-    int distance = 5;
-
-    drawFace (gc, distance, 0, false);
-    drawLeft (gc, distance);
-    drawRight (gc, distance);
-
-    --distance;
-    drawLeft (gc, distance);
-    drawFace (gc, distance, 1, true);
-
-    --distance;
-    drawFace (gc, distance, -1, true);
-    drawRight (gc, distance);
-
-    --distance;
-    drawLeft (gc, distance);
-    drawFace (gc, distance, 1, true);
-
-    --distance;
-    drawLeft (gc, distance);
-    drawRight (gc, distance);
-
-    --distance;
-    drawRight (gc, distance);
-    drawFace (gc, distance, -1, false);
   }
 
   // ---------------------------------------------------------------------------------//

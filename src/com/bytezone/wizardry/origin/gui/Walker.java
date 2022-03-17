@@ -32,7 +32,7 @@ public class Walker
   public MazeCell[] getCells (int distance)
   // ---------------------------------------------------------------------------------//
   {
-    MazeCell[] cells = new MazeCell[3];
+    MazeCell[] cells = new MazeCell[5];
     int column = location.getColumn ();
     int row = location.getRow ();
 
@@ -40,30 +40,38 @@ public class Walker
     {
       case NORTH:
         row += distance;
-        cells[0] = mazeLevel.getMazeCell (column - 1, row);
-        cells[1] = mazeLevel.getMazeCell (column, row);
-        cells[2] = mazeLevel.getMazeCell (column + 1, row);
+        cells[0] = mazeLevel.getMazeCell (column - 2, row);
+        cells[1] = mazeLevel.getMazeCell (column - 1, row);
+        cells[2] = mazeLevel.getMazeCell (column, row);
+        cells[3] = mazeLevel.getMazeCell (column + 1, row);
+        cells[4] = mazeLevel.getMazeCell (column + 2, row);
         break;
 
       case SOUTH:
         row -= distance;
-        cells[0] = mazeLevel.getMazeCell (column + 1, row);
-        cells[1] = mazeLevel.getMazeCell (column, row);
-        cells[2] = mazeLevel.getMazeCell (column - 1, row);
+        cells[0] = mazeLevel.getMazeCell (column + 2, row);
+        cells[1] = mazeLevel.getMazeCell (column + 1, row);
+        cells[2] = mazeLevel.getMazeCell (column, row);
+        cells[3] = mazeLevel.getMazeCell (column - 1, row);
+        cells[4] = mazeLevel.getMazeCell (column - 2, row);
         break;
 
       case EAST:
         column += distance;
-        cells[0] = mazeLevel.getMazeCell (column, row + 1);
-        cells[1] = mazeLevel.getMazeCell (column, row);
-        cells[2] = mazeLevel.getMazeCell (column, row - 1);
+        cells[0] = mazeLevel.getMazeCell (column, row + 2);
+        cells[1] = mazeLevel.getMazeCell (column, row + 1);
+        cells[2] = mazeLevel.getMazeCell (column, row);
+        cells[3] = mazeLevel.getMazeCell (column, row - 1);
+        cells[4] = mazeLevel.getMazeCell (column, row - 2);
         break;
 
       case WEST:
         column -= distance;
-        cells[0] = mazeLevel.getMazeCell (column, row - 1);
-        cells[1] = mazeLevel.getMazeCell (column, row);
-        cells[2] = mazeLevel.getMazeCell (column, row + 1);
+        cells[0] = mazeLevel.getMazeCell (column, row - 2);
+        cells[1] = mazeLevel.getMazeCell (column, row - 1);
+        cells[2] = mazeLevel.getMazeCell (column, row);
+        cells[3] = mazeLevel.getMazeCell (column, row + 1);
+        cells[4] = mazeLevel.getMazeCell (column, row + 2);
         break;
     }
 
