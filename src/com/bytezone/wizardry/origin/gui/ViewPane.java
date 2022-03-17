@@ -41,16 +41,10 @@ public class ViewPane extends Canvas implements WalkerListener
     gc.setFill (Color.LIGHTGRAY);
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
-    if (false)
-    {
-      old ();
-      return;
-    }
-
     boolean leftObscured = false;
     boolean rightObscured = false;
 
-    for (int distance = 0; distance < 5; distance++)
+    for (int distance = 0; distance < 6; distance++)
     {
       MazeCell[] cells = walker.getCells (distance);
       //      System.out.printf ("%s%n%s%n%s%n%n", cells[0], cells[1], cells[2]);
