@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.Maze.Direction;
+import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
+import com.bytezone.wizardry.origin.Walls.Wall;
 
 // -----------------------------------------------------------------------------------//
 public class Walker
@@ -24,6 +26,87 @@ public class Walker
     this.mazeLevel = mazeLevel;
     this.direction = direction;
     this.location = location;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public MazeCell[] getCells (int distance)
+  // ---------------------------------------------------------------------------------//
+  {
+    MazeCell[] cells = new MazeCell[3];
+    int column = location.getColumn ();
+    int row = location.getRow ();
+
+    switch (direction)
+    {
+      case NORTH:
+        row += distance;
+        cells[0] = mazeLevel.getMazeCell (column - 1, row);
+        cells[1] = mazeLevel.getMazeCell (column, row);
+        cells[2] = mazeLevel.getMazeCell (column + 1, row);
+        break;
+
+      case SOUTH:
+        row -= distance;
+        cells[0] = mazeLevel.getMazeCell (column + 1, row);
+        cells[1] = mazeLevel.getMazeCell (column, row);
+        cells[2] = mazeLevel.getMazeCell (column - 1, row);
+        break;
+
+      case EAST:
+        column += distance;
+        cells[0] = mazeLevel.getMazeCell (column, row + 1);
+        cells[1] = mazeLevel.getMazeCell (column, row);
+        cells[2] = mazeLevel.getMazeCell (column, row - 1);
+        break;
+
+      case WEST:
+        column -= distance;
+        cells[0] = mazeLevel.getMazeCell (column, row - 1);
+        cells[1] = mazeLevel.getMazeCell (column, row);
+        cells[2] = mazeLevel.getMazeCell (column, row + 1);
+        break;
+    }
+
+    return cells;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  Wall getLeftWall (MazeCell cell)
+  // ---------------------------------------------------------------------------------//
+  {
+    return switch (direction)
+    {
+      case NORTH -> cell.getWalls ().west;
+      case SOUTH -> cell.getWalls ().east;
+      case EAST -> cell.getWalls ().north;
+      case WEST -> cell.getWalls ().south;
+    };
+  }
+
+  // ---------------------------------------------------------------------------------//
+  Wall getRightWall (MazeCell cell)
+  // ---------------------------------------------------------------------------------//
+  {
+    return switch (direction)
+    {
+      case NORTH -> cell.getWalls ().east;
+      case SOUTH -> cell.getWalls ().west;
+      case EAST -> cell.getWalls ().south;
+      case WEST -> cell.getWalls ().north;
+    };
+  }
+
+  // ---------------------------------------------------------------------------------//
+  Wall getCentreWall (MazeCell cell)
+  // ---------------------------------------------------------------------------------//
+  {
+    return switch (direction)
+    {
+      case NORTH -> cell.getWalls ().north;
+      case SOUTH -> cell.getWalls ().south;
+      case EAST -> cell.getWalls ().east;
+      case WEST -> cell.getWalls ().west;
+    };
   }
 
   // ---------------------------------------------------------------------------------//

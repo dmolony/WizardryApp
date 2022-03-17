@@ -12,11 +12,6 @@ public class Maze
       { "Normal", "Stairs", "Pit", "Chute", "Spinner", "Darkness", "Teleport", "Ouch", "Elevator",
           "Rock/Water", "Fizzle", "Message/Item", "Monster" };
 
-  enum Wall
-  {
-    OPEN, WALL, DOOR, HIDEDOOR
-  }
-
   enum Square
   {
     NORMAL, STAIRS, PIT, CHUTE, SPINNER, DARK, TRANSFER, OUCHY, BUTTONZ, ROCKWATE, FIZZLE, SCNMSG,

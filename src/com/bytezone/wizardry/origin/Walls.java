@@ -1,15 +1,18 @@
 package com.bytezone.wizardry.origin;
 
-import com.bytezone.wizardry.origin.Maze.Wall;
-
 // -----------------------------------------------------------------------------------//
 public class Walls
 // -----------------------------------------------------------------------------------//
 {
-  Wall west;
-  Wall south;
-  Wall east;
-  Wall north;
+  public Wall west;
+  public Wall south;
+  public Wall east;
+  public Wall north;
+
+  public enum Wall
+  {
+    OPEN, WALL, DOOR, HIDEDOOR
+  }
 
   // ---------------------------------------------------------------------------------//
   public Walls (Wall west, Wall south, Wall east, Wall north)

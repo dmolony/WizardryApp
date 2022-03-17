@@ -1,7 +1,7 @@
 package com.bytezone.wizardry.origin;
 
 import com.bytezone.wizardry.origin.Maze.Square;
-import com.bytezone.wizardry.origin.Maze.Wall;
+import com.bytezone.wizardry.origin.Walls.Wall;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -97,6 +97,15 @@ public class MazeLevel
   public MazeCell getMazeCell (int column, int row)
   // ---------------------------------------------------------------------------------//
   {
+    while (column < 0)
+      column += 20;
+    while (column > 19)
+      column -= 20;
+    while (row < 0)
+      row += 20;
+    while (row > 19)
+      row -= 20;
+
     return mazeCells[column][row];
   }
 

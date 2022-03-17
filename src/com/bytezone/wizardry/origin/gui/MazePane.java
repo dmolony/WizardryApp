@@ -1,5 +1,6 @@
 package com.bytezone.wizardry.origin.gui;
 
+import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -14,6 +15,8 @@ public class MazePane extends Canvas implements WalkerListener
 {
   WizardryOrigin wizardry;
   int currentLevel = -1;
+  int currentRow;
+  int currentColumn;
 
   // ---------------------------------------------------------------------------------//
   public MazePane (WizardryOrigin wizardry)
@@ -35,7 +38,13 @@ public class MazePane extends Canvas implements WalkerListener
   {
     GraphicsContext gc = getGraphicsContext2D ();
 
-    if (currentLevel != walker.location.getLevel ())
+    if (currentLevel == walker.location.getLevel ())
+    {
+      MazeCell cell =
+          walker.mazeLevel.getMazeCell (new Location (currentLevel, currentColumn, currentRow));
+      cell.draw (gc);
+    }
+    else
     {
       currentLevel = walker.location.getLevel ();
       gc.setFill (Color.LIGHTGRAY);
@@ -45,5 +54,8 @@ public class MazePane extends Canvas implements WalkerListener
 
     MazeCell cell = walker.mazeLevel.getMazeCell (walker.location);
     cell.drawWalker (gc, walker);
+
+    currentRow = walker.location.getRow ();
+    currentColumn = walker.location.getColumn ();
   }
 }

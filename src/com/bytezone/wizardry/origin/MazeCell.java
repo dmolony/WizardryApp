@@ -1,6 +1,6 @@
 package com.bytezone.wizardry.origin;
 
-import com.bytezone.wizardry.origin.Maze.Wall;
+import com.bytezone.wizardry.origin.Walls.Wall;
 import com.bytezone.wizardry.origin.gui.Walker;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -34,6 +34,13 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
+  public Walls getWalls ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return walls;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public void drawWalker (GraphicsContext gc, Walker walker)
   // ---------------------------------------------------------------------------------//
   {
@@ -48,6 +55,31 @@ public class MazeCell
 
     gc.setFill (Color.RED);
     gc.fillOval (left + 12, top + 12, 14, 14);
+
+    gc.setStroke (Color.BLACK);
+
+    switch (walker.direction)
+    {
+      case NORTH:
+        gc.strokeLine (left + 8, top + 16, left + 19, top + 5);
+        gc.strokeLine (left + 19, top + 5, left + 30, top + 16);
+        break;
+
+      case SOUTH:
+        gc.strokeLine (left + 8, top + 22, left + 19, top + 33);
+        gc.strokeLine (left + 19, top + 33, left + 30, top + 22);
+        break;
+
+      case EAST:
+        gc.strokeLine (left + 21, top + 8, left + 32, top + 19);
+        gc.strokeLine (left + 32, top + 19, left + 21, top + 30);
+        break;
+
+      case WEST:
+        gc.strokeLine (left + 17, top + 8, left + 6, top + 19);
+        gc.strokeLine (left + 6, top + 19, left + 17, top + 30);
+        break;
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -60,10 +92,11 @@ public class MazeCell
     int right = left + CELL_SIZE - 2;
 
     if (fight)
-    {
       gc.setFill (Color.GAINSBORO);
-      gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
-    }
+    else
+      gc.setFill (Color.LIGHTGRAY);
+
+    gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
 
     if (extra != null)
     {

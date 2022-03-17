@@ -1,5 +1,8 @@
 package com.bytezone.wizardry.origin.gui;
 
+import static com.bytezone.wizardry.origin.Walls.Wall.OPEN;
+
+import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.scene.canvas.Canvas;
@@ -34,32 +37,58 @@ public class ViewPane extends Canvas implements WalkerListener
   // ---------------------------------------------------------------------------------//
   {
     GraphicsContext gc = getGraphicsContext2D ();
+
     gc.setFill (Color.LIGHTGRAY);
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
-    //    System.out.println (walker);
+    if (false)
+    {
+      old ();
+      return;
+    }
 
-    //    Wall[] facingWalls = new Wall[5];
+    boolean leftObscured = false;
+    boolean rightObscured = false;
 
-    //    switch (direction)
-    //    {
-    //      case NORTH:
-    //        facingWalls[0] = walls.north;
-    //        break;
-    //
-    //      case SOUTH:
-    //        facingWalls[0] = walls.south;
-    //        break;
-    //
-    //      case EAST:
-    //        facingWalls[0] = walls.east;
-    //        break;
-    //
-    //      case WEST:
-    //        facingWalls[0] = walls.west;
-    //        break;
-    //    }
+    for (int distance = 0; distance < 5; distance++)
+    {
+      MazeCell[] cells = walker.getCells (distance);
+      //      System.out.printf ("%s%n%s%n%s%n%n", cells[0], cells[1], cells[2]);
+      if (walker.getLeftWall (cells[1]) == OPEN)
+      {
+        if (walker.getCentreWall (cells[0]) != OPEN)
+          drawFace (gc, distance, -1, leftObscured);
+        leftObscured = false;
+      }
+      else
+      {
+        drawLeft (gc, distance);
+        leftObscured = true;
+      }
 
+      if (walker.getRightWall (cells[1]) == OPEN)
+      {
+        if (walker.getCentreWall (cells[2]) != OPEN)
+          drawFace (gc, distance, 1, rightObscured);
+        rightObscured = false;
+      }
+      else
+      {
+        drawRight (gc, distance);
+        rightObscured = true;
+      }
+
+      if (walker.getCentreWall (cells[1]) != OPEN)
+      {
+        drawFace (gc, distance, 0, false);
+        break;
+      }
+    }
+  }
+
+  private void old ()
+  {
+    GraphicsContext gc = getGraphicsContext2D ();
     gc.setStroke (Color.GREEN);
 
     int distance = 5;
