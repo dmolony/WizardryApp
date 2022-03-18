@@ -46,8 +46,8 @@ public class ViewPane extends Canvas implements WalkerListener
     gc.setFill (Color.LIGHTGRAY);
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
-    int leftObscured = 0;
-    int rightObscured = 0;
+    int leftObscured = -1;
+    int rightObscured = -1;
 
     for (int distance = 0; distance < corners.length - 1; distance++)
     {
@@ -58,15 +58,15 @@ public class ViewPane extends Canvas implements WalkerListener
         if (walker.getCentreWall (cells[LEFT_1]) != OPEN)
         {
           drawFace (gc, distance, -1, leftObscured);
-          leftObscured = 1;
+          leftObscured = distance;
         }
-        else
-          leftObscured = 0;
+        //        else
+        //          leftObscured = 0;
       }
       else
       {
         drawLeft (gc, distance);
-        leftObscured = 1;
+        leftObscured = distance;
       }
 
       if (walker.getRightWall (cells[MIDDLE]) == OPEN)
@@ -74,20 +74,20 @@ public class ViewPane extends Canvas implements WalkerListener
         if (walker.getCentreWall (cells[RIGHT_1]) != OPEN)
         {
           drawFace (gc, distance, 1, rightObscured);
-          rightObscured = 1;
+          rightObscured = distance;
         }
-        else
-          rightObscured = 0;
+        //        else
+        //          rightObscured = 0;
       }
       else
       {
         drawRight (gc, distance);
-        rightObscured = 1;
+        rightObscured = distance;
       }
 
       if (walker.getCentreWall (cells[MIDDLE]) != OPEN)
       {
-        drawFace (gc, distance, 0, 0);
+        drawFace (gc, distance, 0, -1);
         break;
       }
     }
@@ -100,17 +100,28 @@ public class ViewPane extends Canvas implements WalkerListener
     int nearPoint = corners[distance];
     int farPoint = corners[distance + 1];
     int height = PANE_SIZE - 2 * farPoint;
-    int width = PANE_SIZE - 2 * farPoint;
+    int width = height;
 
-    int x = farPoint + offset * width;
+    int x = farPoint + offset * width;        // move face left or right if offset != 0
     int y = farPoint;
 
-    if (obscured > 0)
+    if (offset != 0)
     {
-      assert offset != 0;                 // cannot obscure centre pane
-      width = farPoint - nearPoint;
-      if (offset < 0)
-        x = (farPoint - width);
+      int gap = distance - obscured;
+      switch (gap)
+      {
+        case 1:
+          width = farPoint - nearPoint;
+          if (offset < 0)
+            x = (farPoint - width);
+          break;
+
+        case 2:
+          width = farPoint - corners[distance - 1];
+          if (offset < 0)
+            x = (farPoint - width);
+          break;
+      }
     }
 
     gc.strokeRect (x, y, width, height);
