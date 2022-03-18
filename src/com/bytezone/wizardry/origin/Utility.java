@@ -9,7 +9,7 @@ public class Utility
   // ---------------------------------------------------------------------------------//
   {
     int length = buffer[offset] & 0xFF;
-    return new String (buffer, 1, length);
+    return new String (buffer, offset + 1, length);
   }
 
   // ---------------------------------------------------------------------------------//

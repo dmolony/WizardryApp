@@ -46,8 +46,8 @@ public class ViewPane extends Canvas implements WalkerListener
     gc.setFill (Color.LIGHTGRAY);
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
-    boolean leftObscured = false;
-    boolean rightObscured = false;
+    int leftObscured = 0;
+    int rightObscured = 0;
 
     for (int distance = 0; distance < corners.length - 1; distance++)
     {
@@ -58,15 +58,15 @@ public class ViewPane extends Canvas implements WalkerListener
         if (walker.getCentreWall (cells[LEFT_1]) != OPEN)
         {
           drawFace (gc, distance, -1, leftObscured);
-          leftObscured = true;
+          leftObscured = 1;
         }
         else
-          leftObscured = false;
+          leftObscured = 0;
       }
       else
       {
         drawLeft (gc, distance);
-        leftObscured = true;
+        leftObscured = 1;
       }
 
       if (walker.getRightWall (cells[MIDDLE]) == OPEN)
@@ -74,27 +74,27 @@ public class ViewPane extends Canvas implements WalkerListener
         if (walker.getCentreWall (cells[RIGHT_1]) != OPEN)
         {
           drawFace (gc, distance, 1, rightObscured);
-          rightObscured = true;
+          rightObscured = 1;
         }
         else
-          rightObscured = false;
+          rightObscured = 0;
       }
       else
       {
         drawRight (gc, distance);
-        rightObscured = true;
+        rightObscured = 1;
       }
 
       if (walker.getCentreWall (cells[MIDDLE]) != OPEN)
       {
-        drawFace (gc, distance, 0, false);
+        drawFace (gc, distance, 0, 0);
         break;
       }
     }
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawFace (GraphicsContext gc, int distance, int offset, boolean obscured)
+  private void drawFace (GraphicsContext gc, int distance, int offset, int obscured)
   // ---------------------------------------------------------------------------------//
   {
     int nearPoint = corners[distance];
@@ -105,7 +105,7 @@ public class ViewPane extends Canvas implements WalkerListener
     int x = farPoint + offset * width;
     int y = farPoint;
 
-    if (obscured)
+    if (obscured > 0)
     {
       assert offset != 0;                 // cannot obscure centre pane
       width = farPoint - nearPoint;

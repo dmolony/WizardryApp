@@ -30,6 +30,7 @@ public class WizardryOrigin
   // ---------------------------------------------------------------------------------//
   {
     String fileName = "/Users/denismolony/code/SCENARIO.DATA.BIN";
+    String messagesFile = "/Users/denismolony/code/SCENARIO.MESGS.BIN";
     File file = new File (fileName);
     if (!file.exists ())
     {
@@ -40,6 +41,7 @@ public class WizardryOrigin
     try
     {
       byte[] buffer = Files.readAllBytes (file.toPath ());
+      byte[] msgBuffer = Files.readAllBytes (new File (messagesFile).toPath ());
 
       scenarioName = Utility.getPascalString (buffer, 0);
 
@@ -48,6 +50,7 @@ public class WizardryOrigin
 
       ScenarioData sd = scenarioData.get (MAZE_AREA);
       maze = new Maze (buffer, sd.dataOffset * 512, sd.totalBlocks * 512);
+      Messages messages = new Messages (msgBuffer);
     }
     catch (IOException e)
     {

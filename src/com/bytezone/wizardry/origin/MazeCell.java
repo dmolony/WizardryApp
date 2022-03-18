@@ -100,6 +100,7 @@ public class MazeCell
 
     if (extra != null)
     {
+      gc.setFill (Color.GREEN);
       switch (extra.square)
       {
         case NORMAL:
@@ -111,17 +112,14 @@ public class MazeCell
           break;
 
         case TRANSFER:
-          gc.setFill (Color.GREEN);
           gc.fillOval (left + 12, top + 12, 14, 14);
           break;
 
         case CHUTE:
-          gc.setFill (Color.GREEN);
           gc.fillText ("C", left + 10, top + 25);
           break;
 
         case STAIRS:
-          gc.setFill (Color.GREEN);
           gc.fillText ("S", left + 10, top + 25);
           break;
 
@@ -131,37 +129,30 @@ public class MazeCell
           break;
 
         case SPINNER:
-          gc.setFill (Color.GREEN);
           gc.fillText ("X", left + 10, top + 25);
           break;
 
         case BUTTONZ:
-          gc.setFill (Color.GREEN);
           gc.fillText ("B", left + 10, top + 25);
           break;
 
         case ENCOUNTE:
-          gc.setFill (Color.GREEN);
           gc.fillText ("E", left + 10, top + 25);
           break;
 
         case FIZZLE:
-          gc.setFill (Color.GREEN);
           gc.fillText ("F", left + 10, top + 25);
           break;
 
         case OUCHY:
-          gc.setFill (Color.GREEN);
           gc.fillText ("O", left + 10, top + 25);
           break;
 
         case PIT:
-          gc.setFill (Color.GREEN);
           gc.fillText ("P", left + 10, top + 25);
           break;
 
         case SCNMSG:
-          gc.setFill (Color.GREEN);
           gc.fillText ("M", left + 10, top + 25);
           break;
       }
