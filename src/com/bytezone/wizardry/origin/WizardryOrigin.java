@@ -50,7 +50,7 @@ public class WizardryOrigin
 
       ScenarioData sd = scenarioData.get (MAZE_AREA);
       maze = new Maze (buffer, sd.dataOffset * 512, sd.totalBlocks * 512);
-      Messages messages = new Messages (msgBuffer);
+      //      Messages messages = new Messages (msgBuffer);
     }
     catch (IOException e)
     {

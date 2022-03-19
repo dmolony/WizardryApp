@@ -29,6 +29,6 @@ public class Walls
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%s %s %s %s", west, south, east, north);
+    return String.format ("W:%s S:%s E:%s N:%s", west, south, east, north);
   }
 }

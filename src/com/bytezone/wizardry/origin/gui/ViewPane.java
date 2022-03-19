@@ -60,8 +60,6 @@ public class ViewPane extends Canvas implements WalkerListener
           drawFace (gc, distance, -1, leftObscured);
           leftObscured = distance;
         }
-        //        else
-        //          leftObscured = 0;
       }
       else
       {
@@ -76,8 +74,6 @@ public class ViewPane extends Canvas implements WalkerListener
           drawFace (gc, distance, 1, rightObscured);
           rightObscured = distance;
         }
-        //        else
-        //          rightObscured = 0;
       }
       else
       {
@@ -174,10 +170,107 @@ public class ViewPane extends Canvas implements WalkerListener
   }
 
   // ---------------------------------------------------------------------------------//
+  private void drawView2 (Walker walker)
+  // ---------------------------------------------------------------------------------//
+  {
+    GraphicsContext gc = getGraphicsContext2D ();
+
+    gc.setFill (Color.LIGHTGRAY);
+    gc.fillRect (0, 0, getWidth (), getHeight ());
+
+    for (int distance = corners.length - 2; distance >= 0; distance--)
+    {
+      MazeCell[] cells = walker.getCells (distance);
+
+      if (walker.getCentreWall (cells[LEFT_1]) != OPEN)
+        drawFace (gc, distance, -1);
+      if (walker.getCentreWall (cells[MIDDLE]) != OPEN)
+        drawFace (gc, distance, 0);
+      if (walker.getCentreWall (cells[RIGHT_1]) != OPEN)
+        drawFace (gc, distance, 1);
+
+      //      if (walker.getLeftWall (cells[LEFT_1]) != OPEN)
+      //        drawLeft (gc, distance, -1);
+      if (walker.getLeftWall (cells[MIDDLE]) != OPEN)
+        drawLeft (gc, distance, 0);
+
+      //      if (walker.getRightWall (cells[RIGHT_1]) != OPEN)
+      //        drawRight (gc, distance, 1);
+      if (walker.getRightWall (cells[MIDDLE]) != OPEN)
+        drawRight (gc, distance, 0);
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawFace (GraphicsContext gc, int distance, int offset)
+  // ---------------------------------------------------------------------------------//
+  {
+    int x = corners[distance + 1];
+    int y = x;
+    int height = PANE_SIZE - 2 * x;
+    int width = height;
+
+    x = x + offset * width;
+
+    gc.setFill (Color.LIGHTGRAY);
+    gc.fillRect (x, y, width, height);
+    gc.strokeRect (x, y, width, height);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawLeft (GraphicsContext gc, int distance, int offset)
+  // ---------------------------------------------------------------------------------//
+  {
+    double x = corners[distance];
+    double y = corners[distance];
+
+    double x1 = corners[distance + 1];
+    double y1 = corners[distance + 1];
+
+    double x2 = x1;
+    double y2 = getHeight () - y1;
+
+    double x3 = x;
+    double y3 = getHeight () - y;
+
+    //    double o = offset * getWidth () - corners[distance + 1] * 2;
+
+    //    double[] xx = new double[] { x + o, x1 + o, x2 + o, x3 + o };
+    double[] xx = new double[] { x, x1, x2, x3 };
+    double[] yy = new double[] { y, y1, y2, y3 };
+
+    gc.fillPolygon (xx, yy, 4);
+    gc.strokePolygon (xx, yy, 4);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawRight (GraphicsContext gc, int distance, int offset)
+  // ---------------------------------------------------------------------------------//
+  {
+    double x = getWidth () - corners[distance];
+    double y = getWidth () - corners[distance];
+
+    double x1 = getWidth () - corners[distance + 1];
+    double y1 = getWidth () - corners[distance + 1];
+
+    double x2 = x1;
+    double y2 = getHeight () - y1;
+
+    double x3 = x;
+    double y3 = getHeight () - y;
+
+    double[] xx = new double[] { x, x1, x2, x3 };
+    double[] yy = new double[] { y, y1, y2, y3 };
+
+    gc.fillPolygon (xx, yy, 4);
+    gc.strokePolygon (xx, yy, 4);
+  }
+
+  // ---------------------------------------------------------------------------------//
   @Override
   public void walkerMoved (Walker walker)
   // ---------------------------------------------------------------------------------//
   {
-    drawView (walker);
+    drawView2 (walker);
   }
 }
