@@ -85,12 +85,12 @@ public class MazeLevel
   public MazeCell getMazeCell (Location location)
   // ---------------------------------------------------------------------------------//
   {
-    if (location.level != this.level)
+    if (location.getLevel () != this.level)
     {
       System.out.println ("Wrong level");
       return null;
     }
-    return mazeCells[location.column][location.row];
+    return mazeCells[location.getColumn ()][location.getRow ()];
   }
 
   // ---------------------------------------------------------------------------------//

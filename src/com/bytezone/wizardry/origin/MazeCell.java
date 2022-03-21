@@ -50,8 +50,8 @@ public class MazeCell
       return;
     }
 
-    int top = (19 - location.row) * CELL_SIZE + 5;
-    int left = location.column * CELL_SIZE + 5;
+    int top = (19 - location.getRow ()) * CELL_SIZE + 5;
+    int left = location.getColumn () * CELL_SIZE + 5;
 
     gc.setFill (Color.RED);
     gc.fillOval (left + 12, top + 12, 14, 14);
@@ -86,9 +86,9 @@ public class MazeCell
   public void draw (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
-    int top = (19 - location.row) * CELL_SIZE + 5;
+    int top = (19 - location.getRow ()) * CELL_SIZE + 5;
     int bottom = top + CELL_SIZE - 2;
-    int left = location.column * CELL_SIZE + 5;
+    int left = location.getColumn () * CELL_SIZE + 5;
     int right = left + CELL_SIZE - 2;
 
     if (fight)

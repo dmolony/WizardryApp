@@ -49,6 +49,7 @@ public class ViewPane extends Canvas implements WalkerListener
   {
     GraphicsContext gc = getGraphicsContext2D ();
     gc.fillRect (0, 0, getWidth (), getHeight ());
+    gc.setStroke (Color.BLACK);
 
     for (int distance = corners.length - 2; distance >= 0; distance--)
     {
@@ -94,6 +95,7 @@ public class ViewPane extends Canvas implements WalkerListener
     x += offset * width;
 
     gc.fillRect (x, y, width, height);
+    gc.setStroke (Color.BLACK);
     gc.strokeRect (x, y, width, height);
 
     if (wall == DOOR || wall == HIDEDOOR)
@@ -102,6 +104,7 @@ public class ViewPane extends Canvas implements WalkerListener
       y += doors[distance];
       height -= doors[distance];
       width -= doors[distance] * 2;
+      gc.setStroke (wall == DOOR ? Color.BLACK : Color.BLUE);
       gc.strokeRect (x, y, width, height);
     }
   }
@@ -126,6 +129,7 @@ public class ViewPane extends Canvas implements WalkerListener
     double[] yy = new double[] { y, y1, y2, y3 };
 
     gc.fillPolygon (xx, yy, xx.length);
+    gc.setStroke (Color.BLACK);
     gc.strokePolygon (xx, yy, xx.length);
 
     if (wall == DOOR || wall == HIDEDOOR)
@@ -156,6 +160,7 @@ public class ViewPane extends Canvas implements WalkerListener
       xx = new double[] { x, x1, x2, x3 };
       yy = new double[] { y, y1, y2, y3 };
 
+      gc.setStroke (wall == DOOR ? Color.BLACK : Color.BLUE);
       gc.strokePolygon (xx, yy, xx.length);
     }
   }
@@ -179,6 +184,7 @@ public class ViewPane extends Canvas implements WalkerListener
     double[] xx = new double[] { x, x1, x2, x3 };
     double[] yy = new double[] { y, y1, y2, y3 };
 
+    gc.setStroke (Color.BLACK);
     gc.fillPolygon (xx, yy, xx.length);
     gc.strokePolygon (xx, yy, xx.length);
 
@@ -210,6 +216,7 @@ public class ViewPane extends Canvas implements WalkerListener
       xx = new double[] { x, x1, x2, x3 };
       yy = new double[] { y, y1, y2, y3 };
 
+      gc.setStroke (wall == DOOR ? Color.BLACK : Color.BLUE);
       gc.strokePolygon (xx, yy, xx.length);
     }
   }

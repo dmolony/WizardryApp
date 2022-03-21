@@ -6,9 +6,9 @@ import com.bytezone.wizardry.origin.Maze.Direction;
 public class Location
 // -----------------------------------------------------------------------------------//
 {
-  int level;
-  int row;
-  int column;
+  private int level;
+  private int row;
+  private int column;
 
   // ---------------------------------------------------------------------------------//
   public Location (int level, int column, int row)

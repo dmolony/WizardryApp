@@ -102,16 +102,20 @@ public class MazeWalker extends AppBase
 
     switch (keyEvent.getCode ())
     {
-      case A:       // turn left
+      case A:
         currentWalker.turnLeft ();
         break;
 
-      case W:       // move forward
-        currentWalker.move ();
+      case W:
+        currentWalker.forward ();
         break;
 
-      case D:       // turn right
+      case D:
         currentWalker.turnRight ();
+        break;
+
+      case S:
+        currentWalker.back ();
         break;
 
       default:

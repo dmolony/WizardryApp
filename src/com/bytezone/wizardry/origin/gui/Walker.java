@@ -125,10 +125,18 @@ public class Walker
   }
 
   // ---------------------------------------------------------------------------------//
-  public void move ()
+  public void forward ()
   // ---------------------------------------------------------------------------------//
   {
     location.move (direction);
+    notifyListeners ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void back ()
+  // ---------------------------------------------------------------------------------//
+  {
+    location.move (reverse ());
     notifyListeners ();
   }
 
@@ -158,6 +166,19 @@ public class Walker
       case WEST -> Direction.NORTH;
     };
     notifyListeners ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private Direction reverse ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return switch (direction)
+    {
+      case NORTH -> Direction.SOUTH;
+      case SOUTH -> Direction.NORTH;
+      case EAST -> Direction.WEST;
+      case WEST -> Direction.EAST;
+    };
   }
 
   // ---------------------------------------------------------------------------------//
