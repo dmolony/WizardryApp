@@ -126,7 +126,7 @@ public class MazeWalker extends AppBase
         break;
 
       default:
-        super.keyPressed (keyEvent);
+        break;
     }
   }
 
@@ -145,7 +145,7 @@ public class MazeWalker extends AppBase
       {
         int msg = extra.getAux ()[1];
         description.append ("\n\n");
-        description.append (wizardry.getMessages ().getMessage (msg));
+        description.append (wizardry.getMessage (msg));
       }
     }
 
