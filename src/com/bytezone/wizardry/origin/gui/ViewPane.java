@@ -120,10 +120,10 @@ public class ViewPane extends Canvas implements MovementListener
     double y1 = x1;
 
     double x2 = x1;
-    double y2 = getHeight () - y1;
+    double y2 = getHeight () - y1;          // bottom right
 
     double x3 = x;
-    double y3 = getHeight () - y;
+    double y3 = getHeight () - y;           // bottom left
 
     double[] xx = new double[] { x, x1, x2, x3 };
     double[] yy = new double[] { y, y1, y2, y3 };
@@ -175,10 +175,10 @@ public class ViewPane extends Canvas implements MovementListener
     double x1 = getWidth () - corners[distance + 1];      // bottom left
     double y1 = x1;
 
-    double x2 = x1;
+    double x2 = x1;                                       // top left
     double y2 = getHeight () - y1;
 
-    double x3 = x;
+    double x3 = x;                                        // top right
     double y3 = getHeight () - y;
 
     double[] xx = new double[] { x, x1, x2, x3 };
@@ -201,7 +201,7 @@ public class ViewPane extends Canvas implements MovementListener
       else
       {
         x -= hGap;
-        y = y - hGap;
+        y -= hGap;
       }
 
       x1 += hGap;
