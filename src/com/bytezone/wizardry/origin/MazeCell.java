@@ -117,7 +117,7 @@ public class MazeCell
     if (extra != null)
     {
       gc.setFill (Color.GREEN);
-      switch (extra.square)
+      switch (extra.getSquare ())
       {
         case NORMAL:
           break;

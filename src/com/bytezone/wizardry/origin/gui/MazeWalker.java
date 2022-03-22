@@ -6,6 +6,7 @@ import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
+import com.bytezone.wizardry.origin.Maze;
 import com.bytezone.wizardry.origin.Maze.Direction;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -138,7 +139,15 @@ public class MazeWalker extends AppBase
     StringBuilder description = new StringBuilder (currentWalker.toString ());
 
     if (extra != null)
+    {
       description.append ("\n\n" + extra);
+      if (extra.getSquare () == Maze.Square.SCNMSG)
+      {
+        int msg = extra.getAux ()[1];
+        description.append ("\n\n");
+        description.append (wizardry.getMessages ().getMessage (msg));
+      }
+    }
 
     if (fight)
       description.append ("\n\nFIGHT");
