@@ -1,8 +1,8 @@
 package com.bytezone.wizardry.origin.gui;
 
 // -----------------------------------------------------------------------------------//
-public interface WalkerListener
+public interface DirectionListener
 // -----------------------------------------------------------------------------------//
 {
-  public void walkerMoved (Walker walker);
+  public void directionChange (Walker walker);
 }

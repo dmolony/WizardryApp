@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 // -----------------------------------------------------------------------------------//
-public class MazePane extends Canvas implements WalkerListener
+public class MazePane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
   WizardryOrigin wizardry;

@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 // -----------------------------------------------------------------------------------//
-public class ViewPane extends Canvas implements WalkerListener
+public class ViewPane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
   private static final int[] corners = { 0, 30, 90, 130, 155, 170, 180, 187 };

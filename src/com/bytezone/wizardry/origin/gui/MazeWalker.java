@@ -4,6 +4,7 @@ import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.StatusBar;
+import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.Maze.Direction;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -19,6 +20,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 // -----------------------------------------------------------------------------------//
@@ -77,9 +79,9 @@ public class MazeWalker extends AppBase
 
     VBox leftPane = new VBox (10);
     VBox rightPane = new VBox (10);
+    text.setFont (new Font ("Courier new", 14));
     leftPane.getChildren ().addAll (viewPane, text);
     rightPane.getChildren ().addAll (mazePane);
-    text.setText ("hello");
 
     rightPane.setPadding (new Insets (10));
     leftPane.setPadding (new Insets (10));
@@ -104,23 +106,44 @@ public class MazeWalker extends AppBase
     {
       case A:
         currentWalker.turnLeft ();
+        updateText ();
         break;
 
       case W:
         currentWalker.forward ();
+        updateText ();
         break;
 
       case D:
         currentWalker.turnRight ();
+        updateText ();
         break;
 
       case S:
         currentWalker.back ();
+        updateText ();
         break;
 
       default:
-        break;
+        super.keyPressed (keyEvent);
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void updateText ()
+  // ---------------------------------------------------------------------------------//
+  {
+    Extra extra = currentWalker.getCurrentMazeCell ().getExtra ();
+    boolean fight = currentWalker.getCurrentMazeCell ().getFight ();
+    StringBuilder description = new StringBuilder (currentWalker.toString ());
+
+    if (extra != null)
+      description.append ("\n\n" + extra);
+
+    if (fight)
+      description.append ("\n\nFIGHT");
+
+    text.setText (description.toString ());
   }
 
   // ---------------------------------------------------------------------------------//
@@ -136,6 +159,7 @@ public class MazeWalker extends AppBase
   {
     currentWalker = walker[level];
     currentWalker.activate ();
+    updateText ();
   }
 
   // ---------------------------------------------------------------------------------//

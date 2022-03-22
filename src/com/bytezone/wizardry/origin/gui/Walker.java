@@ -17,7 +17,7 @@ public class Walker
   public Direction direction;
   public MazeLevel mazeLevel;
 
-  List<WalkerListener> listeners = new ArrayList<> ();
+  List<MovementListener> listeners = new ArrayList<> ();
 
   // ---------------------------------------------------------------------------------//
   public Walker (MazeLevel mazeLevel, Direction direction, Location location)
@@ -26,6 +26,13 @@ public class Walker
     this.mazeLevel = mazeLevel;
     this.direction = direction;
     this.location = location;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public MazeCell getCurrentMazeCell ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return mazeLevel.getMazeCell (location);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -189,7 +196,7 @@ public class Walker
   }
 
   // ---------------------------------------------------------------------------------//
-  public void addWalkerListener (WalkerListener listener)
+  public void addWalkerListener (MovementListener listener)
   // ---------------------------------------------------------------------------------//
   {
     if (!listeners.contains (listener))
@@ -200,7 +207,7 @@ public class Walker
   private void notifyListeners ()
   // ---------------------------------------------------------------------------------//
   {
-    for (WalkerListener listener : listeners)
+    for (MovementListener listener : listeners)
       listener.walkerMoved (this);
   }
 
@@ -211,9 +218,8 @@ public class Walker
   {
     StringBuilder text = new StringBuilder ();
 
-    text.append (location);
-    text.append (" : ");
-    text.append (direction);
+    text.append ("Location : " + location + "\n");
+    text.append ("Direction: " + direction);
 
     return text.toString ();
   }
