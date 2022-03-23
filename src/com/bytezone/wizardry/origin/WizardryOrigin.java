@@ -30,9 +30,9 @@ public class WizardryOrigin
   public WizardryOrigin ()
   // ---------------------------------------------------------------------------------//
   {
-    String fileName = "/Users/denismolony/code/SCENARIO.DATA.BIN";
+    String mazeFileName = "/Users/denismolony/code/SCENARIO.DATA.BIN";
     String messagesFile = "/Users/denismolony/code/SCENARIO.MESGS.BIN";
-    File file = new File (fileName);
+    File file = new File (mazeFileName);
     if (!file.exists ())
     {
       System.out.println ("File does not exist");

@@ -15,6 +15,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -80,8 +81,12 @@ public class MazeWalker extends AppBase
 
     VBox leftPane = new VBox (10);
     VBox rightPane = new VBox (10);
+
     text.setFont (new Font ("Courier new", 14));
-    leftPane.getChildren ().addAll (viewPane, text);
+    ScrollPane sp = new ScrollPane (text);
+    sp.setStyle ("-fx-background-color:transparent;");
+
+    leftPane.getChildren ().addAll (viewPane, sp);
     rightPane.getChildren ().addAll (mazePane);
 
     rightPane.setPadding (new Insets (10));
