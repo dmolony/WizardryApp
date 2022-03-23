@@ -30,8 +30,6 @@ public class WizardryOrigin
   public WizardryOrigin ()
   // ---------------------------------------------------------------------------------//
   {
-    String mazeFileName = "/Users/denismolony/code/SCENARIO.DATA.BIN";
-    String messagesFile = "/Users/denismolony/code/SCENARIO.MESGS.BIN";
     String diskFileName =
         "/Users/denismolony/Documents/Examples/Apple Disk Images/Wizardry/murasama.dsk";
     File file = new File (diskFileName);
@@ -42,6 +40,11 @@ public class WizardryOrigin
     }
 
     WizardryDisk disk = new WizardryDisk (diskFileName);
+    if (disk == null)
+    {
+      System.out.println ("Not a Wizardry disk");
+      return;
+    }
 
     byte[] buffer = disk.getScenarioData ();
     scenarioName = Utility.getPascalString (buffer, 0);

@@ -41,10 +41,14 @@ public class WizardryDisk
     catch (IOException e)
     {
       e.printStackTrace ();
+      return;
     }
 
     if (fs == null)
+    {
+      System.out.println ("Not a Pascal disk");
       return;
+    }
 
     files = fs.getFiles ();
   }
