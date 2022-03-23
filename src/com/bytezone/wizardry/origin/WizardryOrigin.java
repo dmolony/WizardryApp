@@ -3,10 +3,10 @@ package com.bytezone.wizardry.origin;
 import static com.bytezone.wizardry.origin.ScenarioData.typeText;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.bytezone.wizardry.disk.WizardryDisk;
 
 // -----------------------------------------------------------------------------------//
 public class WizardryOrigin
@@ -32,31 +32,26 @@ public class WizardryOrigin
   {
     String mazeFileName = "/Users/denismolony/code/SCENARIO.DATA.BIN";
     String messagesFile = "/Users/denismolony/code/SCENARIO.MESGS.BIN";
-    File file = new File (mazeFileName);
+    String diskFileName =
+        "/Users/denismolony/Documents/Examples/Apple Disk Images/Wizardry/murasama.dsk";
+    File file = new File (diskFileName);
     if (!file.exists ())
     {
       System.out.println ("File does not exist");
       return;
     }
 
-    try
-    {
-      byte[] buffer = Files.readAllBytes (file.toPath ());
-      byte[] msgBuffer = Files.readAllBytes (new File (messagesFile).toPath ());
+    WizardryDisk disk = new WizardryDisk (diskFileName);
 
-      scenarioName = Utility.getPascalString (buffer, 0);
+    byte[] buffer = disk.getScenarioData ();
+    scenarioName = Utility.getPascalString (buffer, 0);
 
-      for (int i = 0; i < typeText.length; i++)
-        scenarioData.add (new ScenarioData (buffer, i));
+    for (int i = 0; i < typeText.length; i++)
+      scenarioData.add (new ScenarioData (buffer, i));
 
-      ScenarioData sd = scenarioData.get (MAZE_AREA);
-      maze = new Maze (buffer, sd.dataOffset * 512, sd.totalBlocks * 512);
-      messages = new Messages (msgBuffer);
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace ();
-    }
+    ScenarioData sd = scenarioData.get (MAZE_AREA);
+    maze = new Maze (buffer, sd.dataOffset * 512, sd.totalBlocks * 512);
+    messages = new Messages (disk.getScenarioMessages ());
   }
 
   // ---------------------------------------------------------------------------------//
