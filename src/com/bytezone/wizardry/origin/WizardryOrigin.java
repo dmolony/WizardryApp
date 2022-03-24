@@ -35,6 +35,36 @@ public class WizardryOrigin
     NORTH, SOUTH, EAST, WEST
   }
 
+  public enum ObjectType
+  {
+    WEAPON, ARMOR, SHIELD, HELMET, GAUNTLET, SPECIAL, MISC
+  }
+
+  public enum Race
+  {
+    NORACE, HUMAN, ELF, DWARF, GNOME, HOBBIT
+  }
+
+  public enum CharacterClass
+  {
+    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
+  }
+
+  public enum Alignment
+  {
+    UNALIGN, GOOD, NEUTRAL, EVIL
+  }
+
+  public enum CharacterStatus
+  {
+    OK, AFRAID, ASLEEP, PLYZE, STONED, DEAD, ASHES, LOST
+  }
+
+  public enum Attribute
+  {
+    STRENGTH, IQ, PIETY, VITALITY, AGILITY, LUCK
+  }
+
   // ---------------------------------------------------------------------------------//
   public WizardryOrigin (String diskFileName)
   // ---------------------------------------------------------------------------------//

@@ -67,12 +67,6 @@ public class MazeLevel
           int index = sqrextra[col][row];
           Extra extra = new Extra (squares[index], aux0[index], aux1[index], aux2[index]);
           mazeCell.addExtra (extra);
-
-          //          if (extra.getSquare () == Maze.Square.ENCOUNTE && extra.getAux ()[2] == 0x51)
-          //          {
-          //            System.out.println (extra);
-          //            System.out.println (HexFormatter.format (buffer, offset, length));
-          //          }
         }
 
         mazeCells[col][row] = mazeCell;

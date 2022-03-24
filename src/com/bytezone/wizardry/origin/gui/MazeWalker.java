@@ -44,8 +44,8 @@ public class MazeWalker extends AppBase
   MazePane mazePane;
   ViewPane viewPane;
 
-  VBox leftPane = new VBox (10);
-  VBox rightPane = new VBox (10);
+  VBox leftVBox = new VBox (10);
+  VBox rightVBox = new VBox (10);
   Text text = new Text ();
   ScrollPane sp = new ScrollPane (text);
 
@@ -73,8 +73,10 @@ public class MazeWalker extends AppBase
     text.setFont (new Font ("Courier new", 14));
     sp.setStyle ("-fx-background-color:transparent;");
 
-    rightPane.setPadding (new Insets (10));
-    leftPane.setPadding (new Insets (10));
+    leftVBox.setPadding (new Insets (10));
+    rightVBox.setPadding (new Insets (10));
+    //    leftVBox.setMinSize (350, 350);
+    rightVBox.setMinSize (820, 825);
 
     //    view.setStyle ("-fx-border-color: black");
     //    leftPane.setStyle ("-fx-border-color: black");
@@ -83,8 +85,8 @@ public class MazeWalker extends AppBase
     if (!wizardryFileName.isEmpty ())
       setWizardryDisk ();
 
-    mainPane.setLeft (leftPane);
-    mainPane.setRight (rightPane);
+    mainPane.setLeft (leftVBox);
+    mainPane.setCenter (rightVBox);
 
     return mainPane;
   }
@@ -119,11 +121,11 @@ public class MazeWalker extends AppBase
     mazePane = new MazePane (wizardry);
     viewPane = new ViewPane (wizardry);
 
-    leftPane.getChildren ().clear ();
-    leftPane.getChildren ().addAll (viewPane, sp);
+    leftVBox.getChildren ().clear ();
+    leftVBox.getChildren ().addAll (viewPane, sp);
 
-    rightPane.getChildren ().clear ();
-    rightPane.getChildren ().addAll (mazePane);
+    rightVBox.getChildren ().clear ();
+    rightVBox.getChildren ().addAll (mazePane);
 
     int levels = wizardry.getMazeLevels ().size ();
     walker = new Walker[levels];

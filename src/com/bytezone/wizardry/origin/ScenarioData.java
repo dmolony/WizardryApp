@@ -16,6 +16,7 @@ class ScenarioData
   int totalBlocks;
   int firstBlock;
   int type;
+  int calc1;
 
   List<DataBlock> dataBlocks = new ArrayList<> ();
 

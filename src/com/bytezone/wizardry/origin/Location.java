@@ -93,6 +93,6 @@ public class Location
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("L:%-2d  E:%-2d  N:%-2d", level, column, row);
+    return String.format ("L:%02d  E:%02d  N:%02d", level, column, row);
   }
 }
