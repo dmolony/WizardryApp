@@ -3,7 +3,6 @@ package com.bytezone.wizardry.disk;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
 
 import com.bytezone.filesystem.AppleFile;
 import com.bytezone.filesystem.AppleFileSystem;
@@ -15,7 +14,6 @@ public class WizardryDisk
 // -----------------------------------------------------------------------------------//
 {
   FsPascal fs;
-  List<AppleFile> files;
 
   // ---------------------------------------------------------------------------------//
   public WizardryDisk (String fileName)
@@ -49,15 +47,13 @@ public class WizardryDisk
       System.out.println ("Not a Pascal disk");
       return;
     }
-
-    files = fs.getFiles ();
   }
 
   // ---------------------------------------------------------------------------------//
   public byte[] getScenarioData ()
   // ---------------------------------------------------------------------------------//
   {
-    for (AppleFile appleFile : files)
+    for (AppleFile appleFile : fs.getFiles ())
       if ("SCENARIO.DATA".equals (appleFile.getName ()))
         return appleFile.read ();
 
@@ -68,7 +64,7 @@ public class WizardryDisk
   public byte[] getScenarioMessages ()
   // ---------------------------------------------------------------------------------//
   {
-    for (AppleFile appleFile : files)
+    for (AppleFile appleFile : fs.getFiles ())
       if ("SCENARIO.MESGS".equals (appleFile.getName ()))
         return appleFile.read ();
 

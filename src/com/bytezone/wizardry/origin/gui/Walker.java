@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.Maze.Direction;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Walls.Wall;
+import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
 // -----------------------------------------------------------------------------------//
 public class Walker
@@ -219,7 +219,7 @@ public class Walker
     StringBuilder text = new StringBuilder ();
 
     text.append ("Location : " + location + "\n");
-    text.append ("Direction: " + direction);
+    text.append ("Facing   : " + direction);
 
     return text.toString ();
   }

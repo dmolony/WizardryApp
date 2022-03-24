@@ -1,13 +1,13 @@
 package com.bytezone.wizardry.origin;
 
-import com.bytezone.wizardry.origin.Maze.Square;
+import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 
 // -----------------------------------------------------------------------------------//
 public class Extra
 // -----------------------------------------------------------------------------------//
 {
   private Square square;
-  int[] aux = new int[3];
+  private int[] aux = new int[3];
 
   // ---------------------------------------------------------------------------------//
   public Extra (Square square, int aux0, int aux1, int aux2)
@@ -34,10 +34,17 @@ public class Extra
   }
 
   // ---------------------------------------------------------------------------------//
+  public boolean is (Square square)
+  // ---------------------------------------------------------------------------------//
+  {
+    return this.square == square;
+  }
+
+  // ---------------------------------------------------------------------------------//
   @Override
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%s %04X %04X, %04X", square, aux[0], aux[1], aux[2]);
+    return String.format ("%-8s  %04X  %04X  %04X", square, aux[0], aux[1], aux[2]);
   }
 }

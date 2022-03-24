@@ -1,7 +1,5 @@
 package com.bytezone.wizardry.origin;
 
-import static com.bytezone.wizardry.origin.ScenarioData.typeText;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +18,27 @@ public class WizardryOrigin
   static final int IMAGE_AREA = 6;
   static final int EXPERIENCE_AREA = 7;
 
-  List<ScenarioData> scenarioData = new ArrayList<> ();
-  String scenarioName;
-
-  public Maze maze;
   Messages messages;
 
+  List<Monster> monsters;
+  List<Item> items;
+  private List<MazeLevel> mazeLevels;
+
+  public enum Square
+  {
+    NORMAL, STAIRS, PIT, CHUTE, SPINNER, DARK, TRANSFER, OUCHY, BUTTONZ, ROCKWATE, FIZZLE, SCNMSG,
+    ENCOUNTE
+  }
+
+  public enum Direction
+  {
+    NORTH, SOUTH, EAST, WEST
+  }
+
   // ---------------------------------------------------------------------------------//
-  public WizardryOrigin ()
+  public WizardryOrigin (String diskFileName)
   // ---------------------------------------------------------------------------------//
   {
-    String diskFileName =
-        "/Users/denismolony/Documents/Examples/Apple Disk Images/Wizardry/murasama.dsk";
     File file = new File (diskFileName);
     if (!file.exists ())
     {
@@ -47,14 +54,78 @@ public class WizardryOrigin
     }
 
     byte[] buffer = disk.getScenarioData ();
-    scenarioName = Utility.getPascalString (buffer, 0);
+    Header header = new Header (buffer);
 
-    for (int i = 0; i < typeText.length; i++)
-      scenarioData.add (new ScenarioData (buffer, i));
+    ScenarioData sd = header.get (MAZE_AREA);
+    mazeLevels = new ArrayList<> (sd.totalUnits);
 
-    ScenarioData sd = scenarioData.get (MAZE_AREA);
-    maze = new Maze (buffer, sd.dataOffset * 512, sd.totalBlocks * 512);
+    int id = 0;
+    for (DataBlock dataBlock : sd.dataBlocks)
+      mazeLevels.add (new MazeLevel (++id, dataBlock));
+
+    sd = header.get (MONSTER_AREA);
+    monsters = new ArrayList<> (sd.totalUnits);
+
+    id = 0;
+    for (DataBlock dataBlock : sd.dataBlocks)
+      monsters.add (new Monster (id++, dataBlock));
+
+    sd = header.get (ITEM_AREA);
+    items = new ArrayList<> (sd.totalUnits);
+
+    id = 0;
+    for (DataBlock dataBlock : sd.dataBlocks)
+      items.add (new Item (id++, dataBlock));
+
     messages = new Messages (disk.getScenarioMessages ());
+
+    if (false)
+      for (Square square : Square.values ())
+      {
+        showExtra (square);
+        System.out.println ();
+      }
+
+    //    for (Monster monster : monsters)
+    //      System.out.println (monster);
+
+    //    for (Item item : items)
+    //      System.out.println (item);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public List<MazeLevel> getMazeLevels ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return mazeLevels;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public List<Monster> getMonsters ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return monsters;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Monster getMonster (int id)
+  // ---------------------------------------------------------------------------------//
+  {
+    return monsters.get (id);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public List<Item> getItems ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return items;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Item getItem (int id)
+  // ---------------------------------------------------------------------------------//
+  {
+    return items.get (id);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -72,9 +143,17 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
-  public static void main (String[] args)
+  void showExtra (Square square)
   // ---------------------------------------------------------------------------------//
   {
-    new WizardryOrigin ();
+    for (MazeLevel level : mazeLevels)
+      for (int col = 0; col < 20; col++)
+        for (int row = 0; row < 20; row++)
+        {
+          MazeCell mazeCell = level.getMazeCell (col, row);
+          Extra extra = mazeCell.getExtra ();
+          if (extra != null && extra.is (square))
+            System.out.printf ("%s  %s%n", extra, mazeCell.getLocation ());
+        }
   }
 }

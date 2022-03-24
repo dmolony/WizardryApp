@@ -1,6 +1,6 @@
 package com.bytezone.wizardry.origin;
 
-import com.bytezone.wizardry.origin.Maze.Direction;
+import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
 // -----------------------------------------------------------------------------------//
 public class Location
@@ -17,6 +17,15 @@ public class Location
     this.level = level;
     this.row = row;
     this.column = column;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Location (int[] aux)
+  // ---------------------------------------------------------------------------------//
+  {
+    this.level = aux[0];
+    this.row = aux[1];
+    this.column = aux[2];
   }
 
   // ---------------------------------------------------------------------------------//
@@ -84,6 +93,6 @@ public class Location
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%2d %2d %2d", level, column, row);
+    return String.format ("L:%-2d  E:%-2d  N:%-2d", level, column, row);
   }
 }
