@@ -13,8 +13,8 @@ class ScenarioData
 
   int unitsPerBuffer;
   int totalUnits;
-  int totalBlocks;                // size in blocks
-  int firstBlock;                 // first block
+  int totalBlocks;
+  int firstBlock;
   int type;
 
   List<DataBlock> dataBlocks = new ArrayList<> ();
@@ -35,11 +35,6 @@ class ScenarioData
     type = seq;
 
     createDataBlocks ();
-
-    //    System.out.println (HexFormatter.format (buffer, 0, 512));
-
-    //    for (int ptr = 42; ptr < 106; ptr += 2)
-    //      System.out.printf ("%d%n", Utility.getShort (buffer, ptr));
   }
 
   // -------------------------------------------------------------------------------//
@@ -48,7 +43,7 @@ class ScenarioData
   {
     int offset = firstBlock * 512;
     int totalUnits = 0;
-    int unitSize = Header.recordLength[type];
+    int unitSize = Header.recordLengths[type];
 
     for (int bufferNo = 0; bufferNo < totalBlocks / 2; bufferNo++)
     {
@@ -69,33 +64,6 @@ class ScenarioData
   {
     for (DataBlock dataBlock : dataBlocks)
       System.out.println (dataBlock);
-  }
-
-  // -------------------------------------------------------------------------------//
-  public void displayRecords ()
-  // -------------------------------------------------------------------------------//
-  {
-    int offset = firstBlock * 512;
-    int totalUnits = 0;
-    int unitSize = Header.recordLength[type];
-
-    System.out.printf ("Unit size: %,d%n", unitSize);
-
-    for (int bufferNo = 0; bufferNo < totalBlocks / 2; bufferNo++)
-    {
-      System.out.printf ("Buffer No: %d%n", bufferNo);
-      int ptr = offset + bufferNo * 1024;
-      for (int unitNo = 0; unitNo < unitsPerBuffer; unitNo++)
-      {
-        dataBlocks.add (new DataBlock (buffer, ptr, unitSize));
-        System.out.printf ("Unit %d%n", unitNo);
-        System.out.println (HexFormatter.format (buffer, ptr, unitSize));
-        if (++totalUnits == this.totalUnits)
-          break;
-        ptr += unitSize;
-        System.out.println ();
-      }
-    }
   }
 
   // -------------------------------------------------------------------------------//

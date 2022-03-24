@@ -4,9 +4,9 @@ package com.bytezone.wizardry.origin;
 public class Damage
 // -----------------------------------------------------------------------------------//
 {
-  int dice;
-  int sides;
-  int plus;
+  private final int dice;
+  private final int sides;
+  private final int plus;
 
   // ---------------------------------------------------------------------------------//
   public Damage (int[] aux)
