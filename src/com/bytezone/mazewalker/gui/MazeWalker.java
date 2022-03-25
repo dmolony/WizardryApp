@@ -32,7 +32,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 // -----------------------------------------------------------------------------------//
-public class MazeWalker extends AppBase
+public class MazeWalker extends AppBase implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
   private static final String PREFS_FILE_NAME = "FileName";
@@ -150,6 +150,7 @@ public class MazeWalker extends AppBase
           new Location (i + 1, 0, 0));
       walker[i].addWalkerListener (mazePane);
       walker[i].addWalkerListener (viewPane);
+      walker[i].addWalkerListener (this);
     }
 
     setLevel (0);
@@ -161,7 +162,6 @@ public class MazeWalker extends AppBase
   {
     Location location = mazePane.getLocation (e.getX (), e.getY ());
     currentWalker.setLocation (location);
-    updateText ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -175,22 +175,18 @@ public class MazeWalker extends AppBase
     {
       case A:
         currentWalker.turnLeft ();
-        updateText ();
         break;
 
       case W:
         currentWalker.forward ();
-        updateText ();
         break;
 
       case D:
         currentWalker.turnRight ();
-        updateText ();
         break;
 
       case S:
         currentWalker.back ();
-        updateText ();
         break;
 
       default:
@@ -199,7 +195,8 @@ public class MazeWalker extends AppBase
   }
 
   // ---------------------------------------------------------------------------------//
-  private void updateText ()
+  @Override
+  public void walkerMoved (Walker walker)
   // ---------------------------------------------------------------------------------//
   {
     StringBuilder description = new StringBuilder ();
@@ -224,20 +221,20 @@ public class MazeWalker extends AppBase
             case 1:
               break;
 
-            case 2:               // special obtain (only blue ribbon so far)
+            case 2:                       // special obtain (only blue ribbon so far)
               description.append ("\n\nObtain: " + wizardry.getItem (aux[0]));
               break;
 
-            case 4:               // monster or obtain
+            case 4:                       // monster or obtain
               int val = Utility.signShort (aux[0]);
 
-              if (val > 0)          // monster
+              if (val > 0)                // monster
                 description.append ("\n\nEncounter: " + wizardry.getMonster (val));
               else
                 description.append ("\n\nObtain: " + wizardry.getItem (Math.abs (val) - 1000));
               break;
 
-            case 5:               // requires
+            case 5:                       // requires
               description.append ("\n\nRequires: " + wizardry.getItem (aux[0]));
               break;
 
@@ -326,7 +323,6 @@ public class MazeWalker extends AppBase
   {
     currentWalker = walker[level];
     currentWalker.activate ();
-    updateText ();
   }
 
   // ---------------------------------------------------------------------------------//
