@@ -202,9 +202,11 @@ public class MazeWalker extends AppBase
   private void updateText ()
   // ---------------------------------------------------------------------------------//
   {
+    StringBuilder description = new StringBuilder ();
+    description.append (currentWalker.toString ());
+
     Extra extra = currentWalker.getCurrentMazeCell ().getExtra ();
     boolean fight = currentWalker.getCurrentMazeCell ().getFight ();
-    StringBuilder description = new StringBuilder (currentWalker.toString ());
 
     if (extra != null)
     {
@@ -281,7 +283,7 @@ public class MazeWalker extends AppBase
           break;
 
         case BUTTONZ:
-          description.append (String.format ("Elevator levels : %d : %d", aux[2], aux[1]));
+          description.append (String.format ("Elevator levels : %d to %d", aux[2], aux[1]));
           break;
 
         case ROCKWATE:
