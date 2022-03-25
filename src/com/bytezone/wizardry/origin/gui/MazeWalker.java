@@ -9,6 +9,7 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
@@ -215,6 +216,37 @@ public class MazeWalker extends AppBase
         case SCNMSG:
           int msg = aux[1];
           description.append (wizardry.getMessage (msg));
+
+          switch (aux[2])
+          {
+            case 1:
+              break;
+
+            case 2:               // special obtain (only blue ribbon so far)
+              description.append ("\n\nObtain: " + wizardry.getItem (aux[0]));
+              break;
+
+            case 4:               // monster or obtain
+              int val = Utility.signShort (aux[0]);
+
+              if (val > 0)          // monster
+                description.append ("\n\nEncounter: " + wizardry.getMonster (val));
+              else
+                description.append ("\n\nObtain: " + wizardry.getItem (Math.abs (val) - 1000));
+              break;
+
+            case 5:               // requires
+              description.append ("\n\nRequires: " + wizardry.getItem (aux[0]));
+              break;
+
+            case 8:
+              description.append ("\n\nReturn to castle??");
+              break;
+
+            case 9:
+              description.append (String.format ("%n%nWhat does AUX0 = %04X mean?", aux[0]));
+              break;
+          }
           break;
 
         case STAIRS:
@@ -262,7 +294,8 @@ public class MazeWalker extends AppBase
 
         case ENCOUNTE:
           Monster monster = wizardry.getMonster (aux[2]);
-          description.append (String.format ("An encounter : %s (%d left)", monster, aux[0]));
+          String when = aux[0] == 0xFFFF ? "always" : aux[0] + " left";
+          description.append (String.format ("An encounter : %s (%s)", monster, when));
           if (!fight)
             description.append ("\n\nError - room not set to FIGHT");
           break;

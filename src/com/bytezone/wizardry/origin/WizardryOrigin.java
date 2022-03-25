@@ -20,8 +20,8 @@ public class WizardryOrigin
 
   Messages messages;
 
-  List<Monster> monsters;
-  List<Item> items;
+  private List<Monster> monsters;
+  private List<Item> items;
   private List<MazeLevel> mazeLevels;
 
   public enum Square
