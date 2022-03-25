@@ -10,7 +10,8 @@ import javafx.scene.paint.Color;
 public class MazeCell
 // -----------------------------------------------------------------------------------//
 {
-  private static final int CELL_SIZE = 40;
+  public static final int CELL_SIZE = 40;
+  public static final int INSET = 5;
 
   private Location location;
   private Walls walls;
@@ -71,8 +72,8 @@ public class MazeCell
       return;
     }
 
-    int top = (19 - location.getRow ()) * CELL_SIZE + 5;
-    int left = location.getColumn () * CELL_SIZE + 5;
+    int top = (19 - location.getRow ()) * CELL_SIZE + INSET;
+    int left = location.getColumn () * CELL_SIZE + INSET;
 
     gc.setFill (Color.RED);
     gc.fillOval (left + 12, top + 12, 14, 14);
@@ -107,9 +108,9 @@ public class MazeCell
   public void draw (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
-    int top = (19 - location.getRow ()) * CELL_SIZE + 5;
+    int top = (19 - location.getRow ()) * CELL_SIZE + INSET;
     int bottom = top + CELL_SIZE - 2;
-    int left = location.getColumn () * CELL_SIZE + 5;
+    int left = location.getColumn () * CELL_SIZE + INSET;
     int right = left + CELL_SIZE - 2;
 
     int textLeft = left + 12;

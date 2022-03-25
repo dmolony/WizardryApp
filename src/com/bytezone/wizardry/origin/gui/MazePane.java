@@ -32,6 +32,16 @@ public class MazePane extends Canvas implements MovementListener
   }
 
   // ---------------------------------------------------------------------------------//
+  public Location getLocation (double x, double y)
+  // ---------------------------------------------------------------------------------//
+  {
+    int row = (int) ((getHeight () - y - MazeCell.INSET) / MazeCell.CELL_SIZE);
+    int column = (int) ((x - MazeCell.INSET) / MazeCell.CELL_SIZE);
+
+    return new Location (0, column, row);
+  }
+
+  // ---------------------------------------------------------------------------------//
   @Override
   public void walkerMoved (Walker walker)
   // ---------------------------------------------------------------------------------//

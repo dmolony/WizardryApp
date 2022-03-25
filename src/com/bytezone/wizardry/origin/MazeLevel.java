@@ -91,6 +91,7 @@ public class MazeLevel
       System.out.println ("Wrong level");
       return null;
     }
+
     return mazeCells[location.getColumn ()][location.getRow ()];
   }
 

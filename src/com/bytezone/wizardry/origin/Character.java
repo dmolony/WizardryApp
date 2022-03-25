@@ -3,6 +3,10 @@ package com.bytezone.wizardry.origin;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bytezone.wizardry.origin.WizardryOrigin.Alignment;
+import com.bytezone.wizardry.origin.WizardryOrigin.Race;
+import com.bytezone.wizardry.origin.WizardryOrigin.Status;
+
 // -----------------------------------------------------------------------------------//
 public class Character
 // -----------------------------------------------------------------------------------//
@@ -40,26 +44,6 @@ public class Character
   LostXYL lostXYL;
 
   List<Possession> possessions = new ArrayList<> (MAX_POSSESSIONS);
-
-  enum Race
-  {
-    NORACE, HUMAN, ELF, DWARF, GNOME, HOBBIT
-  }
-
-  enum Class
-  {
-    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
-  }
-
-  enum Status
-  {
-    OK, AFRAID, ASLEEP, PLYZE, STONED, DEAD, ASHES, LOST
-  }
-
-  enum Alignment
-  {
-    UNALIGN, GOOD, NEUTRAL, EVIL
-  }
 
   // ---------------------------------------------------------------------------------//
   public Character (byte[] buffer, int offset)

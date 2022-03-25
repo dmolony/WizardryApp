@@ -45,11 +45,6 @@ public class WizardryOrigin
     NORACE, HUMAN, ELF, DWARF, GNOME, HOBBIT
   }
 
-  public enum CharacterClass
-  {
-    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
-  }
-
   public enum Alignment
   {
     UNALIGN, GOOD, NEUTRAL, EVIL
@@ -63,6 +58,16 @@ public class WizardryOrigin
   public enum Attribute
   {
     STRENGTH, IQ, PIETY, VITALITY, AGILITY, LUCK
+  }
+
+  enum Class
+  {
+    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
+  }
+
+  enum Status
+  {
+    OK, AFRAID, ASLEEP, PLYZE, STONED, DEAD, ASHES, LOST
   }
 
   // ---------------------------------------------------------------------------------//

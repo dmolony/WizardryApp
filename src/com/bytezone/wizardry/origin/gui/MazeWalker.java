@@ -14,6 +14,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -121,6 +123,10 @@ public class MazeWalker extends AppBase
     mazePane = new MazePane (wizardry);
     viewPane = new ViewPane (wizardry);
 
+    mazePane.setOnMouseClicked (e -> mouseClick (e));
+    mazePane.setOnMouseEntered (e -> mazePane.setCursor (Cursor.HAND));
+    mazePane.setOnMouseExited (e -> mazePane.setCursor (Cursor.DEFAULT));
+
     leftVBox.getChildren ().clear ();
     leftVBox.getChildren ().addAll (viewPane, sp);
 
@@ -146,6 +152,15 @@ public class MazeWalker extends AppBase
     }
 
     setLevel (0);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void mouseClick (MouseEvent e)
+  // ---------------------------------------------------------------------------------//
+  {
+    Location location = mazePane.getLocation (e.getX (), e.getY ());
+    currentWalker.setLocation (location);
+    updateText ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -247,7 +262,9 @@ public class MazeWalker extends AppBase
 
         case ENCOUNTE:
           Monster monster = wizardry.getMonster (aux[2]);
-          description.append (String.format ("An encounter : %s", monster));
+          description.append (String.format ("An encounter : %s (%d left)", monster, aux[0]));
+          if (!fight)
+            description.append ("\n\nError - room not set to FIGHT");
           break;
 
         case NORMAL:
