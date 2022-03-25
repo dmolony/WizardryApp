@@ -1,4 +1,4 @@
-package com.bytezone.wizardry.origin.gui;
+package com.bytezone.mazewalker.gui;
 
 import static com.bytezone.wizardry.origin.Walls.Wall.DOOR;
 import static com.bytezone.wizardry.origin.Walls.Wall.HIDEDOOR;

@@ -1,4 +1,4 @@
-package com.bytezone.wizardry.origin.gui;
+package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;

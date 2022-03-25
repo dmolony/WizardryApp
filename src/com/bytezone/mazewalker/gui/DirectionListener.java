@@ -1,8 +1,8 @@
-package com.bytezone.wizardry.origin.gui;
+package com.bytezone.mazewalker.gui;
 
 // -----------------------------------------------------------------------------------//
-public interface MovementListener
+public interface DirectionListener
 // -----------------------------------------------------------------------------------//
 {
-  public void walkerMoved (Walker walker);
+  public void directionChange (Walker walker);
 }

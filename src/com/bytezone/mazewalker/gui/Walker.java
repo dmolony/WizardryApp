@@ -1,4 +1,4 @@
-package com.bytezone.wizardry.origin.gui;
+package com.bytezone.mazewalker.gui;
 
 import java.util.ArrayList;
 import java.util.List;

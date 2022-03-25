@@ -1,7 +1,7 @@
 package com.bytezone.wizardry.origin;
 
+import com.bytezone.mazewalker.gui.Walker;
 import com.bytezone.wizardry.origin.Walls.Wall;
-import com.bytezone.wizardry.origin.gui.Walker;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
