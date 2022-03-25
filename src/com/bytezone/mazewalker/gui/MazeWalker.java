@@ -65,7 +65,7 @@ public class MazeWalker extends AppBase implements MovementListener
   protected Parent createContent ()
   // ---------------------------------------------------------------------------------//
   {
-    primaryStage.setTitle ("Wizardry Dungeon Walker");
+    primaryStage.setTitle ("Wizardry Maze Walker");
 
     menuBar.getMenus ().addAll (menuFile, menuLevels);
 
@@ -120,6 +120,12 @@ public class MazeWalker extends AppBase implements MovementListener
   // ---------------------------------------------------------------------------------//
   {
     wizardry = new WizardryOrigin (wizardryFileName);
+
+    String userHome = System.getProperty ("user.home");
+    if (wizardryFileName.startsWith (userHome))
+      primaryStage.setTitle ("~" + wizardryFileName.substring (userHome.length ()));
+    else
+      primaryStage.setTitle (wizardryFileName);
 
     mazePane = new MazePane (wizardry);
     viewPane = new ViewPane (wizardry);
