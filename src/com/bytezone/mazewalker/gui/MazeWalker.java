@@ -209,12 +209,13 @@ public class MazeWalker extends AppBase implements MovementListener
     description.append (currentWalker.toString ());
 
     Extra extra = currentWalker.getCurrentMazeCell ().getExtra ();
-    boolean fight = currentWalker.getCurrentMazeCell ().getFight ();
+    boolean lair = currentWalker.getCurrentMazeCell ().getLair ();
 
     if (extra != null)
     {
       description.append ("\n\n" + extra + "\n\n");
       int[] aux = extra.getAux ();
+      int val = Utility.signShort (aux[0]);
 
       switch (extra.getSquare ())
       {
@@ -225,10 +226,10 @@ public class MazeWalker extends AppBase implements MovementListener
           switch (aux[2])
           {
             case 1:
-              if (aux[0] == 0)
+              if (val == 0)
                 description.append ("\n\nMessage will not be displayed");
-              else
-                description.append ("\n\n(" + aux[0] + " left)");
+              else if (val > 0)
+                description.append ("\n\n(" + val + " left)");
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)
@@ -236,8 +237,6 @@ public class MazeWalker extends AppBase implements MovementListener
               break;
 
             case 4:                       // monster or obtain
-              int val = Utility.signShort (aux[0]);
-
               if (val > 0)                // monster
                 description.append ("\n\nEncounter: " + wizardry.getMonster (val));
               else
@@ -305,7 +304,7 @@ public class MazeWalker extends AppBase implements MovementListener
           Monster monster = wizardry.getMonster (aux[2]);
           String when = aux[0] == 0xFFFF ? "always" : aux[0] + " left";
           description.append (String.format ("An encounter : %s (%s)", monster, when));
-          if (!fight)
+          if (!lair)
             description.append ("\n\nError - room is not a LAIR");
           break;
 
@@ -314,7 +313,7 @@ public class MazeWalker extends AppBase implements MovementListener
       }
     }
 
-    if (fight)
+    if (lair)
       description.append ("\n\nLAIR");
 
     text.setText (description.toString ());
