@@ -1,9 +1,9 @@
 # MazeWalker
-Utility to examine Wizardry mazes. Currently only works on Scenarios 1, 2 and 3.
+Utility to examine Wizardry mazes. Currently works on the first three scenarios.
 
 ## Instructions
 Navigate around the maze using the A/W/S/D keys. To go directly to a particular square, just click on it. To switch to a different maze level, use the Levels menu (or the corresponding shortcut).
-There is no need to kick doors down, you can simply walk through any wall. None of the special squares affect you, and you can see perfectly well in the dark.
+There is no need to kick doors down, you can simply walk through any wall. None of the special squares affect you, and you can see perfectly well in the dark. You are invincible.
 
 ## Screen
 ![Level 1](resources/level1.png?raw=true "Level 1")
