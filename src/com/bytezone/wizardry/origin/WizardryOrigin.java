@@ -112,7 +112,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       items.add (new Item (id++, dataBlock));
 
-    messages = new Messages (disk.getScenarioMessages ());
+    messages = new Messages (disk.getScenarioMessages (), header.scenarioId > 1);
 
     if (false)
       for (Square square : Square.values ())
@@ -178,7 +178,10 @@ public class WizardryOrigin
   public Item getItem (int id)
   // ---------------------------------------------------------------------------------//
   {
-    return items.get (id);
+    if (id >= 0 && id < items.size ())
+      return items.get (id);
+    System.out.printf ("Item %d out of range%n", id);
+    return null;
   }
 
   // ---------------------------------------------------------------------------------//

@@ -8,9 +8,10 @@ public class Messages
 // -----------------------------------------------------------------------------------//
 {
   List<Message> messages = new ArrayList<> ();
+  int codeOffset = 185;
 
   // ---------------------------------------------------------------------------------//
-  public Messages (byte[] buffer)
+  public Messages (byte[] buffer, boolean coded)
   // ---------------------------------------------------------------------------------//
   {
     int ptr = 0;
@@ -21,7 +22,8 @@ public class Messages
     {
       for (int i = 0; i < 504; i += 42)
       {
-        String line = Utility.getPascalString (buffer, ptr + i);
+        String line =
+            !coded ? Utility.getPascalString (buffer, ptr + i) : getLine (buffer, ptr + i);
         lines.add (line);
 
         int lastLine = buffer[ptr + i + 40] & 0xFF;
@@ -37,18 +39,18 @@ public class Messages
   }
 
   // ---------------------------------------------------------------------------------//
-  //  protected String getLine (int offset)
+  protected String getLine (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
-    //    int length = buffer[offset] & 0xFF;
-    //    byte[] translation = new byte[length];
-    //    codeOffset--;
-    //    for (int j = 0; j < length; j++)
-    //    {
-    //      translation[j] = buffer[offset + 1 + j];
-    //      translation[j] -= codeOffset - j * 3;
-    //    }
-    //    return HexFormatter.getString (translation, 0, length);
+    int length = buffer[offset++] & 0xFF;
+    byte[] translation = new byte[length];
+    codeOffset--;
+    for (int j = 0; j < length; j++)
+    {
+      translation[j] = buffer[offset + j];
+      translation[j] -= codeOffset - j * 3;
+    }
+    return HexFormatter.getString (translation, 0, length);
   }
 
   // ---------------------------------------------------------------------------------//

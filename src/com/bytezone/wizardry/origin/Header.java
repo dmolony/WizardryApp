@@ -16,6 +16,7 @@ public class Header
   byte[] buffer;
   List<ScenarioData> scenarioData = new ArrayList<> ();
   String scenarioName;
+  int scenarioId;
 
   // ---------------------------------------------------------------------------------//
   public Header (byte[] buffer)
@@ -24,6 +25,13 @@ public class Header
     this.buffer = buffer;
 
     scenarioName = Utility.getPascalString (buffer, 0);
+
+    for (int i = 0; i < scenarioNames.length; i++)
+      if (scenarioNames[i].equals (scenarioName))
+      {
+        scenarioId = i + 1;
+        break;
+      }
 
     for (int i = 0; i < typeText.length; i++)
       scenarioData.add (new ScenarioData (buffer, i));

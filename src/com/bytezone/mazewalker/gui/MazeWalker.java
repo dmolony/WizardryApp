@@ -237,7 +237,7 @@ public class MazeWalker extends AppBase implements MovementListener
               break;
 
             case 4:                       // monster or obtain
-              if (val > 0)                // monster
+              if (val >= 0)               // monster
                 description.append ("\n\nEncounter: " + wizardry.getMonster (val));
               else
                 description.append ("\n\nObtain: " + wizardry.getItem (Math.abs (val) - 1000));
@@ -302,7 +302,7 @@ public class MazeWalker extends AppBase implements MovementListener
 
         case ENCOUNTE:
           Monster monster = wizardry.getMonster (aux[2]);
-          String when = aux[0] == 0xFFFF ? "always" : aux[0] + " left";
+          String when = val == -1 ? "always" : val + " left";
           description.append (String.format ("An encounter : %s (%s)", monster, when));
           if (!lair)
             description.append ("\n\nError - room is not a LAIR");
