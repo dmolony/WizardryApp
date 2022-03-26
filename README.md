@@ -5,8 +5,9 @@ Utility to examine Wizardry mazes. Currently works on the first three scenarios.
 Navigate around the maze using the A/W/S/D keys. To go directly to a particular square, just click on it. To switch to a different maze level, use the Levels menu (or the corresponding shortcut).
 There is no need to kick doors down, you can simply walk through any wall. None of the special squares affect you, and you can see perfectly well in the dark. You are invincible.
 
-## Screen
-![Level 1](resources/level1.png?raw=true "Level 1")
+## Screens
+![Scenario 1](resources/level1.png?raw=true "Scenario 1")
+![Scenario 2](resources/scenario2.png?raw=true "Scenario 2")
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).
