@@ -21,7 +21,7 @@ public class MazeLevel
   Wall[][] east = new Wall[20][20];
   Wall[][] north = new Wall[20][20];
 
-  boolean[][] fights = new boolean[20][20];
+  boolean[][] lair = new boolean[20][20];
   byte[][] sqrextra = new byte[20][20];
   Square[] squares = new Square[16];
 
@@ -38,14 +38,14 @@ public class MazeLevel
     this.level = level;
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
-    int length = dataBlock.length;
+    //    int length = dataBlock.length;
 
     addWalls (west, buffer, offset);
     addWalls (south, buffer, offset + 0x78);
     addWalls (east, buffer, offset + 0xF0);
     addWalls (north, buffer, offset + 0x168);
 
-    addEncounters (fights, buffer, offset + 0x1E0);
+    addLairs (lair, buffer, offset + 0x1E0);
     addExtras (sqrextra, buffer, offset + 0x230);
     addSquares (squares, buffer, offset + 0x2F8);
 
@@ -60,7 +60,7 @@ public class MazeLevel
       {
         Location location = new Location (level, col, row);
         Walls walls = new Walls (west[col][row], south[col][row], east[col][row], north[col][row]);
-        MazeCell mazeCell = new MazeCell (location, walls, fights[col][row]);
+        MazeCell mazeCell = new MazeCell (location, walls, lair[col][row]);
 
         if (sqrextra[col][row] != 0)
         {
@@ -71,6 +71,8 @@ public class MazeLevel
 
         mazeCells[col][row] = mazeCell;
       }
+    //    if (level == 7)
+    //      System.out.println (this);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -133,15 +135,26 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addEncounters (boolean[][] fights, byte[] buffer, int ptr)
+  private void addLairs (boolean[][] lair, byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
+    //    if (level == 7)
+    //    {
+    //      System.out.println (HexFormatter.format (buffer, ptr, 80));
+    //      System.out.println ();
+    //    }
     for (int col = 0; col < 20; col++)
     {
-      int val = Utility.readTriple (buffer, ptr + col * 4);
+      int val = Utility.readTriple (buffer, ptr + col * 4) & 0x0FFFFF;
+      //      if (level == 7)
+      //      {
+      //        System.out.printf ("Col %02d : %02X %02X %02X %02X : %06X  ", col, buffer[ptr + col * 4],
+      //            buffer[ptr + col * 4 + 1], buffer[ptr + col * 4 + 2], buffer[ptr + col * 4 + 3], val);
+      //        System.out.printf ("%20s%n", Integer.toBinaryString (val));
+      //      }
       for (int row = 0; row < 20; row++)
       {
-        fights[col][row] = (val & 0x01) == 1;
+        lair[col][row] = (val & 0x01) == 1;
         val >>>= 1;
       }
     }
@@ -224,7 +237,7 @@ public class MazeLevel
     {
       text.append (String.format ("%2d |", row));
       for (int col = 0; col < 20; col++)
-        if (fights[col][row])
+        if (lair[col][row])
           text.append (" * ");
         else
           text.append ("   ");

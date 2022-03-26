@@ -16,14 +16,14 @@ public class MazeCell
   private Location location;
   private Walls walls;
   private Extra extra;
-  private boolean fight;
+  private boolean lair;
 
   // ---------------------------------------------------------------------------------//
-  public MazeCell (Location location, Walls walls, boolean fight)
+  public MazeCell (Location location, Walls walls, boolean lair)
   // ---------------------------------------------------------------------------------//
   {
     this.location = location;
-    this.fight = fight;
+    this.lair = lair;
     this.walls = walls;
   }
 
@@ -52,7 +52,7 @@ public class MazeCell
   public boolean getFight ()
   // ---------------------------------------------------------------------------------//
   {
-    return fight;
+    return lair;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -114,8 +114,9 @@ public class MazeCell
     int right = left + CELL_SIZE - 2;
 
     int textLeft = left + 12;
+    int textBase = top + 25;
 
-    if (fight)
+    if (lair)
       gc.setFill (Color.GAINSBORO);
     else
       gc.setFill (Color.LIGHTGRAY);
@@ -128,6 +129,7 @@ public class MazeCell
       switch (extra.getSquare ())
       {
         case NORMAL:
+          gc.fillText ("N", textLeft, textBase);
           break;
 
         case DARK:
@@ -140,11 +142,11 @@ public class MazeCell
           break;
 
         case CHUTE:
-          gc.fillText ("C", textLeft, top + 25);
+          gc.fillText ("C", textLeft, textBase);
           break;
 
         case STAIRS:
-          gc.fillText ("S", textLeft, top + 25);
+          gc.fillText ("S", textLeft, textBase);
           break;
 
         case ROCKWATE:
@@ -153,31 +155,31 @@ public class MazeCell
           break;
 
         case SPINNER:
-          gc.fillText ("X", textLeft, top + 25);
+          gc.fillText ("X", textLeft, textBase);
           break;
 
         case BUTTONZ:
-          gc.fillText ("B", textLeft, top + 25);
+          gc.fillText ("B", textLeft, textBase);
           break;
 
         case ENCOUNTE:
-          gc.fillText ("E", textLeft, top + 25);
+          gc.fillText ("E", textLeft, textBase);
           break;
 
         case FIZZLE:
-          gc.fillText ("F", textLeft, top + 25);
+          gc.fillText ("F", textLeft, textBase);
           break;
 
         case OUCHY:
-          gc.fillText ("O", textLeft, top + 25);
+          gc.fillText ("O", textLeft, textBase);
           break;
 
         case PIT:
-          gc.fillText ("P", textLeft, top + 25);
+          gc.fillText ("P", textLeft, textBase);
           break;
 
         case SCNMSG:
-          gc.fillText ("M", textLeft, top + 25);
+          gc.fillText ("M", textLeft, textBase);
           break;
       }
     }
@@ -219,8 +221,8 @@ public class MazeCell
   // ---------------------------------------------------------------------------------//
   {
     if (extra == null)
-      return String.format ("%s %s %s", location, walls, fight);
+      return String.format ("%s %s %s", location, walls, lair);
 
-    return String.format ("%s %s %s %s", location, walls, fight, extra);
+    return String.format ("%s %s %s %s", location, walls, lair, extra);
   }
 }

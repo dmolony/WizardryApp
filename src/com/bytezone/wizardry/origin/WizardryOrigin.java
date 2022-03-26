@@ -129,6 +129,24 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
+  void showExtra (Square square)
+  // ---------------------------------------------------------------------------------//
+  {
+    for (MazeLevel level : mazeLevels)
+      for (int col = 0; col < 20; col++)
+        for (int row = 0; row < 20; row++)
+        {
+          MazeCell mazeCell = level.getMazeCell (col, row);
+          Extra extra = mazeCell.getExtra ();
+          if (extra != null && extra.is (square))
+          {
+            String fight = level.lair[col][row] ? " lair" : "";
+            System.out.printf ("%s  %s %s%n", extra, mazeCell.getLocation (), fight);
+          }
+        }
+  }
+
+  // ---------------------------------------------------------------------------------//
   public List<MazeLevel> getMazeLevels ()
   // ---------------------------------------------------------------------------------//
   {
@@ -175,20 +193,5 @@ public class WizardryOrigin
   // ---------------------------------------------------------------------------------//
   {
     return messages;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  void showExtra (Square square)
-  // ---------------------------------------------------------------------------------//
-  {
-    for (MazeLevel level : mazeLevels)
-      for (int col = 0; col < 20; col++)
-        for (int row = 0; row < 20; row++)
-        {
-          MazeCell mazeCell = level.getMazeCell (col, row);
-          Extra extra = mazeCell.getExtra ();
-          if (extra != null && extra.is (square))
-            System.out.printf ("%s  %s%n", extra, mazeCell.getLocation ());
-        }
   }
 }

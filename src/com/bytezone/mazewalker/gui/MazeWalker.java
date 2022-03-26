@@ -44,19 +44,19 @@ public class MazeWalker extends AppBase implements MovementListener
   private final Menu menuLevels = new Menu ("Levels");
   private final MenuItem openFileItem = new MenuItem ("Open file ...");
 
-  MazePane mazePane;
-  ViewPane viewPane;
+  private MazePane mazePane;
+  private ViewPane viewPane;
 
-  VBox leftVBox = new VBox (10);
-  VBox rightVBox = new VBox (10);
-  Text text = new Text ();
-  ScrollPane sp = new ScrollPane (text);
+  private VBox leftVBox = new VBox (10);
+  private VBox rightVBox = new VBox (10);
+  private Text text = new Text ();
+  private ScrollPane sp = new ScrollPane (text);
 
   private final BorderPane mainPane = new BorderPane ();
-  WizardryOrigin wizardry;
+  private WizardryOrigin wizardry;
 
   private Walker[] walker;
-  Walker currentWalker;
+  private Walker currentWalker;
 
   private String wizardryFileName;
 
@@ -225,6 +225,10 @@ public class MazeWalker extends AppBase implements MovementListener
           switch (aux[2])
           {
             case 1:
+              if (aux[0] == 0)
+                description.append ("\n\nMessage will not be displayed");
+              else
+                description.append ("\n\n(" + aux[0] + " left)");
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)
@@ -302,7 +306,7 @@ public class MazeWalker extends AppBase implements MovementListener
           String when = aux[0] == 0xFFFF ? "always" : aux[0] + " left";
           description.append (String.format ("An encounter : %s (%s)", monster, when));
           if (!fight)
-            description.append ("\n\nError - room not set to FIGHT");
+            description.append ("\n\nError - room is not a LAIR");
           break;
 
         case NORMAL:
@@ -311,7 +315,7 @@ public class MazeWalker extends AppBase implements MovementListener
     }
 
     if (fight)
-      description.append ("\n\nFIGHT");
+      description.append ("\n\nLAIR");
 
     text.setText (description.toString ());
   }
