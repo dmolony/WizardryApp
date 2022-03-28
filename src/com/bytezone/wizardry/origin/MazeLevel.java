@@ -38,7 +38,6 @@ public class MazeLevel
     this.level = level;
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
-    //    int length = dataBlock.length;
 
     addWalls (west, buffer, offset);
     addWalls (south, buffer, offset + 0x78);
@@ -71,8 +70,10 @@ public class MazeLevel
 
         mazeCells[col][row] = mazeCell;
       }
-    //    if (level == 7)
-    //      System.out.println (this);
+
+    //    for (int i = 0; i < 3; i++)
+    //      System.out.printf ("%s%n", enemyCalc[i]);
+    //    System.out.println ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -203,12 +204,8 @@ public class MazeLevel
   {
     for (int i = 0; i < 3; i++)
     {
-      enemyCalc[i] = new EnemyCalc ();
-      for (int j = 0; j < 5; j++)
-      {
-        enemyCalc[i].value[j] = Utility.getShort (buffer, ptr);
-        ptr += 2;
-      }
+      enemyCalc[i] = new EnemyCalc (buffer, ptr);
+      ptr += 10;
     }
   }
 

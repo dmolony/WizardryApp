@@ -1,19 +1,19 @@
 package com.bytezone.wizardry.origin;
 
 // -----------------------------------------------------------------------------------//
-public class HitPoints
+public class Reward
 // -----------------------------------------------------------------------------------//
 {
-  int level;
-  int hpfac;
-  int hpminad;
-
+  int id;
   // ---------------------------------------------------------------------------------//
-  public HitPoints (int level, int hpfac, int hpminad)
+  public Reward (int id, DataBlock dataBlock)
   // ---------------------------------------------------------------------------------//
   {
-    this.level = level;
-    this.hpfac = hpfac;
-    this.hpminad = hpminad;
+    this.id = id;
+
+    byte[] buffer = dataBlock.buffer;
+    int offset = dataBlock.offset;
+
+    System.out.println (HexFormatter.format (buffer, offset, dataBlock.length));
   }
 }

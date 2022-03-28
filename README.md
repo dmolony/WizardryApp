@@ -6,8 +6,8 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 There is no need to kick doors down, you can simply walk through any wall. None of the special squares affect you, and you can see perfectly well in the dark. You are invincible.
 
 ## Screens
-![Scenario 1](resources/level1.png?raw=true "Scenario 1")
-![Scenario 2](resources/scenario2.png?raw=true "Scenario 2")
+![Proving Grounds of the Mad Overlord](resources/level1.png?raw=true "Proving Grounds of the Mad Overlord")
+![Knight of Diamonds](resources/scenario2.png?raw=true "Knight of Diamonds")
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).

@@ -37,7 +37,7 @@ public class Character
   int healPts;
   boolean crithitm;
   int swingCount;
-  HitPoints hpdamrc;
+  Dice hpdamrc;
   boolean[][] wepvsty2 = new boolean[2][14];
   boolean[][] wepvsty3 = new boolean[2][7];
   boolean[] wepvstyp = new boolean[14];

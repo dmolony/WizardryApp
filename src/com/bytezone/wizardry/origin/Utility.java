@@ -45,4 +45,11 @@ public class Utility
       return 0;
     }
   }
+
+  // ---------------------------------------------------------------------------------//
+  public static int getSignedShort (byte[] buffer, int ptr)
+  // ---------------------------------------------------------------------------------//
+  {
+    return signShort (getShort (buffer, ptr));
+  }
 }

@@ -8,7 +8,7 @@ public class Messages
 // -----------------------------------------------------------------------------------//
 {
   private List<Message> messages = new ArrayList<> ();
-  private int codeOffset = 185;
+  private int codeOffset;
 
   // ---------------------------------------------------------------------------------//
   public Messages (byte[] buffer, boolean coded)
@@ -17,6 +17,7 @@ public class Messages
     int ptr = 0;
     int id = 0;
     List<String> lines = new ArrayList<> ();
+    codeOffset = 185;
 
     while (ptr < buffer.length)
     {
@@ -60,10 +61,8 @@ public class Messages
   // ---------------------------------------------------------------------------------//
   {
     for (Message message : messages)
-    {
       if (message.match (id))
         return message;
-    }
 
     return null;
   }

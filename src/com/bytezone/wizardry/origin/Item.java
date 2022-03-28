@@ -25,7 +25,7 @@ public class Item
   boolean[] wepvsty3 = new boolean[16];
   int armorMod;
   int wephitmd;
-  HitPoints wephpdam;
+  Dice wephpdam;
   int xtraSwing;
   boolean crithitm;
   boolean[] wepvstyp = new boolean[14];
