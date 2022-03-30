@@ -5,31 +5,34 @@ public class Monster
 // -----------------------------------------------------------------------------------//
 {
   int id;
-  String name;                                //   0
-  String namePlural;                          //  16
-  String genericName;                         //  32
-  String genericNamePlural;                   //  48
-  int image;                                  //  64
-  Dice calc1;                                 //  66  groupsize?
-  Dice hitPoints;                             //  72 
-  int monsterClass;                           //  78
-  int armourClass;                            //  80                    (11 - AC) * 40
-  int recsn;                                  //  82  total recs
-  Dice[] recs = new Dice[7];                  //  84  damage?
+  public final String name;                                //   0
+  public final String namePlural;                          //  16
+  public final String genericName;                         //  32
+  public final String genericNamePlural;                   //  48
+  public final int image;                                  //  64
+  public final Dice groupSize;                                 //  66  groupsize?
+  public final Dice hitPoints;                             //  72 
+  public final int monsterClass;                           //  78
+  public final int armourClass;                            //  80                    (11 - AC) * 40
+  public final int recsn;                                  //  82  total recs
+  public final Dice[] recs = new Dice[7];                  //  84  damage?
   int expamt;                                 // 128  (triple)
-  int drainAmt;                               // 132                    * 200 exp
-  int healPts;                                // 134                    *  90 exp
-  int reward1;                                // 136  gold
-  int reward2;                                // 138  chest
-  int enemyTeam;                              // 140  partner id
-  int teamPercentage;                         // 142  partner %
-  int mageSpells;                             // 144  spell level?      *  35 exp
-  int priestSpells;                           // 146  spell level?      *  35 exp
-  int unique;                                 // 148
-  int breathe;                                // 150
-  int unaffect;                               // 152
-  boolean[] wepvsty3 = new boolean[16];       // 154
-  boolean[] sppc = new boolean[16];           // 156
+  public final int drainAmt;                               // 132                    * 200 exp
+  public final int healPts;                                // 134                    *  90 exp
+  public final int reward1;                                // 136  gold
+  public final int reward2;                                // 138  chest
+  public final int enemyTeam;                              // 140  partner id
+  public final int teamPercentage;                         // 142  partner %
+  public final int mageSpells;                             // 144  spell level?      *  35 exp
+  public final int priestSpells;                           // 146  spell level?      *  35 exp
+  public final int unique;                                 // 148
+  public final int breathe;                                // 150
+  public final int unaffect;                               // 152
+  public final boolean[] wepvsty3 = new boolean[16];       // 154
+  public final boolean[] sppc = new boolean[16];           // 156
+
+  public final int flags1;
+  public final int flags2;
 
   // ---------------------------------------------------------------------------------//
   public Monster (int id, DataBlock dataBlock)
@@ -46,8 +49,8 @@ public class Monster
     namePlural = Utility.getPascalString (buffer, offset + 48);
 
     image = Utility.getShort (buffer, offset + 64);
-    hitPoints = new Dice (buffer, offset + 66);
-    calc1 = new Dice (buffer, offset + 72);
+    groupSize = new Dice (buffer, offset + 66);
+    hitPoints = new Dice (buffer, offset + 72);
 
     monsterClass = Utility.getShort (buffer, offset + 78);
     armourClass = Utility.getSignedShort (buffer, offset + 80);
@@ -68,11 +71,8 @@ public class Monster
     unique = Utility.getShort (buffer, offset + 148);
     breathe = Utility.getShort (buffer, offset + 150);
     unaffect = Utility.getShort (buffer, offset + 152);
-    int flags1 = Utility.getShort (buffer, offset + 154);         // wepvsty3
-    int flags2 = Utility.getShort (buffer, offset + 156);         // sppc
-
-    //    System.out.println (this);
-    //    System.out.println (dump (buffer, offset + 112, 46));
+    flags1 = Utility.getShort (buffer, offset + 154);             // wepvsty3
+    flags2 = Utility.getShort (buffer, offset + 156);             // sppc
   }
 
   // ---------------------------------------------------------------------------------//
@@ -93,8 +93,9 @@ public class Monster
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%-16s %3d %8s %8s %3d %3d %3d %8s %8s %3d %3d %3d %3d", name, image,
-        calc1, hitPoints, monsterClass, armourClass, recsn, recs[0], recs[1], drainAmt, healPts,
-        reward1, reward2);
+    return name;
+    //    return String.format ("%-16s %3d %8s %8s %3d %3d %3d %8s %8s %3d %3d %3d %3d", name, image,
+    //        groupSize, hitPoints, monsterClass, armourClass, recsn, recs[0], recs[1], drainAmt, healPts,
+    //        reward1, reward2);
   }
 }

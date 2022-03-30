@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -30,6 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class MazeWalker extends AppBase implements MovementListener
@@ -42,7 +44,9 @@ public class MazeWalker extends AppBase implements MovementListener
 
   private final Menu menuFile = new Menu ("File");
   private final Menu menuLevels = new Menu ("Levels");
+  private final Menu menuTools = new Menu ("Tools");
   private final MenuItem openFileItem = new MenuItem ("Open file ...");
+  private final MenuItem experienceItem = new MenuItem ("Experience ...");
 
   private MazePane mazePane;
   private ViewPane viewPane;
@@ -59,6 +63,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private Walker currentWalker;
 
   private String wizardryFileName;
+  Stage calculatorStage;
 
   // ---------------------------------------------------------------------------------//
   @Override
@@ -67,11 +72,16 @@ public class MazeWalker extends AppBase implements MovementListener
   {
     primaryStage.setTitle ("Wizardry Maze Walker");
 
-    menuBar.getMenus ().addAll (menuFile, menuLevels);
+    menuBar.getMenus ().addAll (menuFile, menuLevels, menuTools);
 
     menuFile.getItems ().add (openFileItem);
     openFileItem.setOnAction (e -> getWizardryDisk ());
     openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
+
+    menuTools.getItems ().add (experienceItem);
+    experienceItem.setOnAction (e -> showCalculator ());
+    experienceItem
+        .setAccelerator (new KeyCodeCombination (KeyCode.E, KeyCombination.SHORTCUT_DOWN));
 
     text.setFont (new Font ("Courier new", 14));
     sp.setStyle ("-fx-background-color:transparent;");
@@ -160,6 +170,24 @@ public class MazeWalker extends AppBase implements MovementListener
     }
 
     setLevel (0);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void showCalculator ()
+  // ---------------------------------------------------------------------------------//
+  {
+    if (calculatorStage == null)
+    {
+      calculatorStage = new Stage ();
+      calculatorStage.setTitle ("Experience Calculator");
+      ExperienceCalculator experienceCalculator = new ExperienceCalculator (wizardry);
+
+      Scene scene = new Scene (experienceCalculator, 400, 550);
+      calculatorStage.setScene (scene);
+      calculatorStage.sizeToScene ();
+    }
+
+    calculatorStage.show ();
   }
 
   // ---------------------------------------------------------------------------------//

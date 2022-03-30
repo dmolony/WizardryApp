@@ -3,17 +3,17 @@ package com.bytezone.wizardry.origin;
 // -----------------------------------------------------------------------------------//
 public class Dice
 {
-  int level;
-  int hpfac;
-  int hpminad;
+  public final int level;
+  public final int faces;
+  public final int minAdd;
 
   // ---------------------------------------------------------------------------------//
   public Dice (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
     this.level = Utility.getShort (buffer, offset);
-    this.hpfac = Utility.getShort (buffer, offset + 2);
-    this.hpminad = Utility.getShort (buffer, offset + 4);
+    this.faces = Utility.getShort (buffer, offset + 2);
+    this.minAdd = Utility.getShort (buffer, offset + 4);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -21,8 +21,8 @@ public class Dice
   // ---------------------------------------------------------------------------------//
   {
     this.level = level;
-    this.hpfac = hpfac;
-    this.hpminad = hpminad;
+    this.faces = hpfac;
+    this.minAdd = hpminad;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -32,6 +32,6 @@ public class Dice
   {
     if (level == 0)
       return "";
-    return String.format ("%dD%d+%d", level, hpfac, hpminad);
+    return String.format ("%dD%d+%d", level, faces, minAdd);
   }
 }

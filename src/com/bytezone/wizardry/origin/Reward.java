@@ -14,6 +14,6 @@ public class Reward
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
 
-    System.out.println (HexFormatter.format (buffer, offset, dataBlock.length));
+    //    System.out.println (HexFormatter.format (buffer, offset, dataBlock.length));
   }
 }
