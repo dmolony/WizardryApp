@@ -35,9 +35,8 @@ public class ExperienceCalculator extends Pane
   private static final int ABILITY = 11;
   private static final int TOTAL = 12;
 
-  String[] labelText = { "Hit point (dice)", "Hit point (sides)", "Breathe", "Armour class",
-      "Damage #", "Mage level", "Priest level", "Drain", "Heal", "Resist 1", "Resist 2",
-      "Abilities", "Total" };
+  String[] labelText = { "HP dice", "HP sides", "Breathe", "Armour class", "Damage #", "Mage level",
+      "Priest level", "Level drain", "Heal", "Resist 1", "Resist 2", "Abilities", "Total" };
 
   Label[] labels = new Label[labelText.length];
   TextField[] textIn = new TextField[labelText.length];
@@ -59,9 +58,9 @@ public class ExperienceCalculator extends Pane
     gridPane.getColumnConstraints ().add (new ColumnConstraints (60));
     gridPane.getColumnConstraints ().add (new ColumnConstraints (80));
 
-    gridPane.setHgap (10);
-    gridPane.setVgap (10);
-    gridPane.setPadding (new Insets (10, 10, 10, 10));
+    gridPane.setHgap (12);
+    gridPane.setVgap (8);
+    gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
 
     getChildren ().add (new BorderPane (gridPane));
   }
@@ -168,7 +167,7 @@ public class ExperienceCalculator extends Pane
   private void build ()
   // ---------------------------------------------------------------------------------//
   {
-    Label monsterLabel = new Label ("Monsters");
+    Label monsterLabel = new Label ("Monster");
     GridPane.setConstraints (monsterLabel, 0, 0);
     GridPane.setConstraints (monsters, 1, 0);
     gridPane.getChildren ().addAll (monsterLabel, monsters);

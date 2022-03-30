@@ -182,7 +182,7 @@ public class MazeWalker extends AppBase implements MovementListener
       calculatorStage.setTitle ("Experience Calculator");
       ExperienceCalculator experienceCalculator = new ExperienceCalculator (wizardry);
 
-      Scene scene = new Scene (experienceCalculator, 400, 550);
+      Scene scene = new Scene (experienceCalculator, 400, 500);       // wh
       calculatorStage.setScene (scene);
       calculatorStage.sizeToScene ();
     }
