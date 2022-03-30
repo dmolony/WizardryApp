@@ -8,6 +8,7 @@ There is no need to kick doors down, you can simply walk through any wall. None 
 ## Screens
 ![Proving Grounds of the Mad Overlord](resources/level1.png?raw=true "Proving Grounds of the Mad Overlord")
 ![Knight of Diamonds](resources/scenario2.png?raw=true "Knight of Diamonds")
+![Experience Points Calculator](resources/werdna.png?raw=true "Experience Points Calculator")
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).
