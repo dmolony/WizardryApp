@@ -119,7 +119,7 @@ public class MazeCell
     if (lair)
       gc.setFill (Color.LIGHTGREY);
     else
-      gc.setFill (Color.SILVER);
+      gc.setFill (Color.DARKGREY);
 
     gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
 
