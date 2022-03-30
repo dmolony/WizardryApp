@@ -117,9 +117,9 @@ public class MazeCell
     int textBase = top + 25;
 
     if (lair)
-      gc.setFill (Color.GAINSBORO);
+      gc.setFill (Color.LIGHTGREY);
     else
-      gc.setFill (Color.LIGHTGRAY);
+      gc.setFill (Color.SILVER);
 
     gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
 
@@ -133,7 +133,7 @@ public class MazeCell
           break;
 
         case DARK:
-          gc.setFill (Color.DARKGRAY);
+          gc.setFill (Color.GRAY);
           gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
           break;
 
