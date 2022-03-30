@@ -35,8 +35,9 @@ public class ExperienceCalculator extends Pane
   private static final int ABILITY = 11;
   private static final int TOTAL = 12;
 
-  String[] labelText = { "HP dice", "HP sides", "Breathe", "Armour class", "Damage #", "Mage level",
-      "Priest level", "Level drain", "Heal", "Resist 1", "Resist 2", "Abilities", "Total" };
+  String[] labelText =
+      { "HP # dice", "HP # sides", "Breathe", "Armour class", "Damage # dice", "Mage level",
+          "Priest level", "Level drain", "Heal", "Resist 1", "Resist 2", "Abilities", "Total" };
 
   Label[] labels = new Label[labelText.length];
   TextField[] textIn = new TextField[labelText.length];

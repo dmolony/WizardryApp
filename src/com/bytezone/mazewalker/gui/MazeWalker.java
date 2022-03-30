@@ -46,7 +46,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private final Menu menuLevels = new Menu ("Levels");
   private final Menu menuTools = new Menu ("Tools");
   private final MenuItem openFileItem = new MenuItem ("Open file ...");
-  private final MenuItem experienceItem = new MenuItem ("Experience ...");
+  private final MenuItem experienceItem = new MenuItem ("Experience Points ...");
 
   private MazePane mazePane;
   private ViewPane viewPane;
@@ -179,7 +179,7 @@ public class MazeWalker extends AppBase implements MovementListener
     if (calculatorStage == null)
     {
       calculatorStage = new Stage ();
-      calculatorStage.setTitle ("Experience Calculator");
+      calculatorStage.setTitle ("Experience Points Calculator");
       ExperienceCalculator experienceCalculator = new ExperienceCalculator (wizardry);
 
       Scene scene = new Scene (experienceCalculator, 400, 500);       // wh
