@@ -13,7 +13,7 @@ public class Dice
   {
     this.level = Utility.getShort (buffer, offset);
     this.faces = Utility.getShort (buffer, offset + 2);
-    this.minAdd = Utility.getShort (buffer, offset + 4);
+    this.minAdd = Utility.getSignedShort (buffer, offset + 4);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -32,6 +32,13 @@ public class Dice
   {
     if (level == 0)
       return "";
-    return String.format ("%dD%d+%d", level, faces, minAdd);
+
+    if (minAdd == 0)
+      return String.format ("%dd%d", level, faces);
+
+    if (minAdd < 0)
+      return String.format ("%dd%d%d", level, faces, minAdd);
+
+    return String.format ("%dd%d+%d", level, faces, minAdd);
   }
 }

@@ -227,7 +227,7 @@ public class MazeWalker extends AppBase implements MovementListener
     monstersStage.setTitle ("Wizardry Monsters");
     MonstersPane monstersPane = new MonstersPane (wizardry);
 
-    Scene scene = new Scene (monstersPane, 400, 500);       // wh
+    Scene scene = new Scene (monstersPane, 550, 500);       // wh
     monstersStage.setScene (scene);
     monstersStage.sizeToScene ();
 
