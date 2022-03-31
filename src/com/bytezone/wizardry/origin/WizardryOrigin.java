@@ -19,7 +19,7 @@ public class WizardryOrigin
   static final int EXPERIENCE_AREA = 7;
 
   Messages messages;
-
+  Header header;
   private List<Monster> monsters;
   private List<Item> items;
   private List<MazeLevel> mazeLevels;
@@ -90,7 +90,7 @@ public class WizardryOrigin
     }
 
     byte[] buffer = disk.getScenarioData ();
-    Header header = new Header (buffer);
+    header = new Header (buffer);
 
     ScenarioData sd = header.get (MAZE_AREA);
     mazeLevels = new ArrayList<> (sd.totalUnits);
@@ -133,6 +133,13 @@ public class WizardryOrigin
 
     //    for (Item item : items)
     //      System.out.println (item);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public int getScenarioId ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return header.scenarioId;
   }
 
   // ---------------------------------------------------------------------------------//

@@ -80,6 +80,11 @@ public class ExperienceCalculator extends Pane
   private void getExperience ()
   // ---------------------------------------------------------------------------------//
   {
+    if (wizardry.getScenarioId () > 1)
+    {
+      return;
+    }
+
     int[] values = new int[labels.length];
     for (int i = 0; i < labels.length; i++)
     {
@@ -132,7 +137,6 @@ public class ExperienceCalculator extends Pane
     textOut[MAGE_LEVEL].setText (getText (expMage));
     textOut[PRIEST_LEVEL].setText (getText (expPriest));
     textOut[DRAIN].setText (getText (expDrain));
-    //    textOut[DAMAGE].setText (expDamage + "");
     textOut[HEAL].setText (getText (expHeal));
     textOut[RECSN].setText (getText (expDamage));
     textOut[RESIST1].setText (getText (expUnaffect));
@@ -177,8 +181,7 @@ public class ExperienceCalculator extends Pane
     GridPane.setHalignment (monsterLabel, HPos.RIGHT);
 
     ObservableList<Monster> list = FXCollections.observableArrayList ();
-    for (Monster monster : wizardry.getMonsters ())
-      list.add (monster);
+    list.addAll (wizardry.getMonsters ());
 
     monsters.setItems (list);
 
@@ -201,7 +204,10 @@ public class ExperienceCalculator extends Pane
             textIn[RESIST2].setText (monster.flags1 + "");
             textIn[ABILITY].setText (monster.flags2 + "");
 
-            getExperience ();
+            if (wizardry.getScenarioId () > 1)
+              textOut[TOTAL].setText (getText (monster.expamt));
+            else
+              getExperience ();
           }
         });
 

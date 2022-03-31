@@ -116,11 +116,7 @@ public class MazeCell
     int textLeft = left + 12;
     int textBase = top + 25;
 
-    if (lair)
-      gc.setFill (Color.LIGHTGREY);
-    else
-      gc.setFill (Color.DARKGREY);
-
+    gc.setFill (lair ? Color.DARKGREY : Color.LIGHTGREY);
     gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
 
     if (extra != null)

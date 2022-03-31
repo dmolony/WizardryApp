@@ -47,6 +47,9 @@ public class MazeWalker extends AppBase implements MovementListener
   private final Menu menuTools = new Menu ("Tools");
   private final MenuItem openFileItem = new MenuItem ("Open file ...");
   private final MenuItem experienceItem = new MenuItem ("Experience Points ...");
+  private final MenuItem charactersItem = new MenuItem ("Characters ...");
+  private final MenuItem monstersItem = new MenuItem ("Monsters ...");
+  private final MenuItem itemsItem = new MenuItem ("Items ...");
 
   private MazePane mazePane;
   private ViewPane viewPane;
@@ -63,7 +66,11 @@ public class MazeWalker extends AppBase implements MovementListener
   private Walker currentWalker;
 
   private String wizardryFileName;
-  Stage calculatorStage;
+
+  private Stage calculatorStage;
+  private Stage charactersStage;
+  private Stage monstersStage;
+  private Stage itemsStage;
 
   // ---------------------------------------------------------------------------------//
   @Override
@@ -78,10 +85,17 @@ public class MazeWalker extends AppBase implements MovementListener
     openFileItem.setOnAction (e -> getWizardryDisk ());
     openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
 
-    menuTools.getItems ().add (experienceItem);
+    menuTools.getItems ().addAll (experienceItem, charactersItem, monstersItem, itemsItem);
     experienceItem.setOnAction (e -> showCalculator ());
     experienceItem
         .setAccelerator (new KeyCodeCombination (KeyCode.E, KeyCombination.SHORTCUT_DOWN));
+    charactersItem.setOnAction (e -> showCharacters ());
+    charactersItem
+        .setAccelerator (new KeyCodeCombination (KeyCode.C, KeyCombination.SHORTCUT_DOWN));
+    monstersItem.setOnAction (e -> showMonsters ());
+    monstersItem.setAccelerator (new KeyCodeCombination (KeyCode.M, KeyCombination.SHORTCUT_DOWN));
+    itemsItem.setOnAction (e -> showItems ());
+    itemsItem.setAccelerator (new KeyCodeCombination (KeyCode.I, KeyCombination.SHORTCUT_DOWN));
 
     text.setFont (new Font ("Courier new", 14));
     sp.setStyle ("-fx-background-color:transparent;");
@@ -188,6 +202,51 @@ public class MazeWalker extends AppBase implements MovementListener
     }
 
     calculatorStage.show ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void showCharacters ()
+  // ---------------------------------------------------------------------------------//
+  {
+    charactersStage = new Stage ();
+    charactersStage.setTitle ("Wizardry Characters");
+    CharactersPane charactersPane = new CharactersPane (wizardry);
+
+    Scene scene = new Scene (charactersPane, 400, 500);       // wh
+    charactersStage.setScene (scene);
+    charactersStage.sizeToScene ();
+
+    charactersStage.show ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void showMonsters ()
+  // ---------------------------------------------------------------------------------//
+  {
+    monstersStage = new Stage ();
+    monstersStage.setTitle ("Wizardry Monsters");
+    MonstersPane monstersPane = new MonstersPane (wizardry);
+
+    Scene scene = new Scene (monstersPane, 400, 500);       // wh
+    monstersStage.setScene (scene);
+    monstersStage.sizeToScene ();
+
+    monstersStage.show ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void showItems ()
+  // ---------------------------------------------------------------------------------//
+  {
+    itemsStage = new Stage ();
+    itemsStage.setTitle ("Wizardry Items");
+    ItemsPane itemsPane = new ItemsPane (wizardry);
+
+    Scene scene = new Scene (itemsPane, 400, 500);       // wh
+    itemsStage.setScene (scene);
+    itemsStage.sizeToScene ();
+
+    itemsStage.show ();
   }
 
   // ---------------------------------------------------------------------------------//
