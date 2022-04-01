@@ -7,28 +7,28 @@ import com.bytezone.wizardry.origin.WizardryOrigin.ObjectType;
 public class Item
 // -----------------------------------------------------------------------------------//
 {
-  int id;
-  String name;
-  String nameUnknown;
-  ObjectType type;
-  Alignment alignment;
-  boolean cursed;
-  int special;
-  int changeTo;
-  int changeChance;
-  int price;
-  int boltac;
-  int spellPwr;
-  boolean[] classUse = new boolean[8];      // by Class
-  int healPts;
-  boolean[] wepvsty2 = new boolean[16];
-  boolean[] wepvsty3 = new boolean[16];
-  int armorMod;
-  int wephitmd;
-  Dice wephpdam;
-  int xtraSwing;
-  boolean crithitm;
-  boolean[] wepvstyp = new boolean[14];
+  public final int id;
+  public final String name;
+  public final String nameUnknown;
+  public final ObjectType type;
+  public final Alignment alignment;
+  public final boolean cursed;
+  public final int special;
+  public final int changeTo;
+  public final int changeChance;
+  public final int price;
+  public final int boltac;
+  public final int spellPwr;
+  public final boolean[] classUse = new boolean[8];      // by Class
+  public final int healPts;
+  public final boolean[] wepvsty2 = new boolean[16];
+  public final boolean[] wepvsty3 = new boolean[16];
+  public final int armorMod;
+  public final int wephitmd;
+  public final Dice wephpdam;
+  public final int xtraSwing;
+  public final boolean crithitm;
+  public final boolean[] wepvstyp = new boolean[14];
 
   int classUseFlags;
   int wepvsty2Flags;
@@ -47,24 +47,24 @@ public class Item
     name = Utility.getPascalString (buffer, offset);
     nameUnknown = Utility.getPascalString (buffer, offset + 16);
     type = ObjectType.values ()[buffer[offset + 32]];
-    alignment = Alignment.values ()[buffer[offset + 33]];
-    cursed = Utility.getSignedShort (buffer, offset + 34) == -1;
-    special = Utility.getShort (buffer, offset + 36);
-    changeTo = Utility.getShort (buffer, offset + 38);
-    changeChance = Utility.getShort (buffer, offset + 40);
-    price = Utility.getWizLong (buffer, offset + 42);
-    boltac = Utility.getShort (buffer, offset + 48);
-    spellPwr = Utility.getShort (buffer, offset + 50);
-    classUseFlags = Utility.getShort (buffer, offset + 52);
-    healPts = Utility.getShort (buffer, offset + 54);
-    wepvsty2Flags = Utility.getShort (buffer, offset + 56);
-    wepvsty3Flags = Utility.getShort (buffer, offset + 58);
-    armorMod = Utility.getShort (buffer, offset + 60);
-    wephitmd = Utility.getShort (buffer, offset + 62);
-    wephpdam = new Dice (buffer, offset + 64);
-    xtraSwing = Utility.getShort (buffer, offset + 66);
-    crithitm = Utility.getShort (buffer, offset + 68) == 1;
-    wepvstyFlags = Utility.getShort (buffer, offset + 70);
+    alignment = Alignment.values ()[buffer[offset + 34]];
+    cursed = Utility.getSignedShort (buffer, offset + 36) == -1;
+    special = Utility.getSignedShort (buffer, offset + 38);
+    changeTo = Utility.getShort (buffer, offset + 40);
+    changeChance = Utility.getShort (buffer, offset + 42);
+    price = Utility.getWizLong (buffer, offset + 44);
+    boltac = Utility.getShort (buffer, offset + 50);
+    spellPwr = Utility.getShort (buffer, offset + 52);
+    classUseFlags = Utility.getShort (buffer, offset + 54);
+    healPts = Utility.getShort (buffer, offset + 56);
+    wepvsty2Flags = Utility.getShort (buffer, offset + 58);
+    wepvsty3Flags = Utility.getShort (buffer, offset + 60);
+    armorMod = Utility.getShort (buffer, offset + 62);
+    wephitmd = Utility.getShort (buffer, offset + 64);
+    wephpdam = new Dice (buffer, offset + 66);
+    xtraSwing = Utility.getShort (buffer, offset + 68);
+    crithitm = Utility.getShort (buffer, offset + 70) == 1;
+    wepvstyFlags = Utility.getShort (buffer, offset + 72);
   }
 
   // ---------------------------------------------------------------------------------//

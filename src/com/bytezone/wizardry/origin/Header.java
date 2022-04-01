@@ -11,7 +11,7 @@ public class Header
       { "header", "maze", "monsters", "rewards", "items", "characters", "images", "char levels" };
   static String[] scenarioNames = { "PROVING GROUNDS OF THE MAD OVERLORD!",
       "THE KNIGHT OF DIAMONDS", "THE LEGACY OF LLYLGAMYN", "THE RETURN OF WERDNA" };
-  static int[] recordLengths = { 0, 894, 158, 168, 78, 208, 480, 78 };
+  static int[] recordLengths = { 0, 894, 158, 168, 78, 208, 512, 78 };
 
   byte[] buffer;
   List<ScenarioData> scenarioData = new ArrayList<> ();

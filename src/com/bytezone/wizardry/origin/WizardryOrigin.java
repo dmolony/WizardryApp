@@ -23,10 +23,12 @@ public class WizardryOrigin
 
   Messages messages;
   Header header;
+
   private List<Monster> monsters;
   private List<Item> items;
   private List<MazeLevel> mazeLevels;
   private List<Reward> rewards;
+  private List<Image> images;
 
   public enum Square
   {
@@ -119,8 +121,16 @@ public class WizardryOrigin
     sd = header.get (TREASURE_TABLE_AREA);
     rewards = new ArrayList<> (sd.totalUnits);
 
+    id = 0;
     for (DataBlock dataBlock : sd.dataBlocks)
       rewards.add (new Reward (id++, dataBlock));
+
+    sd = header.get (IMAGE_AREA);
+    images = new ArrayList<> (sd.totalUnits);
+
+    id = 0;
+    for (DataBlock dataBlock : sd.dataBlocks)
+      images.add (new Image (id++, dataBlock));
 
     messages = new Messages (disk.getScenarioMessages (), header.scenarioId > 1);
 
