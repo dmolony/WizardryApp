@@ -10,6 +10,9 @@ import com.bytezone.wizardry.disk.WizardryDisk;
 public class WizardryOrigin
 // -----------------------------------------------------------------------------------//
 {
+  public static final String[] monsterClass = { "Fighter", "Mage", "Priest", "Thief", "Midget",
+      "Giant", "Mythical", "Dragon", "Animal", "Were", "Undead", "Demon", "Insect", "Enchanted" };
+
   static final int MAZE_AREA = 1;
   static final int MONSTER_AREA = 2;
   static final int TREASURE_TABLE_AREA = 3;

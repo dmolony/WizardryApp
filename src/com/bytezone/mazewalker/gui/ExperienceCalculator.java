@@ -30,8 +30,8 @@ public class ExperienceCalculator extends Pane
   private static final int PRIEST_LEVEL = 6;
   private static final int DRAIN = 7;
   private static final int HEAL = 8;
-  private static final int RESIST1 = 9;
-  private static final int RESIST2 = 10;
+  private static final int MAGIC_RESISTANCE = 9;
+  private static final int RESISTANCE = 10;
   private static final int ABILITY = 11;
   private static final int TOTAL = 12;
 
@@ -124,9 +124,9 @@ public class ExperienceCalculator extends Pane
     int expHeal = getBonus (90, values[HEAL]);
 
     int expDamage = values[RECSN] <= 1 ? 0 : getBonus (30, values[RECSN]);
-    int expUnaffect = values[RESIST1] == 0 ? 0 : getBonus (40, (values[RESIST1] / 10 + 1));
+    int expUnaffect = values[MAGIC_RESISTANCE] == 0 ? 0 : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
 
-    int expFlags1 = getBonus (35, Integer.bitCount (values[RESIST2] & 0x7E));    // 6 bits
+    int expFlags1 = getBonus (35, Integer.bitCount (values[RESISTANCE] & 0x7E));    // 6 bits
     int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));    // 7 bits
 
     int total = expHitPoints + expAc + expMage + expPriest + expDrain + expHeal + expDamage
@@ -139,8 +139,8 @@ public class ExperienceCalculator extends Pane
     textOut[DRAIN].setText (getText (expDrain));
     textOut[HEAL].setText (getText (expHeal));
     textOut[RECSN].setText (getText (expDamage));
-    textOut[RESIST1].setText (getText (expUnaffect));
-    textOut[RESIST2].setText (getText (expFlags1));
+    textOut[MAGIC_RESISTANCE].setText (getText (expUnaffect));
+    textOut[RESISTANCE].setText (getText (expFlags1));
     textOut[ABILITY].setText (getText (expFlags2));
 
     textOut[TOTAL].setText (getText (total));
@@ -200,8 +200,8 @@ public class ExperienceCalculator extends Pane
             textIn[PRIEST_LEVEL].setText (monster.priestSpells + "");
             textIn[DRAIN].setText (monster.drainAmt + "");
             textIn[HEAL].setText (monster.healPts + "");
-            textIn[RESIST1].setText (monster.unaffect + "");
-            textIn[RESIST2].setText (monster.flags1 + "");
+            textIn[MAGIC_RESISTANCE].setText (monster.unaffect + "");
+            textIn[RESISTANCE].setText (monster.flags1 + "");
             textIn[ABILITY].setText (monster.flags2 + "");
 
             if (wizardry.getScenarioId () > 1)

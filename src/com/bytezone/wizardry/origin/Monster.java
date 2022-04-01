@@ -4,7 +4,12 @@ package com.bytezone.wizardry.origin;
 public class Monster
 // -----------------------------------------------------------------------------------//
 {
-  int id;
+  public static final String[] property =
+      { "Stone", "Poison", "Paralyse", "Autokill", "Be slept", "Run", "Gate in" };
+  public static final String[] resistance =
+      { "Friends", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
+
+  public final int id;
   public final String name;                                //   0
   public final String namePlural;                          //  16
   public final String genericName;                         //  32
@@ -31,6 +36,10 @@ public class Monster
   public final int flags1;                                 // 154
   public final int flags2;                                 // 156
 
+  public final String damageDice;
+  public final String propertyText;
+  public final String resistanceText;
+
   // ---------------------------------------------------------------------------------//
   public Monster (int id, DataBlock dataBlock)
   // ---------------------------------------------------------------------------------//
@@ -53,8 +62,18 @@ public class Monster
     armourClass = Utility.getSignedShort (buffer, offset + 80);
 
     recsn = Utility.getShort (buffer, offset + 82);               // 0-7
+    StringBuilder dd = new StringBuilder ();
     for (int i = 0; i < recsn; i++)
+    {
       recs[i] = new Dice (buffer, offset + 84 + i * 6);
+      dd.append (recs[i].toString () + ", ");
+    }
+    if (dd.length () > 0)
+    {
+      dd.deleteCharAt (dd.length () - 1);
+      dd.deleteCharAt (dd.length () - 1);
+    }
+    damageDice = dd.toString ();
 
     expamt = Utility.getWizLong (buffer, offset + 126);
     drainAmt = Utility.getShort (buffer, offset + 132);
@@ -69,12 +88,34 @@ public class Monster
     mageSpells = Utility.getShort (buffer, offset + 144);         // spell level
     priestSpells = Utility.getShort (buffer, offset + 146);       // spell level
 
-    unique = Utility.getShort (buffer, offset + 148);
+    unique = Utility.getSignedShort (buffer, offset + 148);
     breathe = Utility.getShort (buffer, offset + 150);
     unaffect = Utility.getShort (buffer, offset + 152);
 
     flags1 = Utility.getShort (buffer, offset + 154);             // wepvsty3
     flags2 = Utility.getShort (buffer, offset + 156);             // sppc
+
+    resistanceText = getFlagsText (flags1, resistance);
+    propertyText = getFlagsText (flags2, property);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private String getFlagsText (int value, String[] values)
+  // ---------------------------------------------------------------------------------//
+  {
+    StringBuilder p = new StringBuilder ();
+    for (int i = 0; i < 7; i++)
+    {
+      if ((value & 0x01) != 0)
+        p.append (values[i] + ", ");
+      value >>>= 1;
+    }
+    if (p.length () > 0)
+    {
+      p.deleteCharAt (p.length () - 1);
+      p.deleteCharAt (p.length () - 1);
+    }
+    return p.toString ();
   }
 
   // ---------------------------------------------------------------------------------//

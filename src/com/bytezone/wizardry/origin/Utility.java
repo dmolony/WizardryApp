@@ -63,4 +63,12 @@ public class Utility
 
     return high * 100000000 + mid * 10000 + low;
   }
+
+  // ---------------------------------------------------------------------------------//
+  public static String getBitstring (int value)
+  // ---------------------------------------------------------------------------------//
+  {
+    String bits = "0000000" + Integer.toBinaryString (value);
+    return bits.substring (bits.length () - 8);
+  }
 }
