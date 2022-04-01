@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -69,6 +71,7 @@ public class MonstersPane extends Pane
 
   GridPane gridPane = new GridPane ();
   WizardryOrigin wizardry;
+  public Canvas canvas = new Canvas (210, 150);      // wh
 
   // ---------------------------------------------------------------------------------//
   public MonstersPane (WizardryOrigin wizardry)
@@ -98,7 +101,15 @@ public class MonstersPane extends Pane
     GridPane.setConstraints (monsterLabel, 0, 0);
     GridPane.setConstraints (monsters, 1, 0);
     GridPane.setHalignment (monsterLabel, HPos.RIGHT);
-    gridPane.getChildren ().addAll (monsterLabel, monsters);
+
+    GridPane.setConstraints (canvas, 1, 9);
+    GraphicsContext gc = canvas.getGraphicsContext2D ();
+    //    gc.setFill (Color.BLACK);
+    //    gc.fillRect (0, 0, 140, 100);
+    GridPane.setColumnSpan (canvas, 2);
+    GridPane.setRowSpan (canvas, 5);
+
+    gridPane.getChildren ().addAll (monsterLabel, monsters, canvas);
 
     ObservableList<Monster> list = FXCollections.observableArrayList ();
     list.addAll (wizardry.getMonsters ());
@@ -138,6 +149,8 @@ public class MonstersPane extends Pane
 
             textOut[PARTNER].setText (wizardry.getMonsters ().get (monster.enemyTeam).name);
             textOut[PARTNER_PCT].setText (monster.teamPercentage + "%");
+
+            wizardry.getImage (monster.image).draw (canvas.getGraphicsContext2D ());
           }
         });
 

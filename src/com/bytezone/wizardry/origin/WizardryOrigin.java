@@ -140,19 +140,6 @@ public class WizardryOrigin
         showExtra (square);
         System.out.println ();
       }
-
-    //    for (Monster monster : monsters)
-    //      System.out.println (monster);
-
-    //    for (Item item : items)
-    //      System.out.println (item);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  public int getScenarioId ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return header.scenarioId;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -171,6 +158,13 @@ public class WizardryOrigin
             System.out.printf ("%s  %s %s%n", extra, mazeCell.getLocation (), fight);
           }
         }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public int getScenarioId ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return header.scenarioId;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -207,7 +201,26 @@ public class WizardryOrigin
   {
     if (id >= 0 && id < items.size ())
       return items.get (id);
+
     System.out.printf ("Item %d out of range%n", id);
+    return null;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public List<Image> getImages ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return images;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Image getImage (int id)
+  // ---------------------------------------------------------------------------------//
+  {
+    if (id >= 0 && id < images.size ())
+      return images.get (id);
+
+    System.out.printf ("Image %d out of range%n", id);
     return null;
   }
 

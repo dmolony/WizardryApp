@@ -1,51 +1,71 @@
 package com.bytezone.wizardry.origin;
 
-import java.nio.ByteBuffer;
-
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelWriter;
+import javafx.scene.paint.Color;
 
 // -----------------------------------------------------------------------------------//
 public class Image
 // -----------------------------------------------------------------------------------//
 {
-  Canvas canvas = new Canvas (70, 50);      // wh
+  byte[] buffer;
+  int offset;
 
   // ---------------------------------------------------------------------------------//
   public Image (int id, DataBlock dataBlock)
   // ---------------------------------------------------------------------------------//
   {
-    byte[] buffer = dataBlock.buffer;
-    int offset = dataBlock.offset;
+    buffer = dataBlock.buffer;
+    offset = dataBlock.offset;
+  }
 
-    System.out.println (id);
-    System.out.println (dataBlock.length);
-
-    GraphicsContext gc = canvas.getGraphicsContext2D ();
+  // ---------------------------------------------------------------------------------//
+  public void draw (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    //    gc = canvas.getGraphicsContext2D ();
     PixelWriter pixelWriter = gc.getPixelWriter ();
-    PixelFormat<ByteBuffer> pixelFormat = PixelFormat.getByteRgbInstance ();
+    //    PixelFormat<ByteBuffer> pixelFormat = PixelFormat.getByteRgbInstance ();
+
+    int x = 0;
+    int y = 0;
+
+    gc.setFill (Color.BLACK);
+    gc.fillRect (0, 0, 210, 150);
 
     for (int j = 0; j < 500; j++)
     {
-      if (j % 10 == 0)
-        System.out.println ();
+      //      if (j % 10 == 0)
+      //        System.out.println ();
 
       int bits = buffer[offset + j] & 0xFF;
       for (int m = 0; m < 7; m++)
       {
         if ((bits & 1) == 1)
-          //          db.setElem (element, 255);
-          System.out.print ("XX");
-        else
-          System.out.print ("..");
+        {
+          pixelWriter.setColor (x, y, Color.WHITE);
+          pixelWriter.setColor (x + 1, y, Color.WHITE);
+          pixelWriter.setColor (x + 2, y, Color.WHITE);
+          pixelWriter.setColor (x, y + 1, Color.WHITE);
+          pixelWriter.setColor (x + 1, y + 1, Color.WHITE);
+          pixelWriter.setColor (x + 2, y + 1, Color.WHITE);
+          pixelWriter.setColor (x, y + 2, Color.WHITE);
+          pixelWriter.setColor (x + 1, y + 2, Color.WHITE);
+          pixelWriter.setColor (x + 2, y + 2, Color.WHITE);
+        }
+        //          System.out.print ("XX");
+        //        else
+        //          System.out.print ("..");
 
         bits >>= 1;
-        //        element++;
+        x += 3;
+        if (x >= 210)
+        {
+          x = 0;
+          y += 3;
+        }
       }
     }
-    System.out.println ();
+    //    System.out.println ();
   }
-
 }
