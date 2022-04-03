@@ -62,7 +62,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] setOutputFields (String[] labelText, int col, int row, Pos alignment)
+  TextField[] setOutputFields (String[] labelText, int col, int row, Pos alignment, int columns)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[labelText.length];
@@ -74,6 +74,7 @@ public class BasePane extends Pane
 
       GridPane.setConstraints (label, col, row);
       GridPane.setConstraints (textOut[i], col + 1, row);
+      GridPane.setColumnSpan (textOut[i], columns);
 
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
@@ -89,7 +90,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] setOutputFields (int totalFields, int col, int row, Pos alignment)
+  TextField[] setOutputFields (int totalFields, int col, int row, Pos alignment, int columns)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[totalFields];
@@ -99,6 +100,7 @@ public class BasePane extends Pane
       textOut[i] = new TextField ();
 
       GridPane.setConstraints (textOut[i], col + 1, row);
+      GridPane.setColumnSpan (textOut[i], columns);
 
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);

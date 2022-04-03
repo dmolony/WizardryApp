@@ -119,7 +119,7 @@ public class MonstersPane extends BasePane
           }
         });
 
-    textOut1 = setOutputFields (label1Text, 0, 0, Pos.CENTER_LEFT);
-    textOut2 = setOutputFields (label2Text, 2, 0, Pos.CENTER_RIGHT);
+    textOut1 = setOutputFields (label1Text, 0, 0, Pos.CENTER_LEFT, 1);
+    textOut2 = setOutputFields (label2Text, 2, 0, Pos.CENTER_RIGHT, 1);
   }
 }
