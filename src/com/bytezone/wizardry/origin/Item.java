@@ -16,24 +16,24 @@ public class Item
   public final int special;
   public final int changeTo;
   public final int changeChance;
-  public final int price;
+  public final long price;
   public final int boltac;
   public final int spellPwr;
-  public final boolean[] classUse = new boolean[8];      // by Class
+  //  public final boolean[] classUse = new boolean[8];      // by Class
   public final int healPts;
-  public final boolean[] wepvsty2 = new boolean[16];
-  public final boolean[] wepvsty3 = new boolean[16];
-  public final int armorMod;
+  //  public final boolean[] wepvsty2 = new boolean[16];
+  //  public final boolean[] wepvsty3 = new boolean[16];
+  public final int armourClass;
   public final int wephitmd;
   public final Dice wephpdam;
   public final int xtraSwing;
   public final boolean crithitm;
   public final boolean[] wepvstyp = new boolean[14];
 
-  int classUseFlags;
-  int wepvsty2Flags;
-  int wepvsty3Flags;
-  int wepvstyFlags;
+  public final int classUseFlags;
+  public final int wepvsty2Flags;
+  public final int wepvsty3Flags;
+  public final int wepvstyFlags;
 
   // ---------------------------------------------------------------------------------//
   public Item (int id, DataBlock dataBlock)
@@ -53,18 +53,19 @@ public class Item
     changeTo = Utility.getShort (buffer, offset + 40);
     changeChance = Utility.getShort (buffer, offset + 42);
     price = Utility.getWizLong (buffer, offset + 44);
-    boltac = Utility.getShort (buffer, offset + 50);
+    boltac = Utility.getSignedShort (buffer, offset + 50);
     spellPwr = Utility.getShort (buffer, offset + 52);
-    classUseFlags = Utility.getShort (buffer, offset + 54);
-    healPts = Utility.getShort (buffer, offset + 56);
-    wepvsty2Flags = Utility.getShort (buffer, offset + 58);
-    wepvsty3Flags = Utility.getShort (buffer, offset + 60);
-    armorMod = Utility.getShort (buffer, offset + 62);
-    wephitmd = Utility.getShort (buffer, offset + 64);
+    classUseFlags = Utility.getShort (buffer, offset + 54);       // 8 flags
+
+    healPts = Utility.getSignedShort (buffer, offset + 56);
+    wepvsty2Flags = Utility.getShort (buffer, offset + 58);       // 16 flags
+    wepvsty3Flags = Utility.getShort (buffer, offset + 60);       // 16 flags
+    armourClass = Utility.getSignedShort (buffer, offset + 62);
+    wephitmd = Utility.getSignedShort (buffer, offset + 64);
     wephpdam = new Dice (buffer, offset + 66);
     xtraSwing = Utility.getShort (buffer, offset + 68);
     crithitm = Utility.getShort (buffer, offset + 70) == 1;
-    wepvstyFlags = Utility.getShort (buffer, offset + 72);
+    wepvstyFlags = Utility.getShort (buffer, offset + 72);        // 14 flags
   }
 
   // ---------------------------------------------------------------------------------//

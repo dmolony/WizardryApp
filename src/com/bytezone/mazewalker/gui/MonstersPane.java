@@ -4,12 +4,10 @@ import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -67,7 +65,7 @@ public class MonstersPane extends Pane
 
   Label[] labels = new Label[labelText.length];
   TextField[] textOut = new TextField[labelText.length];
-  ComboBox<Monster> monsters = new ComboBox<> ();
+  ComboBox<Monster> monstersList = new ComboBox<> ();
 
   GridPane gridPane = new GridPane ();
   WizardryOrigin wizardry;
@@ -98,26 +96,21 @@ public class MonstersPane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     Label monsterLabel = new Label ("Monster");
+
     GridPane.setConstraints (monsterLabel, 0, 0);
-    GridPane.setConstraints (monsters, 1, 0);
+    GridPane.setConstraints (monstersList, 1, 0);
     GridPane.setHalignment (monsterLabel, HPos.RIGHT);
 
     GridPane.setConstraints (canvas, 1, 9);
-    GraphicsContext gc = canvas.getGraphicsContext2D ();
-    //    gc.setFill (Color.BLACK);
-    //    gc.fillRect (0, 0, 140, 100);
     GridPane.setColumnSpan (canvas, 2);
     GridPane.setRowSpan (canvas, 5);
 
-    gridPane.getChildren ().addAll (monsterLabel, monsters, canvas);
+    gridPane.getChildren ().addAll (monsterLabel, monstersList, canvas);
 
-    ObservableList<Monster> list = FXCollections.observableArrayList ();
-    list.addAll (wizardry.getMonsters ());
+    monstersList.setItems (FXCollections.observableArrayList (wizardry.getMonsters ()));
+    monstersList.setVisibleRowCount (20);
 
-    monsters.setItems (list);
-    monsters.setVisibleRowCount (30);
-
-    monsters.getSelectionModel ().selectedItemProperty ()
+    monstersList.getSelectionModel ().selectedItemProperty ()
         .addListener ( (options, oldValue, newValue) ->
         {
           Monster monster = newValue;
@@ -180,7 +173,6 @@ public class MonstersPane extends Pane
         textOut[i].setAlignment (Pos.CENTER_RIGHT);
 
       GridPane.setHalignment (labels[i], HPos.RIGHT);
-
       gridPane.getChildren ().addAll (labels[i], textOut[i]);
     }
   }
@@ -190,5 +182,12 @@ public class MonstersPane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,7d", value);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private String getText (long value)
+  // ---------------------------------------------------------------------------------//
+  {
+    return String.format ("%,15d", value);
   }
 }

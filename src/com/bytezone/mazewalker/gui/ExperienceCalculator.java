@@ -124,7 +124,8 @@ public class ExperienceCalculator extends Pane
     int expHeal = getBonus (90, values[HEAL]);
 
     int expDamage = values[RECSN] <= 1 ? 0 : getBonus (30, values[RECSN]);
-    int expUnaffect = values[MAGIC_RESISTANCE] == 0 ? 0 : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
+    int expUnaffect =
+        values[MAGIC_RESISTANCE] == 0 ? 0 : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
 
     int expFlags1 = getBonus (35, Integer.bitCount (values[RESISTANCE] & 0x7E));    // 6 bits
     int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));    // 7 bits
@@ -241,5 +242,12 @@ public class ExperienceCalculator extends Pane
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,7d", value);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private String getText (long value)
+  // ---------------------------------------------------------------------------------//
+  {
+    return String.format ("%,15d", value);
   }
 }

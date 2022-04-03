@@ -21,7 +21,7 @@ public class Monster
   public final int armourClass;                            //  80          
   public final int recsn;                                  //  82  total recs
   public final Dice[] recs = new Dice[7];                  //  84  damage?
-  public final int expamt;                                 // 126  (triple)
+  public final long expamt;                                // 126  (triple)
   public final int drainAmt;                               // 132                    
   public final int healPts;                                // 134                    
   public final int reward1;                                // 136  gold

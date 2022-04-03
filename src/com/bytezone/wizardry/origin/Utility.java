@@ -54,21 +54,21 @@ public class Utility
   }
 
   // ---------------------------------------------------------------------------------//
-  public static int getWizLong (byte[] buffer, int offset)
+  public static long getWizLong (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
     int low = Utility.getShort (buffer, offset);
     int mid = Utility.getShort (buffer, offset + 2);
     int high = Utility.getShort (buffer, offset + 4);
 
-    return high * 100000000 + mid * 10000 + low;
+    return high * 100000000L + mid * 10000L + low;
   }
 
   // ---------------------------------------------------------------------------------//
-  public static String getBitstring (int value)
+  public static String getBitString (int value, int bitLength)
   // ---------------------------------------------------------------------------------//
   {
-    String bits = "0000000" + Integer.toBinaryString (value);
-    return bits.substring (bits.length () - 8);
+    String bits = "000000000000000" + Integer.toBinaryString (value);
+    return bits.substring (bits.length () - bitLength);
   }
 }

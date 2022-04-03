@@ -12,6 +12,17 @@ public class WizardryOrigin
 {
   public static final String[] monsterClass = { "Fighter", "Mage", "Priest", "Thief", "Midget",
       "Giant", "Mythical", "Dragon", "Animal", "Were", "Undead", "Demon", "Insect", "Enchanted" };
+  public static final String[] resistance =
+      { "No elements", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
+  public static final String[] characterClass =
+      { "Fighter", "Mage", "Priest", "Thief", "Bishop", "Samurai", "Lord", "Ninja" };
+  public static final String[] spells =
+      { "Halito", "Mogref", "Katino", "Dumapic", "Dilto", "Sopic", "Mahalito", "Molito", "Morlis",
+          "Dalto", "Lahalito", "Mamorlis", "Makanito", "Madalto", "Lakanito", "Zilwan", "Masopic",
+          "Haman", "Malor", "Mahaman", "Tiltowait", "Kalki", "Dios", "Badios", "Milwa", "Porfic",
+          "Matu", "Calfo", "Manifo", "Montino", "Lomilwa", "Dialko", "Latumapic", "Bamatu", "Dial",
+          "Badial", "Latumofis", "Maporfic", "Dialma", "Badialma", "Litokan", "Kandi", "Di", "Badi",
+          "Lorto", "Madi", "Mabadi", "Loktofeit", "Malikto", "Kadorto" };
 
   static final int MAZE_AREA = 1;
   static final int MONSTER_AREA = 2;
@@ -66,10 +77,10 @@ public class WizardryOrigin
     STRENGTH, IQ, PIETY, VITALITY, AGILITY, LUCK
   }
 
-  enum Class
-  {
-    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
-  }
+  //  enum Class
+  //  {
+  //    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
+  //  }
 
   enum Status
   {
