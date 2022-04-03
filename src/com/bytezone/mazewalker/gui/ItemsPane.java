@@ -37,7 +37,7 @@ public class ItemsPane extends Pane
   private static final int REGEN = 15;
   private static final int PRICE = 16;
 
-  String[] labelText = { "Generic name", "Kind", "Alignment", "Cursed", "Critical hit", "Change to",
+  String[] labelText = { "Generic name", "Kind", "Alignment", "Cursed", "Auto kill", "Change to",
       "Chance", "Wep Hit Damage", "Spell", "Id", "Special #", "AC", "Wep Hit Mod", "Extra swing",
       "In store", "Regeneration", "Value" };
 
@@ -88,10 +88,10 @@ public class ItemsPane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     Label itemLabel = new Label ("Item");
-    Label protectionLabel = new Label ("Protection");
+    Label useLabel = new Label ("Can be used by");
+    Label protectionLabel = new Label ("Protection vs");
     Label resistanceLabel = new Label ("Resistance");
-    Label purposeLabel = new Label ("Purpose");
-    Label useLabel = new Label ("Used by");
+    Label purposeLabel = new Label ("Purposed vs");
 
     GridPane.setConstraints (itemLabel, 0, 0);
     GridPane.setConstraints (itemsList, 1, 0);
