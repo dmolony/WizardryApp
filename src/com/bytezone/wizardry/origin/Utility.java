@@ -54,6 +54,40 @@ public class Utility
   }
 
   // ---------------------------------------------------------------------------------//
+  public static int getLong (byte[] buffer, int ptr)
+  // ---------------------------------------------------------------------------------//
+  {
+    try
+    {
+      int val = 0;
+      for (int i = 3; i >= 0; i--)
+      {
+        val <<= 8;
+        val += buffer[ptr + i] & 0xFF;
+      }
+      return val;
+    }
+    catch (ArrayIndexOutOfBoundsException e)
+    {
+      System.out.printf ("Index out of range (getLong): %08X  %<d%n", ptr);
+      return 0;
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public static int getLongBigEndian (byte[] buffer, int ptr)
+  // ---------------------------------------------------------------------------------//
+  {
+    int val = 0;
+    for (int i = 0; i < 4; i++)
+    {
+      val <<= 8;
+      val += buffer[ptr + i] & 0xFF;
+    }
+    return val;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public static long getWizLong (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {

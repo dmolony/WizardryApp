@@ -23,6 +23,7 @@ public class WizardryOrigin
           "Matu", "Calfo", "Manifo", "Montino", "Lomilwa", "Dialko", "Latumapic", "Bamatu", "Dial",
           "Badial", "Latumofis", "Maporfic", "Dialma", "Badialma", "Litokan", "Kandi", "Di", "Badi",
           "Lorto", "Madi", "Mabadi", "Loktofeit", "Malikto", "Kadorto" };
+  public static final String[] race = { "No race", "Human", "Elf", "Dwarf", "Gnome", "Hobbit" };
 
   static final int MAZE_AREA = 1;
   static final int MONSTER_AREA = 2;
@@ -40,6 +41,7 @@ public class WizardryOrigin
   private List<MazeLevel> mazeLevels;
   private List<Reward> rewards;
   private List<Image> images;
+  private List<Character> characters;
 
   public enum Square
   {
@@ -115,6 +117,13 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       mazeLevels.add (new MazeLevel (++id, dataBlock));
 
+    sd = header.get (CHARACTER_AREA);
+    characters = new ArrayList<> (sd.totalUnits);
+
+    id = 0;
+    for (DataBlock dataBlock : sd.dataBlocks)
+      characters.add (new Character (id++, dataBlock));
+
     sd = header.get (MONSTER_AREA);
     monsters = new ArrayList<> (sd.totalUnits);
 
@@ -183,6 +192,20 @@ public class WizardryOrigin
   // ---------------------------------------------------------------------------------//
   {
     return mazeLevels;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public List<Character> getCharacters ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return characters;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Character getCharacter (int id)
+  // ---------------------------------------------------------------------------------//
+  {
+    return characters.get (id);
   }
 
   // ---------------------------------------------------------------------------------//

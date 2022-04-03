@@ -4,21 +4,16 @@ import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 // -----------------------------------------------------------------------------------//
-public class ExperienceCalculator extends Pane
+public class ExperienceCalculator extends BasePane
 // -----------------------------------------------------------------------------------//
 {
   private static final int HP_DICE = 0;
@@ -42,28 +37,71 @@ public class ExperienceCalculator extends Pane
   Label[] labels = new Label[labelText.length];
   TextField[] textIn = new TextField[labelText.length];
   TextField[] textOut = new TextField[labelText.length];
-  ComboBox<Monster> monsters = new ComboBox<> ();
 
-  GridPane gridPane = new GridPane ();
-  WizardryOrigin wizardry;
+  ComboBox<Monster> monsters = new ComboBox<> ();
 
   // ---------------------------------------------------------------------------------//
   public ExperienceCalculator (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
+    super (wizardry);
 
-    build ();
+    setColumnConstraints (135, 60, 80);
 
-    gridPane.getColumnConstraints ().add (new ColumnConstraints (135));
-    gridPane.getColumnConstraints ().add (new ColumnConstraints (60));
-    gridPane.getColumnConstraints ().add (new ColumnConstraints (80));
+    setComboBox ("Monster", monsters, wizardry.getMonsters ());
+    GridPane.setColumnSpan (monsters, 2);
 
-    gridPane.setHgap (12);
-    gridPane.setVgap (8);
-    gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
+    monsters.setItems (FXCollections.observableArrayList (wizardry.getMonsters ()));
 
-    getChildren ().add (new BorderPane (gridPane));
+    monsters.getSelectionModel ().selectedItemProperty ()
+        .addListener ( (options, oldValue, newValue) ->
+        {
+          Monster monster = newValue;
+          if (monster != null)
+          {
+            textIn[HP_DICE].setText (monster.hitPoints.level + "");
+            textIn[HP_SIDES].setText (monster.hitPoints.faces + "");
+            textIn[BREATHE].setText (monster.breathe + "");
+            textIn[AC].setText (monster.armourClass + "");
+            textIn[RECSN].setText (monster.recsn + "");
+            textIn[MAGE_LEVEL].setText (monster.mageSpells + "");
+            textIn[PRIEST_LEVEL].setText (monster.priestSpells + "");
+            textIn[DRAIN].setText (monster.drainAmt + "");
+            textIn[HEAL].setText (monster.healPts + "");
+            textIn[MAGIC_RESISTANCE].setText (monster.unaffect + "");
+            textIn[RESISTANCE].setText (monster.flags1 + "");
+            textIn[ABILITY].setText (monster.flags2 + "");
+
+            if (wizardry.getScenarioId () > 1)
+              textOut[TOTAL].setText (getText (monster.expamt));
+            else
+              getExperience ();
+          }
+        });
+
+    for (int i = 0; i < labels.length; i++)
+    {
+      labels[i] = new Label (labelText[i]);
+      textIn[i] = new TextField ();
+      textOut[i] = new TextField ();
+
+      GridPane.setConstraints (labels[i], 0, i + 1);
+      GridPane.setConstraints (textIn[i], 1, i + 1);
+      GridPane.setConstraints (textOut[i], 2, i + 1);
+
+      textOut[i].setEditable (false);
+      textOut[i].setFocusTraversable (false);
+      textOut[i].setAlignment (Pos.CENTER_RIGHT);
+      GridPane.setHalignment (labels[i], HPos.RIGHT);
+
+      gridPane.getChildren ().add (labels[i]);
+      if (i < labels.length - 1)
+        gridPane.getChildren ().add (textIn[i]);
+      if (i != HP_DICE && i != BREATHE)
+        gridPane.getChildren ().add (textOut[i]);
+
+      textIn[i].setOnKeyTyped (e -> keyTyped (e));
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -167,87 +205,5 @@ public class ExperienceCalculator extends Pane
     }
 
     return total;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void build ()
-  // ---------------------------------------------------------------------------------//
-  {
-    Label monsterLabel = new Label ("Monster");
-    GridPane.setConstraints (monsterLabel, 0, 0);
-    GridPane.setConstraints (monsters, 1, 0);
-    gridPane.getChildren ().addAll (monsterLabel, monsters);
-    monsters.setVisibleRowCount (30);
-    GridPane.setColumnSpan (monsters, 2);
-    GridPane.setHalignment (monsterLabel, HPos.RIGHT);
-
-    ObservableList<Monster> list = FXCollections.observableArrayList ();
-    list.addAll (wizardry.getMonsters ());
-
-    monsters.setItems (list);
-
-    monsters.getSelectionModel ().selectedItemProperty ()
-        .addListener ( (options, oldValue, newValue) ->
-        {
-          Monster monster = newValue;
-          if (monster != null)
-          {
-            textIn[HP_DICE].setText (monster.hitPoints.level + "");
-            textIn[HP_SIDES].setText (monster.hitPoints.faces + "");
-            textIn[BREATHE].setText (monster.breathe + "");
-            textIn[AC].setText (monster.armourClass + "");
-            textIn[RECSN].setText (monster.recsn + "");
-            textIn[MAGE_LEVEL].setText (monster.mageSpells + "");
-            textIn[PRIEST_LEVEL].setText (monster.priestSpells + "");
-            textIn[DRAIN].setText (monster.drainAmt + "");
-            textIn[HEAL].setText (monster.healPts + "");
-            textIn[MAGIC_RESISTANCE].setText (monster.unaffect + "");
-            textIn[RESISTANCE].setText (monster.flags1 + "");
-            textIn[ABILITY].setText (monster.flags2 + "");
-
-            if (wizardry.getScenarioId () > 1)
-              textOut[TOTAL].setText (getText (monster.expamt));
-            else
-              getExperience ();
-          }
-        });
-
-    for (int i = 0; i < labels.length; i++)
-    {
-      labels[i] = new Label (labelText[i]);
-      textIn[i] = new TextField ();
-      textOut[i] = new TextField ();
-
-      GridPane.setConstraints (labels[i], 0, i + 1);
-      GridPane.setConstraints (textIn[i], 1, i + 1);
-      GridPane.setConstraints (textOut[i], 2, i + 1);
-
-      textOut[i].setEditable (false);
-      textOut[i].setFocusTraversable (false);
-      textOut[i].setAlignment (Pos.CENTER_RIGHT);
-      GridPane.setHalignment (labels[i], HPos.RIGHT);
-
-      gridPane.getChildren ().add (labels[i]);
-      if (i < labels.length - 1)
-        gridPane.getChildren ().add (textIn[i]);
-      if (i != HP_DICE && i != BREATHE)
-        gridPane.getChildren ().add (textOut[i]);
-
-      textIn[i].setOnKeyTyped (e -> keyTyped (e));
-    }
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private String getText (int value)
-  // ---------------------------------------------------------------------------------//
-  {
-    return String.format ("%,7d", value);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private String getText (long value)
-  // ---------------------------------------------------------------------------------//
-  {
-    return String.format ("%,15d", value);
   }
 }

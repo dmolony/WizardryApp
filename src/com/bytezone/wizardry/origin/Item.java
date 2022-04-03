@@ -19,16 +19,12 @@ public class Item
   public final long price;
   public final int boltac;
   public final int spellPwr;
-  //  public final boolean[] classUse = new boolean[8];      // by Class
   public final int healPts;
-  //  public final boolean[] wepvsty2 = new boolean[16];
-  //  public final boolean[] wepvsty3 = new boolean[16];
   public final int armourClass;
   public final int wephitmd;
   public final Dice wephpdam;
   public final int xtraSwing;
   public final boolean crithitm;
-  public final boolean[] wepvstyp = new boolean[14];
 
   public final int classUseFlags;
   public final int wepvsty2Flags;
@@ -50,7 +46,7 @@ public class Item
     alignment = Alignment.values ()[buffer[offset + 34]];
     cursed = Utility.getSignedShort (buffer, offset + 36) == -1;
     special = Utility.getSignedShort (buffer, offset + 38);
-    changeTo = Utility.getShort (buffer, offset + 40);
+    changeTo = Utility.getShort (buffer, offset + 40);            // decay #
     changeChance = Utility.getShort (buffer, offset + 42);
     price = Utility.getWizLong (buffer, offset + 44);
     boltac = Utility.getSignedShort (buffer, offset + 50);
@@ -62,10 +58,10 @@ public class Item
     wepvsty3Flags = Utility.getShort (buffer, offset + 60);       // 16 flags
     armourClass = Utility.getSignedShort (buffer, offset + 62);
     wephitmd = Utility.getSignedShort (buffer, offset + 64);
-    wephpdam = new Dice (buffer, offset + 66);
-    xtraSwing = Utility.getShort (buffer, offset + 68);
-    crithitm = Utility.getShort (buffer, offset + 70) == 1;
-    wepvstyFlags = Utility.getShort (buffer, offset + 72);        // 14 flags
+    wephpdam = new Dice (buffer, offset + 66);                    // Dice
+    xtraSwing = Utility.getShort (buffer, offset + 72);
+    crithitm = Utility.getShort (buffer, offset + 74) == 1;       // boolean
+    wepvstyFlags = Utility.getShort (buffer, offset + 76);        // 14 flags
   }
 
   // ---------------------------------------------------------------------------------//
