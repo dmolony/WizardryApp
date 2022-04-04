@@ -3,7 +3,6 @@ package com.bytezone.mazewalker.gui;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
-import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
@@ -34,7 +33,6 @@ public class ExperienceCalculator extends BasePane
       { "HP # dice", "HP # sides", "Breathe", "Armour class", "Damage # dice", "Mage level",
           "Priest level", "Level drain", "Heal", "Resist 1", "Resist 2", "Abilities", "Total" };
 
-  Label[] labels = new Label[labelText.length];
   TextField[] textIn = new TextField[labelText.length];
   TextField[] textOut = new TextField[labelText.length];
 
@@ -48,60 +46,56 @@ public class ExperienceCalculator extends BasePane
 
     setColumnConstraints (135, 60, 80);
 
-    setComboBox ("Monster", monsters, wizardry.getMonsters ());
+    setComboBox ("Monster", monsters, wizardry.getMonsters (),
+        (options, oldValue, newValue) -> update (newValue));
     GridPane.setColumnSpan (monsters, 2);
 
-    monsters.setItems (FXCollections.observableArrayList (wizardry.getMonsters ()));
-
-    monsters.getSelectionModel ().selectedItemProperty ()
-        .addListener ( (options, oldValue, newValue) ->
-        {
-          Monster monster = newValue;
-          if (monster != null)
-          {
-            textIn[HP_DICE].setText (monster.hitPoints.level + "");
-            textIn[HP_SIDES].setText (monster.hitPoints.faces + "");
-            textIn[BREATHE].setText (monster.breathe + "");
-            textIn[AC].setText (monster.armourClass + "");
-            textIn[RECSN].setText (monster.recsn + "");
-            textIn[MAGE_LEVEL].setText (monster.mageSpells + "");
-            textIn[PRIEST_LEVEL].setText (monster.priestSpells + "");
-            textIn[DRAIN].setText (monster.drainAmt + "");
-            textIn[HEAL].setText (monster.healPts + "");
-            textIn[MAGIC_RESISTANCE].setText (monster.unaffect + "");
-            textIn[RESISTANCE].setText (monster.flags1 + "");
-            textIn[ABILITY].setText (monster.flags2 + "");
-
-            if (wizardry.getScenarioId () > 1)
-              textOut[TOTAL].setText (getText (monster.expamt));
-            else
-              setExperienceTotal ();
-          }
-        });
-
-    for (int i = 0; i < labels.length; i++)
+    for (int i = 0; i < textIn.length; i++)
     {
-      labels[i] = new Label (labelText[i]);
+      Label label = new Label (labelText[i]);
       textIn[i] = new TextField ();
       textOut[i] = new TextField ();
 
-      GridPane.setConstraints (labels[i], 0, i + 1);
+      GridPane.setConstraints (label, 0, i + 1);
       GridPane.setConstraints (textIn[i], 1, i + 1);
       GridPane.setConstraints (textOut[i], 2, i + 1);
 
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
       textOut[i].setAlignment (Pos.CENTER_RIGHT);
-      GridPane.setHalignment (labels[i], HPos.RIGHT);
+      GridPane.setHalignment (label, HPos.RIGHT);
 
-      gridPane.getChildren ().add (labels[i]);
-      if (i < labels.length - 1)
+      gridPane.getChildren ().add (label);
+      if (i < textIn.length - 1)
         gridPane.getChildren ().add (textIn[i]);
       if (i != HP_DICE && i != BREATHE)
         gridPane.getChildren ().add (textOut[i]);
 
       textIn[i].setOnKeyTyped (e -> keyTyped (e));
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void update (Monster monster)
+  // ---------------------------------------------------------------------------------//
+  {
+    textIn[HP_DICE].setText (monster.hitPoints.level + "");
+    textIn[HP_SIDES].setText (monster.hitPoints.faces + "");
+    textIn[BREATHE].setText (monster.breathe + "");
+    textIn[AC].setText (monster.armourClass + "");
+    textIn[RECSN].setText (monster.recsn + "");
+    textIn[MAGE_LEVEL].setText (monster.mageSpells + "");
+    textIn[PRIEST_LEVEL].setText (monster.priestSpells + "");
+    textIn[DRAIN].setText (monster.drainAmt + "");
+    textIn[HEAL].setText (monster.healPts + "");
+    textIn[MAGIC_RESISTANCE].setText (monster.unaffect + "");
+    textIn[RESISTANCE].setText (monster.flags1 + "");
+    textIn[ABILITY].setText (monster.flags2 + "");
+
+    if (wizardry.getScenarioId () > 1)
+      textOut[TOTAL].setText (getText (monster.expamt));
+    else
+      setExperienceTotal ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -121,8 +115,8 @@ public class ExperienceCalculator extends BasePane
     if (wizardry.getScenarioId () > 1)
       return;
 
-    int[] values = new int[labels.length];
-    for (int i = 0; i < labels.length; i++)
+    int[] values = new int[textIn.length];
+    for (int i = 0; i < textIn.length; i++)
     {
       try
       {

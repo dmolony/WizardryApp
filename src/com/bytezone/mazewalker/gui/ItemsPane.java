@@ -55,16 +55,14 @@ public class ItemsPane extends BasePane
 
     setColumnConstraints (110, 64, 90, 110, 50, 110, 50, 50, 20);
 
-    setComboBox ("Item", itemsList, wizardry.getItems ());
+    setComboBox ("Item", itemsList, wizardry.getItems (),
+        (options, oldValue, newValue) -> update (newValue));
     GridPane.setColumnSpan (itemsList, 2);
 
     setLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
     setLabel ("Protection vs", 5, 0, HPos.RIGHT, 2);
     setLabel ("Resistance", 3, 10, HPos.RIGHT, 2);
     setLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
-
-    itemsList.getSelectionModel ().selectedItemProperty ()
-        .addListener ( (options, oldValue, newValue) -> update (newValue));
 
     textOut0 = createOutputFields (label1Text, 0, 1, Pos.CENTER_LEFT, 2);
     textOut6 = createOutputFields (label2Text, 0, 11, Pos.CENTER_RIGHT, 1);

@@ -22,14 +22,19 @@ public class Character
   public final CharacterStatus status;
   public final Alignment alignment;
   public final int[] attributes = new int[6];      // 0:18
+  public final int[] luckSkill = new int[5];       // 0:31
 
-  int[] luckSkill = new int[5];       // 0:31
-  int gold;
-  int experience;
-  int maxlevac;                       // max level armour class?
-  int charlev;                        // character level?
-  int hpLeft;
-  int hpMax;
+  public final long gold;
+
+  public final int possessionsCount;
+  //  public final Possession[] possessions = new Possession[8];
+
+  public final long experience;
+  public final int maxlevac;                       // max level armour class?
+  public final int charlev;                        // character level?
+  public final int hpLeft;
+  public final int hpMax;
+
   boolean[] spellsKnown = new boolean[50];
   int[] mageSpells = new int[7];
   int[] priestSpells = new int[7];
@@ -68,6 +73,27 @@ public class Character
       attributes[i] = (int) (attr & 0x1F);
       attr >>>= i == 2 ? 6 : 5;
     }
+
+    System.out.println (HexFormatter.formatNoHeader (buffer, offset + 48, 4));
+
+    gold = Utility.getWizLong (buffer, offset + 52);
+
+    possessionsCount = Utility.getShort (buffer, offset + 58);
+    for (int i = 0; i < possessionsCount; i++)
+    {
+      boolean equipped = Utility.getShort (buffer, offset + 60 + i * 8) == 1;
+      boolean cursed = Utility.getShort (buffer, offset + 62 + i * 8) == 1;
+      boolean identified = Utility.getShort (buffer, offset + 64 + i * 8) == 1;
+      int itemId = Utility.getShort (buffer, offset + 66 + i * 8);
+      possessions.add (new Possession (itemId, equipped, cursed, identified));
+    }
+
+    experience = Utility.getWizLong (buffer, offset + 124);
+    maxlevac = Utility.getShort (buffer, offset + 130);
+    charlev = Utility.getShort (buffer, offset + 132);
+    hpLeft = Utility.getShort (buffer, offset + 134);
+    hpMax = Utility.getShort (buffer, offset + 136);
+
   }
 
   // ---------------------------------------------------------------------------------//
@@ -76,5 +102,11 @@ public class Character
   // ---------------------------------------------------------------------------------//
   {
     return name;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  record Possession (int itemNo, boolean equipped, boolean cursed, boolean identified)
+  // ---------------------------------------------------------------------------------//
+  {
   }
 }

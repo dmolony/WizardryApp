@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -45,7 +46,8 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  <T> void setComboBox (String labelText, ComboBox<T> comboBox, List<T> list)
+  <T> void setComboBox (String labelText, ComboBox<T> comboBox, List<T> list,
+      ChangeListener<T> listener)
   // ---------------------------------------------------------------------------------//
   {
     Label label = new Label (labelText);
@@ -59,6 +61,7 @@ public class BasePane extends Pane
 
     comboBox.setItems (FXCollections.observableArrayList (list));
     comboBox.setVisibleRowCount (20);
+    comboBox.getSelectionModel ().selectedItemProperty ().addListener (listener);
   }
 
   // ---------------------------------------------------------------------------------//

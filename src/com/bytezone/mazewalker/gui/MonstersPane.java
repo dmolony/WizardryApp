@@ -66,10 +66,11 @@ public class MonstersPane extends BasePane
 
     scenarioId = wizardry.getScenarioId ();
 
-    setColumnConstraints (110, 230, 110, 65);
+    setColumnConstraints (110, 160, 30, 110, 65);
 
     ComboBox<Monster> monstersList = new ComboBox<> ();
-    setComboBox ("Monster", monstersList, wizardry.getMonsters ());
+    setComboBox ("Monster", monstersList, wizardry.getMonsters (),
+        (options, oldValue, newValue) -> update (newValue));
 
     GridPane.setConstraints (canvas, 1, 9);
     GridPane.setColumnSpan (canvas, 2);
@@ -84,39 +85,36 @@ public class MonstersPane extends BasePane
         "Chest rewards", "# Encs", "Image" };
 
     textOut1 = createOutputFields (label1Text, 0, 1, Pos.CENTER_LEFT, 1);
-    textOut2 = createOutputFields (label2Text, 2, 0, Pos.CENTER_RIGHT, 1);
-
-    monstersList.getSelectionModel ().selectedItemProperty ()
-        .addListener ( (options, oldValue, newValue) -> update (newValue));
+    textOut2 = createOutputFields (label2Text, 3, 0, Pos.CENTER_RIGHT, 1);
   }
 
   // ---------------------------------------------------------------------------------//
   private void update (Monster monster)
   // ---------------------------------------------------------------------------------//
   {
-    textOut1[GENERIC_NAME].setText (monster.genericName);
-    textOut1[MONSTER_CLASS].setText (WizardryOrigin.monsterClass[monster.monsterClass]);
-    textOut1[PARTNER].setText (wizardry.getMonsters ().get (monster.enemyTeam).name);
-    textOut1[GROUP_DICE].setText (monster.groupSize.toString ());
-    textOut1[HP_DICE].setText (monster.hitPoints.toString ());
-    textOut1[RECSN].setText (monster.damageDice);
-    textOut1[RESISTANCE].setText (monster.resistanceText);
-    textOut1[ABILITY].setText (monster.propertyText);
+    setText (textOut1[GENERIC_NAME], monster.genericName);
+    setText (textOut1[MONSTER_CLASS], WizardryOrigin.monsterClass[monster.monsterClass]);
+    setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.enemyTeam).name);
+    setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
+    setText (textOut1[HP_DICE], monster.hitPoints.toString ());
+    setText (textOut1[RECSN], monster.damageDice);
+    setText (textOut1[RESISTANCE], monster.resistanceText);
+    setText (textOut1[ABILITY], monster.propertyText);
 
-    textOut2[ID].setText (getText (monster.id));
-    textOut2[MAGE_LEVEL].setText (monster.mageSpells + "");
-    textOut2[PRIEST_LEVEL].setText (monster.priestSpells + "");
-    textOut2[PARTNER_PCT].setText (monster.teamPercentage + "%");
-    textOut2[MAGIC_RESIST].setText (monster.unaffect + "%");
-    textOut2[BREATHE].setText (monster.breathe + "");
-    textOut2[DRAIN].setText (monster.drainAmt + "");
-    textOut2[REGEN].setText (monster.healPts + "");
-    textOut2[TOTAL].setText (getText (scenarioId == 1 ? experience[monster.id] : monster.expamt));
-    textOut2[ARMOUR_CLASS].setText (getText (monster.armourClass));
-    textOut2[GOLD_REWARDS].setText (getText (monster.reward1));
-    textOut2[CHEST_REWARDS].setText (getText (monster.reward2));
-    textOut2[UNIQUE].setText (getText (monster.unique));
-    textOut2[IMAGE].setText (getText (monster.image));
+    setText (textOut2[ID], monster.id);
+    setText (textOut2[MAGE_LEVEL], monster.mageSpells + "");
+    setText (textOut2[PRIEST_LEVEL], monster.priestSpells + "");
+    setText (textOut2[PARTNER_PCT], monster.teamPercentage + "%");
+    setText (textOut2[MAGIC_RESIST], monster.unaffect + "%");
+    setText (textOut2[BREATHE], monster.breathe);
+    setText (textOut2[DRAIN], monster.drainAmt);
+    setText (textOut2[REGEN], monster.healPts);
+    setText (textOut2[TOTAL], scenarioId == 1 ? experience[monster.id] : monster.expamt);
+    setText (textOut2[ARMOUR_CLASS], monster.armourClass);
+    setText (textOut2[GOLD_REWARDS], monster.reward1);
+    setText (textOut2[CHEST_REWARDS], monster.reward2);
+    setText (textOut2[UNIQUE], monster.unique);
+    setText (textOut2[IMAGE], monster.image);
 
     wizardry.getImage (monster.image).draw (canvas.getGraphicsContext2D ());
   }
