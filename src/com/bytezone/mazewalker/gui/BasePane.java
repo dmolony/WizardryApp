@@ -62,7 +62,21 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] setOutputFields (String[] labelText, int col, int row, Pos alignment, int columns)
+  Label setLabel (String labelText, int col, int row, HPos alignment, int span)
+  // ---------------------------------------------------------------------------------//
+  {
+    Label label = new Label (labelText);
+
+    GridPane.setConstraints (label, col, row);
+    GridPane.setHalignment (label, alignment);
+    GridPane.setColumnSpan (label, span);
+    gridPane.getChildren ().add (label);
+
+    return label;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextField[] createOutputFields (String[] labelText, int col, int row, Pos alignment, int columns)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[labelText.length];
@@ -90,7 +104,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] setOutputFields (int totalFields, int col, int row, Pos alignment, int columns)
+  TextField[] createOutputFields (int totalFields, int col, int row, Pos alignment, int columns)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[totalFields];
@@ -112,6 +126,48 @@ public class BasePane extends Pane
     }
 
     return textOut;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setText (TextField textField, Object object)
+  // ---------------------------------------------------------------------------------//
+  {
+    textField.setText (object.toString ());
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setText (TextField textField, boolean value)
+  // ---------------------------------------------------------------------------------//
+  {
+    textField.setText (value ? "True" : "False");
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setTextYN (TextField textField, boolean value)
+  // ---------------------------------------------------------------------------------//
+  {
+    textField.setText (value ? "Yes" : "");
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setText (TextField textField, String text)
+  // ---------------------------------------------------------------------------------//
+  {
+    textField.setText (text);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setText (TextField textField, int value)
+  // ---------------------------------------------------------------------------------//
+  {
+    textField.setText (getText (value));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setText (TextField textField, long value)
+  // ---------------------------------------------------------------------------------//
+  {
+    textField.setText (getText (value));
   }
 
   // ---------------------------------------------------------------------------------//

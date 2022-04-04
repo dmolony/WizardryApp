@@ -52,19 +52,11 @@ public class MonstersPane extends BasePane
       1900                                                                // 100 
   };
 
-  String[] label1Text = { "Generic name", "Monster class", "Partner", "Appear dice", "Hits dice",
-      "Damage dice", "Resistance", "Properties" };
-  String[] label2Text = { "ID", "Mage level", "Priest level", "Partner odds", "Magic resistance",
-      "Breathe", "Level drain", "Regen", "Experience", "Armour class", "Gold rewards",
-      "Chest rewards", "# Encs", "Image" };
-
-  //  Label[] labels = new Label[label1Text.length];
-  TextField[] textOut1 = new TextField[label1Text.length];
+  TextField[] textOut1;
   TextField[] textOut2;
-  ComboBox<Monster> monstersList = new ComboBox<> ();
-  private final int scenarioId;
 
-  public Canvas canvas = new Canvas (210, 150);      // wh
+  private final int scenarioId;
+  private final Canvas canvas = new Canvas (210, 150);      // wh
 
   // ---------------------------------------------------------------------------------//
   public MonstersPane (WizardryOrigin wizardry)
@@ -76,6 +68,7 @@ public class MonstersPane extends BasePane
 
     setColumnConstraints (110, 230, 110, 65);
 
+    ComboBox<Monster> monstersList = new ComboBox<> ();
     setComboBox ("Monster", monstersList, wizardry.getMonsters ());
 
     GridPane.setConstraints (canvas, 1, 9);
@@ -84,42 +77,47 @@ public class MonstersPane extends BasePane
 
     gridPane.getChildren ().add (canvas);
 
+    String[] label1Text = { "Generic name", "Monster class", "Partner", "Appear dice", "Hits dice",
+        "Damage dice", "Resistance", "Properties" };
+    String[] label2Text = { "ID", "Mage level", "Priest level", "Partner odds", "Magic resistance",
+        "Breathe", "Level drain", "Regen", "Experience", "Armour class", "Gold rewards",
+        "Chest rewards", "# Encs", "Image" };
+
+    textOut1 = createOutputFields (label1Text, 0, 1, Pos.CENTER_LEFT, 1);
+    textOut2 = createOutputFields (label2Text, 2, 0, Pos.CENTER_RIGHT, 1);
+
     monstersList.getSelectionModel ().selectedItemProperty ()
-        .addListener ( (options, oldValue, newValue) ->
-        {
-          Monster monster = newValue;
-          if (monster != null)
-          {
-            textOut1[GENERIC_NAME].setText (monster.genericName);
-            textOut1[MONSTER_CLASS].setText (WizardryOrigin.monsterClass[monster.monsterClass]);
-            textOut1[PARTNER].setText (wizardry.getMonsters ().get (monster.enemyTeam).name);
-            textOut1[GROUP_DICE].setText (monster.groupSize.toString ());
-            textOut1[HP_DICE].setText (monster.hitPoints.toString ());
-            textOut1[RECSN].setText (monster.damageDice);
-            textOut1[RESISTANCE].setText (monster.resistanceText);
-            textOut1[ABILITY].setText (monster.propertyText);
+        .addListener ( (options, oldValue, newValue) -> update (newValue));
+  }
 
-            textOut2[ID].setText (getText (monster.id));
-            textOut2[MAGE_LEVEL].setText (monster.mageSpells + "");
-            textOut2[PRIEST_LEVEL].setText (monster.priestSpells + "");
-            textOut2[PARTNER_PCT].setText (monster.teamPercentage + "%");
-            textOut2[MAGIC_RESIST].setText (monster.unaffect + "%");
-            textOut2[BREATHE].setText (monster.breathe + "");
-            textOut2[DRAIN].setText (monster.drainAmt + "");
-            textOut2[REGEN].setText (monster.healPts + "");
-            textOut2[TOTAL]
-                .setText (getText (scenarioId == 1 ? experience[monster.id] : monster.expamt));
-            textOut2[ARMOUR_CLASS].setText (getText (monster.armourClass));
-            textOut2[GOLD_REWARDS].setText (getText (monster.reward1));
-            textOut2[CHEST_REWARDS].setText (getText (monster.reward2));
-            textOut2[UNIQUE].setText (getText (monster.unique));
-            textOut2[IMAGE].setText (getText (monster.image));
+  // ---------------------------------------------------------------------------------//
+  private void update (Monster monster)
+  // ---------------------------------------------------------------------------------//
+  {
+    textOut1[GENERIC_NAME].setText (monster.genericName);
+    textOut1[MONSTER_CLASS].setText (WizardryOrigin.monsterClass[monster.monsterClass]);
+    textOut1[PARTNER].setText (wizardry.getMonsters ().get (monster.enemyTeam).name);
+    textOut1[GROUP_DICE].setText (monster.groupSize.toString ());
+    textOut1[HP_DICE].setText (monster.hitPoints.toString ());
+    textOut1[RECSN].setText (monster.damageDice);
+    textOut1[RESISTANCE].setText (monster.resistanceText);
+    textOut1[ABILITY].setText (monster.propertyText);
 
-            wizardry.getImage (monster.image).draw (canvas.getGraphicsContext2D ());
-          }
-        });
+    textOut2[ID].setText (getText (monster.id));
+    textOut2[MAGE_LEVEL].setText (monster.mageSpells + "");
+    textOut2[PRIEST_LEVEL].setText (monster.priestSpells + "");
+    textOut2[PARTNER_PCT].setText (monster.teamPercentage + "%");
+    textOut2[MAGIC_RESIST].setText (monster.unaffect + "%");
+    textOut2[BREATHE].setText (monster.breathe + "");
+    textOut2[DRAIN].setText (monster.drainAmt + "");
+    textOut2[REGEN].setText (monster.healPts + "");
+    textOut2[TOTAL].setText (getText (scenarioId == 1 ? experience[monster.id] : monster.expamt));
+    textOut2[ARMOUR_CLASS].setText (getText (monster.armourClass));
+    textOut2[GOLD_REWARDS].setText (getText (monster.reward1));
+    textOut2[CHEST_REWARDS].setText (getText (monster.reward2));
+    textOut2[UNIQUE].setText (getText (monster.unique));
+    textOut2[IMAGE].setText (getText (monster.image));
 
-    textOut1 = setOutputFields (label1Text, 0, 0, Pos.CENTER_LEFT, 1);
-    textOut2 = setOutputFields (label2Text, 2, 0, Pos.CENTER_RIGHT, 1);
+    wizardry.getImage (monster.image).draw (canvas.getGraphicsContext2D ());
   }
 }

@@ -75,7 +75,7 @@ public class ExperienceCalculator extends BasePane
             if (wizardry.getScenarioId () > 1)
               textOut[TOTAL].setText (getText (monster.expamt));
             else
-              getExperience ();
+              setExperienceTotal ();
           }
         });
 
@@ -111,17 +111,15 @@ public class ExperienceCalculator extends BasePane
     if (evt.isShortcutDown () || evt.isControlDown () || evt.isMetaDown ())
       return;
 
-    getExperience ();
+    setExperienceTotal ();
   }
 
   // ---------------------------------------------------------------------------------//
-  private void getExperience ()
+  private void setExperienceTotal ()
   // ---------------------------------------------------------------------------------//
   {
     if (wizardry.getScenarioId () > 1)
-    {
       return;
-    }
 
     int[] values = new int[labels.length];
     for (int i = 0; i < labels.length; i++)
@@ -166,7 +164,7 @@ public class ExperienceCalculator extends BasePane
         values[MAGIC_RESISTANCE] == 0 ? 0 : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
 
     int expFlags1 = getBonus (35, Integer.bitCount (values[RESISTANCE] & 0x7E));    // 6 bits
-    int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));    // 7 bits
+    int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));       // 7 bits
 
     int total = expHitPoints + expAc + expMage + expPriest + expDrain + expHeal + expDamage
         + expUnaffect + expFlags1 + expFlags2;
