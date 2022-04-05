@@ -5,6 +5,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -18,8 +19,8 @@ public class ItemsPane extends BasePane
   private static final int ALIGNMENT = 2;
   private static final int CURSED = 3;
   private static final int CRIT_HIT = 4;
-  private static final int CHANGE_TO = 5;
-  private static final int CHANCE = 6;
+  private static final int CHANCE = 5;
+  private static final int CHANGE_TO = 6;
   private static final int DAMAGE_DICE = 7;
   private static final int SPELL_POWER = 8;
   private static final int PRICE = 9;
@@ -32,20 +33,20 @@ public class ItemsPane extends BasePane
   private static final int BOLTAC = 5;
   private static final int REGEN = 6;
 
-  String[] label1Text = { "Generic name", "Kind", "Alignment", "Cursed", "Auto kill", "Decay to",
-      "Decay odds", "Damage dice", "Spell", "Value" };
+  String[] label1Text = { "Generic name", "Kind", "Alignment", "Cursed", "Auto kill", "Decay odds",
+      "Decay to", "Damage dice", "Spell", "Value" };
   String[] label2Text =
       { "Id", "Special #", "AC", "To hit +", "# swings", "In store", "Regeneration" };
 
   ComboBox<Item> itemsList = new ComboBox<> ();
 
-  TextField[] textOut0 = new TextField[label1Text.length];
-  TextField[] textOut6 = new TextField[label2Text.length];
-
   TextField[] textOut1;
   TextField[] textOut2;
-  TextField[] textOut3;
-  TextField[] textOut4;
+
+  CheckBox[] checkBoxes1;
+  CheckBox[] checkBoxes2;
+  CheckBox[] checkBoxes3;
+  CheckBox[] checkBoxes4;
 
   // ---------------------------------------------------------------------------------//
   public ItemsPane (WizardryOrigin wizardry)
@@ -60,68 +61,68 @@ public class ItemsPane extends BasePane
     GridPane.setColumnSpan (itemsList, 2);
 
     setLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
-    setLabel ("Protection vs", 5, 0, HPos.RIGHT, 2);
     setLabel ("Resistance", 3, 10, HPos.RIGHT, 2);
+    setLabel ("Protection vs", 5, 0, HPos.RIGHT, 2);
     setLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
 
+    // basic attributes
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 2);
-    textOut0 = createOutputFields (label1Text, lp1, dp1);
+    textOut1 = createOutputFields (label1Text, lp1, dp1);
 
+    // numeric attributes
     LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
     DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_RIGHT, 1);
-    textOut6 = createOutputFields (label2Text, lp2, dp2);
+    textOut2 = createOutputFields (label2Text, lp2, dp2);
 
-    LabelPlacement lp3 = new LabelPlacement (5, 1, HPos.RIGHT, 1);
-    DataPlacement dp3 = new DataPlacement (6, 1, Pos.CENTER_LEFT, 1);
-    textOut1 = createOutputFields (WizardryOrigin.monsterClass, lp3, dp3);
+    // used by
+    checkBoxes2 = createCheckBoxes (WizardryOrigin.characterClass, 3, 1);
 
-    DataPlacement dp7 = new DataPlacement (7, 1, Pos.CENTER_LEFT, 1);
-    textOut2 = createOutputFields (textOut1.length, dp7);
+    // resistance
+    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 3, 11);
 
-    LabelPlacement lp5 = new LabelPlacement (3, 11, HPos.RIGHT, 1);
-    DataPlacement dp5 = new DataPlacement (4, 11, Pos.CENTER_LEFT, 1);
-    textOut3 = createOutputFields (WizardryOrigin.resistance, lp5, dp5);
+    // protection vs
+    checkBoxes3 = createCheckBoxes (WizardryOrigin.monsterClass, 5, 1);
 
-    LabelPlacement lp6 = new LabelPlacement (3, 1, HPos.RIGHT, 1);
-    DataPlacement dp6 = new DataPlacement (4, 1, Pos.CENTER_LEFT, 1);
-    textOut4 = createOutputFields (WizardryOrigin.characterClass, lp6, dp6);
+    // purposed vs
+    checkBoxes4 = createCheckBoxes (checkBoxes3.length, 7, 1);
   }
 
   // ---------------------------------------------------------------------------------//
   private void update (Item item)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut0[GENERIC_NAME], item.nameUnknown);
-    setText (textOut0[ITEM_CLASS], item.type);
-    setText (textOut0[ALIGNMENT], item.alignment);
-    setText (textOut0[CURSED], item.cursed);
-    setText (textOut0[CRIT_HIT], item.crithitm);                    // Auto kill
-    setText (textOut0[CHANGE_TO], wizardry.getItem (item.changeTo).name);
-    setText (textOut0[CHANCE], item.changeChance + "%");
-    setText (textOut0[DAMAGE_DICE], item.wephpdam);
+    setText (textOut1[GENERIC_NAME], item.nameUnknown);
+    setText (textOut1[ITEM_CLASS], item.type);
+    setText (textOut1[ALIGNMENT], item.alignment);
+    setText (textOut1[CURSED], item.cursed);
+    setText (textOut1[CRIT_HIT], item.crithitm);                    // Auto kill
+    setText (textOut1[CHANGE_TO],
+        item.changeChance > 0 ? wizardry.getItem (item.changeTo).name : "");
+    setText (textOut1[CHANCE], item.changeChance > 0 ? item.changeChance + "%" : "");
+    setText (textOut1[DAMAGE_DICE], item.wephpdam);
 
     if (item.spellPwr > 0)
-      setText (textOut0[SPELL_POWER], WizardryOrigin.spells[item.spellPwr - 1]);
+      setText (textOut1[SPELL_POWER], WizardryOrigin.spells[item.spellPwr - 1]);
     else
-      setText (textOut0[SPELL_POWER], "");
+      setText (textOut1[SPELL_POWER], "");
 
-    setText (textOut0[PRICE], item.price);
+    setText (textOut1[PRICE], item.price);
 
-    setText (textOut6[ID], item.id);
-    setText (textOut6[SPECIAL], item.special);
-    setText (textOut6[AC], item.armourClass);
-    setText (textOut6[WEP_HIT_MOD], item.wephitmd);
-    setText (textOut6[XTRA_SWING], item.xtraSwing);
-    setText (textOut6[BOLTAC], item.boltac);
-    setText (textOut6[REGEN], item.healPts);
+    setText (textOut2[ID], item.id);
+    setText (textOut2[SPECIAL], item.special);
+    setText (textOut2[AC], item.armourClass);
+    setText (textOut2[WEP_HIT_MOD], item.wephitmd);
+    setText (textOut2[XTRA_SWING], item.xtraSwing);
+    setText (textOut2[BOLTAC], item.boltac);
+    setText (textOut2[REGEN], item.healPts);
 
     int protection = item.wepvsty2Flags;
     int purposed = item.wepvstyFlags;
     for (int i = 0; i < WizardryOrigin.monsterClass.length; i++)
     {
-      setTextYN (textOut1[i], (protection & 0x01) != 0);
-      setTextYN (textOut2[i], (purposed & 0x01) != 0);
+      checkBoxes3[i].setSelected ((protection & 0x01) != 0);
+      checkBoxes4[i].setSelected ((purposed & 0x01) != 0);
 
       protection >>>= 1;
       purposed >>>= 1;
@@ -130,14 +131,14 @@ public class ItemsPane extends BasePane
     int resistance = item.wepvsty3Flags;
     for (int i = 0; i < WizardryOrigin.resistance.length; i++)
     {
-      setTextYN (textOut3[i], (resistance & 0x01) != 0);
+      checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
       resistance >>>= 1;
     }
 
     int characterClass = item.classUseFlags;
     for (int i = 0; i < WizardryOrigin.characterClass.length; i++)
     {
-      setTextYN (textOut4[i], (characterClass & 0x01) != 0);
+      checkBoxes2[i].setSelected ((characterClass & 0x01) != 0);
       characterClass >>>= 1;
     }
   }

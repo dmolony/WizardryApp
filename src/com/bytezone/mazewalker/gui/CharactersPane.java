@@ -95,6 +95,7 @@ public class CharactersPane extends BasePane
     textOut2 = createOutputFields (labelText2, lp3, dp3);
 
     // possessions headings
+    setLabel ("Item", 1, 17, HPos.CENTER, 1);
     setLabel ("Eq", 3, 17, HPos.LEFT, 1);
     setLabel ("Cu", 4, 17, HPos.LEFT, 1);
     setLabel ("Id", 5, 17, HPos.LEFT, 1);
@@ -103,7 +104,7 @@ public class CharactersPane extends BasePane
     // possessions
     String[] possessionsText = new String[8];
     for (int i = 0; i < possessionsText.length; i++)
-      possessionsText[i] = "Item # " + (i + 1);
+      possessionsText[i] = "# " + (i + 1);
 
     LabelPlacement lp4 = new LabelPlacement (0, 18, HPos.RIGHT, 1);
     DataPlacement dp4 = new DataPlacement (1, 18, Pos.CENTER_LEFT, 2);
