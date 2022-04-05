@@ -50,6 +50,8 @@ public class MazeWalker extends AppBase implements MovementListener
   private final MenuItem charactersItem = new MenuItem ("Characters ...");
   private final MenuItem monstersItem = new MenuItem ("Monsters ...");
   private final MenuItem itemsItem = new MenuItem ("Items ...");
+  private final MenuItem rewardsItem = new MenuItem ("Rewards ...");
+  private final MenuItem encountersItem = new MenuItem ("Encounters ...");
 
   private MazePane mazePane;
   private ViewPane viewPane;
@@ -71,6 +73,8 @@ public class MazeWalker extends AppBase implements MovementListener
   private Stage charactersStage;
   private Stage monstersStage;
   private Stage itemsStage;
+  private Stage rewardsStage;
+  private Stage encountersStage;
 
   // ---------------------------------------------------------------------------------//
   @Override
@@ -85,17 +89,29 @@ public class MazeWalker extends AppBase implements MovementListener
     openFileItem.setOnAction (e -> getWizardryDisk ());
     openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
 
-    menuTools.getItems ().addAll (experienceItem, charactersItem, monstersItem, itemsItem);
+    menuTools.getItems ().addAll (experienceItem, charactersItem, monstersItem, itemsItem,
+        rewardsItem, encountersItem);
+
     experienceItem.setOnAction (e -> calculatorStage.show ());
     experienceItem
-        .setAccelerator (new KeyCodeCombination (KeyCode.E, KeyCombination.SHORTCUT_DOWN));
+        .setAccelerator (new KeyCodeCombination (KeyCode.X, KeyCombination.SHORTCUT_DOWN));
+
     charactersItem.setOnAction (e -> charactersStage.show ());
     charactersItem
         .setAccelerator (new KeyCodeCombination (KeyCode.C, KeyCombination.SHORTCUT_DOWN));
+
     monstersItem.setOnAction (e -> monstersStage.show ());
     monstersItem.setAccelerator (new KeyCodeCombination (KeyCode.M, KeyCombination.SHORTCUT_DOWN));
+
     itemsItem.setOnAction (e -> itemsStage.show ());
     itemsItem.setAccelerator (new KeyCodeCombination (KeyCode.I, KeyCombination.SHORTCUT_DOWN));
+
+    rewardsItem.setOnAction (e -> rewardsStage.show ());
+    rewardsItem.setAccelerator (new KeyCodeCombination (KeyCode.R, KeyCombination.SHORTCUT_DOWN));
+
+    encountersItem.setOnAction (e -> encountersStage.show ());
+    encountersItem
+        .setAccelerator (new KeyCodeCombination (KeyCode.E, KeyCombination.SHORTCUT_DOWN));
 
     text.setFont (new Font ("Courier new", 14));
     sp.setStyle ("-fx-background-color:transparent;");
@@ -189,6 +205,8 @@ public class MazeWalker extends AppBase implements MovementListener
     buildCharacters ();
     buildMonsters ();
     buildItems ();
+    buildRewards ();
+    buildEncounters ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -204,7 +222,6 @@ public class MazeWalker extends AppBase implements MovementListener
 
       Scene scene = new Scene (experienceCalculator, 370, 450);       // wh
       calculatorStage.setScene (scene);
-      //      calculatorStage.sizeToScene ();
       scene.setOnKeyPressed (e -> experienceCalculator.keyPressed (e));
     }
   }
@@ -219,7 +236,6 @@ public class MazeWalker extends AppBase implements MovementListener
 
     Scene scene = new Scene (charactersPane, 910, 810);       // wh
     charactersStage.setScene (scene);
-    //    charactersStage.sizeToScene ();
     scene.setOnKeyPressed (e -> charactersPane.keyPressed (e));
   }
 
@@ -233,8 +249,33 @@ public class MazeWalker extends AppBase implements MovementListener
 
     Scene scene = new Scene (monstersPane, 820, 500);         // wh
     monstersStage.setScene (scene);
-    //    monstersStage.sizeToScene ();
     scene.setOnKeyPressed (e -> monstersPane.keyPressed (e));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void buildRewards ()
+  // ---------------------------------------------------------------------------------//
+  {
+    rewardsStage = new Stage ();
+    rewardsStage.setTitle ("Wizardry Rewards");
+    RewardsPane rewardsPane = new RewardsPane (wizardry, rewardsStage);
+
+    Scene scene = new Scene (rewardsPane, 770, 575);            // wh
+    rewardsStage.setScene (scene);
+    scene.setOnKeyPressed (e -> rewardsPane.keyPressed (e));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void buildEncounters ()
+  // ---------------------------------------------------------------------------------//
+  {
+    encountersStage = new Stage ();
+    encountersStage.setTitle ("Wizardry Encounters");
+    EncountersPane encountersPane = new EncountersPane (wizardry, encountersStage);
+
+    Scene scene = new Scene (encountersPane, 770, 575);            // wh
+    encountersStage.setScene (scene);
+    scene.setOnKeyPressed (e -> encountersPane.keyPressed (e));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -247,7 +288,6 @@ public class MazeWalker extends AppBase implements MovementListener
 
     Scene scene = new Scene (itemsPane, 770, 575);            // wh
     itemsStage.setScene (scene);
-    //    itemsStage.sizeToScene ();
     scene.setOnKeyPressed (e -> itemsPane.keyPressed (e));
   }
 

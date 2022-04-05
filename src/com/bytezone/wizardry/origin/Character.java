@@ -37,7 +37,7 @@ public class Character
   public final int hpLeft;
   public final int hpMax;
 
-  public final boolean mysteryBit;                              // first bit in spellsKnown
+  public final boolean mysteryBit;                          // first bit in spellsKnown
   public final boolean[] spellsKnown = new boolean[50];
   public final int[] mageSpells = new int[7];
   public final int[] priestSpells = new int[7];
@@ -65,7 +65,7 @@ public class Character
     int offset = dataBlock.offset;
 
     int nameLength = buffer[offset] & 0xFF;
-    if (nameLength == 0xC3)
+    if (nameLength < 1 || nameLength > 15)
       throw new InvalidCharacterException ();
 
     name = Utility.getPascalString (buffer, offset);
@@ -107,7 +107,7 @@ public class Character
     hpMax = Utility.getShort (buffer, offset + 136);
 
     mysteryBit = (buffer[offset + 138] & 0x01) == 1;
-    int index = -1;
+    int index = -1;                         // skip mystery bit
     for (int i = 138; i < 145; i++)
       for (int bit = 0; bit < 8; bit++)
       {
