@@ -37,8 +37,6 @@ public class Monster
   public final int flags2;                                 // 156
 
   public final String damageDice;
-  //  public final String propertyText;
-  //  public final String resistanceText;
 
   // ---------------------------------------------------------------------------------//
   public Monster (int id, DataBlock dataBlock)

@@ -31,13 +31,10 @@ public class Image
     int y = 0;
 
     gc.setFill (Color.BLACK);
-    gc.fillRect (0, 0, 210, 150);
+    gc.fillRect (0, 0, 280, 200);
 
     for (int j = 0; j < 500; j++)
     {
-      //      if (j % 10 == 0)
-      //        System.out.println ();
-
       int bits = buffer[offset + j] & 0xFF;
       for (int m = 0; m < 7; m++)
       {
@@ -46,23 +43,30 @@ public class Image
           pixelWriter.setColor (x, y, Color.WHITE);
           pixelWriter.setColor (x + 1, y, Color.WHITE);
           pixelWriter.setColor (x + 2, y, Color.WHITE);
+          pixelWriter.setColor (x + 3, y, Color.WHITE);
+
           pixelWriter.setColor (x, y + 1, Color.WHITE);
           pixelWriter.setColor (x + 1, y + 1, Color.WHITE);
           pixelWriter.setColor (x + 2, y + 1, Color.WHITE);
+          pixelWriter.setColor (x + 3, y + 1, Color.WHITE);
+
           pixelWriter.setColor (x, y + 2, Color.WHITE);
           pixelWriter.setColor (x + 1, y + 2, Color.WHITE);
           pixelWriter.setColor (x + 2, y + 2, Color.WHITE);
+          pixelWriter.setColor (x + 3, y + 2, Color.WHITE);
+
+          pixelWriter.setColor (x, y + 3, Color.WHITE);
+          pixelWriter.setColor (x + 1, y + 3, Color.WHITE);
+          pixelWriter.setColor (x + 2, y + 3, Color.WHITE);
+          pixelWriter.setColor (x + 3, y + 3, Color.WHITE);
         }
-        //          System.out.print ("XX");
-        //        else
-        //          System.out.print ("..");
 
         bits >>= 1;
-        x += 3;
-        if (x >= 210)
+        x += 4;
+        if (x >= 280)
         {
           x = 0;
-          y += 3;
+          y += 4;
         }
       }
     }
