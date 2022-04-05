@@ -13,6 +13,7 @@ public class Character
 // -----------------------------------------------------------------------------------//
 {
   private static int MAX_POSSESSIONS = 8;
+  private static char[] awardsText = ">!$#&*<?BCPKODG@".toCharArray ();
 
   public final String name;
   public final String password;
@@ -48,6 +49,8 @@ public class Character
   public final boolean crithitm;
   public final int swingCount;
   public final Dice hpdamrc;
+
+  public final String awards;
 
   boolean[][] wepvsty2 = new boolean[2][14];
   boolean[][] wepvsty3 = new boolean[2][7];
@@ -126,6 +129,25 @@ public class Character
     swingCount = Utility.getShort (buffer, offset + 182);
     hpdamrc = new Dice (buffer, offset + 184);
 
+    awards = getAwardString (buffer, offset);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private String getAwardString (byte[] buffer, int offset)
+  // ---------------------------------------------------------------------------------//
+  {
+    StringBuilder text = new StringBuilder ();
+
+    int awards = Utility.getShort (buffer, offset + 206);
+
+    for (int i = 0; i < 16; i++)
+    {
+      if ((awards & 0x01) != 0)
+        text.append (awardsText[i]);
+      awards >>>= 1;
+    }
+
+    return text.toString ();
   }
 
   // ---------------------------------------------------------------------------------//

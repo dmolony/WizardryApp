@@ -17,8 +17,8 @@ import javafx.scene.layout.RowConstraints;
 public class CharactersPane extends BasePane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int NAME = 0;
-  private static final int PASSWORD = 1;
+  private static final int PASSWORD = 0;
+  private static final int AWARDS = 1;
   private static final int IN_MAZE = 2;
   private static final int RACE = 3;
   private static final int CLASS = 4;
@@ -75,8 +75,9 @@ public class CharactersPane extends BasePane
 
     GridPane.setColumnSpan (charactersList, 2);
 
-    String[] labelText1 = { "Name", "Password", "In maze", "Race", "Class", "Age (weeks)", "Status",
-        "Alignment", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
+    String[] labelText1 =
+        { "Password", "Awards", "In maze", "Race", "Class", "Age (weeks)", "Status", "Alignment",
+            "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
 
     String[] labelText2 =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
@@ -148,7 +149,7 @@ public class CharactersPane extends BasePane
   private void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut[NAME], character.name);
+    setText (textOut[AWARDS], character.awards);
     setText (textOut[PASSWORD], character.password);
     setText (textOut[IN_MAZE], character.inMaze);
     setText (textOut[RACE], character.race);
