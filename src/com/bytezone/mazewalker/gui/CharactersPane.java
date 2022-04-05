@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class CharactersPane extends BasePane
@@ -58,10 +59,10 @@ public class CharactersPane extends BasePane
   ComboBox<Character> charactersList = new ComboBox<> ();
 
   // ---------------------------------------------------------------------------------//
-  public CharactersPane (WizardryOrigin wizardry)
+  public CharactersPane (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
-    super (wizardry);
+    super (wizardry, stage);
 
     setColumnConstraints (110, 69, 70, 20, 20, 20, 40, 40, 90, 20, 80, 20, 80, 20);
     RowConstraints rowCo = new RowConstraints (25);

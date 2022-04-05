@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class ItemsPane extends BasePane
@@ -48,10 +49,10 @@ public class ItemsPane extends BasePane
   CheckBox[] checkBoxes4;
 
   // ---------------------------------------------------------------------------------//
-  public ItemsPane (WizardryOrigin wizardry)
+  public ItemsPane (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
-    super (wizardry);
+    super (wizardry, stage);
 
     setColumnConstraints (110, 64, 90, 110, 20, 110, 30, 100);
 

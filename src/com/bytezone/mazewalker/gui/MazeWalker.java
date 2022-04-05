@@ -199,11 +199,13 @@ public class MazeWalker extends AppBase implements MovementListener
     {
       calculatorStage = new Stage ();
       calculatorStage.setTitle ("Experience Points Calculator");
-      ExperienceCalculator experienceCalculator = new ExperienceCalculator (wizardry);
+      ExperienceCalculator experienceCalculator =
+          new ExperienceCalculator (wizardry, calculatorStage);
 
       Scene scene = new Scene (experienceCalculator, 370, 450);       // wh
       calculatorStage.setScene (scene);
-      calculatorStage.sizeToScene ();
+      //      calculatorStage.sizeToScene ();
+      scene.setOnKeyPressed (e -> experienceCalculator.keyPressed (e));
     }
   }
 
@@ -213,11 +215,12 @@ public class MazeWalker extends AppBase implements MovementListener
   {
     charactersStage = new Stage ();
     charactersStage.setTitle ("Wizardry Characters");
-    CharactersPane charactersPane = new CharactersPane (wizardry);
+    CharactersPane charactersPane = new CharactersPane (wizardry, charactersStage);
 
     Scene scene = new Scene (charactersPane, 910, 810);       // wh
     charactersStage.setScene (scene);
-    charactersStage.sizeToScene ();
+    //    charactersStage.sizeToScene ();
+    scene.setOnKeyPressed (e -> charactersPane.keyPressed (e));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -226,11 +229,12 @@ public class MazeWalker extends AppBase implements MovementListener
   {
     monstersStage = new Stage ();
     monstersStage.setTitle ("Wizardry Monsters");
-    MonstersPane monstersPane = new MonstersPane (wizardry);
+    MonstersPane monstersPane = new MonstersPane (wizardry, monstersStage);
 
     Scene scene = new Scene (monstersPane, 820, 500);         // wh
     monstersStage.setScene (scene);
-    monstersStage.sizeToScene ();
+    //    monstersStage.sizeToScene ();
+    scene.setOnKeyPressed (e -> monstersPane.keyPressed (e));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -239,11 +243,12 @@ public class MazeWalker extends AppBase implements MovementListener
   {
     itemsStage = new Stage ();
     itemsStage.setTitle ("Wizardry Items");
-    ItemsPane itemsPane = new ItemsPane (wizardry);
+    ItemsPane itemsPane = new ItemsPane (wizardry, itemsStage);
 
     Scene scene = new Scene (itemsPane, 770, 575);            // wh
     itemsStage.setScene (scene);
-    itemsStage.sizeToScene ();
+    //    itemsStage.sizeToScene ();
+    scene.setOnKeyPressed (e -> itemsPane.keyPressed (e));
   }
 
   // ---------------------------------------------------------------------------------//

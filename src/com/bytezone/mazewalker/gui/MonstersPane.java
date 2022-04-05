@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class MonstersPane extends BasePane
@@ -61,10 +62,10 @@ public class MonstersPane extends BasePane
   private final Canvas canvas = new Canvas (280, 200);      // wh
 
   // ---------------------------------------------------------------------------------//
-  public MonstersPane (WizardryOrigin wizardry)
+  public MonstersPane (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
-    super (wizardry);
+    super (wizardry, stage);
 
     scenarioId = wizardry.getScenarioId ();
 

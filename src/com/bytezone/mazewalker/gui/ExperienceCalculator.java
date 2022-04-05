@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class ExperienceCalculator extends BasePane
@@ -39,10 +40,10 @@ public class ExperienceCalculator extends BasePane
   ComboBox<Monster> monsters = new ComboBox<> ();
 
   // ---------------------------------------------------------------------------------//
-  public ExperienceCalculator (WizardryOrigin wizardry)
+  public ExperienceCalculator (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
-    super (wizardry);
+    super (wizardry, stage);
 
     setColumnConstraints (125, 60, 80);
 

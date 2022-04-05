@@ -13,11 +13,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class BasePane extends Pane
@@ -25,12 +28,14 @@ public class BasePane extends Pane
 {
   GridPane gridPane = new GridPane ();
   WizardryOrigin wizardry;
+  Stage stage;
 
   // ---------------------------------------------------------------------------------//
-  public BasePane (WizardryOrigin wizardry)
+  public BasePane (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+    this.stage = stage;
 
     gridPane.setHgap (12);
     gridPane.setVgap (4);
@@ -253,6 +258,14 @@ public class BasePane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,15d", value).trim ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  protected void keyPressed (KeyEvent keyEvent)
+  // ---------------------------------------------------------------------------------//
+  {
+    if (keyEvent.getCode () == KeyCode.ESCAPE)
+      stage.hide ();
   }
 
   // ---------------------------------------------------------------------------------//
