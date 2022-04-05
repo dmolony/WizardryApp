@@ -186,11 +186,11 @@ public class CharactersPane extends BasePane
         int itemNo = possession.itemNo ();
         Item item = wizardry.getItem (itemNo);
 
-        setText (textOut3[i], possession.identified () ? item.name : item.nameUnknown);
-
         if (possession.identified ())
         {
+          setText (textOut3[i], item.name);
           checkBox4[i].setSelected (possession.equipped ());
+          checkBox5[i].setIndeterminate (false);
           checkBox5[i].setSelected (possession.cursed ());
           checkBox6[i].setSelected (true);
 
@@ -198,6 +198,7 @@ public class CharactersPane extends BasePane
         }
         else
         {
+          setText (textOut3[i], item.nameUnknown);
           checkBox4[i].setSelected (false);
           checkBox5[i].setIndeterminate (true);
           checkBox6[i].setSelected (false);

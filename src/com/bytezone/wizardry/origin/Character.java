@@ -58,11 +58,15 @@ public class Character
   LostXYL lostXYL;
 
   // ---------------------------------------------------------------------------------//
-  public Character (int id, DataBlock dataBlock)
+  public Character (int id, DataBlock dataBlock) throws InvalidCharacterException
   // ---------------------------------------------------------------------------------//
   {
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
+
+    int nameLength = buffer[offset] & 0xFF;
+    if (nameLength == 0xC3)
+      throw new InvalidCharacterException ();
 
     name = Utility.getPascalString (buffer, offset);
     password = Utility.getPascalString (buffer, offset + 16);

@@ -127,7 +127,15 @@ public class WizardryOrigin
 
     id = 0;
     for (DataBlock dataBlock : sd.dataBlocks)
-      characters.add (new Character (id++, dataBlock));
+      try
+      {
+        characters.add (new Character (id++, dataBlock));
+      }
+      catch (InvalidCharacterException e)
+      {
+        System.out.println ("Invalid character");
+        break;
+      }
 
     sd = header.get (MONSTER_AREA);
     monsters = new ArrayList<> (sd.totalUnits);
