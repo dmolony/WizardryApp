@@ -64,13 +64,28 @@ public class ItemsPane extends BasePane
     setLabel ("Resistance", 3, 10, HPos.RIGHT, 2);
     setLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
 
-    textOut0 = createOutputFields (label1Text, 0, 1, Pos.CENTER_LEFT, 2);
-    textOut6 = createOutputFields (label2Text, 0, 11, Pos.CENTER_RIGHT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 2);
+    textOut0 = createOutputFields (label1Text, lp1, dp1);
 
-    textOut1 = createOutputFields (WizardryOrigin.monsterClass, 5, 1, Pos.CENTER_LEFT, 1);
-    textOut2 = createOutputFields (textOut1.length, 6, 1, Pos.CENTER_LEFT, 1);
-    textOut3 = createOutputFields (WizardryOrigin.resistance, 3, 11, Pos.CENTER_LEFT, 1);
-    textOut4 = createOutputFields (WizardryOrigin.characterClass, 3, 1, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
+    DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_RIGHT, 1);
+    textOut6 = createOutputFields (label2Text, lp2, dp2);
+
+    LabelPlacement lp3 = new LabelPlacement (5, 1, HPos.RIGHT, 1);
+    DataPlacement dp3 = new DataPlacement (6, 1, Pos.CENTER_LEFT, 1);
+    textOut1 = createOutputFields (WizardryOrigin.monsterClass, lp3, dp3);
+
+    DataPlacement dp7 = new DataPlacement (6, 1, Pos.CENTER_LEFT, 1);
+    textOut2 = createOutputFields (textOut1.length, dp7);
+
+    LabelPlacement lp5 = new LabelPlacement (3, 11, HPos.RIGHT, 1);
+    DataPlacement dp5 = new DataPlacement (4, 11, Pos.CENTER_LEFT, 1);
+    textOut3 = createOutputFields (WizardryOrigin.resistance, lp5, dp5);
+
+    LabelPlacement lp6 = new LabelPlacement (3, 1, HPos.RIGHT, 1);
+    DataPlacement dp6 = new DataPlacement (4, 1, Pos.CENTER_LEFT, 1);
+    textOut4 = createOutputFields (WizardryOrigin.characterClass, lp6, dp6);
   }
 
   // ---------------------------------------------------------------------------------//

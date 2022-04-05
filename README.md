@@ -12,6 +12,7 @@ There is no need to kick doors down, you can simply walk through any wall. None 
 <img src="resources/werdna.png" alt="drawing" width="450"/>
 <img src="resources/monsterpane.png" alt="drawing" width="550"/>
 <img src="resources/items.png" alt="drawing" width="650"/>
+<img src="resources/character.png" alt="drawing" width="700"/>
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).

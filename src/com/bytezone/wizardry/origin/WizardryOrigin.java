@@ -16,13 +16,16 @@ public class WizardryOrigin
       { "No elements", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
   public static final String[] characterClass =
       { "Fighter", "Mage", "Priest", "Thief", "Bishop", "Samurai", "Lord", "Ninja" };
-  public static final String[] spells =
-      { "Halito", "Mogref", "Katino", "Dumapic", "Dilto", "Sopic", "Mahalito", "Molito", "Morlis",
-          "Dalto", "Lahalito", "Mamorlis", "Makanito", "Madalto", "Lakanito", "Zilwan", "Masopic",
-          "Haman", "Malor", "Mahaman", "Tiltowait", "Kalki", "Dios", "Badios", "Milwa", "Porfic",
-          "Matu", "Calfo", "Manifo", "Montino", "Lomilwa", "Dialko", "Latumapic", "Bamatu", "Dial",
-          "Badial", "Latumofis", "Maporfic", "Dialma", "Badialma", "Litokan", "Kandi", "Di", "Badi",
-          "Lorto", "Madi", "Mabadi", "Loktofeit", "Malikto", "Kadorto" };
+
+  public static final String[] spells = { "Halito", "Mogref", "Katino", "Dumapic", "Dilto", "Sopic",
+      "Mahalito", "Molito", "Morlis", "Dalto", "Lahalito", "Mamorlis", "Makanito", "Madalto",
+      "Lakanito", "Zilwan", "Masopic", "Haman", "Malor", "Mahaman", "Tiltowait",
+
+      "Kalki", "Dios", "Badios", "Milwa", "Porfic", "Matu", "Calfo", "Manifo", "Montino", "Lomilwa",
+      "Dialko", "Latumapic", "Bamatu", "Dial", "Badial", "Latumofis", "Maporfic", "Dialma",
+      "Badialma", "Litokan", "Kandi", "Di", "Badi", "Lorto", "Madi", "Mabadi", "Loktofeit",
+      "Malikto", "Kadorto" };
+
   public static final String[] race = { "No race", "Human", "Elf", "Dwarf", "Gnome", "Hobbit" };
 
   static final int MAZE_AREA = 1;

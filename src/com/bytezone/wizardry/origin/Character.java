@@ -27,7 +27,7 @@ public class Character
   public final long gold;
 
   public final int possessionsCount;
-  //  public final Possession[] possessions = new Possession[8];
+  public final List<Possession> possessions = new ArrayList<> (MAX_POSSESSIONS);
 
   public final long experience;
   public final int maxlevac;                       // max level armour class?
@@ -35,21 +35,22 @@ public class Character
   public final int hpLeft;
   public final int hpMax;
 
-  boolean[] spellsKnown = new boolean[50];
-  int[] mageSpells = new int[7];
-  int[] priestSpells = new int[7];
-  int hpCalCmd;
-  int armourClass;
-  int healPts;
-  boolean crithitm;
-  int swingCount;
-  Dice hpdamrc;
+  public final boolean[] spellsKnown = new boolean[50];
+  public final int[] mageSpells = new int[7];
+  public final int[] priestSpells = new int[7];
+
+  public final int hpCalCmd;
+  public final int armourClass;
+  public final int healPts;
+
+  public final boolean crithitm;
+  public final int swingCount;
+  public final Dice hpdamrc;
+
   boolean[][] wepvsty2 = new boolean[2][14];
   boolean[][] wepvsty3 = new boolean[2][7];
   boolean[] wepvstyp = new boolean[14];
   LostXYL lostXYL;
-
-  List<Possession> possessions = new ArrayList<> (MAX_POSSESSIONS);
 
   // ---------------------------------------------------------------------------------//
   public Character (int id, DataBlock dataBlock)
@@ -74,11 +75,12 @@ public class Character
       attr >>>= i == 2 ? 6 : 5;
     }
 
+    // luck/skill
     System.out.println (HexFormatter.formatNoHeader (buffer, offset + 48, 4));
 
     gold = Utility.getWizLong (buffer, offset + 52);
 
-    possessionsCount = Utility.getShort (buffer, offset + 58);
+    possessionsCount = Utility.getShort (buffer, offset + 58);      // 0-8
     for (int i = 0; i < possessionsCount; i++)
     {
       boolean equipped = Utility.getShort (buffer, offset + 60 + i * 8) == 1;
@@ -94,6 +96,34 @@ public class Character
     hpLeft = Utility.getShort (buffer, offset + 134);
     hpMax = Utility.getShort (buffer, offset + 136);
 
+    int index = -1;
+    for (int i = 138; i < 145; i++)
+      for (int bit = 0; bit < 8; bit++)
+      {
+        if (((buffer[offset + i] >>> bit) & 0x01) != 0)
+          if (index >= 0)
+            spellsKnown[index] = true;
+          else
+            System.out.println (name + " Lock bit?");
+
+        if (++index >= WizardryOrigin.spells.length)
+          break;
+      }
+
+    for (int i = 0; i < 7; i++)
+    {
+      mageSpells[i] = Utility.getShort (buffer, offset + 146 + i * 2);
+      priestSpells[i] = Utility.getShort (buffer, offset + 160 + i * 2);
+    }
+
+    hpCalCmd = Utility.getSignedShort (buffer, offset + 174);
+    armourClass = Utility.getSignedShort (buffer, offset + 176);
+    healPts = Utility.getShort (buffer, offset + 178);
+
+    crithitm = Utility.getShort (buffer, offset + 180) == 1;
+    swingCount = Utility.getShort (buffer, offset + 182);
+    hpdamrc = new Dice (buffer, offset + 184);
+
   }
 
   // ---------------------------------------------------------------------------------//
@@ -105,7 +135,7 @@ public class Character
   }
 
   // ---------------------------------------------------------------------------------//
-  record Possession (int itemNo, boolean equipped, boolean cursed, boolean identified)
+  public record Possession (int itemNo, boolean equipped, boolean cursed, boolean identified)
   // ---------------------------------------------------------------------------------//
   {
   }

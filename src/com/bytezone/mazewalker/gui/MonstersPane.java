@@ -3,6 +3,7 @@ package com.bytezone.mazewalker.gui;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
@@ -84,8 +85,13 @@ public class MonstersPane extends BasePane
         "Breathe", "Level drain", "Regen", "Experience", "Armour class", "Gold rewards",
         "Chest rewards", "# Encs", "Image" };
 
-    textOut1 = createOutputFields (label1Text, 0, 1, Pos.CENTER_LEFT, 1);
-    textOut2 = createOutputFields (label2Text, 3, 0, Pos.CENTER_RIGHT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
+    textOut1 = createOutputFields (label1Text, lp1, dp1);
+
+    LabelPlacement lp2 = new LabelPlacement (3, 0, HPos.RIGHT, 1);
+    DataPlacement dp2 = new DataPlacement (4, 0, Pos.CENTER_RIGHT, 1);
+    textOut2 = createOutputFields (label2Text, lp2, dp2);
   }
 
   // ---------------------------------------------------------------------------------//

@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 
 // -----------------------------------------------------------------------------------//
 public class BasePane extends Pane
@@ -31,7 +33,7 @@ public class BasePane extends Pane
     this.wizardry = wizardry;
 
     gridPane.setHgap (12);
-    gridPane.setVgap (7);
+    gridPane.setVgap (4);
     gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
 
     getChildren ().add (new BorderPane (gridPane));
@@ -43,6 +45,14 @@ public class BasePane extends Pane
   {
     for (int i = 0; i < width.length; i++)
       gridPane.getColumnConstraints ().add (new ColumnConstraints (width[i]));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setRowConstraints (int... height)
+  // ---------------------------------------------------------------------------------//
+  {
+    for (int i = 0; i < height.length; i++)
+      gridPane.getRowConstraints ().add (new RowConstraints (height[i]));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -79,25 +89,29 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] createOutputFields (String[] labelText, int col, int row, Pos alignment, int columns)
+  TextField[] createOutputFields (String[] labelText, LabelPlacement labelPos,
+      DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[labelText.length];
+    int row = labelPos.row;
 
     for (int i = 0; i < labelText.length; i++)
     {
       Label label = new Label (labelText[i]);
       textOut[i] = new TextField ();
 
-      GridPane.setConstraints (label, col, row);
-      GridPane.setConstraints (textOut[i], col + 1, row);
-      GridPane.setColumnSpan (textOut[i], columns);
+      GridPane.setConstraints (label, labelPos.col, row);
+      GridPane.setColumnSpan (label, labelPos.colSpan);
+
+      GridPane.setConstraints (textOut[i], dataPos.col, row);
+      GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
+      textOut[i].setAlignment (dataPos.alignment);
 
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
-      textOut[i].setAlignment (alignment);
 
-      GridPane.setHalignment (label, HPos.RIGHT);
+      GridPane.setHalignment (label, labelPos.alignment);
       gridPane.getChildren ().addAll (label, textOut[i]);
 
       row++;
@@ -107,21 +121,22 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] createOutputFields (int totalFields, int col, int row, Pos alignment, int columns)
+  TextField[] createOutputFields (int totalFields, DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[totalFields];
+    int row = dataPos.row;
 
     for (int i = 0; i < totalFields; i++)
     {
       textOut[i] = new TextField ();
 
-      GridPane.setConstraints (textOut[i], col + 1, row);
-      GridPane.setColumnSpan (textOut[i], columns);
+      GridPane.setConstraints (textOut[i], dataPos.col, row);
+      GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
+      textOut[i].setAlignment (dataPos.alignment);
 
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
-      textOut[i].setAlignment (alignment);
 
       gridPane.getChildren ().add (textOut[i]);
 
@@ -129,6 +144,57 @@ public class BasePane extends Pane
     }
 
     return textOut;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  CheckBox[] createCheckBoxes (String[] labelText, int col, int row)
+  // ---------------------------------------------------------------------------------//
+  {
+    CheckBox[] checkBoxes = new CheckBox[labelText.length];
+
+    for (int i = 0; i < labelText.length; i++)
+    {
+      Label label = new Label (labelText[i]);
+      checkBoxes[i] = new CheckBox ();
+
+      GridPane.setConstraints (label, col, row);
+      GridPane.setConstraints (checkBoxes[i], col + 1, row);
+
+      checkBoxes[i].setDisable (true);
+      checkBoxes[i].setStyle ("-fx-opacity: 1");    // make disabled checkbox look normal
+      checkBoxes[i].setFocusTraversable (false);
+
+      GridPane.setHalignment (label, HPos.RIGHT);
+      gridPane.getChildren ().addAll (label, checkBoxes[i]);
+
+      row++;
+    }
+
+    return checkBoxes;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  CheckBox[] createCheckBoxes (int total, int col, int row)
+  // ---------------------------------------------------------------------------------//
+  {
+    CheckBox[] checkBoxes = new CheckBox[total];
+
+    for (int i = 0; i < total; i++)
+    {
+      checkBoxes[i] = new CheckBox ();
+
+      GridPane.setConstraints (checkBoxes[i], col, row);
+
+      checkBoxes[i].setDisable (true);
+      checkBoxes[i].setStyle ("-fx-opacity: 1");    // make disabled checkbox look normal
+      checkBoxes[i].setFocusTraversable (false);
+
+      gridPane.getChildren ().add (checkBoxes[i]);
+
+      row++;
+    }
+
+    return checkBoxes;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -185,5 +251,17 @@ public class BasePane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,15d", value).trim ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public record LabelPlacement (int col, int row, HPos alignment, int colSpan)
+  // ---------------------------------------------------------------------------------//
+  {
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public record DataPlacement (int col, int row, Pos alignment, int colSpan)
+  // ---------------------------------------------------------------------------------//
+  {
   }
 }

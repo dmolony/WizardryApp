@@ -215,7 +215,7 @@ public class MazeWalker extends AppBase implements MovementListener
     charactersStage.setTitle ("Wizardry Characters");
     CharactersPane charactersPane = new CharactersPane (wizardry);
 
-    Scene scene = new Scene (charactersPane, 700, 700);       // wh
+    Scene scene = new Scene (charactersPane, 880, 810);       // wh
     charactersStage.setScene (scene);
     charactersStage.sizeToScene ();
   }
@@ -241,7 +241,7 @@ public class MazeWalker extends AppBase implements MovementListener
     itemsStage.setTitle ("Wizardry Items");
     ItemsPane itemsPane = new ItemsPane (wizardry);
 
-    Scene scene = new Scene (itemsPane, 770, 630);       // wh
+    Scene scene = new Scene (itemsPane, 770, 570);       // wh
     itemsStage.setScene (scene);
     itemsStage.sizeToScene ();
   }
