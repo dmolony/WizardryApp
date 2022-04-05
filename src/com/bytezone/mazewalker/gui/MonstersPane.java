@@ -6,6 +6,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -20,8 +21,6 @@ public class MonstersPane extends BasePane
   private static final int GROUP_DICE = 3;
   private static final int HP_DICE = 4;
   private static final int RECSN = 5;
-  private static final int RESISTANCE = 6;
-  private static final int ABILITY = 7;
 
   private static final int ID = 0;
   private static final int MAGE_LEVEL = 1;
@@ -55,9 +54,11 @@ public class MonstersPane extends BasePane
 
   TextField[] textOut1;
   TextField[] textOut2;
+  CheckBox[] checkBoxes1;
+  CheckBox[] checkBoxes2;
 
   private final int scenarioId;
-  private final Canvas canvas = new Canvas (210, 150);      // wh
+  private final Canvas canvas = new Canvas (280, 200);      // wh
 
   // ---------------------------------------------------------------------------------//
   public MonstersPane (WizardryOrigin wizardry)
@@ -67,31 +68,41 @@ public class MonstersPane extends BasePane
 
     scenarioId = wizardry.getScenarioId ();
 
-    setColumnConstraints (110, 160, 30, 110, 65);
+    setColumnConstraints (50, 60, 160, 30, 110, 65, 80, 20, 80, 20);
 
+    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 2);
+    DataPlacement dp0 = new DataPlacement (2, 0, Pos.CENTER_LEFT, 1);
     ComboBox<Monster> monstersList = new ComboBox<> ();
     setComboBox ("Monster", monstersList, wizardry.getMonsters (),
-        (options, oldValue, newValue) -> update (newValue));
+        (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
-    GridPane.setConstraints (canvas, 1, 9);
-    GridPane.setColumnSpan (canvas, 2);
-    GridPane.setRowSpan (canvas, 5);
+    GridPane.setConstraints (canvas, 1, 8);
+    GridPane.setColumnSpan (canvas, 3);
+    GridPane.setRowSpan (canvas, 7);
 
     gridPane.getChildren ().add (canvas);
 
-    String[] label1Text = { "Generic name", "Monster class", "Partner", "Appear dice", "Hits dice",
-        "Damage dice", "Resistance", "Properties" };
+    String[] label1Text =
+        { "Generic name", "Monster class", "Partner", "Appear dice", "Hits dice", "Damage dice" };
     String[] label2Text = { "ID", "Mage level", "Priest level", "Partner odds", "Magic resistance",
         "Breathe", "Level drain", "Regen", "Experience", "Armour class", "Gold rewards",
         "Chest rewards", "# Encs", "Image" };
 
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 2);
+    DataPlacement dp1 = new DataPlacement (2, 1, Pos.CENTER_LEFT, 1);
     textOut1 = createOutputFields (label1Text, lp1, dp1);
 
-    LabelPlacement lp2 = new LabelPlacement (3, 0, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (4, 0, Pos.CENTER_RIGHT, 1);
+    LabelPlacement lp2 = new LabelPlacement (4, 0, HPos.RIGHT, 1);
+    DataPlacement dp2 = new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1);
     textOut2 = createOutputFields (label2Text, lp2, dp2);
+
+    // resistance
+    setLabel ("Resistance", 6, 0, HPos.RIGHT, 2);
+    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 6, 1);
+
+    // properties
+    setLabel ("Property", 8, 0, HPos.RIGHT, 2);
+    checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 8, 1);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -104,8 +115,6 @@ public class MonstersPane extends BasePane
     setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
     setText (textOut1[HP_DICE], monster.hitPoints.toString ());
     setText (textOut1[RECSN], monster.damageDice);
-    setText (textOut1[RESISTANCE], monster.resistanceText);
-    setText (textOut1[ABILITY], monster.propertyText);
 
     setText (textOut2[ID], monster.id);
     setText (textOut2[MAGE_LEVEL], monster.mageSpells + "");
@@ -121,6 +130,20 @@ public class MonstersPane extends BasePane
     setText (textOut2[CHEST_REWARDS], monster.reward2);
     setText (textOut2[UNIQUE], monster.unique);
     setText (textOut2[IMAGE], monster.image);
+
+    int resistance = monster.flags1;
+    for (int i = 0; i < WizardryOrigin.resistance.length; i++)
+    {
+      checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
+      resistance >>>= 1;
+    }
+
+    int property = monster.flags2;
+    for (int i = 0; i < WizardryOrigin.property.length; i++)
+    {
+      checkBoxes2[i].setSelected ((property & 0x01) != 0);
+      property >>>= 1;
+    }
 
     wizardry.getImage (monster.image).draw (canvas.getGraphicsContext2D ());
   }

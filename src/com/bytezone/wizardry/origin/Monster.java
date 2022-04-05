@@ -4,10 +4,10 @@ package com.bytezone.wizardry.origin;
 public class Monster
 // -----------------------------------------------------------------------------------//
 {
-  public static final String[] property =
-      { "Stone", "Poison", "Paralyse", "Autokill", "Be slept", "Run", "Gate in" };
-  public static final String[] resistance =
-      { "Friends", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
+  //  public static final String[] property =
+  //      { "Stone", "Poison", "Paralyse", "Autokill", "Be slept", "Run", "Gate in" };
+  //  public static final String[] resistance =
+  //      { "Friends", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
 
   public final int id;
   public final String name;                                //   0
@@ -37,8 +37,8 @@ public class Monster
   public final int flags2;                                 // 156
 
   public final String damageDice;
-  public final String propertyText;
-  public final String resistanceText;
+  //  public final String propertyText;
+  //  public final String resistanceText;
 
   // ---------------------------------------------------------------------------------//
   public Monster (int id, DataBlock dataBlock)
@@ -94,9 +94,6 @@ public class Monster
 
     flags1 = Utility.getShort (buffer, offset + 154);             // wepvsty3
     flags2 = Utility.getShort (buffer, offset + 156);             // sppc
-
-    resistanceText = getFlagsText (flags1, resistance);
-    propertyText = getFlagsText (flags2, property);
   }
 
   // ---------------------------------------------------------------------------------//

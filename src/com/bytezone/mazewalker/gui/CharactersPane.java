@@ -31,6 +31,7 @@ public class CharactersPane extends BasePane
   private static final int HP_DAM_DICE = 11;
   private static final int MAGE_TOTALS = 12;
   private static final int PRIEST_TOTALS = 13;
+  private static final int MYSTERY = 14;
 
   private static final int MAXLEVAC = 0;
   private static final int CHAR_LEV = 1;
@@ -62,17 +63,20 @@ public class CharactersPane extends BasePane
   {
     super (wizardry);
 
-    setColumnConstraints (110, 69, 70, 20, 20, 20, 40, 40, 80, 20, 70, 20, 70, 20);
+    setColumnConstraints (110, 69, 70, 20, 20, 20, 40, 40, 90, 20, 80, 20, 80, 20);
     RowConstraints rowCo = new RowConstraints (25);
     for (int i = 0; i < 20; i++)
       gridPane.getRowConstraints ().add (rowCo);
 
-    setComboBox ("Character", charactersList, wizardry.getCharacters (), (a, b, c) -> update (c));
+    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
+    setComboBox ("Character", charactersList, wizardry.getCharacters (), (a, b, c) -> update (c),
+        lp0, dp0);
 
     GridPane.setColumnSpan (charactersList, 2);
 
     String[] labelText1 = { "Name", "Password", "In maze", "Race", "Class", "Age (weeks)", "Status",
-        "Alignment", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest" };
+        "Alignment", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
 
     String[] labelText2 =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
@@ -158,6 +162,7 @@ public class CharactersPane extends BasePane
     setText (textOut[HP_DAM_DICE], character.hpdamrc);
     setText (textOut[MAGE_TOTALS], add (character.mageSpells));
     setText (textOut[PRIEST_TOTALS], add (character.priestSpells));
+    setText (textOut[MYSTERY], character.mysteryBit);
 
     setText (textOut2[MAXLEVAC], character.maxlevac);
     setText (textOut2[CHAR_LEV], character.charlev);

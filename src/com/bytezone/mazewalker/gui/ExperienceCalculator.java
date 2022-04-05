@@ -31,7 +31,7 @@ public class ExperienceCalculator extends BasePane
 
   String[] labelText =
       { "HP # dice", "HP # sides", "Breathe", "Armour class", "Damage # dice", "Mage level",
-          "Priest level", "Level drain", "Heal", "Resist 1", "Resist 2", "Abilities", "Total" };
+          "Priest level", "Level drain", "Regen", "Resist 1", "Resist 2", "Abilities", "Total" };
 
   TextField[] textIn = new TextField[labelText.length];
   TextField[] textOut = new TextField[labelText.length];
@@ -44,10 +44,12 @@ public class ExperienceCalculator extends BasePane
   {
     super (wizardry);
 
-    setColumnConstraints (135, 60, 80);
+    setColumnConstraints (125, 60, 80);
 
+    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
     setComboBox ("Monster", monsters, wizardry.getMonsters (),
-        (options, oldValue, newValue) -> update (newValue));
+        (options, oldValue, newValue) -> update (newValue), lp0, dp0);
     GridPane.setColumnSpan (monsters, 2);
 
     for (int i = 0; i < textIn.length; i++)

@@ -201,7 +201,7 @@ public class MazeWalker extends AppBase implements MovementListener
       calculatorStage.setTitle ("Experience Points Calculator");
       ExperienceCalculator experienceCalculator = new ExperienceCalculator (wizardry);
 
-      Scene scene = new Scene (experienceCalculator, 400, 500);       // wh
+      Scene scene = new Scene (experienceCalculator, 370, 450);       // wh
       calculatorStage.setScene (scene);
       calculatorStage.sizeToScene ();
     }
@@ -215,7 +215,7 @@ public class MazeWalker extends AppBase implements MovementListener
     charactersStage.setTitle ("Wizardry Characters");
     CharactersPane charactersPane = new CharactersPane (wizardry);
 
-    Scene scene = new Scene (charactersPane, 880, 810);       // wh
+    Scene scene = new Scene (charactersPane, 910, 810);       // wh
     charactersStage.setScene (scene);
     charactersStage.sizeToScene ();
   }
@@ -228,7 +228,7 @@ public class MazeWalker extends AppBase implements MovementListener
     monstersStage.setTitle ("Wizardry Monsters");
     MonstersPane monstersPane = new MonstersPane (wizardry);
 
-    Scene scene = new Scene (monstersPane, 690, 460);         // wh
+    Scene scene = new Scene (monstersPane, 820, 500);         // wh
     monstersStage.setScene (scene);
     monstersStage.sizeToScene ();
   }

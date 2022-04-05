@@ -36,6 +36,7 @@ public class Character
   public final int hpLeft;
   public final int hpMax;
 
+  public final boolean mysteryBit;                              // first bit in spellsKnown
   public final boolean[] spellsKnown = new boolean[50];
   public final int[] mageSpells = new int[7];
   public final int[] priestSpells = new int[7];
@@ -98,6 +99,7 @@ public class Character
     hpLeft = Utility.getShort (buffer, offset + 134);
     hpMax = Utility.getShort (buffer, offset + 136);
 
+    mysteryBit = (buffer[offset + 138] & 0x01) == 1;
     int index = -1;
     for (int i = 138; i < 145; i++)
       for (int bit = 0; bit < 8; bit++)
@@ -105,8 +107,6 @@ public class Character
         if (((buffer[offset + i] >>> bit) & 0x01) != 0)
           if (index >= 0)
             spellsKnown[index] = true;
-        //          else
-        //            System.out.println (name + " Lock bit?");
 
         if (++index >= WizardryOrigin.spells.length)
           break;

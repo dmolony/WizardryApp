@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 
 // -----------------------------------------------------------------------------------//
 public class ItemsPane extends BasePane
@@ -56,9 +55,11 @@ public class ItemsPane extends BasePane
 
     setColumnConstraints (110, 64, 90, 110, 50, 110, 50, 50, 20);
 
+    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
     setComboBox ("Item", itemsList, wizardry.getItems (),
-        (options, oldValue, newValue) -> update (newValue));
-    GridPane.setColumnSpan (itemsList, 2);
+        (options, oldValue, newValue) -> update (newValue), lp0, dp0);
+    //    GridPane.setColumnSpan (itemsList, 2);
 
     setLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
     setLabel ("Resistance", 3, 10, HPos.RIGHT, 2);

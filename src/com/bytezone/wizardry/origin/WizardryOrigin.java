@@ -16,6 +16,8 @@ public class WizardryOrigin
       { "No elements", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
   public static final String[] characterClass =
       { "Fighter", "Mage", "Priest", "Thief", "Bishop", "Samurai", "Lord", "Ninja" };
+  public static final String[] property =
+      { "Stone", "Poison", "Paralyze", "Auto Kill", "Be slept", "Run", "Gate in" };
 
   public static final String[] spells = { "Halito", "Mogref", "Katino", "Dumapic", "Dilto", "Sopic",
       "Mahalito", "Molito", "Morlis", "Dalto", "Lahalito", "Mamorlis", "Makanito", "Madalto",

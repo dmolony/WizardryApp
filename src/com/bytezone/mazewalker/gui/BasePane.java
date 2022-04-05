@@ -57,15 +57,17 @@ public class BasePane extends Pane
 
   // ---------------------------------------------------------------------------------//
   <T> void setComboBox (String labelText, ComboBox<T> comboBox, List<T> list,
-      ChangeListener<T> listener)
+      ChangeListener<T> listener, LabelPlacement labelPos, DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
     Label label = new Label (labelText);
 
-    GridPane.setConstraints (label, 0, 0);
-    GridPane.setHalignment (label, HPos.RIGHT);
+    GridPane.setConstraints (label, labelPos.col, labelPos.row);
+    GridPane.setColumnSpan (label, labelPos.colSpan);
+    GridPane.setHalignment (label, labelPos.alignment);
 
-    GridPane.setConstraints (comboBox, 1, 0);
+    GridPane.setConstraints (comboBox, dataPos.col, dataPos.row);
+    GridPane.setColumnSpan (comboBox, dataPos.colSpan);
 
     gridPane.getChildren ().addAll (label, comboBox);
 
