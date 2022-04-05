@@ -82,10 +82,10 @@ public class WizardryOrigin
     STRENGTH, IQ, PIETY, VITALITY, AGILITY, LUCK
   }
 
-  //  enum Class
-  //  {
-  //    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
-  //  }
+  enum CharacterClass
+  {
+    FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
+  }
 
   enum Status
   {

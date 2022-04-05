@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bytezone.wizardry.origin.WizardryOrigin.Alignment;
+import com.bytezone.wizardry.origin.WizardryOrigin.CharacterClass;
 import com.bytezone.wizardry.origin.WizardryOrigin.CharacterStatus;
 import com.bytezone.wizardry.origin.WizardryOrigin.Race;
 
@@ -17,7 +18,7 @@ public class Character
   public final String password;
   public final boolean inMaze;
   public final Race race;
-  public final String characterClass;
+  public final CharacterClass characterClass;
   public final int age;
   public final CharacterStatus status;
   public final Alignment alignment;
@@ -63,7 +64,8 @@ public class Character
     password = Utility.getPascalString (buffer, offset + 16);
     inMaze = Utility.getShort (buffer, offset + 32) != 0;
     race = WizardryOrigin.Race.values ()[Utility.getShort (buffer, offset + 34)];
-    characterClass = WizardryOrigin.characterClass[Utility.getShort (buffer, offset + 36)];
+    characterClass =
+        WizardryOrigin.CharacterClass.values ()[Utility.getShort (buffer, offset + 36)];
     age = Utility.getShort (buffer, offset + 38);
     status = WizardryOrigin.CharacterStatus.values ()[Utility.getShort (buffer, offset + 40)];
     alignment = WizardryOrigin.Alignment.values ()[Utility.getShort (buffer, offset + 42)];
@@ -76,7 +78,7 @@ public class Character
     }
 
     // luck/skill
-    System.out.println (HexFormatter.formatNoHeader (buffer, offset + 48, 4));
+    //    System.out.println (HexFormatter.formatNoHeader (buffer, offset + 48, 4));
 
     gold = Utility.getWizLong (buffer, offset + 52);
 
@@ -103,8 +105,8 @@ public class Character
         if (((buffer[offset + i] >>> bit) & 0x01) != 0)
           if (index >= 0)
             spellsKnown[index] = true;
-          else
-            System.out.println (name + " Lock bit?");
+        //          else
+        //            System.out.println (name + " Lock bit?");
 
         if (++index >= WizardryOrigin.spells.length)
           break;

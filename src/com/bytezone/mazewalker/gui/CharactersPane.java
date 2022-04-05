@@ -62,7 +62,7 @@ public class CharactersPane extends BasePane
   {
     super (wizardry);
 
-    setColumnConstraints (110, 64, 70, 20, 20, 20, 40, 40, 80, 20, 70, 20, 70, 20);
+    setColumnConstraints (110, 69, 70, 20, 20, 20, 40, 40, 80, 20, 70, 20, 70, 20);
     RowConstraints rowCo = new RowConstraints (25);
     for (int i = 0; i < 20; i++)
       gridPane.getRowConstraints ().add (rowCo);
@@ -201,6 +201,7 @@ public class CharactersPane extends BasePane
       {
         setText (textOut3[i], "");
         setText (textOut4[i], "");
+
         checkBox4[i].setSelected (false);
         checkBox5[i].setSelected (false);
         checkBox6[i].setSelected (false);

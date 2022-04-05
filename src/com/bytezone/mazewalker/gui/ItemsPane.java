@@ -76,7 +76,7 @@ public class ItemsPane extends BasePane
     DataPlacement dp3 = new DataPlacement (6, 1, Pos.CENTER_LEFT, 1);
     textOut1 = createOutputFields (WizardryOrigin.monsterClass, lp3, dp3);
 
-    DataPlacement dp7 = new DataPlacement (6, 1, Pos.CENTER_LEFT, 1);
+    DataPlacement dp7 = new DataPlacement (7, 1, Pos.CENTER_LEFT, 1);
     textOut2 = createOutputFields (textOut1.length, dp7);
 
     LabelPlacement lp5 = new LabelPlacement (3, 11, HPos.RIGHT, 1);
