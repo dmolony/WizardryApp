@@ -73,7 +73,7 @@ public class MonstersPane extends BasePane
 
     scenarioId = wizardry.getScenarioId ();
 
-    setColumnConstraints (50, 60, 160, 30, 110, 65, 80, 20, 80, 20);
+    setColumnConstraints (50, 60, 160, 30, 110, 65, 90, 20, 80, 20);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 2);
     DataPlacement dp0 = new DataPlacement (2, 0, Pos.CENTER_LEFT, 1);
@@ -101,7 +101,7 @@ public class MonstersPane extends BasePane
     DataPlacement dp2 = new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1);
     textOut2 = createOutputFields (label2Text, lp2, dp2);
 
-    textOut3 = createOutputFields (1, new DataPlacement (6, 12, Pos.CENTER_LEFT, 2));
+    textOut3 = createOutputFields (1, new DataPlacement (6, 12, Pos.CENTER_LEFT, 1));
     textOut4 = createOutputFields (3, new DataPlacement (6, 13, Pos.CENTER_LEFT, 4));
 
     // resistance
@@ -139,8 +139,10 @@ public class MonstersPane extends BasePane
     setText (textOut2[GOLD_REWARDS], monster.reward1);
     setText (textOut2[CHEST_REWARDS], monster.reward2);
 
+    // gold rewards
     setText (textOut3[0], wizardry.getRewards ().get (monster.reward1).goldRange ());
 
+    // item rewards
     for (int i = 0; i < 3; i++)
     {
       Reward reward = wizardry.getRewards ().get (monster.reward2);
@@ -161,7 +163,6 @@ public class MonstersPane extends BasePane
           String itemName2 = wizardry.getItems ().get (item2).name;
           setText (textOut4[i], itemName1 + " : " + itemName2);
         }
-        //        }
       }
     }
 
