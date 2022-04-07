@@ -253,6 +253,19 @@ public class MazeWalker extends AppBase implements MovementListener
   }
 
   // ---------------------------------------------------------------------------------//
+  private void buildItems ()
+  // ---------------------------------------------------------------------------------//
+  {
+    itemsStage = new Stage ();
+    itemsStage.setTitle ("Wizardry Items");
+    ItemsPane itemsPane = new ItemsPane (wizardry, itemsStage);
+
+    Scene scene = new Scene (itemsPane, 770, 575);            // wh
+    itemsStage.setScene (scene);
+    scene.setOnKeyPressed (e -> itemsPane.keyPressed (e));
+  }
+
+  // ---------------------------------------------------------------------------------//
   private void buildRewards ()
   // ---------------------------------------------------------------------------------//
   {
@@ -276,19 +289,6 @@ public class MazeWalker extends AppBase implements MovementListener
     Scene scene = new Scene (encountersPane, 770, 575);            // wh
     encountersStage.setScene (scene);
     scene.setOnKeyPressed (e -> encountersPane.keyPressed (e));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void buildItems ()
-  // ---------------------------------------------------------------------------------//
-  {
-    itemsStage = new Stage ();
-    itemsStage.setTitle ("Wizardry Items");
-    ItemsPane itemsPane = new ItemsPane (wizardry, itemsStage);
-
-    Scene scene = new Scene (itemsPane, 770, 575);            // wh
-    itemsStage.setScene (scene);
-    scene.setOnKeyPressed (e -> itemsPane.keyPressed (e));
   }
 
   // ---------------------------------------------------------------------------------//

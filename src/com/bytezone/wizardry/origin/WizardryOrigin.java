@@ -18,6 +18,10 @@ public class WizardryOrigin
       { "Fighter", "Mage", "Priest", "Thief", "Bishop", "Samurai", "Lord", "Ninja" };
   public static final String[] property =
       { "Stone", "Poison", "Paralyze", "Auto Kill", "Be slept", "Run", "Gate in" };
+  public static String[] trapType = { "Trapless chest", "Poison needle", "Gas bomb", "Bolt",
+      "Teleporter", "Anti-mage", "Anti-priest", "Alarm" };
+  public static String[] trapType3 =
+      { "Crossbow bolt", "Exploding box", "Splinters", "Blades", "Stunner" };
 
   public static final String[] spells = { "Halito", "Mogref", "Katino", "Dumapic", "Dilto", "Sopic",
       "Mahalito", "Molito", "Morlis", "Dalto", "Lahalito", "Mamorlis", "Makanito", "Madalto",
@@ -251,6 +255,13 @@ public class WizardryOrigin
 
     System.out.printf ("Item %d out of range%n", id);
     return null;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public List<Reward> getRewards ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return rewards;
   }
 
   // ---------------------------------------------------------------------------------//

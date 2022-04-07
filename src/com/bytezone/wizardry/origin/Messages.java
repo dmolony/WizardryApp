@@ -27,8 +27,8 @@ public class Messages
             Utility.getPascalString (buffer, ptr + i);
         lines.add (line);
 
-        int lastLine = buffer[ptr + i + 40] & 0xFF;
-        if (lastLine == 1)
+        boolean lastLine = buffer[ptr + i + 40] == 1;
+        if (lastLine)
         {
           messages.add (new Message (id, lines));
           id += lines.size ();

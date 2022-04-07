@@ -82,6 +82,27 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
+  <T> void setComboBox2 (String labelText, ComboBox<T> comboBox, List<T> list,
+      ChangeListener<T> listener, LabelPlacement labelPos, DataPlacement dataPos)
+  // ---------------------------------------------------------------------------------//
+  {
+    Label label = new Label (labelText);
+
+    GridPane.setConstraints (label, labelPos.col, labelPos.row);
+    GridPane.setColumnSpan (label, labelPos.colSpan);
+    GridPane.setHalignment (label, labelPos.alignment);
+
+    GridPane.setConstraints (comboBox, dataPos.col, dataPos.row);
+    GridPane.setColumnSpan (comboBox, dataPos.colSpan);
+
+    gridPane.getChildren ().addAll (label, comboBox);
+
+    comboBox.setItems (FXCollections.observableArrayList (list));
+    comboBox.setVisibleRowCount (20);
+    comboBox.getSelectionModel ().selectedItemProperty ().addListener (listener);
+  }
+
+  // ---------------------------------------------------------------------------------//
   Label setLabel (String labelText, int col, int row, HPos alignment, int span)
   // ---------------------------------------------------------------------------------//
   {
