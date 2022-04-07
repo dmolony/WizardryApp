@@ -1,9 +1,9 @@
 package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Reward;
-import com.bytezone.wizardry.origin.RewardOdds;
-import com.bytezone.wizardry.origin.RewardOdds.GoldReward;
-import com.bytezone.wizardry.origin.RewardOdds.ItemReward;
+import com.bytezone.wizardry.origin.RewardDetails;
+import com.bytezone.wizardry.origin.RewardDetails.GoldReward;
+import com.bytezone.wizardry.origin.RewardDetails.ItemReward;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.geometry.HPos;
@@ -35,15 +35,14 @@ public class RewardsPane extends BasePane
   private static final int MAX = 5;
   private static final int ELEMENT = 6;
   private static final int ITEM_ODDS_2 = 7;
-  //  private static final int ITEM_NO_MAX = 7;
 
   String[] label1Text = { "Is chest" };
   String[] label2Text = { "Gold odds", "Dice 1", "Multiplier", "Dice 2", "Gold min", "Gold max", };
-  String[] label3Text =
-      { "Item odds", "Item # range", "Item", "Item max", "Size", "Max", "Element", "Item odds" };
+  String[] label3Text = { "Item odds", "Item # range", "Item from", "Item to", "Size", "Max",
+      "Element", "Probability" };
 
   ComboBox<Reward> rewardsList = new ComboBox<> ();
-  ComboBox<RewardOdds> rewardOddsList = new ComboBox<> ();
+  ComboBox<RewardDetails> rewardOddsList = new ComboBox<> ();
 
   TextField[] textOut1;
   TextField[] textOut2;
@@ -58,6 +57,8 @@ public class RewardsPane extends BasePane
 
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width, width);
+
+    // make all rows the same height
     RowConstraints rowCo = new RowConstraints (25);
     for (int i = 0; i < 20; i++)
       gridPane.getRowConstraints ().add (rowCo);
@@ -99,9 +100,6 @@ public class RewardsPane extends BasePane
 
     // erase gold
     setText (textOut2[GOLD_ODDS], "");
-    //    setText (textOut2[TYPE], "");
-
-    setText (textOut2[GOLD_ODDS], "");
     setText (textOut2[DICE_1], "");
     setText (textOut2[MULTIPLIER], "");
     setText (textOut2[DICE_2], "");
@@ -124,7 +122,7 @@ public class RewardsPane extends BasePane
     int itemCol = 0;
     for (int i = 0; i < reward.total; i++)
     {
-      RewardOdds rewardOdds = reward.rewardOdds[i];
+      RewardDetails rewardOdds = reward.rewardDetails[i];
 
       if (rewardOdds.goldReward != null)
       {

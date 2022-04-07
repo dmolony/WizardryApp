@@ -9,11 +9,11 @@ There is no need to kick doors down, you can simply walk through any wall. None 
 ![Proving Grounds of the Mad Overlord](resources/scenario1.png?raw=true "Proving Grounds of the Mad Overlord")
 ![Knight of Diamonds](resources/scenario2.png?raw=true "Knight of Diamonds")
 ![Legacy of Llylgamyn](resources/scenario3.png?raw=true "Legacy of Llylgamyn")
-<img src="resources/werdna.png" alt="drawing" width="450"/>
+<img src="resources/character.png" alt="drawing" width="700"/>
 <img src="resources/monster.png" alt="drawing" width="550"/>
 <img src="resources/item.png" alt="drawing" width="650"/>
-<img src="resources/character.png" alt="drawing" width="700"/>
 <img src="resources/rewards.png" alt="drawing" width="650"/>
+<img src="resources/werdna.png" alt="drawing" width="450"/>
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).

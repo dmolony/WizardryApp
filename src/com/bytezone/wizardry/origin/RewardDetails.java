@@ -1,7 +1,7 @@
 package com.bytezone.wizardry.origin;
 
 // -----------------------------------------------------------------------------------//
-public class RewardOdds
+public class RewardDetails
 // -----------------------------------------------------------------------------------//
 {
   public final int rewardPct;
@@ -11,7 +11,7 @@ public class RewardOdds
   public final ItemReward itemReward;       // if type == 1
 
   // ---------------------------------------------------------------------------------//
-  public RewardOdds (byte[] buffer, int offset)
+  public RewardDetails (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
     rewardPct = Utility.getShort (buffer, offset);

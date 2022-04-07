@@ -65,6 +65,8 @@ public class CharactersPane extends BasePane
     super (wizardry, stage);
 
     setColumnConstraints (110, 69, 70, 20, 20, 20, 40, 40, 90, 20, 80, 20, 80, 20);
+
+    // make all rows the same height
     RowConstraints rowCo = new RowConstraints (25);
     for (int i = 0; i < 20; i++)
       gridPane.getRowConstraints ().add (rowCo);
