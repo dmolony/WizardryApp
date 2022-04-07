@@ -1,6 +1,7 @@
 package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.geometry.HPos;
@@ -33,10 +34,10 @@ public class MonstersPane extends BasePane
   private static final int REGEN = 7;
   private static final int TOTAL = 8;
   private static final int ARMOUR_CLASS = 9;
-  private static final int GOLD_REWARDS = 10;
-  private static final int CHEST_REWARDS = 11;
-  private static final int UNIQUE = 12;
-  private static final int IMAGE = 13;
+  private static final int UNIQUE = 10;
+  private static final int IMAGE = 11;
+  private static final int GOLD_REWARDS = 12;
+  private static final int CHEST_REWARDS = 13;
 
   // Scenario #1 values
   private static int[] experience = {                                     //
@@ -55,6 +56,9 @@ public class MonstersPane extends BasePane
 
   TextField[] textOut1;
   TextField[] textOut2;
+  TextField[] textOut3;
+  TextField[] textOut4;
+
   CheckBox[] checkBoxes1;
   CheckBox[] checkBoxes2;
 
@@ -86,8 +90,8 @@ public class MonstersPane extends BasePane
     String[] label1Text =
         { "Generic name", "Monster class", "Partner", "Appear dice", "Hits dice", "Damage dice" };
     String[] label2Text = { "ID", "Mage level", "Priest level", "Partner odds", "Magic resistance",
-        "Breathe", "Level drain", "Regen", "Experience", "Armour class", "Gold rewards",
-        "Chest rewards", "# Encs", "Image" };
+        "Breathe", "Level drain", "Regen", "Experience", "Armour class", "# Encs", "Image",
+        "Gold rewards", "Chest rewards" };
 
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 2);
     DataPlacement dp1 = new DataPlacement (2, 1, Pos.CENTER_LEFT, 1);
@@ -96,6 +100,9 @@ public class MonstersPane extends BasePane
     LabelPlacement lp2 = new LabelPlacement (4, 0, HPos.RIGHT, 1);
     DataPlacement dp2 = new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1);
     textOut2 = createOutputFields (label2Text, lp2, dp2);
+
+    textOut3 = createOutputFields (1, new DataPlacement (6, 12, Pos.CENTER_LEFT, 2));
+    textOut4 = createOutputFields (3, new DataPlacement (6, 13, Pos.CENTER_LEFT, 4));
 
     // resistance
     setLabel ("Resistance", 6, 0, HPos.RIGHT, 2);
@@ -127,10 +134,36 @@ public class MonstersPane extends BasePane
     setText (textOut2[REGEN], monster.healPts);
     setText (textOut2[TOTAL], scenarioId == 1 ? experience[monster.id] : monster.expamt);
     setText (textOut2[ARMOUR_CLASS], monster.armourClass);
-    setText (textOut2[GOLD_REWARDS], monster.reward1);
-    setText (textOut2[CHEST_REWARDS], monster.reward2);
     setText (textOut2[UNIQUE], monster.unique);
     setText (textOut2[IMAGE], monster.image);
+    setText (textOut2[GOLD_REWARDS], monster.reward1);
+    setText (textOut2[CHEST_REWARDS], monster.reward2);
+
+    setText (textOut3[0], wizardry.getRewards ().get (monster.reward1).goldRange ());
+
+    for (int i = 0; i < 3; i++)
+    {
+      Reward reward = wizardry.getRewards ().get (monster.reward2);
+      String itemRange = reward.itemRange (i);
+      if (itemRange.isEmpty ())
+        setText (textOut4[i], "");
+      else
+      {
+        int pos = itemRange.indexOf (':');
+        int item1 = Integer.parseInt (itemRange.substring (0, pos - 1));
+        int item2 = Integer.parseInt (itemRange.substring (pos + 2));
+
+        if (item1 == item2)
+          setText (textOut4[i], wizardry.getItems ().get (item1));
+        else
+        {
+          String itemName1 = wizardry.getItems ().get (item1).name;
+          String itemName2 = wizardry.getItems ().get (item2).name;
+          setText (textOut4[i], itemName1 + " : " + itemName2);
+        }
+        //        }
+      }
+    }
 
     int resistance = monster.flags1;
     for (int i = 0; i < WizardryOrigin.resistance.length; i++)

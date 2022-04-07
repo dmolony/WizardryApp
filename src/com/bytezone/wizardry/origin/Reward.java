@@ -29,6 +29,34 @@ public class Reward
   }
 
   // ---------------------------------------------------------------------------------//
+  public String goldRange ()
+  // ---------------------------------------------------------------------------------//
+  {
+    if (rewardDetails[0].goldReward != null)
+    {
+      return rewardDetails[0].goldReward.getRange ();
+    }
+    return "";
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public String itemRange (int index)
+  // ---------------------------------------------------------------------------------//
+  {
+    int count = 0;
+    for (int i = 0; i < total; i++)
+    {
+      if (rewardDetails[i].itemReward != null)
+      {
+        if (count++ == index)
+          return rewardDetails[i].itemReward.getMin () + " : "
+              + rewardDetails[i].itemReward.getMax ();
+      }
+    }
+    return "";
+  }
+
+  // ---------------------------------------------------------------------------------//
   @Override
   public String toString ()
   // ---------------------------------------------------------------------------------//

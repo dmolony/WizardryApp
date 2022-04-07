@@ -75,12 +75,22 @@ public class RewardDetails
     {
       return dice1.max () * base * dice2.max ();
     }
+
+    public String getRange ()
+    {
+      return getMin () + " : " + getMax ();
+    }
   }
 
   // ---------------------------------------------------------------------------------//
   public record ItemReward (int item, int size, int max, int element, int odds)
   // ---------------------------------------------------------------------------------//
   {
+    public int getMin ()
+    {
+      return item;
+    }
+
     public int getMax ()
     {
       return item + size * max + element;

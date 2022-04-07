@@ -19,8 +19,6 @@ public class EnemyCalc
     worse01 = Utility.getShort (buffer, offset + 4);
     range0n = Utility.getShort (buffer, offset + 6);
     percWors = Utility.getShort (buffer, offset + 8);
-
-    //    System.out.println (HexFormatter.format (buffer, offset, 10, false, offset));
   }
 
   // ---------------------------------------------------------------------------------//
