@@ -26,7 +26,7 @@ public class EncountersPane extends BasePane
   {
     super (wizardry, stage);
 
-    setColumnConstraints (110, 50, 100, 50, 100, 50, 100);
+    setColumnConstraints (110, 50, 80, 50, 80, 50, 80);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 3);
