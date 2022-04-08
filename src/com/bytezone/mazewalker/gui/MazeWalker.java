@@ -53,7 +53,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private final MenuItem rewardsItem = new MenuItem ("Rewards ...");
   private final MenuItem encountersItem = new MenuItem ("Encounters ...");
 
-  private MazePane mazePane;
+  private MazeWalkerPane mazePane;
   private ViewPane viewPane;
 
   private VBox leftVBox = new VBox (10);
@@ -167,7 +167,7 @@ public class MazeWalker extends AppBase implements MovementListener
     else
       primaryStage.setTitle (wizardryFileName);
 
-    mazePane = new MazePane (wizardry);
+    mazePane = new MazeWalkerPane (wizardry);
     viewPane = new ViewPane (wizardry);
 
     mazePane.setOnMouseClicked (e -> mouseClick (e));
