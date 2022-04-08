@@ -146,6 +146,8 @@ public class CharactersPane extends BasePane
     checkBox1 = createCheckBoxes (mageSpells, 8, 1);
     checkBox2 = createCheckBoxes (priestSpells1, 10, 1);
     checkBox3 = createCheckBoxes (priestSpells2, 12, 1);
+
+    charactersList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//

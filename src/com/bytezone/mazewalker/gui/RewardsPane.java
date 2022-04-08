@@ -42,7 +42,6 @@ public class RewardsPane extends BasePane
       "Element", "Probability" };
 
   ComboBox<Reward> rewardsList = new ComboBox<> ();
-  ComboBox<RewardDetails> rewardOddsList = new ComboBox<> ();
 
   TextField[] textOut1;
   TextField[] textOut2;
@@ -90,6 +89,8 @@ public class RewardsPane extends BasePane
 
     // traps
     checkBoxes1 = createCheckBoxes (WizardryOrigin.trapType, 2, 1);
+
+    rewardsList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//

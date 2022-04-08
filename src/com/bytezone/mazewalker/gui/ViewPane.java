@@ -20,7 +20,6 @@ public class ViewPane extends Canvas implements MovementListener
   private static final int[] corners = { 0, 35, 90, 130, 155, 170, 180, 187 };
   private static final int[] doors = { 25, 20, 15, 10, 8, 6, 4, 2 };
   private static final int[] vGaps = { 20, 18, 16, 12, 10, 6, 5, 4 };
-  //  private static final int[] hGaps = { 30, 20, 15, 10, 8, 6, 4, 2 };
   private static final int PANE_SIZE = 400;
   private static final int MIDDLE = 2;
   private static final int LEFT_1 = 1;

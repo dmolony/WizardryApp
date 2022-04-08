@@ -53,6 +53,8 @@ public class EncountersPane extends BasePane
     textOut2[0] = createOutputFields (labels2, lp2, dp2);
     textOut2[1] = createOutputFields (6, new DataPlacement (3, 11, Pos.CENTER_LEFT, 2));
     textOut2[2] = createOutputFields (6, new DataPlacement (5, 11, Pos.CENTER_LEFT, 2));
+
+    mazeLevelList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//

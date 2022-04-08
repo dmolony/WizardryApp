@@ -6,17 +6,20 @@ import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 public class Extra
 // -----------------------------------------------------------------------------------//
 {
-  private Square square;
-  private int[] aux = new int[3];
+  public final Square square;
+  public final int[] aux = new int[3];
 
   // ---------------------------------------------------------------------------------//
-  public Extra (Square square, int aux0, int aux1, int aux2)
+  public Extra (int index, byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
-    this.square = square;
-    this.aux[0] = aux0;
-    this.aux[1] = aux1;
-    this.aux[2] = aux2;
+    byte b = buffer[offset + (index) / 2];
+    int val = index % 2 == 0 ? b & 0x0F : (b & 0xF0) >>> 4;
+
+    square = WizardryOrigin.Square.values ()[val];
+    aux[0] = Utility.getSignedShort (buffer, offset + 8 + index * 2);
+    aux[1] = Utility.getSignedShort (buffer, offset + 40 + index * 2);
+    aux[2] = Utility.getSignedShort (buffer, offset + 72 + index * 2);
   }
 
   // ---------------------------------------------------------------------------------//

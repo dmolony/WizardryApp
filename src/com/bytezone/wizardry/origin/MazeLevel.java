@@ -1,7 +1,6 @@
 package com.bytezone.wizardry.origin;
 
 import com.bytezone.wizardry.origin.Walls.Wall;
-import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -23,11 +22,8 @@ public class MazeLevel
 
   boolean[][] lair = new boolean[20][20];
   byte[][] sqrextra = new byte[20][20];
-  public final Square[] squares = new Square[16];
 
-  public final int[] aux0 = new int[16];
-  public final int[] aux1 = new int[16];
-  public final int[] aux2 = new int[16];
+  public final Extra[] extra = new Extra[16];
 
   EnemyCalc[] enemyCalc = new EnemyCalc[3];
 
@@ -46,11 +42,8 @@ public class MazeLevel
 
     addLairs (lair, buffer, offset + 0x1E0);
     addExtras (sqrextra, buffer, offset + 0x230);
-    addSquares (squares, buffer, offset + 0x2F8);
 
-    addAux (aux0, buffer, offset + 0x300);
-    addAux (aux1, buffer, offset + 0x320);
-    addAux (aux2, buffer, offset + 0x340);
+    addExtra (extra, buffer, offset + 0x2F8);
 
     addEnemyCalc (enemyCalc, buffer, offset + 0x360);
 
@@ -64,8 +57,7 @@ public class MazeLevel
         if (sqrextra[col][row] != 0)
         {
           int index = sqrextra[col][row];
-          Extra extra = new Extra (squares[index], aux0[index], aux1[index], aux2[index]);
-          mazeCell.addExtra (extra);
+          mazeCell.addExtra (extra[index]);
         }
 
         mazeCells[col][row] = mazeCell;
@@ -167,26 +159,14 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addSquares (Square[] squares, byte[] buffer, int ptr)
+  private void addExtra (Extra[] extra, byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     int pos = 0;
     for (int i = 0; i < 8; i++)
     {
-      int value = buffer[ptr++] & 0xFF;
-      squares[pos++] = WizardryOrigin.Square.values ()[(value & 0x0F)];
-      squares[pos++] = WizardryOrigin.Square.values ()[(value & 0xF0) >>> 4];
-    }
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void addAux (int[] aux, byte[] buffer, int ptr)
-  // ---------------------------------------------------------------------------------//
-  {
-    for (int i = 0; i < 16; i++)
-    {
-      aux[i] = Utility.getSignedShort (buffer, ptr);
-      ptr += 2;
+      extra[pos] = new Extra (pos++, buffer, ptr);
+      extra[pos] = new Extra (pos++, buffer, ptr);
     }
   }
 
@@ -249,10 +229,10 @@ public class MazeLevel
     }
     appendGridBottom (text);
 
-    for (int i = 0; i < 16; i++)
-      if (squares[i] != WizardryOrigin.Square.NORMAL)
-        text.append (String.format ("%X   %-12s %04X  %04X  %04X%n", i, squares[i], aux0[i],
-            aux1[i], aux2[i]));
+    //    for (int i = 0; i < 16; i++)
+    //      if (squares[i] != WizardryOrigin.Square.NORMAL)
+    //        text.append (String.format ("%X   %-12s %04X  %04X  %04X%n", i, squares[i], aux0[i],
+    //            aux1[i], aux2[i]));
 
     return text.toString ();
   }

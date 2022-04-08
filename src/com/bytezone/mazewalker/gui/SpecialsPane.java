@@ -1,11 +1,11 @@
 package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Damage;
+import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
-import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -42,11 +42,12 @@ public class SpecialsPane extends BasePane
     // special squares
     String[] squaresText = new String[16];
     for (int i = 0; i < squaresText.length; i++)
-      squaresText[i] = "# " + (i + 1);
+      squaresText[i] = i + "";
 
     LabelPlacement lp1 = new LabelPlacement (0, 5, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 5, Pos.CENTER_LEFT, 1);
     textOut1 = createOutputFields (squaresText, lp1, dp1);
+
     textOut2 = createOutputFields (16, new DataPlacement (2, 5, Pos.CENTER_RIGHT, 1));
     textOut3 = createOutputFields (16, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
     textOut4 = createOutputFields (16, new DataPlacement (4, 5, Pos.CENTER_RIGHT, 1));
@@ -58,8 +59,10 @@ public class SpecialsPane extends BasePane
     setLabel ("Aux 0", 2, 4, HPos.LEFT, 1);
     setLabel ("Aux 1", 3, 4, HPos.LEFT, 1);
     setLabel ("Aux 2", 4, 4, HPos.LEFT, 1);
-    setLabel ("Msg", 5, 4, HPos.LEFT, 1);
-    setLabel ("Meaning", 6, 4, HPos.LEFT, 1);
+    setLabel ("Msg #", 5, 4, HPos.LEFT, 1);
+    setLabel ("Description", 6, 4, HPos.LEFT, 1);
+
+    mazeLevelList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -68,13 +71,13 @@ public class SpecialsPane extends BasePane
   {
     for (int i = 0; i < 16; i++)
     {
-      Square square = mazeLevel.squares[i];
-      int aux0 = mazeLevel.aux0[i];
-      int aux1 = mazeLevel.aux1[i];
-      int aux2 = mazeLevel.aux2[i];
-      int[] aux = { aux0, aux1, aux2 };
+      Extra extra = mazeLevel.extra[i];
 
-      setText (textOut1[i], square);
+      int aux0 = extra.aux[0];
+      int aux1 = extra.aux[1];
+      int aux2 = extra.aux[2];
+
+      setText (textOut1[i], extra.square);
       setText (textOut2[i], aux0);
       setText (textOut3[i], aux1);
       setText (textOut4[i], aux2);
@@ -83,7 +86,7 @@ public class SpecialsPane extends BasePane
 
       StringBuilder description = new StringBuilder ();
 
-      switch (square)
+      switch (extra.square)
       {
         case SCNMSG:
           setText (textOut5[i], aux1);
@@ -118,17 +121,17 @@ public class SpecialsPane extends BasePane
           break;
 
         case STAIRS:
-          Location location = new Location (aux);
+          Location location = new Location (extra.aux);
           description.append (String.format ("Stairs to: %s", location));
           break;
 
         case PIT:
-          Damage damage = new Damage (aux);
+          Damage damage = new Damage (extra.aux);
           description.append (String.format ("Pit - %s", damage));
           break;
 
         case CHUTE:
-          location = new Location (aux);
+          location = new Location (extra.aux);
           description.append (String.format ("Chute to %s", location));
           break;
 
@@ -140,7 +143,7 @@ public class SpecialsPane extends BasePane
           break;
 
         case TRANSFER:
-          location = new Location (aux);
+          location = new Location (extra.aux);
           description.append (String.format ("Teleport to: %s", location));
           break;
 

@@ -79,7 +79,6 @@ public class BasePane extends Pane
     comboBox.setItems (FXCollections.observableArrayList (list));
     comboBox.setVisibleRowCount (20);
     comboBox.getSelectionModel ().selectedItemProperty ().addListener (listener);
-    //    comboBox.setMinWidth (gridPane.getColumnConstraints ().get (dataPos.col).getMaxWidth ());
   }
 
   // ---------------------------------------------------------------------------------//

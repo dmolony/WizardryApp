@@ -8,6 +8,7 @@ import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
+import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
@@ -44,14 +45,14 @@ public class MazeWalker extends AppBase implements MovementListener
   private final Menu menuFile = new Menu ("File");
   private final Menu menuLevels = new Menu ("Levels");
   private final Menu menuTools = new Menu ("Tools");
-  private final MenuItem openFileItem = new MenuItem ("Open file ...");
-  private final MenuItem experienceItem = new MenuItem ("Experience Points ...");
-  private final MenuItem charactersItem = new MenuItem ("Characters ...");
-  private final MenuItem monstersItem = new MenuItem ("Monsters ...");
-  private final MenuItem itemsItem = new MenuItem ("Items ...");
-  private final MenuItem rewardsItem = new MenuItem ("Rewards ...");
-  private final MenuItem encountersItem = new MenuItem ("Encounters ...");
-  private final MenuItem specialsItem = new MenuItem ("Specials ...");
+  private final MenuItem openFileItem = new MenuItem ("Open file...");
+  private final MenuItem experienceItem = new MenuItem ("Experience Points...");
+  private final MenuItem charactersItem = new MenuItem ("Characters...");
+  private final MenuItem monstersItem = new MenuItem ("Monsters...");
+  private final MenuItem itemsItem = new MenuItem ("Items...");
+  private final MenuItem rewardsItem = new MenuItem ("Rewards...");
+  private final MenuItem encountersItem = new MenuItem ("Encounters...");
+  private final MenuItem specialsItem = new MenuItem ("Specials...");
 
   private MazeWalkerPane mazePane;
   private ViewPane viewPane;
@@ -355,14 +356,14 @@ public class MazeWalker extends AppBase implements MovementListener
     StringBuilder description = new StringBuilder ();
     description.append (currentWalker.toString ());
 
-    Extra extra = currentWalker.getCurrentMazeCell ().getExtra ();
-    boolean lair = currentWalker.getCurrentMazeCell ().getLair ();
+    MazeCell currentMazeCell = currentWalker.getCurrentMazeCell ();
+    Extra extra = currentMazeCell.getExtra ();
+    boolean lair = currentMazeCell.getLair ();
 
     if (extra != null)
     {
       description.append ("\n\n" + extra + "\n\n");
       int[] aux = extra.getAux ();
-      //      int val = aux[0];
 
       switch (extra.getSquare ())
       {

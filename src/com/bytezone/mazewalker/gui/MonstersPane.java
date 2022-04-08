@@ -111,6 +111,8 @@ public class MonstersPane extends BasePane
     // properties
     setLabel ("Property", 8, 0, HPos.RIGHT, 2);
     checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 8, 1);
+
+    monstersList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//

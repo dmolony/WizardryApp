@@ -76,6 +76,8 @@ public class ExperienceCalculator extends BasePane
 
       textIn[i].setOnKeyTyped (e -> keyTyped (e));
     }
+
+    monsters.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//

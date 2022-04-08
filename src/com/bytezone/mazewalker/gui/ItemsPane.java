@@ -87,6 +87,8 @@ public class ItemsPane extends BasePane
 
     // purposed vs
     checkBoxes4 = createCheckBoxes (checkBoxes3.length, 7, 1);
+
+    itemsList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
