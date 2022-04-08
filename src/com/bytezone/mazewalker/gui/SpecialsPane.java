@@ -71,7 +71,7 @@ public class SpecialsPane extends BasePane
   {
     for (int i = 0; i < 16; i++)
     {
-      Extra extra = mazeLevel.extra[i];
+      Extra extra = mazeLevel.getExtra ()[i];
 
       int aux0 = extra.aux[0];
       int aux1 = extra.aux[1];

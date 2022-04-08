@@ -23,7 +23,7 @@ public class MazeLevel
   boolean[][] lair = new boolean[20][20];
   byte[][] sqrextra = new byte[20][20];
 
-  public final Extra[] extra = new Extra[16];
+  Extra[] extra = new Extra[16];
 
   EnemyCalc[] enemyCalc = new EnemyCalc[3];
 
@@ -40,12 +40,12 @@ public class MazeLevel
     addWalls (east, buffer, offset + 0xF0);
     addWalls (north, buffer, offset + 0x168);
 
-    addLairs (lair, buffer, offset + 0x1E0);
-    addExtras (sqrextra, buffer, offset + 0x230);
+    addLairs (buffer, offset + 0x1E0);
+    addExtras (buffer, offset + 0x230);
 
-    addExtra (extra, buffer, offset + 0x2F8);
+    addExtra (buffer, offset + 0x2F8);
 
-    addEnemyCalc (enemyCalc, buffer, offset + 0x360);
+    addEnemyCalc (buffer, offset + 0x360);
 
     for (int col = 0; col < 20; col++)
       for (int row = 0; row < 20; row++)
@@ -103,6 +103,13 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
+  public Extra[] getExtra ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return extra;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public EnemyCalc[] getEnemyCalc ()
   // ---------------------------------------------------------------------------------//
   {
@@ -131,7 +138,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addLairs (boolean[][] lair, byte[] buffer, int ptr)
+  private void addLairs (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     for (int col = 0; col < 20; col++)
@@ -146,7 +153,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addExtras (byte[][] sqrextra, byte[] buffer, int ptr)
+  private void addExtras (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     for (int col = 0; col < 20; col++)
@@ -159,7 +166,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addExtra (Extra[] extra, byte[] buffer, int ptr)
+  private void addExtra (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     int pos = 0;
@@ -171,7 +178,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addEnemyCalc (EnemyCalc[] enemyCalc, byte[] buffer, int ptr)
+  private void addEnemyCalc (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < 3; i++)
