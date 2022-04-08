@@ -304,7 +304,7 @@ public class MazeWalker extends AppBase implements MovementListener
     encountersStage.setTitle ("Wizardry Encounters");
     EncountersPane encountersPane = new EncountersPane (wizardry, encountersStage);
 
-    Scene scene = new Scene (encountersPane, 770, 575);            // wh
+    Scene scene = new Scene (encountersPane, 700, 440);            // wh
     encountersStage.setScene (scene);
     scene.setOnKeyPressed (e -> encountersPane.keyPressed (e));
   }

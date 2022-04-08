@@ -4,11 +4,11 @@ package com.bytezone.wizardry.origin;
 public class EnemyCalc
 // -----------------------------------------------------------------------------------//
 {
-  int minEnemy;       // ptr
-  int multWors;       // classize
-  int worse01;        // classmax
-  int range0n;        // element
-  int percWors;       // prob
+  public final int minEnemy;       // ptr
+  public final int multWors;       // classize
+  public final int worse01;        // classmax
+  public final int range0n;        // element
+  public final int percWors;       // prob
 
   // ---------------------------------------------------------------------------------//
   public EnemyCalc (byte[] buffer, int offset)
