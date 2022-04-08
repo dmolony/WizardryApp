@@ -23,11 +23,11 @@ public class MazeLevel
 
   boolean[][] lair = new boolean[20][20];
   byte[][] sqrextra = new byte[20][20];
-  Square[] squares = new Square[16];
+  public final Square[] squares = new Square[16];
 
-  int[] aux0 = new int[16];
-  int[] aux1 = new int[16];
-  int[] aux2 = new int[16];
+  public final int[] aux0 = new int[16];
+  public final int[] aux1 = new int[16];
+  public final int[] aux2 = new int[16];
 
   EnemyCalc[] enemyCalc = new EnemyCalc[3];
 
@@ -70,10 +70,6 @@ public class MazeLevel
 
         mazeCells[col][row] = mazeCell;
       }
-
-    //    for (int i = 0; i < 3; i++)
-    //      System.out.printf ("%s%n", enemyCalc[i]);
-    //    System.out.println ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -115,6 +111,13 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
+  public EnemyCalc[] getEnemyCalc ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return enemyCalc;
+  }
+
+  // ---------------------------------------------------------------------------------//
   private void addWalls (Wall[][] walls, byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
@@ -139,20 +142,9 @@ public class MazeLevel
   private void addLairs (boolean[][] lair, byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
-    //    if (level == 7)
-    //    {
-    //      System.out.println (HexFormatter.format (buffer, ptr, 80));
-    //      System.out.println ();
-    //    }
     for (int col = 0; col < 20; col++)
     {
       int val = Utility.readTriple (buffer, ptr + col * 4) & 0x0FFFFF;
-      //      if (level == 7)
-      //      {
-      //        System.out.printf ("Col %02d : %02X %02X %02X %02X : %06X  ", col, buffer[ptr + col * 4],
-      //            buffer[ptr + col * 4 + 1], buffer[ptr + col * 4 + 2], buffer[ptr + col * 4 + 3], val);
-      //        System.out.printf ("%20s%n", Integer.toBinaryString (val));
-      //      }
       for (int row = 0; row < 20; row++)
       {
         lair[col][row] = (val & 0x01) == 1;
@@ -193,7 +185,7 @@ public class MazeLevel
   {
     for (int i = 0; i < 16; i++)
     {
-      aux[i] = Utility.getShort (buffer, ptr);
+      aux[i] = Utility.getSignedShort (buffer, ptr);
       ptr += 2;
     }
   }
@@ -210,15 +202,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  public EnemyCalc[] getEnemyCalc ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return enemyCalc;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public String toString ()
+  public String getText ()
   // ---------------------------------------------------------------------------------//
   {
     StringBuilder text = new StringBuilder ("*******  Level " + level + "  *******\n\n");
@@ -304,5 +288,13 @@ public class MazeLevel
     text.append ("   | 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9 |\n");
     text.append (line);
     text.append ("\n");
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return "Maze Level " + level;
   }
 }

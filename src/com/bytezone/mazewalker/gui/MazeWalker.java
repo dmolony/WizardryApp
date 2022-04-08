@@ -9,7 +9,6 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.Monster;
-import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
@@ -52,6 +51,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private final MenuItem itemsItem = new MenuItem ("Items ...");
   private final MenuItem rewardsItem = new MenuItem ("Rewards ...");
   private final MenuItem encountersItem = new MenuItem ("Encounters ...");
+  private final MenuItem specialsItem = new MenuItem ("Specials ...");
 
   private MazeWalkerPane mazePane;
   private ViewPane viewPane;
@@ -75,6 +75,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private Stage itemsStage;
   private Stage rewardsStage;
   private Stage encountersStage;
+  private Stage specialsStage;
 
   // ---------------------------------------------------------------------------------//
   @Override
@@ -90,7 +91,7 @@ public class MazeWalker extends AppBase implements MovementListener
     openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
 
     menuTools.getItems ().addAll (experienceItem, charactersItem, monstersItem, itemsItem,
-        rewardsItem, encountersItem);
+        rewardsItem, encountersItem, specialsItem);
 
     experienceItem.setOnAction (e -> calculatorStage.show ());
     experienceItem
@@ -99,6 +100,9 @@ public class MazeWalker extends AppBase implements MovementListener
     charactersItem.setOnAction (e -> charactersStage.show ());
     charactersItem
         .setAccelerator (new KeyCodeCombination (KeyCode.C, KeyCombination.SHORTCUT_DOWN));
+
+    specialsItem.setOnAction (e -> specialsStage.show ());
+    specialsItem.setAccelerator (new KeyCodeCombination (KeyCode.S, KeyCombination.SHORTCUT_DOWN));
 
     monstersItem.setOnAction (e -> monstersStage.show ());
     monstersItem.setAccelerator (new KeyCodeCombination (KeyCode.M, KeyCombination.SHORTCUT_DOWN));
@@ -207,6 +211,7 @@ public class MazeWalker extends AppBase implements MovementListener
     buildItems ();
     buildRewards ();
     buildEncounters ();
+    buildMaze ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -224,6 +229,19 @@ public class MazeWalker extends AppBase implements MovementListener
       calculatorStage.setScene (scene);
       scene.setOnKeyPressed (e -> experienceCalculator.keyPressed (e));
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void buildMaze ()
+  // ---------------------------------------------------------------------------------//
+  {
+    specialsStage = new Stage ();
+    specialsStage.setTitle ("Special squares");
+    SpecialsPane specialsPane = new SpecialsPane (wizardry, specialsStage);
+
+    Scene scene = new Scene (specialsPane, 910, 810);               // wh
+    specialsStage.setScene (scene);
+    scene.setOnKeyPressed (e -> specialsPane.keyPressed (e));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -344,7 +362,7 @@ public class MazeWalker extends AppBase implements MovementListener
     {
       description.append ("\n\n" + extra + "\n\n");
       int[] aux = extra.getAux ();
-      int val = Utility.signShort (aux[0]);
+      //      int val = aux[0];
 
       switch (extra.getSquare ())
       {
@@ -355,10 +373,10 @@ public class MazeWalker extends AppBase implements MovementListener
           switch (aux[2])
           {
             case 1:
-              if (val == 0)
+              if (aux[0] == 0)
                 description.append ("\n\nMessage will not be displayed");
-              else if (val > 0)
-                description.append ("\n\n(" + val + " left)");
+              else if (aux[0] > 0)
+                description.append ("\n\n(" + aux[0] + " left)");
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)
@@ -366,10 +384,10 @@ public class MazeWalker extends AppBase implements MovementListener
               break;
 
             case 4:                       // monster or obtain
-              if (val >= 0)               // monster
-                description.append ("\n\nEncounter: " + wizardry.getMonster (val));
+              if (aux[0] >= 0)               // monster
+                description.append ("\n\nEncounter: " + wizardry.getMonster (aux[0]));
               else
-                description.append ("\n\nObtain: " + wizardry.getItem (Math.abs (val) - 1000));
+                description.append ("\n\nObtain: " + wizardry.getItem (Math.abs (aux[0]) - 1000));
               break;
 
             case 5:                       // requires
@@ -431,7 +449,7 @@ public class MazeWalker extends AppBase implements MovementListener
 
         case ENCOUNTE:
           Monster monster = wizardry.getMonster (aux[2]);
-          String when = val == -1 ? "always" : val + " left";
+          String when = aux[0] == -1 ? "always" : aux[0] + " left";
           description.append (String.format ("An encounter : %s (%s)", monster, when));
           if (!lair)
             description.append ("\n\nError - room is not a LAIR");
