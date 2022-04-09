@@ -1,7 +1,14 @@
 package com.bytezone.wizardry.origin;
 
+import static com.bytezone.wizardry.origin.Walls.EAST;
+import static com.bytezone.wizardry.origin.Walls.NORTH;
+import static com.bytezone.wizardry.origin.Walls.SOUTH;
+import static com.bytezone.wizardry.origin.Walls.WEST;
+import static com.bytezone.wizardry.origin.Walls.Wall.DOOR;
+import static com.bytezone.wizardry.origin.Walls.Wall.HIDEDOOR;
+import static com.bytezone.wizardry.origin.Walls.Wall.WALL;
+
 import com.bytezone.mazewalker.gui.Walker;
-import com.bytezone.wizardry.origin.Walls.Wall;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -181,33 +188,33 @@ public class MazeCell
     }
 
     gc.setStroke (Color.BLACK);
-    if (walls.west == Wall.WALL)
+    if (walls.wall (WEST) == WALL)
       gc.strokeLine (left, top, left, bottom);
-    if (walls.north == Wall.WALL)
+    if (walls.wall (NORTH) == WALL)
       gc.strokeLine (left, top, right, top);
-    if (walls.east == Wall.WALL)
+    if (walls.wall (EAST) == WALL)
       gc.strokeLine (right, top, right, bottom);
-    if (walls.south == Wall.WALL)
+    if (walls.wall (SOUTH) == WALL)
       gc.strokeLine (left, bottom, right, bottom);
 
     gc.setStroke (Color.BLUEVIOLET);
-    if (walls.west == Wall.DOOR)
+    if (walls.wall (WEST) == DOOR)
       gc.strokeLine (left, top, left, bottom);
-    if (walls.north == Wall.DOOR)
+    if (walls.wall (NORTH) == DOOR)
       gc.strokeLine (left, top, right, top);
-    if (walls.east == Wall.DOOR)
+    if (walls.wall (EAST) == DOOR)
       gc.strokeLine (right, top, right, bottom);
-    if (walls.south == Wall.DOOR)
+    if (walls.wall (SOUTH) == DOOR)
       gc.strokeLine (left, bottom, right, bottom);
 
     gc.setStroke (Color.BLUE);
-    if (walls.west == Wall.HIDEDOOR)
+    if (walls.wall (WEST) == HIDEDOOR)
       gc.strokeLine (left, top, left, bottom);
-    if (walls.north == Wall.HIDEDOOR)
+    if (walls.wall (NORTH) == HIDEDOOR)
       gc.strokeLine (left, top, right, top);
-    if (walls.east == Wall.HIDEDOOR)
+    if (walls.wall (EAST) == HIDEDOOR)
       gc.strokeLine (right, top, right, bottom);
-    if (walls.south == Wall.HIDEDOOR)
+    if (walls.wall (SOUTH) == HIDEDOOR)
       gc.strokeLine (left, bottom, right, bottom);
   }
 

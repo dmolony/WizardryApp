@@ -1,5 +1,10 @@
 package com.bytezone.mazewalker.gui;
 
+import static com.bytezone.wizardry.origin.Walls.EAST;
+import static com.bytezone.wizardry.origin.Walls.NORTH;
+import static com.bytezone.wizardry.origin.Walls.SOUTH;
+import static com.bytezone.wizardry.origin.Walls.WEST;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,10 +96,10 @@ public class Walker
   {
     return switch (direction)
     {
-      case NORTH -> cell.getWalls ().west;
-      case SOUTH -> cell.getWalls ().east;
-      case EAST -> cell.getWalls ().north;
-      case WEST -> cell.getWalls ().south;
+      case NORTH -> cell.getWalls ().wall (WEST);
+      case SOUTH -> cell.getWalls ().wall (EAST);
+      case EAST -> cell.getWalls ().wall (NORTH);
+      case WEST -> cell.getWalls ().wall (SOUTH);
     };
   }
 
@@ -104,10 +109,10 @@ public class Walker
   {
     return switch (direction)
     {
-      case NORTH -> cell.getWalls ().east;
-      case SOUTH -> cell.getWalls ().west;
-      case EAST -> cell.getWalls ().south;
-      case WEST -> cell.getWalls ().north;
+      case NORTH -> cell.getWalls ().wall (EAST);
+      case SOUTH -> cell.getWalls ().wall (WEST);
+      case EAST -> cell.getWalls ().wall (SOUTH);
+      case WEST -> cell.getWalls ().wall (NORTH);
     };
   }
 
@@ -117,10 +122,10 @@ public class Walker
   {
     return switch (direction)
     {
-      case NORTH -> cell.getWalls ().north;
-      case SOUTH -> cell.getWalls ().south;
-      case EAST -> cell.getWalls ().east;
-      case WEST -> cell.getWalls ().west;
+      case NORTH -> cell.getWalls ().wall (NORTH);
+      case SOUTH -> cell.getWalls ().wall (SOUTH);
+      case EAST -> cell.getWalls ().wall (EAST);
+      case WEST -> cell.getWalls ().wall (WEST);
     };
   }
 

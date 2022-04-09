@@ -15,11 +15,6 @@ public class MazeLevel
 
   private MazeCell[][] mazeCells = new MazeCell[20][20];
 
-  Wall[][] west = new Wall[20][20];
-  Wall[][] south = new Wall[20][20];
-  Wall[][] east = new Wall[20][20];
-  Wall[][] north = new Wall[20][20];
-
   boolean[][] lair = new boolean[20][20];
   byte[][] sqrextra = new byte[20][20];
 
@@ -34,6 +29,11 @@ public class MazeLevel
     this.level = level;
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
+
+    Wall[][] west = new Wall[20][20];
+    Wall[][] south = new Wall[20][20];
+    Wall[][] east = new Wall[20][20];
+    Wall[][] north = new Wall[20][20];
 
     addWalls (west, buffer, offset);
     addWalls (south, buffer, offset + 0x78);
@@ -62,6 +62,9 @@ public class MazeLevel
 
         mazeCells[col][row] = mazeCell;
       }
+
+    //    if (level == 1)
+    //      System.out.println (getText ());
   }
 
   // ---------------------------------------------------------------------------------//
@@ -195,16 +198,16 @@ public class MazeLevel
     StringBuilder text = new StringBuilder ("*******  Level " + level + "  *******\n\n");
 
     text.append ("West walls\n");
-    appendWalls (text, west);
+    appendWalls (text, Walls.WEST);
 
     text.append ("South walls\n");
-    appendWalls (text, south);
+    appendWalls (text, Walls.SOUTH);
 
     text.append ("East walls\n");
-    appendWalls (text, east);
+    appendWalls (text, Walls.EAST);
 
     text.append ("North walls\n");
-    appendWalls (text, north);
+    appendWalls (text, Walls.NORTH);
 
     text.append ("Enemy lairs\n");
     text.append (line);
@@ -212,10 +215,10 @@ public class MazeLevel
     {
       text.append (String.format ("%2d |", row));
       for (int col = 0; col < 20; col++)
-        if (lair[col][row])
-          text.append (" * ");
-        else
-          text.append ("   ");
+      {
+        MazeCell mazeCell = mazeCells[col][row];
+        text.append (mazeCell.getLair () ? " * " : "   ");
+      }
 
       text.append ("|\n");
     }
@@ -227,25 +230,31 @@ public class MazeLevel
     {
       text.append (String.format ("%2d |", row));
       for (int col = 0; col < 20; col++)
+      {
+        //        MazeCell mazeCell = mazeCells[col][row];
+        //        Extra extra = mazeCell.getExtra ();
         if (sqrextra[col][row] == 0)
           text.append ("   ");
         else
           text.append (String.format (" %X ", sqrextra[col][row]));
+        //        if (extra == null)
+        //          text.append ("   ");
+        //        else
+        //          text.append (String.format (" %X ", extra.square.ordinal ()));
+      }
 
       text.append ("|\n");
     }
     appendGridBottom (text);
 
-    //    for (int i = 0; i < 16; i++)
-    //      if (squares[i] != WizardryOrigin.Square.NORMAL)
-    //        text.append (String.format ("%X   %-12s %04X  %04X  %04X%n", i, squares[i], aux0[i],
-    //            aux1[i], aux2[i]));
+    for (int i = 0; i < 16; i++)
+      text.append (String.format ("%X  %s%n", i, extra[i]));
 
     return text.toString ();
   }
 
   // ---------------------------------------------------------------------------------//
-  private void appendWalls (StringBuilder text, Wall[][] walls)
+  private void appendWalls (StringBuilder text, int direction)
   // ---------------------------------------------------------------------------------//
   {
     text.append (line);
@@ -255,10 +264,9 @@ public class MazeLevel
       text.append (String.format ("%2d |", row));
       for (int col = 0; col < 20; col++)
       {
-        if (walls[col][row] != Wall.OPEN)
-          text.append (String.format (" %d ", walls[col][row].ordinal ()));
-        else
-          text.append ("   ");
+        MazeCell mazeCell = mazeCells[col][row];
+        Wall wall = mazeCell.getWalls ().walls[direction];
+        text.append (wall == Wall.OPEN ? "   " : String.format (" %d ", wall.ordinal ()));
       }
       text.append ("|\n");
     }

@@ -48,6 +48,6 @@ public class Extra
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%-8s  %4d  %4d  %4d", square, aux[0], aux[1], aux[2]);
+    return String.format ("%-8s  %5d  %4d  %4d", square, aux[0], aux[1], aux[2]);
   }
 }

@@ -4,10 +4,12 @@ package com.bytezone.wizardry.origin;
 public class Walls
 // -----------------------------------------------------------------------------------//
 {
-  public Wall west;
-  public Wall south;
-  public Wall east;
-  public Wall north;
+  public static final int WEST = 0;
+  public static final int SOUTH = 1;
+  public static final int EAST = 2;
+  public static final int NORTH = 3;
+
+  Wall[] walls = new Wall[4];
 
   public enum Wall
   {
@@ -18,10 +20,17 @@ public class Walls
   public Walls (Wall west, Wall south, Wall east, Wall north)
   // ---------------------------------------------------------------------------------//
   {
-    this.west = west;
-    this.south = south;
-    this.east = east;
-    this.north = north;
+    walls[WEST] = west;
+    walls[SOUTH] = south;
+    walls[EAST] = east;
+    walls[NORTH] = north;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Wall wall (int direction)
+  // ---------------------------------------------------------------------------------//
+  {
+    return walls[direction];
   }
 
   // ---------------------------------------------------------------------------------//
@@ -29,6 +38,7 @@ public class Walls
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("W:%s S:%s E:%s N:%s", west, south, east, north);
+    return String.format ("W:%s S:%s E:%s N:%s", walls[WEST], walls[SOUTH], walls[EAST],
+        walls[NORTH]);
   }
 }

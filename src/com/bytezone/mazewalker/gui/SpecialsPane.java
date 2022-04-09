@@ -97,22 +97,22 @@ public class SpecialsPane extends BasePane
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)
-              description.append (" Obtain: " + wizardry.getItem (aux0));
+              description.append ("Obtain : " + wizardry.getItem (aux0));
               break;
 
             case 4:                       // monster or obtain
               if (aux0 >= 0)               // monster
                 description.append (wizardry.getMonster (aux0));
               else
-                description.append (" Obtain: " + wizardry.getItem (Math.abs (aux0) - 1000));
+                description.append ("Obtain : " + wizardry.getItem (Math.abs (aux0) - 1000));
               break;
 
             case 5:                       // requires
-              description.append (" Requires: " + wizardry.getItem (aux0));
+              description.append ("Requires : " + wizardry.getItem (aux0));
               break;
 
             case 8:
-              description.append (" Return to castle??");
+              description.append ("8 = Return to castle??");
               break;
 
             case 9:
@@ -122,7 +122,7 @@ public class SpecialsPane extends BasePane
 
         case STAIRS:
           Location location = new Location (extra.aux);
-          description.append (String.format ("Stairs to: %s", location));
+          description.append (String.format ("Stairs to : %s", location));
           break;
 
         case PIT:
@@ -132,7 +132,7 @@ public class SpecialsPane extends BasePane
 
         case CHUTE:
           location = new Location (extra.aux);
-          description.append (String.format ("Chute to %s", location));
+          description.append (String.format ("Chute to : %s", location));
           break;
 
         case SPINNER:
@@ -144,7 +144,7 @@ public class SpecialsPane extends BasePane
 
         case TRANSFER:
           location = new Location (extra.aux);
-          description.append (String.format ("Teleport to: %s", location));
+          description.append (String.format ("Teleport to : %s", location));
           break;
 
         case OUCHY:

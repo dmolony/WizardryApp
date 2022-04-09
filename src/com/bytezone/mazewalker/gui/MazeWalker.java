@@ -212,7 +212,7 @@ public class MazeWalker extends AppBase implements MovementListener
     buildItems ();
     buildRewards ();
     buildEncounters ();
-    buildMaze ();
+    buildSpecials ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -233,14 +233,14 @@ public class MazeWalker extends AppBase implements MovementListener
   }
 
   // ---------------------------------------------------------------------------------//
-  private void buildMaze ()
+  private void buildSpecials ()
   // ---------------------------------------------------------------------------------//
   {
     specialsStage = new Stage ();
     specialsStage.setTitle ("Special squares");
     SpecialsPane specialsPane = new SpecialsPane (wizardry, specialsStage);
 
-    Scene scene = new Scene (specialsPane, 910, 810);               // wh
+    Scene scene = new Scene (specialsPane, 910, 600);               // wh
     specialsStage.setScene (scene);
     scene.setOnKeyPressed (e -> specialsPane.keyPressed (e));
   }
