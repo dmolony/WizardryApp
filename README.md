@@ -14,6 +14,7 @@ There is no need to kick doors down, you can simply walk through any wall. None 
 <img src="resources/item.png" alt="drawing" width="700"/>
 <img src="resources/rewards.png" alt="drawing" width="700"/>
 <img src="resources/encounters.png" alt="drawing" width="700"/>
+<img src="resources/specials.png" alt="drawing" width="700"/>
 <img src="resources/experience.png" alt="drawing" width="400"/>
 
 ## Installation
