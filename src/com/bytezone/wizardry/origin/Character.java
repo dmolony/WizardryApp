@@ -161,10 +161,4 @@ public class Character
   {
     return name;
   }
-
-  // ---------------------------------------------------------------------------------//
-  public record Possession (int itemNo, boolean equipped, boolean cursed, boolean identified)
-  // ---------------------------------------------------------------------------------//
-  {
-  }
 }

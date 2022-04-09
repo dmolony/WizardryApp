@@ -1,8 +1,8 @@
 package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.Character.Possession;
 import com.bytezone.wizardry.origin.Item;
+import com.bytezone.wizardry.origin.Possession;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.geometry.HPos;
@@ -187,7 +187,7 @@ public class CharactersPane extends BasePane
       if (i < character.possessionsCount)
       {
         Possession possession = character.possessions.get (i);
-        int itemNo = possession.itemNo ();
+        int itemNo = possession.id ();
         Item item = wizardry.getItem (itemNo);
 
         if (possession.identified ())
