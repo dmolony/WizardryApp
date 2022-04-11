@@ -183,31 +183,31 @@ public class CharactersPane extends BasePane
       setText (textOut1[i], character.attributes[i]);
 
     for (int i = 0; i < 8; i++)
-    {
       if (i < character.possessionsCount)
       {
         Possession possession = character.possessions.get (i);
-        int itemNo = possession.id ();
-        Item item = wizardry.getItem (itemNo);
+        Item item = wizardry.getItem (possession.id ());
 
         if (possession.identified ())
         {
           setText (textOut3[i], item.name);
+          setText (textOut4[i], item.price);    // formatted as number
+
           checkBox4[i].setSelected (possession.equipped ());
-          checkBox5[i].setIndeterminate (false);
           checkBox5[i].setSelected (possession.cursed ());
           checkBox6[i].setSelected (true);
 
-          setText (textOut4[i], item.price);    // formatted as number
+          checkBox5[i].setIndeterminate (false);
         }
         else
         {
           setText (textOut3[i], item.nameUnknown);
+          setText (textOut4[i], "?");           // formatted as text
+
           checkBox4[i].setSelected (false);
-          checkBox5[i].setIndeterminate (true);
           checkBox6[i].setSelected (false);
 
-          setText (textOut4[i], "?");           // formatted as text
+          checkBox5[i].setIndeterminate (true);
         }
       }
       else
@@ -218,9 +218,9 @@ public class CharactersPane extends BasePane
         checkBox4[i].setSelected (false);
         checkBox5[i].setSelected (false);
         checkBox6[i].setSelected (false);
+
         checkBox5[i].setIndeterminate (false);
       }
-    }
 
     for (int i = 0; i < checkBox1.length; i++)
       checkBox1[i].setSelected (character.spellsKnown[i]);

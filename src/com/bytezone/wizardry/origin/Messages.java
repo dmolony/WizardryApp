@@ -8,39 +8,37 @@ public class Messages
 // -----------------------------------------------------------------------------------//
 {
   private List<Message> messages = new ArrayList<> ();
-  private int codeOffset;
+  private int codeOffset = 185;
 
   // ---------------------------------------------------------------------------------//
-  public Messages (byte[] buffer, boolean coded)
+  public Messages (byte[] buffer, int scenarioId)
   // ---------------------------------------------------------------------------------//
   {
-    int ptr = 0;
+    int offset = 0;
     int id = 0;
     List<String> lines = new ArrayList<> ();
-    codeOffset = 185;
 
-    while (ptr < buffer.length)
+    while (offset < buffer.length)
     {
       for (int i = 0; i < 504; i += 42)
       {
-        String line = coded ? getLine (buffer, ptr + i) : //
-            Utility.getPascalString (buffer, ptr + i);
+        String line = scenarioId == 1 ? Utility.getPascalString (buffer, offset + i) //
+            : getCodedLine (buffer, offset + i);
         lines.add (line);
 
-        boolean lastLine = buffer[ptr + i + 40] == 1;
-        if (lastLine)
+        if (buffer[offset + i + 40] == 1)               // last line of message
         {
           messages.add (new Message (id, lines));
           id += lines.size ();
           lines.clear ();
         }
       }
-      ptr += 512;
+      offset += 512;
     }
   }
 
   // ---------------------------------------------------------------------------------//
-  private String getLine (byte[] buffer, int offset)
+  private String getCodedLine (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
     int length = buffer[offset++] & 0xFF;
@@ -53,7 +51,7 @@ public class Messages
       translation[j] = (byte) (letter - (codeOffset - j * 3));
     }
 
-    return HexFormatter.getString (translation, 0, length);
+    return new String (translation, 0, length);
   }
 
   // ---------------------------------------------------------------------------------//

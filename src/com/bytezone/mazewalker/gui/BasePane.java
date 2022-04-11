@@ -106,15 +106,14 @@ public class BasePane extends Pane
     for (int i = 0; i < labelText.length; i++)
     {
       Label label = new Label (labelText[i]);
-      textOut[i] = new TextField ();
-
       GridPane.setConstraints (label, labelPos.col, row);
       GridPane.setColumnSpan (label, labelPos.colSpan);
 
+      textOut[i] = new TextField ();
       GridPane.setConstraints (textOut[i], dataPos.col, row);
       GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
-      textOut[i].setAlignment (dataPos.alignment);
 
+      textOut[i].setAlignment (dataPos.alignment);
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
 
@@ -140,8 +139,8 @@ public class BasePane extends Pane
 
       GridPane.setConstraints (textOut[i], dataPos.col, row);
       GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
-      textOut[i].setAlignment (dataPos.alignment);
 
+      textOut[i].setAlignment (dataPos.alignment);
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
 

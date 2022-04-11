@@ -169,7 +169,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       images.add (new Image (id++, dataBlock));
 
-    messages = new Messages (disk.getScenarioMessages (), header.scenarioId > 1);
+    messages = new Messages (disk.getScenarioMessages (), getScenarioId ());
 
     if (false)
       for (Square square : Square.values ())

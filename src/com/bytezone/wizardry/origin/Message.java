@@ -16,10 +16,6 @@ public class Message
   {
     lines.addAll (messages);
     messageID = ID;
-
-    //    System.out.println ("adding " + ID);
-    //    for (String s : messages)
-    //      System.out.println ("    " + s);
   }
 
   // ---------------------------------------------------------------------------------//
