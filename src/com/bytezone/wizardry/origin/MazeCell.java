@@ -197,7 +197,8 @@ public class MazeCell
     if (walls.wall (SOUTH) == WALL)
       gc.strokeLine (left, bottom, right, bottom);
 
-    gc.setStroke (Color.BLUEVIOLET);
+    //    gc.setStroke (Color.BLUEVIOLET);
+    gc.setStroke (Color.YELLOW);
     if (walls.wall (WEST) == DOOR)
       gc.strokeLine (left, top, left, bottom);
     if (walls.wall (NORTH) == DOOR)
@@ -207,7 +208,8 @@ public class MazeCell
     if (walls.wall (SOUTH) == DOOR)
       gc.strokeLine (left, bottom, right, bottom);
 
-    gc.setStroke (Color.BLUE);
+    //    gc.setStroke (Color.BLUE);
+    gc.setStroke (Color.RED);
     if (walls.wall (WEST) == HIDEDOOR)
       gc.strokeLine (left, top, left, bottom);
     if (walls.wall (NORTH) == HIDEDOOR)
