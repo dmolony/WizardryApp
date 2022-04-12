@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -119,6 +120,37 @@ public class BasePane extends Pane
 
       GridPane.setHalignment (label, labelPos.alignment);
       gridPane.getChildren ().addAll (label, textOut[i]);
+
+      row++;
+    }
+
+    return textOut;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextArea createOutputField (String[] labelText, LabelPlacement labelPos, DataPlacement2 dataPos)
+  // ---------------------------------------------------------------------------------//
+  {
+    TextArea textOut = new TextArea ();
+    int row = labelPos.row;
+
+    for (int i = 0; i < labelText.length; i++)
+    {
+      Label label = new Label (labelText[i]);
+      GridPane.setConstraints (label, labelPos.col, row);
+      GridPane.setColumnSpan (label, labelPos.colSpan);
+
+      //      textOut[i] = new TextField ();
+      GridPane.setConstraints (textOut, dataPos.col, row);
+      GridPane.setColumnSpan (textOut, dataPos.colSpan);
+      GridPane.setRowSpan (textOut, dataPos.rowSpan);
+
+      //      textOut.setAlignment (dataPos.alignment);
+      textOut.setEditable (false);
+      textOut.setFocusTraversable (false);
+
+      GridPane.setHalignment (label, labelPos.alignment);
+      gridPane.getChildren ().addAll (label, textOut);
 
       row++;
     }
@@ -275,6 +307,12 @@ public class BasePane extends Pane
 
   // ---------------------------------------------------------------------------------//
   public record DataPlacement (int col, int row, Pos alignment, int colSpan)
+  // ---------------------------------------------------------------------------------//
+  {
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public record DataPlacement2 (int col, int row, Pos alignment, int colSpan, int rowSpan)
   // ---------------------------------------------------------------------------------//
   {
   }

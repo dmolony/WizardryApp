@@ -1,5 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
+import com.bytezone.wizardry.origin.Image;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -182,6 +183,7 @@ public class MonstersPane extends BasePane
       property >>>= 1;
     }
 
-    wizardry.getImage (monster.image).draw (canvas.getGraphicsContext2D ());
+    Image image = wizardry.getImage (monster.image);
+    image.draw (canvas.getGraphicsContext2D ());
   }
 }

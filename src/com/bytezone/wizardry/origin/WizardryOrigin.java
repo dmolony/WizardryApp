@@ -137,7 +137,7 @@ public class WizardryOrigin
       }
       catch (InvalidCharacterException e)
       {
-        System.out.println ("Invalid character");
+        System.out.println (e);
         break;
       }
 
@@ -167,7 +167,7 @@ public class WizardryOrigin
 
     id = 0;
     for (DataBlock dataBlock : sd.dataBlocks)
-      images.add (new Image (id++, dataBlock));
+      images.add (new Image (id++, dataBlock, getScenarioId ()));
 
     messages = new Messages (disk.getScenarioMessages (), getScenarioId ());
 

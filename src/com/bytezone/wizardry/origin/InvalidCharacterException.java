@@ -4,5 +4,20 @@ package com.bytezone.wizardry.origin;
 public class InvalidCharacterException extends Exception
 // -----------------------------------------------------------------------------------//
 {
+  String reason;
 
+  // ---------------------------------------------------------------------------------//
+  public InvalidCharacterException (String reason)
+  // ---------------------------------------------------------------------------------//
+  {
+    this.reason = reason;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return "Invalid character : " + reason;
+  }
 }

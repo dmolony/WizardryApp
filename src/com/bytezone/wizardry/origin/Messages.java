@@ -55,6 +55,13 @@ public class Messages
   }
 
   // ---------------------------------------------------------------------------------//
+  public List<Message> getMessages ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return messages;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public Message getMessage (int id)
   // ---------------------------------------------------------------------------------//
   {
@@ -63,5 +70,21 @@ public class Messages
         return message;
 
     return null;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    StringBuilder text = new StringBuilder ();
+
+    for (Message message : messages)
+    {
+      text.append (message);
+      text.append ("\n\n");
+    }
+
+    return text.toString ();
   }
 }

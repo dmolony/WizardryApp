@@ -8,33 +8,32 @@ public class Message
 // -----------------------------------------------------------------------------------//
 {
   List<String> lines = new ArrayList<String> ();
-  int messageID;
+  int messageId;
 
   // ---------------------------------------------------------------------------------//
   public Message (int ID, List<String> messages)
   // ---------------------------------------------------------------------------------//
   {
     lines.addAll (messages);
-    messageID = ID;
+    messageId = ID;
   }
 
   // ---------------------------------------------------------------------------------//
   public boolean match (int messageNum)
   // ---------------------------------------------------------------------------------//
   {
-    if (messageID == messageNum)
+    if (messageId == messageNum)
       return true;
 
     // this code is to allow for a bug in scenario #1
-    if (messageNum > messageID && messageNum < (messageID + lines.size ()))
+    if (messageNum > messageId && messageNum < (messageId + lines.size ()))
       return true;
 
     return false;
   }
 
   // ---------------------------------------------------------------------------------//
-  @Override
-  public String toString ()
+  public String getText ()
   // ---------------------------------------------------------------------------------//
   {
     StringBuilder text = new StringBuilder ();
@@ -48,5 +47,13 @@ public class Message
     text.deleteCharAt (text.length () - 1);
 
     return text.toString ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return String.format ("Message %d", messageId);
   }
 }

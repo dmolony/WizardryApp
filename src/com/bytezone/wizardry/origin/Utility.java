@@ -7,6 +7,18 @@ public class Utility
   private static final int MAX_SHORT = 0xFFFF;
 
   // ---------------------------------------------------------------------------------//
+  public static String removeUserName (String filePath)
+  // ---------------------------------------------------------------------------------//
+  {
+    String userHome = System.getProperty ("user.home");
+
+    if (filePath.startsWith (userHome))
+      return "~" + filePath.substring (userHome.length ());
+
+    return filePath;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public static String getPascalString (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {

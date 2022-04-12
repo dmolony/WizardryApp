@@ -10,6 +10,7 @@ import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
@@ -45,7 +46,10 @@ public class MazeWalker extends AppBase implements MovementListener
   private final Menu menuFile = new Menu ("File");
   private final Menu menuLevels = new Menu ("Levels");
   private final Menu menuTools = new Menu ("Tools");
+
   private final MenuItem openFileItem = new MenuItem ("Open file...");
+  private final MenuItem recentFilesItem = new MenuItem ("Recent files...");
+
   private final MenuItem experienceItem = new MenuItem ("Experience Points...");
   private final MenuItem charactersItem = new MenuItem ("Characters...");
   private final MenuItem monstersItem = new MenuItem ("Monsters...");
@@ -53,6 +57,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private final MenuItem rewardsItem = new MenuItem ("Rewards...");
   private final MenuItem encountersItem = new MenuItem ("Encounters...");
   private final MenuItem specialsItem = new MenuItem ("Specials...");
+  private final MenuItem messagesItem = new MenuItem ("Messages...");
 
   private MazeWalkerPane mazePane;
   private ViewPane viewPane;
@@ -77,6 +82,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private Stage rewardsStage;
   private Stage encountersStage;
   private Stage specialsStage;
+  private Stage messagesStage;
 
   // ---------------------------------------------------------------------------------//
   @Override
@@ -92,7 +98,7 @@ public class MazeWalker extends AppBase implements MovementListener
     openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
 
     menuTools.getItems ().addAll (experienceItem, charactersItem, monstersItem, itemsItem,
-        rewardsItem, encountersItem, specialsItem);
+        rewardsItem, encountersItem, specialsItem, messagesItem);
 
     experienceItem.setOnAction (e -> calculatorStage.show ());
     experienceItem
@@ -104,6 +110,9 @@ public class MazeWalker extends AppBase implements MovementListener
 
     specialsItem.setOnAction (e -> specialsStage.show ());
     specialsItem.setAccelerator (new KeyCodeCombination (KeyCode.S, KeyCombination.SHORTCUT_DOWN));
+
+    messagesItem.setOnAction (e -> messagesStage.show ());
+    messagesItem.setAccelerator (new KeyCodeCombination (KeyCode.T, KeyCombination.SHORTCUT_DOWN));
 
     monstersItem.setOnAction (e -> monstersStage.show ());
     monstersItem.setAccelerator (new KeyCodeCombination (KeyCode.M, KeyCombination.SHORTCUT_DOWN));
@@ -166,11 +175,7 @@ public class MazeWalker extends AppBase implements MovementListener
   {
     wizardry = new WizardryOrigin (wizardryFileName);
 
-    String userHome = System.getProperty ("user.home");
-    if (wizardryFileName.startsWith (userHome))
-      primaryStage.setTitle ("~" + wizardryFileName.substring (userHome.length ()));
-    else
-      primaryStage.setTitle (wizardryFileName);
+    primaryStage.setTitle (Utility.removeUserName (wizardryFileName));
 
     mazePane = new MazeWalkerPane (wizardry);
     viewPane = new ViewPane (wizardry);
@@ -193,6 +198,7 @@ public class MazeWalker extends AppBase implements MovementListener
     {
       MenuItem item = new MenuItem ("Level " + (i + 1));
       menuLevels.getItems ().add (item);
+
       item.setAccelerator (new KeyCodeCombination (keyCodes[i], KeyCombination.SHORTCUT_DOWN));
       item.setOnAction (actionEvent -> selectMazeLevel (actionEvent));
       item.setId ("" + i);
@@ -213,6 +219,7 @@ public class MazeWalker extends AppBase implements MovementListener
     buildRewards ();
     buildEncounters ();
     buildSpecials ();
+    buildMessages ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -311,6 +318,19 @@ public class MazeWalker extends AppBase implements MovementListener
   }
 
   // ---------------------------------------------------------------------------------//
+  private void buildMessages ()
+  // ---------------------------------------------------------------------------------//
+  {
+    messagesStage = new Stage ();
+    messagesStage.setTitle ("Wizardry Messages");
+    MessagesPane messagesPane = new MessagesPane (wizardry, messagesStage);
+
+    Scene scene = new Scene (messagesPane, 640, 540);            // wh
+    messagesStage.setScene (scene);
+    scene.setOnKeyPressed (e -> messagesPane.keyPressed (e));
+  }
+
+  // ---------------------------------------------------------------------------------//
   private void mouseClick (MouseEvent e)
   // ---------------------------------------------------------------------------------//
   {
@@ -369,7 +389,7 @@ public class MazeWalker extends AppBase implements MovementListener
       {
         case SCNMSG:
           int msg = aux[1];
-          description.append (wizardry.getMessage (msg));
+          description.append (wizardry.getMessage (msg).getText ());
 
           switch (aux[2])
           {

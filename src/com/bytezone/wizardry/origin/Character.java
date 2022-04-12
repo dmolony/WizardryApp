@@ -66,7 +66,7 @@ public class Character
 
     int nameLength = buffer[offset] & 0xFF;
     if (nameLength < 1 || nameLength > 15)
-      throw new InvalidCharacterException ();
+      throw new InvalidCharacterException ("Name too long");
 
     name = Utility.getPascalString (buffer, offset);
     password = Utility.getPascalString (buffer, offset + 16);
