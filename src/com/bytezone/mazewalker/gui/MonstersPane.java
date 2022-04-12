@@ -1,6 +1,5 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.Image;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -55,16 +54,16 @@ public class MonstersPane extends BasePane
       1900                                                                // 100 
   };
 
-  TextField[] textOut1;
-  TextField[] textOut2;
-  TextField[] textOut3;
-  TextField[] textOut4;
+  private final TextField[] textOut1;
+  private final TextField[] textOut2;
+  private final TextField[] textOut3;
+  private final TextField[] textOut4;
 
-  CheckBox[] checkBoxes1;
-  CheckBox[] checkBoxes2;
+  private final CheckBox[] checkBoxes1;
+  private final CheckBox[] checkBoxes2;
 
   private final int scenarioId;
-  private final Canvas canvas = new Canvas (280, 200);      // wh
+  private final Canvas canvas;
 
   // ---------------------------------------------------------------------------------//
   public MonstersPane (WizardryOrigin wizardry, Stage stage)
@@ -73,6 +72,7 @@ public class MonstersPane extends BasePane
     super (wizardry, stage);
 
     scenarioId = wizardry.getScenarioId ();
+    canvas = scenarioId == 3 ? new Canvas (280, 192) : new Canvas (280, 200);
 
     setColumnConstraints (50, 60, 160, 30, 110, 65, 90, 20, 80, 20);
 
@@ -183,7 +183,6 @@ public class MonstersPane extends BasePane
       property >>>= 1;
     }
 
-    Image image = wizardry.getImage (monster.image);
-    image.draw (canvas.getGraphicsContext2D ());
+    wizardry.getImage (monster.image).draw (canvas);
   }
 }

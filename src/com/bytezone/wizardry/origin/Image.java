@@ -1,5 +1,6 @@
 package com.bytezone.wizardry.origin;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
@@ -22,9 +23,14 @@ public class Image
   }
 
   // ---------------------------------------------------------------------------------//
-  public void draw (GraphicsContext gc)
+  public void draw (Canvas canvas)
   // ---------------------------------------------------------------------------------//
   {
+    GraphicsContext gc = canvas.getGraphicsContext2D ();
+
+    gc.setFill (Color.BLACK);
+    gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
+
     if (scenarioId == 3)
       drawV2 (gc);
     else
@@ -39,9 +45,6 @@ public class Image
 
     int x = 0;
     int y = 0;
-
-    gc.setFill (Color.BLACK);
-    gc.fillRect (0, 0, 280, 200);           // wh
 
     for (int j = 0; j < 500; j++)
     {
@@ -68,30 +71,26 @@ public class Image
   {
     PixelWriter pixelWriter = gc.getPixelWriter ();
 
-    gc.setFill (Color.BLACK);
-    gc.fillRect (0, 0, 280, 200);       // only uses 280 x 192
-
     int offset = this.offset;
-    int size = 7;
 
     for (int i = 0; i < 6; i++)                                 // 6
       for (int j = 0; j < 10; j++)                              // 10
-      {
         for (int k = 7; k >= 0; k--)                            // 8 
         {
           int element = i * 560 + j * 7 + k * 70;
           int x = element % 70 * 4;
           int y = element / 70 * 4;
           int bits = buffer[offset++] & 0xFF;
-          for (int m = size - 1; m >= 0; m--)                   // 6 pixels
+
+          for (int m = 6; m >= 0; m--)                          // 7 pixels
           {
             if ((bits & 1) == 1)
               writePixel (pixelWriter, x, y);
+
             bits >>= 1;
             x += 4;
           }
         }
-      }
   }
 
   // ---------------------------------------------------------------------------------//
