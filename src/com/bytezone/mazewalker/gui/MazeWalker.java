@@ -1,10 +1,13 @@
 package com.bytezone.mazewalker.gui;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
+import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
+import com.bytezone.mazewalker.gui.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
@@ -35,7 +38,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class MazeWalker extends AppBase implements MovementListener
+public class MazeWalker extends AppBase
+    implements MovementListener, SaveState, FileNameSelectedListener
 // -----------------------------------------------------------------------------------//
 {
   private static final String PREFS_FILE_NAME = "FileName";
@@ -48,7 +52,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private final Menu menuTools = new Menu ("Tools");
 
   private final MenuItem openFileItem = new MenuItem ("Open file...");
-  private final MenuItem recentFilesItem = new MenuItem ("Recent files...");
+  private final Menu recentFilesMenu = new Menu ("Recent files");
 
   private final MenuItem experienceItem = new MenuItem ("Experience Points...");
   private final MenuItem charactersItem = new MenuItem ("Characters...");
@@ -74,6 +78,7 @@ public class MazeWalker extends AppBase implements MovementListener
   private Walker currentWalker;
 
   private String wizardryFileName;
+  private RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
 
   private Stage calculatorStage;
   private Stage charactersStage;
@@ -93,7 +98,8 @@ public class MazeWalker extends AppBase implements MovementListener
 
     menuBar.getMenus ().addAll (menuFile, menuLevels, menuTools);
 
-    menuFile.getItems ().add (openFileItem);
+    menuFile.getItems ().addAll (openFileItem, recentFilesMenu);
+
     openFileItem.setOnAction (e -> getWizardryDisk ());
     openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
 
@@ -138,12 +144,11 @@ public class MazeWalker extends AppBase implements MovementListener
     //    view.setStyle ("-fx-border-color: black");
     //    leftPane.setStyle ("-fx-border-color: black");
 
-    wizardryFileName = prefs.get (PREFS_FILE_NAME, "");
-    if (!wizardryFileName.isEmpty ())
-      setWizardryDisk ();
-
     mainPane.setLeft (leftVBox);
     mainPane.setCenter (rightVBox);
+
+    saveStateList.addAll (Arrays.asList (this));
+    recentFiles.addListener (this);
 
     return mainPane;
   }
@@ -164,7 +169,6 @@ public class MazeWalker extends AppBase implements MovementListener
     if (file != null && file.isFile () && !file.getAbsolutePath ().equals (wizardryFileName))
     {
       wizardryFileName = file.getAbsolutePath ();
-      prefs.put (PREFS_FILE_NAME, wizardryFileName);
       setWizardryDisk ();
     }
   }
@@ -174,6 +178,7 @@ public class MazeWalker extends AppBase implements MovementListener
   // ---------------------------------------------------------------------------------//
   {
     wizardry = new WizardryOrigin (wizardryFileName);
+    recentFiles.addLastFileName (wizardryFileName);
 
     primaryStage.setTitle (Utility.removeUserName (wizardryFileName));
 
@@ -516,6 +521,37 @@ public class MazeWalker extends AppBase implements MovementListener
   // ---------------------------------------------------------------------------------//
   {
     return null;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void save (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    prefs.put (PREFS_FILE_NAME, wizardryFileName);
+
+    recentFiles.save (prefs);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void restore (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    recentFiles.restore (prefs);
+
+    wizardryFileName = prefs.get (PREFS_FILE_NAME, "");
+    if (!wizardryFileName.isEmpty ())
+      setWizardryDisk ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void fileNameSelected (String fileName)
+  // ---------------------------------------------------------------------------------//
+  {
+    wizardryFileName = fileName;
+    setWizardryDisk ();
   }
 
   // ---------------------------------------------------------------------------------//
