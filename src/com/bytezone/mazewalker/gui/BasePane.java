@@ -239,7 +239,10 @@ public class BasePane extends Pane
   void setText (TextField textField, Object object)
   // ---------------------------------------------------------------------------------//
   {
-    textField.setText (object.toString ());
+    if (object == null)
+      textField.setText ("** Error **");
+    else
+      textField.setText (object.toString ());
   }
 
   // ---------------------------------------------------------------------------------//

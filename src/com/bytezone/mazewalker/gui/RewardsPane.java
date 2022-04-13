@@ -1,5 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
+import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.RewardDetails;
 import com.bytezone.wizardry.origin.RewardDetails.GoldReward;
@@ -147,8 +148,15 @@ public class RewardsPane extends BasePane
         setText (textOut3[itemCol][MAX], itemReward.max ());
         setText (textOut3[itemCol][ELEMENT], itemReward.element ());
         setText (textOut3[itemCol][ITEM_ODDS_2], itemReward.odds () + "%");
+
         if (itemReward.item () != itemReward.getMax ())
-          setText (textOut3[itemCol][ITEM_MAX], wizardry.getItem (itemReward.getMax ()));
+        {
+          Item item = wizardry.getItem (itemReward.getMax ());
+          if (item == null)
+            setText (textOut3[itemCol][ITEM_MAX], "** No such item **");
+          else
+            setText (textOut3[itemCol][ITEM_MAX], item);
+        }
 
         ++itemCol;
       }

@@ -18,6 +18,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -98,40 +99,17 @@ public class MazeWalker extends AppBase
 
     menuBar.getMenus ().addAll (menuFile, menuLevels, menuTools);
 
-    menuFile.getItems ().addAll (openFileItem, recentFilesMenu);
+    addItem (menuFile, openFileItem, KeyCode.O, e -> getWizardryDisk ());
+    addItem (menuTools, charactersItem, KeyCode.C, e -> charactersStage.show ());
+    addItem (menuTools, specialsItem, KeyCode.S, e -> specialsStage.show ());
+    addItem (menuTools, messagesItem, KeyCode.T, e -> messagesStage.show ());
+    addItem (menuTools, monstersItem, KeyCode.M, e -> monstersStage.show ());
+    addItem (menuTools, itemsItem, KeyCode.I, e -> itemsStage.show ());
+    addItem (menuTools, rewardsItem, KeyCode.R, e -> rewardsStage.show ());
+    addItem (menuTools, encountersItem, KeyCode.E, e -> encountersStage.show ());
+    addItem (menuTools, experienceItem, KeyCode.X, e -> calculatorStage.show ());
 
-    openFileItem.setOnAction (e -> getWizardryDisk ());
-    openFileItem.setAccelerator (new KeyCodeCombination (KeyCode.O, KeyCombination.SHORTCUT_DOWN));
-
-    menuTools.getItems ().addAll (experienceItem, charactersItem, monstersItem, itemsItem,
-        rewardsItem, encountersItem, specialsItem, messagesItem);
-
-    experienceItem.setOnAction (e -> calculatorStage.show ());
-    experienceItem
-        .setAccelerator (new KeyCodeCombination (KeyCode.X, KeyCombination.SHORTCUT_DOWN));
-
-    charactersItem.setOnAction (e -> charactersStage.show ());
-    charactersItem
-        .setAccelerator (new KeyCodeCombination (KeyCode.C, KeyCombination.SHORTCUT_DOWN));
-
-    specialsItem.setOnAction (e -> specialsStage.show ());
-    specialsItem.setAccelerator (new KeyCodeCombination (KeyCode.S, KeyCombination.SHORTCUT_DOWN));
-
-    messagesItem.setOnAction (e -> messagesStage.show ());
-    messagesItem.setAccelerator (new KeyCodeCombination (KeyCode.T, KeyCombination.SHORTCUT_DOWN));
-
-    monstersItem.setOnAction (e -> monstersStage.show ());
-    monstersItem.setAccelerator (new KeyCodeCombination (KeyCode.M, KeyCombination.SHORTCUT_DOWN));
-
-    itemsItem.setOnAction (e -> itemsStage.show ());
-    itemsItem.setAccelerator (new KeyCodeCombination (KeyCode.I, KeyCombination.SHORTCUT_DOWN));
-
-    rewardsItem.setOnAction (e -> rewardsStage.show ());
-    rewardsItem.setAccelerator (new KeyCodeCombination (KeyCode.R, KeyCombination.SHORTCUT_DOWN));
-
-    encountersItem.setOnAction (e -> encountersStage.show ());
-    encountersItem
-        .setAccelerator (new KeyCodeCombination (KeyCode.E, KeyCombination.SHORTCUT_DOWN));
+    menuFile.getItems ().add (recentFilesMenu);
 
     text.setFont (new Font ("Courier new", 14));
     sp.setStyle ("-fx-background-color:transparent;");
@@ -151,6 +129,16 @@ public class MazeWalker extends AppBase
     recentFiles.addListener (this);
 
     return mainPane;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void addItem (Menu menu, MenuItem menuItem, KeyCode keyCode,
+      EventHandler<ActionEvent> event)
+  // ---------------------------------------------------------------------------------//
+  {
+    menu.getItems ().add (menuItem);
+    menuItem.setOnAction (event);
+    menuItem.setAccelerator (new KeyCodeCombination (keyCode, KeyCombination.SHORTCUT_DOWN));
   }
 
   // ---------------------------------------------------------------------------------//

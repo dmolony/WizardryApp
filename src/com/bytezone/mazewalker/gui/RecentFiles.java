@@ -62,8 +62,14 @@ public class RecentFiles
   public void save (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
-    for (int i = 0; i < fileNames.size () && i < MAX_FILES; i++)
-      prefs.put (String.format ("%s%02d", PREFS_FILE_NAME, i), fileNames.get (i));
+    for (int i = 0; i < MAX_FILES; i++)
+    {
+      String key = String.format ("%s%02d", PREFS_FILE_NAME, i);
+      if (i < fileNames.size ())
+        prefs.put (key, fileNames.get (i));
+      else
+        prefs.remove (key);          // erase any previous entries
+    }
   }
 
   // ---------------------------------------------------------------------------------//
