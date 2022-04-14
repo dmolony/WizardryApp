@@ -93,7 +93,7 @@ public class RewardDetails
 
     public int getMax ()
     {
-      return item + size * max + element;
+      return item + size * max + element;         // should this be -1?
     }
   }
 }
