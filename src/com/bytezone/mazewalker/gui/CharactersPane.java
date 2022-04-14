@@ -73,7 +73,7 @@ public class CharactersPane extends BasePane
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    setComboBox ("Character", charactersList, wizardry.getCharacters (), (a, b, c) -> update (c),
+    createComboBox ("Character", charactersList, wizardry.getCharacters (), (a, b, c) -> update (c),
         lp0, dp0);
 
     GridPane.setColumnSpan (charactersList, 2);
@@ -90,24 +90,24 @@ public class CharactersPane extends BasePane
     // text values
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 2);
-    textOut = createOutputFields (labelText1, lp1, dp1);
+    textOut = createTextFields (labelText1, lp1, dp1);
 
     // attributes
     LabelPlacement lp2 = new LabelPlacement (4, 1, HPos.RIGHT, 3);
     DataPlacement dp2 = new DataPlacement (7, 1, Pos.CENTER_RIGHT, 1);
-    textOut1 = createOutputFields (attributesText, lp2, dp2);
+    textOut1 = createTextFields (attributesText, lp2, dp2);
 
     // numeric values
     LabelPlacement lp3 = new LabelPlacement (4, 8, HPos.RIGHT, 3);
     DataPlacement dp3 = new DataPlacement (7, 8, Pos.CENTER_RIGHT, 1);
-    textOut2 = createOutputFields (labelText2, lp3, dp3);
+    textOut2 = createTextFields (labelText2, lp3, dp3);
 
     // possessions headings
-    setLabel ("Item", 1, 17, HPos.CENTER, 1);
-    setLabel ("Eq", 3, 17, HPos.LEFT, 1);
-    setLabel ("Cu", 4, 17, HPos.LEFT, 1);
-    setLabel ("Id", 5, 17, HPos.LEFT, 1);
-    setLabel ("Value", 6, 17, HPos.CENTER, 2);
+    createLabel ("Item", 1, 17, HPos.CENTER, 1);
+    createLabel ("Eq", 3, 17, HPos.LEFT, 1);
+    createLabel ("Cu", 4, 17, HPos.LEFT, 1);
+    createLabel ("Id", 5, 17, HPos.LEFT, 1);
+    createLabel ("Value", 6, 17, HPos.CENTER, 2);
 
     // possessions
     String[] possessionsText = new String[8];
@@ -116,7 +116,7 @@ public class CharactersPane extends BasePane
 
     LabelPlacement lp4 = new LabelPlacement (0, 18, HPos.RIGHT, 1);
     DataPlacement dp4 = new DataPlacement (1, 18, Pos.CENTER_LEFT, 2);
-    textOut3 = createOutputFields (possessionsText, lp4, dp4);
+    textOut3 = createTextFields (possessionsText, lp4, dp4);
 
     // possessions eq/cu/id
     checkBox4 = createCheckBoxes (8, 3, 18);
@@ -125,11 +125,11 @@ public class CharactersPane extends BasePane
 
     // possessions value
     DataPlacement dp5 = new DataPlacement (6, 18, Pos.CENTER_RIGHT, 2);
-    textOut4 = createOutputFields (8, dp5);
+    textOut4 = createTextFields (8, dp5);
 
     // spells headings
-    setLabel ("Mage spells", 8, 0, HPos.RIGHT, 2);
-    setLabel ("Priest spells", 11, 0, HPos.LEFT, 2);
+    createLabel ("Mage spells", 8, 0, HPos.RIGHT, 2);
+    createLabel ("Priest spells", 11, 0, HPos.LEFT, 2);
 
     // spells
     String[] mageSpells = new String[21];

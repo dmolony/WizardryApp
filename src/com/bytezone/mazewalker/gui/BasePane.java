@@ -62,7 +62,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  <T> void setComboBox (String labelText, ComboBox<T> comboBox, List<T> list,
+  <T> void createComboBox (String labelText, ComboBox<T> comboBox, List<T> list,
       ChangeListener<T> listener, LabelPlacement labelPos, DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
@@ -83,7 +83,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  Label setLabel (String labelText, int col, int row, HPos alignment, int span)
+  Label createLabel (String labelText, int col, int row, HPos alignment, int span)
   // ---------------------------------------------------------------------------------//
   {
     Label label = new Label (labelText);
@@ -97,8 +97,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] createOutputFields (String[] labelText, LabelPlacement labelPos,
-      DataPlacement dataPos)
+  TextField[] createTextFields (String[] labelText, LabelPlacement labelPos, DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[labelText.length];
@@ -111,12 +110,12 @@ public class BasePane extends Pane
       GridPane.setColumnSpan (label, labelPos.colSpan);
 
       textOut[i] = new TextField ();
-      GridPane.setConstraints (textOut[i], dataPos.col, row);
-      GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
-
       textOut[i].setAlignment (dataPos.alignment);
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
+
+      GridPane.setConstraints (textOut[i], dataPos.col, row);
+      GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
 
       GridPane.setHalignment (label, labelPos.alignment);
       gridPane.getChildren ().addAll (label, textOut[i]);
@@ -128,38 +127,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextArea createOutputField (String[] labelText, LabelPlacement labelPos, DataPlacement2 dataPos)
-  // ---------------------------------------------------------------------------------//
-  {
-    TextArea textOut = new TextArea ();
-    int row = labelPos.row;
-
-    for (int i = 0; i < labelText.length; i++)
-    {
-      Label label = new Label (labelText[i]);
-      GridPane.setConstraints (label, labelPos.col, row);
-      GridPane.setColumnSpan (label, labelPos.colSpan);
-
-      //      textOut[i] = new TextField ();
-      GridPane.setConstraints (textOut, dataPos.col, row);
-      GridPane.setColumnSpan (textOut, dataPos.colSpan);
-      GridPane.setRowSpan (textOut, dataPos.rowSpan);
-
-      //      textOut.setAlignment (dataPos.alignment);
-      textOut.setEditable (false);
-      textOut.setFocusTraversable (false);
-
-      GridPane.setHalignment (label, labelPos.alignment);
-      gridPane.getChildren ().addAll (label, textOut);
-
-      row++;
-    }
-
-    return textOut;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  TextField[] createOutputFields (int totalFields, DataPlacement dataPos)
+  TextField[] createTextFields (int totalFields, DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[totalFields];
@@ -182,6 +150,35 @@ public class BasePane extends Pane
     }
 
     return textOut;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextArea createTextArea (String[] labelText, LabelPlacement labelPos, DataPlacement2 dataPos)
+  // ---------------------------------------------------------------------------------//
+  {
+    TextArea textArea = new TextArea ();
+    int row = labelPos.row;
+
+    for (int i = 0; i < labelText.length; i++)
+    {
+      Label label = new Label (labelText[i]);
+      GridPane.setConstraints (label, labelPos.col, row);
+      GridPane.setColumnSpan (label, labelPos.colSpan);
+
+      GridPane.setConstraints (textArea, dataPos.col, row);
+      GridPane.setColumnSpan (textArea, dataPos.colSpan);
+      GridPane.setRowSpan (textArea, dataPos.rowSpan);
+
+      textArea.setEditable (false);
+      textArea.setFocusTraversable (false);
+
+      GridPane.setHalignment (label, labelPos.alignment);
+      gridPane.getChildren ().addAll (label, textArea);
+
+      row++;
+    }
+
+    return textArea;
   }
 
   // ---------------------------------------------------------------------------------//

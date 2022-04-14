@@ -30,7 +30,7 @@ public class EncountersPane extends BasePane
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 3);
-    setComboBox ("Maze Level", mazeLevelList, wizardry.getMazeLevels (),
+    createComboBox ("Maze Level", mazeLevelList, wizardry.getMazeLevels (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
     String[] labels1 = { "minenemy", "multwors", "wors01", "range0n", "percwors" };
@@ -38,21 +38,21 @@ public class EncountersPane extends BasePane
         { "base range", "monster from", "monster to", "ext range", "monster from", "monster to" };
 
     // headings
-    setLabel ("Group 1", 1, 4, HPos.LEFT, 2);
-    setLabel ("Group 2", 3, 4, HPos.LEFT, 2);
-    setLabel ("Group 3", 5, 4, HPos.LEFT, 2);
+    createLabel ("Group 1", 1, 4, HPos.LEFT, 2);
+    createLabel ("Group 2", 3, 4, HPos.LEFT, 2);
+    createLabel ("Group 3", 5, 4, HPos.LEFT, 2);
 
     LabelPlacement lp1 = new LabelPlacement (0, 5, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 5, Pos.CENTER_RIGHT, 1);
-    textOut1[0] = createOutputFields (labels1, lp1, dp1);
-    textOut1[1] = createOutputFields (5, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
-    textOut1[2] = createOutputFields (5, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
+    textOut1[0] = createTextFields (labels1, lp1, dp1);
+    textOut1[1] = createTextFields (5, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
+    textOut1[2] = createTextFields (5, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
 
     LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
     DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_LEFT, 2);
-    textOut2[0] = createOutputFields (labels2, lp2, dp2);
-    textOut2[1] = createOutputFields (6, new DataPlacement (3, 11, Pos.CENTER_LEFT, 2));
-    textOut2[2] = createOutputFields (6, new DataPlacement (5, 11, Pos.CENTER_LEFT, 2));
+    textOut2[0] = createTextFields (labels2, lp2, dp2);
+    textOut2[1] = createTextFields (6, new DataPlacement (3, 11, Pos.CENTER_LEFT, 2));
+    textOut2[2] = createTextFields (6, new DataPlacement (5, 11, Pos.CENTER_LEFT, 2));
 
     mazeLevelList.getSelectionModel ().select (0);
   }

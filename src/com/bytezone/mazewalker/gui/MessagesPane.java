@@ -35,13 +35,13 @@ public class MessagesPane extends BasePane
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
     ComboBox<Message> messagesList = new ComboBox<> ();
-    setComboBox ("Message", messagesList, messages.getMessages (),
+    createComboBox ("Message", messagesList, messages.getMessages (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
     String[] label1Text = { "Text" };
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
     DataPlacement2 dp1 = new DataPlacement2 (1, 1, Pos.CENTER_LEFT, 2, 16);
-    textOut = createOutputField (label1Text, lp1, dp1);
+    textOut = createTextArea (label1Text, lp1, dp1);
 
     messagesList.getSelectionModel ().select (0);
   }

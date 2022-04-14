@@ -49,7 +49,7 @@ public class ExperienceCalculator extends BasePane
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    setComboBox ("Monster", monsters, wizardry.getMonsters (),
+    createComboBox ("Monster", monsters, wizardry.getMonsters (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
     GridPane.setColumnSpan (monsters, 2);
 

@@ -32,11 +32,12 @@ public class SpecialsPane extends BasePane
   {
     super (wizardry, stage);
 
-    setColumnConstraints (110, 120, 60, 60, 60, 60, 300);
+    int width = 65;
+    setColumnConstraints (110, 120, width, width, width, width, 280);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    setComboBox ("Maze Level", mazeLevelList, wizardry.getMazeLevels (),
+    createComboBox ("Maze Level", mazeLevelList, wizardry.getMazeLevels (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
     // special squares
@@ -46,21 +47,21 @@ public class SpecialsPane extends BasePane
 
     LabelPlacement lp1 = new LabelPlacement (0, 5, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 5, Pos.CENTER_LEFT, 1);
-    textOut1 = createOutputFields (squaresText, lp1, dp1);
+    textOut1 = createTextFields (squaresText, lp1, dp1);
 
-    textOut2 = createOutputFields (16, new DataPlacement (2, 5, Pos.CENTER_RIGHT, 1));
-    textOut3 = createOutputFields (16, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
-    textOut4 = createOutputFields (16, new DataPlacement (4, 5, Pos.CENTER_RIGHT, 1));
-    textOut5 = createOutputFields (16, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
-    textOut6 = createOutputFields (16, new DataPlacement (6, 5, Pos.CENTER_LEFT, 1));
+    textOut2 = createTextFields (16, new DataPlacement (2, 5, Pos.CENTER_RIGHT, 1));
+    textOut3 = createTextFields (16, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
+    textOut4 = createTextFields (16, new DataPlacement (4, 5, Pos.CENTER_RIGHT, 1));
+    textOut5 = createTextFields (16, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
+    textOut6 = createTextFields (16, new DataPlacement (6, 5, Pos.CENTER_LEFT, 1));
 
     // headings
-    setLabel ("Square", 1, 4, HPos.LEFT, 1);
-    setLabel ("Aux 0", 2, 4, HPos.LEFT, 1);
-    setLabel ("Aux 1", 3, 4, HPos.LEFT, 1);
-    setLabel ("Aux 2", 4, 4, HPos.LEFT, 1);
-    setLabel ("Msg #", 5, 4, HPos.LEFT, 1);
-    setLabel ("Description", 6, 4, HPos.LEFT, 1);
+    createLabel ("Square", 1, 4, HPos.LEFT, 1);
+    createLabel ("Aux 0", 2, 4, HPos.LEFT, 1);
+    createLabel ("Aux 1", 3, 4, HPos.LEFT, 1);
+    createLabel ("Aux 2", 4, 4, HPos.LEFT, 1);
+    createLabel ("Msg #", 5, 4, HPos.LEFT, 1);
+    createLabel ("Description", 6, 4, HPos.LEFT, 1);
 
     mazeLevelList.getSelectionModel ().select (0);
   }

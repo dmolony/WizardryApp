@@ -79,7 +79,7 @@ public class MonstersPane extends BasePane
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 2);
     DataPlacement dp0 = new DataPlacement (2, 0, Pos.CENTER_LEFT, 1);
     ComboBox<Monster> monstersList = new ComboBox<> ();
-    setComboBox ("Monster", monstersList, wizardry.getMonsters (),
+    createComboBox ("Monster", monstersList, wizardry.getMonsters (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
     GridPane.setConstraints (canvas, 1, 8);
@@ -96,21 +96,21 @@ public class MonstersPane extends BasePane
 
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 2);
     DataPlacement dp1 = new DataPlacement (2, 1, Pos.CENTER_LEFT, 1);
-    textOut1 = createOutputFields (label1Text, lp1, dp1);
+    textOut1 = createTextFields (label1Text, lp1, dp1);
 
     LabelPlacement lp2 = new LabelPlacement (4, 0, HPos.RIGHT, 1);
     DataPlacement dp2 = new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1);
-    textOut2 = createOutputFields (label2Text, lp2, dp2);
+    textOut2 = createTextFields (label2Text, lp2, dp2);
 
-    textOut3 = createOutputFields (1, new DataPlacement (6, 12, Pos.CENTER_LEFT, 1));
-    textOut4 = createOutputFields (3, new DataPlacement (6, 13, Pos.CENTER_LEFT, 4));
+    textOut3 = createTextFields (1, new DataPlacement (6, 12, Pos.CENTER_LEFT, 1));
+    textOut4 = createTextFields (3, new DataPlacement (6, 13, Pos.CENTER_LEFT, 4));
 
     // resistance
-    setLabel ("Resistance", 6, 0, HPos.RIGHT, 2);
+    createLabel ("Resistance", 6, 0, HPos.RIGHT, 2);
     checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 6, 1);
 
     // properties
-    setLabel ("Property", 8, 0, HPos.RIGHT, 2);
+    createLabel ("Property", 8, 0, HPos.RIGHT, 2);
     checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 8, 1);
 
     monstersList.getSelectionModel ().select (0);

@@ -68,27 +68,27 @@ public class RewardsPane extends BasePane
     // table list
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
-    setComboBox ("Item", rewardsList, wizardry.getRewards (),
+    createComboBox ("Item", rewardsList, wizardry.getRewards (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
     // basic attributes
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
-    textOut1 = createOutputFields (label1Text, lp1, dp1);
+    textOut1 = createTextFields (label1Text, lp1, dp1);
 
     // gold reward
     LabelPlacement lp3 = new LabelPlacement (0, 3, HPos.RIGHT, 1);
     DataPlacement dp3 = new DataPlacement (1, 4, Pos.CENTER_LEFT, 1);
-    gold = createOutputFields (goldLabels, lp3, dp3);
+    gold = createTextFields (goldLabels, lp3, dp3);
 
     // first item reward
     LabelPlacement lp4 = new LabelPlacement (0, 10, HPos.RIGHT, 1);
     DataPlacement dp4 = new DataPlacement (1, 10, Pos.CENTER_LEFT, 1);
-    items[0] = createOutputFields (itemLabels, lp4, dp4);
+    items[0] = createTextFields (itemLabels, lp4, dp4);
 
     // second  thru fourth item rewards
     for (int i = 1; i < MAX_ITEMS; i++)
-      items[i] = createOutputFields (8, new DataPlacement (i + 1, 10, Pos.CENTER_LEFT, 1));
+      items[i] = createTextFields (8, new DataPlacement (i + 1, 10, Pos.CENTER_LEFT, 1));
 
     // traps
     traps = createCheckBoxes (WizardryOrigin.trapType, 2, 1);

@@ -58,23 +58,23 @@ public class ItemsPane extends BasePane
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
-    setComboBox ("Item", itemsList, wizardry.getItems (),
+    createComboBox ("Item", itemsList, wizardry.getItems (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
-    setLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
-    setLabel ("Resistance", 3, 10, HPos.RIGHT, 2);
-    setLabel ("Protection vs", 5, 0, HPos.RIGHT, 2);
-    setLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
+    createLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
+    createLabel ("Resistance", 3, 10, HPos.RIGHT, 2);
+    createLabel ("Protection vs", 5, 0, HPos.RIGHT, 2);
+    createLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
 
     // basic attributes
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 2);
-    textOut1 = createOutputFields (label1Text, lp1, dp1);
+    textOut1 = createTextFields (label1Text, lp1, dp1);
 
     // numeric attributes
     LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
     DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_RIGHT, 1);
-    textOut2 = createOutputFields (label2Text, lp2, dp2);
+    textOut2 = createTextFields (label2Text, lp2, dp2);
 
     // used by
     checkBoxes2 = createCheckBoxes (WizardryOrigin.characterClass, 3, 1);
