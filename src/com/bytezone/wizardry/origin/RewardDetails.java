@@ -32,7 +32,7 @@ public class RewardDetails
       int cSize = Utility.getShort (buffer, offset + 6);
       int cMax = Utility.getShort (buffer, offset + 8);
       int element = Utility.getShort (buffer, offset + 10);
-      int odds = Utility.getShort (buffer, offset + 12);
+      int odds = Utility.getSignedShort (buffer, offset + 12);
 
       itemReward = new ItemReward (itemNo, cSize, cMax, element, odds);
       goldReward = null;

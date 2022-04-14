@@ -292,7 +292,7 @@ public class MazeWalker extends AppBase
     rewardsStage.setTitle ("Wizardry Rewards");
     RewardsPane rewardsPane = new RewardsPane (wizardry, rewardsStage);
 
-    Scene scene = new Scene (rewardsPane, 770, 575);            // wh
+    Scene scene = new Scene (rewardsPane, 940, 575);            // wh
     rewardsStage.setScene (scene);
     scene.setOnKeyPressed (e -> rewardsPane.keyPressed (e));
   }

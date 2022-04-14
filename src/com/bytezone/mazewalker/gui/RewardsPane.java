@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class RewardsPane extends BasePane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int MAX_ITEMS = 4;
+  private static final int MAX_ITEMS = 5;
 
   private static final int IS_CHEST = 0;
 
