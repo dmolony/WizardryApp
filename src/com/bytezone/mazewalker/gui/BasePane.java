@@ -296,6 +296,9 @@ public class BasePane extends Pane
   {
     if (keyEvent.getCode () == KeyCode.ESCAPE)
       stage.hide ();
+
+    if (keyEvent.getCode () == KeyCode.W && keyEvent.isMetaDown ())
+      stage.hide ();
   }
 
   // ---------------------------------------------------------------------------------//

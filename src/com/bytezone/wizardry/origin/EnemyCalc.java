@@ -18,7 +18,7 @@ public class EnemyCalc
     multWors = Utility.getShort (buffer, offset + 2);
     worse01 = Utility.getShort (buffer, offset + 4);
     range0n = Utility.getShort (buffer, offset + 6);
-    percWors = Utility.getShort (buffer, offset + 8);
+    percWors = Utility.getSignedShort (buffer, offset + 8);
   }
 
   // ---------------------------------------------------------------------------------//

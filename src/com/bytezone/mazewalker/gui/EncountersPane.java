@@ -14,11 +14,12 @@ import javafx.stage.Stage;
 public class EncountersPane extends BasePane
 // -----------------------------------------------------------------------------------//
 {
+  private static final int MAX_GROUPS = 3;
+
   ComboBox<MazeLevel> mazeLevelList = new ComboBox<> ();
 
-  TextField[][] textOut1 = new TextField[3][];
-  TextField[][] textOut2 = new TextField[3][];
-  //  TextField[] textOut3;
+  TextField[][] textOut1 = new TextField[MAX_GROUPS][];
+  TextField[][] textOut2 = new TextField[MAX_GROUPS][];
 
   // ---------------------------------------------------------------------------------//
   public EncountersPane (WizardryOrigin wizardry, Stage stage)
@@ -38,19 +39,21 @@ public class EncountersPane extends BasePane
         { "base range", "monster from", "monster to", "ext range", "monster from", "monster to" };
 
     // headings
-    createLabel ("Group 1", 1, 4, HPos.LEFT, 2);
-    createLabel ("Group 2", 3, 4, HPos.LEFT, 2);
-    createLabel ("Group 3", 5, 4, HPos.LEFT, 2);
+    createLabel ("75%", 1, 4, HPos.LEFT, 2);
+    createLabel ("18.75%", 3, 4, HPos.LEFT, 2);
+    createLabel ("6.25%", 5, 4, HPos.LEFT, 2);
 
     LabelPlacement lp1 = new LabelPlacement (0, 5, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 5, Pos.CENTER_RIGHT, 1);
     textOut1[0] = createTextFields (labels1, lp1, dp1);
+
     textOut1[1] = createTextFields (5, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
     textOut1[2] = createTextFields (5, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
 
     LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
     DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_LEFT, 2);
     textOut2[0] = createTextFields (labels2, lp2, dp2);
+
     textOut2[1] = createTextFields (6, new DataPlacement (3, 11, Pos.CENTER_LEFT, 2));
     textOut2[2] = createTextFields (6, new DataPlacement (5, 11, Pos.CENTER_LEFT, 2));
 
@@ -63,12 +66,12 @@ public class EncountersPane extends BasePane
   {
     EnemyCalc[] enemyCalc = mazeLevel.getEnemyCalc ();
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < MAX_GROUPS; i++)
     {
       int minEnemy = enemyCalc[i].minEnemy;
+      int range0n = enemyCalc[i].range0n;
       int multWors = enemyCalc[i].multWors;
       int worse01 = enemyCalc[i].worse01;
-      int range0n = enemyCalc[i].range0n;
       int percWors = enemyCalc[i].percWors;
 
       setText (textOut1[i][0], minEnemy);
@@ -77,18 +80,14 @@ public class EncountersPane extends BasePane
       setText (textOut1[i][3], range0n);
       setText (textOut1[i][4], percWors);
 
-      int last = minEnemy + range0n - 1;
+      int maxEnemy = minEnemy + range0n - 1;
+      setMinMax (i, 0, minEnemy, maxEnemy);
 
-      setText (textOut2[i][0], minEnemy + " : " + last);
-      setText (textOut2[i][1], wizardry.getMonster (minEnemy).name);
-      setText (textOut2[i][2], wizardry.getMonster (last).name);
-
-      int max = multWors * worse01;
-      if (max > 0)
+      if (worse01 > 0)
       {
-        setText (textOut2[i][3], (minEnemy + range0n) + " : " + (last + max));
-        setText (textOut2[i][4], wizardry.getMonster (minEnemy + range0n).name);
-        setText (textOut2[i][5], wizardry.getMonster (last + max).name);
+        minEnemy += range0n;
+        maxEnemy += multWors * worse01;
+        setMinMax (i, 3, minEnemy, maxEnemy);
       }
       else
       {
@@ -97,5 +96,14 @@ public class EncountersPane extends BasePane
         setText (textOut2[i][5], "");
       }
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void setMinMax (int index1, int index2, int minEnemy, int maxEnemy)
+  // ---------------------------------------------------------------------------------//
+  {
+    setText (textOut2[index1][index2++], minEnemy + " : " + maxEnemy);
+    setText (textOut2[index1][index2++], wizardry.getMonster (minEnemy).name);
+    setText (textOut2[index1][index2++], wizardry.getMonster (maxEnemy).name);
   }
 }
