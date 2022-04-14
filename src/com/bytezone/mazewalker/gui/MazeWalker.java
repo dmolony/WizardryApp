@@ -248,7 +248,7 @@ public class MazeWalker extends AppBase
     specialsStage.setTitle ("Special squares");
     specialsPane = new SpecialsPane (wizardry, specialsStage);
 
-    Scene scene = new Scene (specialsPane, 910, 600);               // wh
+    Scene scene = new Scene (specialsPane, 980, 600);               // wh
     specialsStage.setScene (scene);
     scene.setOnKeyPressed (e -> specialsPane.keyPressed (e));
   }
@@ -425,10 +425,15 @@ public class MazeWalker extends AppBase
 
             case 9:
               description.append (String.format ("%n%nWhat does AUX0 = %04X mean?", aux[0]));
+              description.append (String.format ("%n%nWhat does AUX2 = %04X mean?", aux[2]));
               break;
 
             case 10:
-              description.append ("\n\nQuestion??");
+              description.append ("\n\nAnswer : " + wizardry.getMessage (aux[0]).getText ());
+              break;
+
+            case 11:
+              description.append ("\n\nPay : " + wizardry.getMessage (aux[0]).getText ());
               break;
           }
           break;

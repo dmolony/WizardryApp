@@ -1,5 +1,8 @@
 package com.bytezone.wizardry.origin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 
 // -----------------------------------------------------------------------------------//
@@ -8,6 +11,7 @@ public class Extra
 {
   public final Square square;
   public final int[] aux = new int[3];
+  public final List<Location> locations = new ArrayList<> ();
 
   // ---------------------------------------------------------------------------------//
   public Extra (int index, byte[] buffer, int offset)
@@ -20,6 +24,13 @@ public class Extra
     aux[0] = Utility.getSignedShort (buffer, offset + 8 + index * 2);
     aux[1] = Utility.getSignedShort (buffer, offset + 40 + index * 2);
     aux[2] = Utility.getSignedShort (buffer, offset + 72 + index * 2);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void addLocation (Location location)
+  // ---------------------------------------------------------------------------------//
+  {
+    locations.add (location);
   }
 
   // ---------------------------------------------------------------------------------//

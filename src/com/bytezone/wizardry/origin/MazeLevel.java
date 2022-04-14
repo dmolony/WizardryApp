@@ -53,18 +53,16 @@ public class MazeLevel
         Location location = new Location (level, col, row);
         Walls walls = new Walls (west[col][row], south[col][row], east[col][row], north[col][row]);
         MazeCell mazeCell = new MazeCell (location, walls, lair[col][row]);
+        int index = sqrextra[col][row];
+        extra[index].addLocation (location);
 
-        if (sqrextra[col][row] != 0)
+        if (index != 0)
         {
-          int index = sqrextra[col][row];
           mazeCell.addExtra (extra[index]);
         }
 
         mazeCells[col][row] = mazeCell;
       }
-
-    //    if (level == 1)
-    //      System.out.println (getText ());
   }
 
   // ---------------------------------------------------------------------------------//

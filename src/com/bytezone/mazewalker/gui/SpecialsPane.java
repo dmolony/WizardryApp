@@ -25,6 +25,7 @@ public class SpecialsPane extends BasePane
   TextField[] textOut4;
   TextField[] textOut5;
   TextField[] textOut6;
+  TextField[] textOut7;
 
   // ---------------------------------------------------------------------------------//
   public SpecialsPane (WizardryOrigin wizardry, Stage stage)
@@ -33,7 +34,7 @@ public class SpecialsPane extends BasePane
     super (wizardry, stage);
 
     int width = 65;
-    setColumnConstraints (110, 120, width, width, width, width, 280);
+    setColumnConstraints (110, 120, width, width, width, width, width, 280);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
@@ -53,15 +54,17 @@ public class SpecialsPane extends BasePane
     textOut3 = createTextFields (16, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
     textOut4 = createTextFields (16, new DataPlacement (4, 5, Pos.CENTER_RIGHT, 1));
     textOut5 = createTextFields (16, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
-    textOut6 = createTextFields (16, new DataPlacement (6, 5, Pos.CENTER_LEFT, 1));
+    textOut6 = createTextFields (16, new DataPlacement (6, 5, Pos.CENTER_RIGHT, 1));
+    textOut7 = createTextFields (16, new DataPlacement (7, 5, Pos.CENTER_LEFT, 1));
 
     // headings
     createLabel ("Square", 1, 4, HPos.LEFT, 1);
     createLabel ("Aux 0", 2, 4, HPos.LEFT, 1);
     createLabel ("Aux 1", 3, 4, HPos.LEFT, 1);
     createLabel ("Aux 2", 4, 4, HPos.LEFT, 1);
-    createLabel ("Msg #", 5, 4, HPos.LEFT, 1);
-    createLabel ("Description", 6, 4, HPos.LEFT, 1);
+    createLabel ("Total", 5, 4, HPos.LEFT, 1);
+    createLabel ("Msg #", 6, 4, HPos.LEFT, 1);
+    createLabel ("Description", 7, 4, HPos.LEFT, 1);
 
     mazeLevelList.getSelectionModel ().select (0);
   }
@@ -82,15 +85,16 @@ public class SpecialsPane extends BasePane
       setText (textOut2[i], aux0);
       setText (textOut3[i], aux1);
       setText (textOut4[i], aux2);
+      setText (textOut5[i], extra.locations.size ());
 
-      setText (textOut5[i], "");
+      setText (textOut6[i], "");
 
       StringBuilder description = new StringBuilder ();
 
       switch (extra.square)
       {
         case SCNMSG:
-          setText (textOut5[i], aux1);
+          setText (textOut6[i], aux1);
 
           switch (aux2)
           {
@@ -216,7 +220,7 @@ public class SpecialsPane extends BasePane
         case NORMAL:
           break;
       }
-      setText (textOut6[i], description.toString ());
+      setText (textOut7[i], description.toString ());
     }
   }
 

@@ -119,6 +119,7 @@ public class WizardryOrigin
     byte[] buffer = disk.getScenarioData ();
     header = new Header (buffer);
 
+    // add maze levels
     ScenarioData sd = header.get (MAZE_AREA);
     mazeLevels = new ArrayList<> (sd.totalUnits);
 
@@ -126,6 +127,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       mazeLevels.add (new MazeLevel (++id, dataBlock));
 
+    // add characters
     sd = header.get (CHARACTER_AREA);
     characters = new ArrayList<> (sd.totalUnits);
 
@@ -141,6 +143,7 @@ public class WizardryOrigin
         break;
       }
 
+    // add monsters
     sd = header.get (MONSTER_AREA);
     monsters = new ArrayList<> (sd.totalUnits);
 
@@ -148,6 +151,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       monsters.add (new Monster (id++, dataBlock));
 
+    // add items
     sd = header.get (ITEM_AREA);
     items = new ArrayList<> (sd.totalUnits);
 
@@ -155,6 +159,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       items.add (new Item (id++, dataBlock));
 
+    // add rewards
     sd = header.get (TREASURE_TABLE_AREA);
     rewards = new ArrayList<> (sd.totalUnits);
 
@@ -162,6 +167,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       rewards.add (new Reward (id++, dataBlock));
 
+    // add images
     sd = header.get (IMAGE_AREA);
     images = new ArrayList<> (sd.totalUnits);
 
@@ -169,6 +175,7 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       images.add (new Image (id++, dataBlock, getScenarioId ()));
 
+    // add messages
     messages = new Messages (disk.getScenarioMessages (), getScenarioId ());
 
     if (false)
@@ -180,7 +187,7 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
-  void showExtra (Square square)
+  private void showExtra (Square square)
   // ---------------------------------------------------------------------------------//
   {
     for (MazeLevel level : mazeLevels)
