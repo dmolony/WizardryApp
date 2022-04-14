@@ -426,6 +426,10 @@ public class MazeWalker extends AppBase
             case 9:
               description.append (String.format ("%n%nWhat does AUX0 = %04X mean?", aux[0]));
               break;
+
+            case 10:
+              description.append ("\n\nQuestion??");
+              break;
           }
           break;
 

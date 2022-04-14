@@ -95,21 +95,43 @@ public class SpecialsPane extends BasePane
           switch (aux2)
           {
             case 1:
+              description.append ("1 = ??");
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)
               description.append ("Obtain : " + wizardry.getItem (aux0));
               break;
 
-            case 4:                       // monster or obtain
-              if (aux0 >= 0)               // monster
-                description.append (wizardry.getMonster (aux0));
+            case 3:
+              if (aux0 > 0)
+                description.append (wizardry.getItem (aux0).name);
               else
-                description.append ("Obtain : " + wizardry.getItem (Math.abs (aux0) - 1000));
+                description.append ("3 = ??");
+              break;
+
+            case 4:
+              if (aux0 >= 0)
+                description.append ("Encounter : " + wizardry.getMonster (aux0));
+              else
+              {
+                int item = getItemNo (aux0);
+                if (item != 0)
+                  description.append ("Obtain : " + wizardry.getItem (item));
+                else
+                  description.append ("Obtain : ??");
+              }
               break;
 
             case 5:                       // requires
               description.append ("Requires : " + wizardry.getItem (aux0));
+              break;
+
+            case 6:
+              description.append ("6 = ??");
+              break;
+
+            case 7:
+              description.append ("7 = ??");
               break;
 
             case 8:
@@ -117,6 +139,26 @@ public class SpecialsPane extends BasePane
               break;
 
             case 9:
+              description.append ("9 = ??");
+              break;
+
+            case 10:
+              description.append ("Answer : " + wizardry.getMessage (aux0).getText ());
+              break;
+
+            case 11:
+              description.append ("Pay : " + wizardry.getMessage (aux0).getText ());
+              break;
+
+            case 12:
+              description.append ("12 = ??");
+              break;
+
+            case 13:
+              if (aux0 > 0)
+                description.append (wizardry.getItem (aux0).name);
+              else
+                description.append ("13 = ??");
               break;
           }
           break;
@@ -176,5 +218,22 @@ public class SpecialsPane extends BasePane
       }
       setText (textOut6[i], description.toString ());
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  int getItemNo (int itemNo)
+  // ---------------------------------------------------------------------------------//
+  {
+    itemNo *= -1;
+
+    if (itemNo > 1000 && itemNo < 1200)
+      return itemNo - 1000;
+    if (itemNo > 21000 && itemNo < 21200)
+      return itemNo - 21000;
+    if (itemNo > 20200 && itemNo < 20400)
+      return itemNo - 20200;
+    if (itemNo > 21400 && itemNo < 21600)
+      return itemNo - 21400;
+    return 0;
   }
 }

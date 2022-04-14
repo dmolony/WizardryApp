@@ -162,8 +162,8 @@ public class MonstersPane extends BasePane
           setText (textOut4[i], wizardry.getItems ().get (item1));
         else
         {
-          String itemName1 = wizardry.getItems ().get (item1).name;
-          String itemName2 = wizardry.getItems ().get (item2).name;
+          String itemName1 = wizardry.getItemName (item1);
+          String itemName2 = wizardry.getItemName (item2);
           setText (textOut4[i], itemName1 + " : " + itemName2);
         }
       }
