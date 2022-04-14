@@ -16,7 +16,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -42,7 +41,7 @@ public class BasePane extends Pane
     gridPane.setVgap (4);
     gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
 
-    getChildren ().add (new BorderPane (gridPane));
+    getChildren ().add (gridPane);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -297,6 +296,14 @@ public class BasePane extends Pane
   {
     if (keyEvent.getCode () == KeyCode.ESCAPE)
       stage.hide ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void show ()
+  // ---------------------------------------------------------------------------------//
+  {
+    stage.show ();
+    stage.toFront ();
   }
 
   // ---------------------------------------------------------------------------------//

@@ -90,6 +90,15 @@ public class MazeWalker extends AppBase
   private Stage specialsStage;
   private Stage messagesStage;
 
+  SpecialsPane specialsPane;
+  MonstersPane monstersPane;
+  CharactersPane charactersPane;
+  ItemsPane itemsPane;
+  RewardsPane rewardsPane;
+  EncountersPane encountersPane;
+  MessagesPane messagesPane;
+  ExperienceCalculator experienceCalculator;
+
   // ---------------------------------------------------------------------------------//
   @Override
   protected Parent createContent ()
@@ -100,14 +109,14 @@ public class MazeWalker extends AppBase
     menuBar.getMenus ().addAll (menuFile, menuLevels, menuTools);
 
     addItem (menuFile, openFileItem, KeyCode.O, e -> getWizardryDisk ());
-    addItem (menuTools, charactersItem, KeyCode.C, e -> charactersStage.show ());
-    addItem (menuTools, specialsItem, KeyCode.S, e -> specialsStage.show ());
-    addItem (menuTools, messagesItem, KeyCode.T, e -> messagesStage.show ());
-    addItem (menuTools, monstersItem, KeyCode.M, e -> monstersStage.show ());
-    addItem (menuTools, itemsItem, KeyCode.I, e -> itemsStage.show ());
-    addItem (menuTools, rewardsItem, KeyCode.R, e -> rewardsStage.show ());
-    addItem (menuTools, encountersItem, KeyCode.E, e -> encountersStage.show ());
-    addItem (menuTools, experienceItem, KeyCode.X, e -> calculatorStage.show ());
+    addItem (menuTools, charactersItem, KeyCode.C, e -> charactersPane.show ());
+    addItem (menuTools, specialsItem, KeyCode.S, e -> specialsPane.show ());
+    addItem (menuTools, messagesItem, KeyCode.T, e -> messagesPane.show ());
+    addItem (menuTools, monstersItem, KeyCode.M, e -> monstersPane.show ());
+    addItem (menuTools, itemsItem, KeyCode.I, e -> itemsPane.show ());
+    addItem (menuTools, rewardsItem, KeyCode.R, e -> rewardsPane.show ());
+    addItem (menuTools, encountersItem, KeyCode.E, e -> encountersPane.show ());
+    addItem (menuTools, experienceItem, KeyCode.X, e -> experienceCalculator.show ());
 
     menuFile.getItems ().add (recentFilesMenu);
 
@@ -223,8 +232,7 @@ public class MazeWalker extends AppBase
     {
       calculatorStage = new Stage ();
       calculatorStage.setTitle ("Experience Points Calculator");
-      ExperienceCalculator experienceCalculator =
-          new ExperienceCalculator (wizardry, calculatorStage);
+      experienceCalculator = new ExperienceCalculator (wizardry, calculatorStage);
 
       Scene scene = new Scene (experienceCalculator, 370, 450);       // wh
       calculatorStage.setScene (scene);
@@ -238,7 +246,7 @@ public class MazeWalker extends AppBase
   {
     specialsStage = new Stage ();
     specialsStage.setTitle ("Special squares");
-    SpecialsPane specialsPane = new SpecialsPane (wizardry, specialsStage);
+    specialsPane = new SpecialsPane (wizardry, specialsStage);
 
     Scene scene = new Scene (specialsPane, 910, 600);               // wh
     specialsStage.setScene (scene);
@@ -251,7 +259,7 @@ public class MazeWalker extends AppBase
   {
     charactersStage = new Stage ();
     charactersStage.setTitle ("Wizardry Characters");
-    CharactersPane charactersPane = new CharactersPane (wizardry, charactersStage);
+    charactersPane = new CharactersPane (wizardry, charactersStage);
 
     Scene scene = new Scene (charactersPane, 910, 810);       // wh
     charactersStage.setScene (scene);
@@ -264,9 +272,9 @@ public class MazeWalker extends AppBase
   {
     monstersStage = new Stage ();
     monstersStage.setTitle ("Wizardry Monsters");
-    MonstersPane monstersPane = new MonstersPane (wizardry, monstersStage);
+    monstersPane = new MonstersPane (wizardry, monstersStage);
 
-    Scene scene = new Scene (monstersPane, 820, 520);         // wh
+    Scene scene = new Scene (monstersPane, 840, 520);         // wh
     monstersStage.setScene (scene);
     scene.setOnKeyPressed (e -> monstersPane.keyPressed (e));
   }
@@ -277,7 +285,7 @@ public class MazeWalker extends AppBase
   {
     itemsStage = new Stage ();
     itemsStage.setTitle ("Wizardry Items");
-    ItemsPane itemsPane = new ItemsPane (wizardry, itemsStage);
+    itemsPane = new ItemsPane (wizardry, itemsStage);
 
     Scene scene = new Scene (itemsPane, 770, 575);            // wh
     itemsStage.setScene (scene);
@@ -290,7 +298,7 @@ public class MazeWalker extends AppBase
   {
     rewardsStage = new Stage ();
     rewardsStage.setTitle ("Wizardry Rewards");
-    RewardsPane rewardsPane = new RewardsPane (wizardry, rewardsStage);
+    rewardsPane = new RewardsPane (wizardry, rewardsStage);
 
     Scene scene = new Scene (rewardsPane, 940, 575);            // wh
     rewardsStage.setScene (scene);
@@ -303,7 +311,7 @@ public class MazeWalker extends AppBase
   {
     encountersStage = new Stage ();
     encountersStage.setTitle ("Wizardry Encounters");
-    EncountersPane encountersPane = new EncountersPane (wizardry, encountersStage);
+    encountersPane = new EncountersPane (wizardry, encountersStage);
 
     Scene scene = new Scene (encountersPane, 640, 440);            // wh
     encountersStage.setScene (scene);
@@ -316,7 +324,7 @@ public class MazeWalker extends AppBase
   {
     messagesStage = new Stage ();
     messagesStage.setTitle ("Wizardry Messages");
-    MessagesPane messagesPane = new MessagesPane (wizardry, messagesStage);
+    messagesPane = new MessagesPane (wizardry, messagesStage);
 
     Scene scene = new Scene (messagesPane, 640, 540);            // wh
     messagesStage.setScene (scene);
@@ -337,6 +345,9 @@ public class MazeWalker extends AppBase
   // ---------------------------------------------------------------------------------//
   {
     super.keyPressed (keyEvent);
+
+    if (keyEvent.isMetaDown ())
+      return;
 
     switch (keyEvent.getCode ())
     {
