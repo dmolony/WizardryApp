@@ -12,7 +12,7 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.Message;
+import com.bytezone.wizardry.origin.OldMessage;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -83,15 +83,6 @@ public class MazeWalker extends AppBase
   private String wizardryFileName;
   private RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
 
-  private Stage calculatorStage;
-  private Stage charactersStage;
-  private Stage monstersStage;
-  private Stage itemsStage;
-  private Stage rewardsStage;
-  private Stage encountersStage;
-  private Stage specialsStage;
-  private Stage messagesStage;
-
   SpecialsPane specialsPane;
   MonstersPane monstersPane;
   CharactersPane charactersPane;
@@ -127,7 +118,6 @@ public class MazeWalker extends AppBase
 
     leftVBox.setPadding (new Insets (10));
     rightVBox.setPadding (new Insets (10));
-    //    leftVBox.setMinSize (350, 350);
     rightVBox.setMinSize (820, 825);
 
     //    view.setStyle ("-fx-border-color: black");
@@ -230,107 +220,90 @@ public class MazeWalker extends AppBase
   private void buildCalculator ()
   // ---------------------------------------------------------------------------------//
   {
-    if (calculatorStage == null)
-    {
-      calculatorStage = new Stage ();
-      calculatorStage.setTitle ("Experience Points Calculator");
-      experienceCalculator = new ExperienceCalculator (wizardry, calculatorStage);
-
-      Scene scene = new Scene (experienceCalculator, 370, 450);       // wh
-      calculatorStage.setScene (scene);
-      scene.setOnKeyPressed (e -> experienceCalculator.keyPressed (e));
-    }
+    Stage stage = getStage ("Experience Points");
+    experienceCalculator = new ExperienceCalculator (wizardry, stage);
+    stage.setScene (getScene (experienceCalculator, 370, 450));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildSpecials ()
   // ---------------------------------------------------------------------------------//
   {
-    specialsStage = new Stage ();
-    specialsStage.setTitle ("Special squares");
-    specialsPane = new SpecialsPane (wizardry, specialsStage);
-
-    Scene scene = new Scene (specialsPane, 1020, 600);               // wh
-    specialsStage.setScene (scene);
-    scene.setOnKeyPressed (e -> specialsPane.keyPressed (e));
+    Stage stage = getStage ("Special squares");
+    specialsPane = new SpecialsPane (wizardry, stage);
+    stage.setScene (getScene (specialsPane, 1020, 600));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildCharacters ()
   // ---------------------------------------------------------------------------------//
   {
-    charactersStage = new Stage ();
-    charactersStage.setTitle ("Wizardry Characters");
-    charactersPane = new CharactersPane (wizardry, charactersStage);
-
-    Scene scene = new Scene (charactersPane, 910, 810);       // wh
-    charactersStage.setScene (scene);
-    scene.setOnKeyPressed (e -> charactersPane.keyPressed (e));
+    Stage stage = getStage ("Characters");
+    charactersPane = new CharactersPane (wizardry, stage);
+    stage.setScene (getScene (charactersPane, 910, 810));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildMonsters ()
   // ---------------------------------------------------------------------------------//
   {
-    monstersStage = new Stage ();
-    monstersStage.setTitle ("Wizardry Monsters");
-    monstersPane = new MonstersPane (wizardry, monstersStage);
-
-    Scene scene = new Scene (monstersPane, 840, 520);         // wh
-    monstersStage.setScene (scene);
-    scene.setOnKeyPressed (e -> monstersPane.keyPressed (e));
+    Stage stage = getStage ("Monsters");
+    monstersPane = new MonstersPane (wizardry, stage);
+    stage.setScene (getScene (monstersPane, 840, 520));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildItems ()
   // ---------------------------------------------------------------------------------//
   {
-    itemsStage = new Stage ();
-    itemsStage.setTitle ("Wizardry Items");
-    itemsPane = new ItemsPane (wizardry, itemsStage);
-
-    Scene scene = new Scene (itemsPane, 770, 575);            // wh
-    itemsStage.setScene (scene);
-    scene.setOnKeyPressed (e -> itemsPane.keyPressed (e));
+    Stage stage = getStage ("Items");
+    itemsPane = new ItemsPane (wizardry, stage);
+    stage.setScene (getScene (itemsPane, 770, 575));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildRewards ()
   // ---------------------------------------------------------------------------------//
   {
-    rewardsStage = new Stage ();
-    rewardsStage.setTitle ("Wizardry Rewards");
-    rewardsPane = new RewardsPane (wizardry, rewardsStage);
-
-    Scene scene = new Scene (rewardsPane, 940, 575);            // wh
-    rewardsStage.setScene (scene);
-    scene.setOnKeyPressed (e -> rewardsPane.keyPressed (e));
+    Stage stage = getStage ("Rewards");
+    rewardsPane = new RewardsPane (wizardry, stage);
+    stage.setScene (getScene (rewardsPane, 940, 575));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildEncounters ()
   // ---------------------------------------------------------------------------------//
   {
-    encountersStage = new Stage ();
-    encountersStage.setTitle ("Wizardry Encounters");
-    encountersPane = new EncountersPane (wizardry, encountersStage);
-
-    Scene scene = new Scene (encountersPane, 640, 440);            // wh
-    encountersStage.setScene (scene);
-    scene.setOnKeyPressed (e -> encountersPane.keyPressed (e));
+    Stage stage = getStage ("Encounters");
+    encountersPane = new EncountersPane (wizardry, stage);
+    stage.setScene (getScene (encountersPane, 640, 440));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildMessages ()
   // ---------------------------------------------------------------------------------//
   {
-    messagesStage = new Stage ();
-    messagesStage.setTitle ("Wizardry Messages");
-    messagesPane = new MessagesPane (wizardry, messagesStage);
+    Stage stage = getStage ("Messages");
+    messagesPane = new MessagesPane (wizardry, stage);
+    stage.setScene (getScene (messagesPane, 640, 540));
+  }
 
-    Scene scene = new Scene (messagesPane, 640, 540);            // wh
-    messagesStage.setScene (scene);
-    scene.setOnKeyPressed (e -> messagesPane.keyPressed (e));
+  // ---------------------------------------------------------------------------------//
+  private Stage getStage (String name)
+  // ---------------------------------------------------------------------------------//
+  {
+    Stage stage = new Stage ();
+    stage.setTitle (wizardry.getScenarioName () + " - " + name);
+    return stage;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private Scene getScene (BasePane pane, int width, int height)
+  // ---------------------------------------------------------------------------------//
+  {
+    Scene scene = new Scene (pane, width, height);
+    scene.setOnKeyPressed (e -> pane.keyPressed (e));
+    return scene;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -394,7 +367,7 @@ public class MazeWalker extends AppBase
       switch (extra.getSquare ())
       {
         case SCNMSG:
-          Message message = wizardry.getMessage (aux[1]);
+          OldMessage message = wizardry.getMessage (aux[1]);
           description.append (message.getText ());
           if (message.getId () != aux[1])
             description.append ("\n\n(not actual message)");

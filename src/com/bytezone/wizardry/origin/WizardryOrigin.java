@@ -213,6 +213,13 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
+  public String getScenarioName ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return header.scenarioName;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public List<MazeLevel> getMazeLevels ()
   // ---------------------------------------------------------------------------------//
   {
@@ -281,23 +288,10 @@ public class WizardryOrigin
   {
     itemNo *= -1;
     itemNo -= 20000;
-    //
-    //    if (itemNo > 1000 && itemNo < 1200)
-    //      return getItemName (itemNo - 1000);
-    //
-    //    if (itemNo > 21000 && itemNo < 21200)
-    //      return getItemName (itemNo - 21000);
-    //
-    //    if (itemNo > 20200 && itemNo < 20400)
-    //      return getItemName (itemNo - 20200);
-    //
-    //    if (itemNo > 21400 && itemNo < 21600)
-    //      return getItemName (itemNo - 21400);
-    //
-    //    return "Unknown";
 
     int item1 = itemNo / 100;
     int item2 = itemNo % 100;
+
     return new Trade (item1, item2);
   }
 
@@ -334,7 +328,7 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
-  public Message getMessage (int id)
+  public OldMessage getMessage (int id)
   // ---------------------------------------------------------------------------------//
   {
     return messages.getMessage (id);

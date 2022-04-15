@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 // -----------------------------------------------------------------------------------//
-public class Message
+public class OldMessage
 // -----------------------------------------------------------------------------------//
 {
   List<String> lines = new ArrayList<String> ();
   int messageId;
 
   // ---------------------------------------------------------------------------------//
-  public Message (int ID, List<String> messages)
+  public OldMessage (int ID, List<String> messages)
   // ---------------------------------------------------------------------------------//
   {
     lines.addAll (messages);

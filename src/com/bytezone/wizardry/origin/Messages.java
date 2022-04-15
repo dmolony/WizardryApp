@@ -7,7 +7,7 @@ import java.util.List;
 public class Messages
 // -----------------------------------------------------------------------------------//
 {
-  private List<Message> messages = new ArrayList<> ();
+  private List<OldMessage> messages = new ArrayList<> ();
   private int codeOffset = 185;
 
   // ---------------------------------------------------------------------------------//
@@ -28,7 +28,7 @@ public class Messages
 
         if (buffer[offset + i + 40] == 1)               // last line of message
         {
-          messages.add (new Message (id, lines));
+          messages.add (new OldMessage (id, lines));
           id += lines.size ();
           lines.clear ();
         }
@@ -55,17 +55,17 @@ public class Messages
   }
 
   // ---------------------------------------------------------------------------------//
-  public List<Message> getMessages ()
+  public List<OldMessage> getMessages ()
   // ---------------------------------------------------------------------------------//
   {
     return messages;
   }
 
   // ---------------------------------------------------------------------------------//
-  public Message getMessage (int id)
+  public OldMessage getMessage (int id)
   // ---------------------------------------------------------------------------------//
   {
-    for (Message message : messages)
+    for (OldMessage message : messages)
       if (message.match (id))
         return message;
 
@@ -79,7 +79,7 @@ public class Messages
   {
     StringBuilder text = new StringBuilder ();
 
-    for (Message message : messages)
+    for (OldMessage message : messages)
     {
       text.append (message);
       text.append ("\n\n");
