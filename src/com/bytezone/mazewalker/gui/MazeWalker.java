@@ -12,6 +12,7 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
+import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -392,8 +393,10 @@ public class MazeWalker extends AppBase
       switch (extra.getSquare ())
       {
         case SCNMSG:
-          int msg = aux[1];
-          description.append (wizardry.getMessage (msg).getText ());
+          Message message = wizardry.getMessage (aux[1]);
+          description.append (message.getText ());
+          if (message.getId () != aux[1])
+            description.append ("\n\n(not actual message)");
 
           switch (aux[2])
           {
@@ -405,18 +408,18 @@ public class MazeWalker extends AppBase
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)
-              description.append ("\n\nObtain: " + wizardry.getItem (aux[0]));
+              description.append ("\n\nObtain: " + wizardry.getItemName (aux[0]));
               break;
 
-            case 4:                       // monster or obtain
+            case 4:
               if (aux[0] >= 0)               // monster
                 description.append ("\n\nEncounter: " + wizardry.getMonster (aux[0]));
               else
-                description.append ("\n\nObtain: " + wizardry.getItem (Math.abs (aux[0]) - 1000));
+                description.append ("\n\nObtain : " + wizardry.getItemNegative (aux[0]));
               break;
 
             case 5:                       // requires
-              description.append ("\n\nRequires: " + wizardry.getItem (aux[0]));
+              description.append ("\n\nRequires: " + wizardry.getItemName (aux[0]));
               break;
 
             case 8:
@@ -429,11 +432,11 @@ public class MazeWalker extends AppBase
               break;
 
             case 10:
-              description.append ("\n\nAnswer : " + wizardry.getMessage (aux[0]).getText ());
+              description.append ("\n\nAnswer : " + wizardry.getMessageText (aux[0]));
               break;
 
             case 11:
-              description.append ("\n\nPay : " + wizardry.getMessage (aux[0]).getText ());
+              description.append ("\n\nPay : " + wizardry.getMessageText (aux[0]));
               break;
           }
           break;

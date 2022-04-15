@@ -275,6 +275,27 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
+  public String getItemNegative (int itemNo)
+  // ---------------------------------------------------------------------------------//
+  {
+    itemNo *= -1;
+
+    if (itemNo > 1000 && itemNo < 1200)
+      return getItemName (itemNo - 1000);
+
+    if (itemNo > 21000 && itemNo < 21200)
+      return getItemName (itemNo - 21000);
+
+    if (itemNo > 20200 && itemNo < 20400)
+      return getItemName (itemNo - 20200);
+
+    if (itemNo > 21400 && itemNo < 21600)
+      return getItemName (itemNo - 21400);
+
+    return "Unknown";
+  }
+
+  // ---------------------------------------------------------------------------------//
   public List<Reward> getRewards ()
   // ---------------------------------------------------------------------------------//
   {
@@ -297,6 +318,13 @@ public class WizardryOrigin
 
     System.out.printf ("Image %d out of range%n", id);
     return null;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public String getMessageText (int id)
+  // ---------------------------------------------------------------------------------//
+  {
+    return messages.getMessage (id).getText ();
   }
 
   // ---------------------------------------------------------------------------------//

@@ -4,6 +4,7 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeLevel;
+import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -95,6 +96,9 @@ public class SpecialsPane extends BasePane
       {
         case SCNMSG:
           setText (textOut6[i], aux1);
+          Message message = wizardry.getMessage (aux1);
+          if (message.getId () != aux1)
+            description.append (String.format ("%d = Invalid message id. ", aux1));
 
           switch (aux2)
           {
@@ -108,7 +112,7 @@ public class SpecialsPane extends BasePane
 
             case 3:
               if (aux0 > 0)
-                description.append (wizardry.getItem (aux0).name);
+                description.append (wizardry.getItemName (aux0));
               else
                 description.append ("3 = ??");
               break;
@@ -117,17 +121,11 @@ public class SpecialsPane extends BasePane
               if (aux0 >= 0)
                 description.append ("Encounter : " + wizardry.getMonster (aux0));
               else
-              {
-                int item = getItemNo (aux0);
-                if (item != 0)
-                  description.append ("Obtain : " + wizardry.getItem (item));
-                else
-                  description.append ("Obtain : ??");
-              }
+                description.append ("\n\nObtain : " + wizardry.getItemNegative (aux0));
               break;
 
             case 5:                       // requires
-              description.append ("Requires : " + wizardry.getItem (aux0));
+              description.append ("Requires : " + wizardry.getItemName (aux0));
               break;
 
             case 6:
@@ -147,11 +145,11 @@ public class SpecialsPane extends BasePane
               break;
 
             case 10:
-              description.append ("Answer : " + wizardry.getMessage (aux0).getText ());
+              description.append ("Answer : " + wizardry.getMessageText (aux0));
               break;
 
             case 11:
-              description.append ("Pay : " + wizardry.getMessage (aux0).getText ());
+              description.append ("Pay : " + wizardry.getMessageText (aux0));
               break;
 
             case 12:
@@ -160,9 +158,13 @@ public class SpecialsPane extends BasePane
 
             case 13:
               if (aux0 > 0)
-                description.append (wizardry.getItem (aux0).name);
+                description.append (wizardry.getItemName (aux0));
               else
                 description.append ("13 = ??");
+              break;
+
+            case 14:
+              description.append ("14 = ??");
               break;
           }
           break;
@@ -222,22 +224,5 @@ public class SpecialsPane extends BasePane
       }
       setText (textOut7[i], description.toString ());
     }
-  }
-
-  // ---------------------------------------------------------------------------------//
-  int getItemNo (int itemNo)
-  // ---------------------------------------------------------------------------------//
-  {
-    itemNo *= -1;
-
-    if (itemNo > 1000 && itemNo < 1200)
-      return itemNo - 1000;
-    if (itemNo > 21000 && itemNo < 21200)
-      return itemNo - 21000;
-    if (itemNo > 20200 && itemNo < 20400)
-      return itemNo - 20200;
-    if (itemNo > 21400 && itemNo < 21600)
-      return itemNo - 21400;
-    return 0;
   }
 }
