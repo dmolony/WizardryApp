@@ -103,22 +103,21 @@ public class SpecialsPane extends BasePane
 
           switch (aux2)
           {
-            case 1:
+            case 1:                                 //
               description.append ("1 = ??");
               break;
 
-            case 2:                       // special obtain (only blue ribbon so far)
+            case 2:                                 // TRYGET               
+              // special obtain (only blue ribbon so far)
               description.append ("Obtain : " + wizardry.getItem (aux0));
               break;
 
-            case 3:
+            case 3:                                 // WHOWADE
               if (aux0 > 0)
-                description.append (wizardry.getItemName (aux0));
-              else
-                description.append ("3 = ??");
+                description.append ("Wade : " + wizardry.getItemName (aux0));
               break;
 
-            case 4:               // Search (Y/N)
+            case 4:                                 // GETYN
               if (aux0 >= 0)
                 description.append ("Encounter : " + wizardry.getMonster (aux0));
               else if (aux0 > -1200)
@@ -131,31 +130,31 @@ public class SpecialsPane extends BasePane
               }
               break;
 
-            case 5:                       // requires
+            case 5:                               // ITM2PASS
               description.append ("Requires : " + wizardry.getItemName (aux0));
               break;
 
-            case 6:
+            case 6:                               // CHKALIGN
               description.append ("6 = ??");
               break;
 
-            case 7:
+            case 7:                               // CHKAUX0
               description.append ("7 = ??");
               break;
 
-            case 8:
+            case 8:                               // BCK2SHOP
               description.append ("8 = Return to castle??");
               break;
 
-            case 9:
-              description.append ("9 = ??");
+            case 9:                               // LOOKOUT
+              description.append (String.format ("Look out : surrounded by fights"));
               break;
 
-            case 10:
+            case 10:                              // RIDDLES
               description.append ("Answer : " + wizardry.getMessageText (aux0));
               break;
 
-            case 11:
+            case 11:                              // FEEIS
               description.append ("Pay : " + wizardry.getMessageText (aux0));
               break;
 
@@ -165,7 +164,7 @@ public class SpecialsPane extends BasePane
 
             case 13:
               if (aux0 > 0)
-                description.append (wizardry.getItemName (aux0));
+                description.append ("Requires : " + wizardry.getItemName (aux0));
               else
                 description.append ("13 = ??");
               break;

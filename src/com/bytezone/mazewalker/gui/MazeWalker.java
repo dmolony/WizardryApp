@@ -435,8 +435,7 @@ public class MazeWalker extends AppBase
               break;
 
             case 9:
-              description.append (String.format ("%n%nWhat does AUX0 = %04X mean?", aux[0]));
-              description.append (String.format ("%n%nWhat does AUX2 = %04X mean?", aux[2]));
+              description.append (String.format ("%n%nLook out : surrounded by fights"));
               break;
 
             case 10:
