@@ -4,7 +4,7 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.OldMessage;
+import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
@@ -97,7 +97,7 @@ public class SpecialsPane extends BasePane
       {
         case SCNMSG:
           setText (textOut6[i], aux1);
-          OldMessage message = wizardry.getMessage (aux1);
+          Message message = wizardry.getMessage (aux1);
           if (message.getId () != aux1)
             description.append (String.format ("%d = Invalid message id. ", aux1));
 

@@ -3,19 +3,25 @@ package com.bytezone.wizardry.origin;
 import java.util.ArrayList;
 import java.util.List;
 
-// -----------------------------------------------------------------------------------//
-public class OldMessage
-// -----------------------------------------------------------------------------------//
+// ---------------------------------------------------------------------------------//
+public class Message
+// ---------------------------------------------------------------------------------//
 {
-  List<String> lines = new ArrayList<String> ();
+  List<MessageLine> messageLines = new ArrayList<> ();
   int messageId;
 
   // ---------------------------------------------------------------------------------//
-  public OldMessage (int ID, List<String> messages)
+  public Message (int id)
   // ---------------------------------------------------------------------------------//
   {
-    lines.addAll (messages);
-    messageId = ID;
+    this.messageId = id;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void addLine (MessageLine messageLine)
+  // ---------------------------------------------------------------------------------//
+  {
+    messageLines.add (messageLine);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -33,7 +39,7 @@ public class OldMessage
       return true;
 
     // this code is to allow for a bug in scenario #1
-    if (messageNum > messageId && messageNum < (messageId + lines.size ()))
+    if (messageNum > messageId && messageNum < (messageId + messageLines.size ()))
       return true;
 
     return false;
@@ -45,7 +51,7 @@ public class OldMessage
   {
     StringBuilder text = new StringBuilder ();
 
-    for (String line : lines)
+    for (MessageLine line : messageLines)
     {
       text.append (line);
       text.append ("\n");

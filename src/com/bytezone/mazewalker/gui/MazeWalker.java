@@ -12,7 +12,7 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.OldMessage;
+import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -367,7 +367,7 @@ public class MazeWalker extends AppBase
       switch (extra.getSquare ())
       {
         case SCNMSG:
-          OldMessage message = wizardry.getMessage (aux[1]);
+          Message message = wizardry.getMessage (aux[1]);
           description.append (message.getText ());
           if (message.getId () != aux[1])
             description.append ("\n\n(not actual message)");

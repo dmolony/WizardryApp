@@ -328,7 +328,7 @@ public class WizardryOrigin
   }
 
   // ---------------------------------------------------------------------------------//
-  public OldMessage getMessage (int id)
+  public Message getMessage (int id)
   // ---------------------------------------------------------------------------------//
   {
     return messages.getMessage (id);

@@ -1,6 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.OldMessage;
+import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Messages;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -34,7 +34,7 @@ public class MessagesPane extends BasePane
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    ComboBox<OldMessage> messagesList = new ComboBox<> ();
+    ComboBox<Message> messagesList = new ComboBox<> ();
     createComboBox ("Message", messagesList, messages.getMessages (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
@@ -47,7 +47,7 @@ public class MessagesPane extends BasePane
   }
 
   // ---------------------------------------------------------------------------------//
-  private void update (OldMessage message)
+  private void update (Message message)
   // ---------------------------------------------------------------------------------//
   {
     textOut.setText (message.getText ());

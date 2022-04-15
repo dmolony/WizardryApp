@@ -7,16 +7,15 @@ import java.util.List;
 public class Messages
 // -----------------------------------------------------------------------------------//
 {
-  private List<OldMessage> messages = new ArrayList<> ();
   private int codeOffset = 185;
+  private List<MessageLine> messageLines = new ArrayList<> ();
+  private List<Message> messages = new ArrayList<> ();
 
   // ---------------------------------------------------------------------------------//
   public Messages (byte[] buffer, int scenarioId)
   // ---------------------------------------------------------------------------------//
   {
     int offset = 0;
-    int id = 0;
-    List<String> lines = new ArrayList<> ();
 
     while (offset < buffer.length)
     {
@@ -24,16 +23,26 @@ public class Messages
       {
         String line = scenarioId == 1 ? Utility.getPascalString (buffer, offset + i) //
             : getCodedLine (buffer, offset + i);
-        lines.add (line);
-
-        if (buffer[offset + i + 40] == 1)               // last line of message
-        {
-          messages.add (new OldMessage (id, lines));
-          id += lines.size ();
-          lines.clear ();
-        }
+        messageLines.add (new MessageLine (line, buffer[offset + i + 40] == 1));
       }
       offset += 512;
+    }
+
+    // create messages
+    int ptr = 0;
+    Message message = null;
+
+    for (MessageLine messageLine : messageLines)
+    {
+      if (message == null)
+        message = new Message (ptr);
+      message.addLine (messageLine);
+      if (messageLine.endOfMessage)
+      {
+        messages.add (message);
+        message = null;
+      }
+      ++ptr;
     }
   }
 
@@ -55,17 +64,17 @@ public class Messages
   }
 
   // ---------------------------------------------------------------------------------//
-  public List<OldMessage> getMessages ()
+  public List<Message> getMessages ()
   // ---------------------------------------------------------------------------------//
   {
     return messages;
   }
 
   // ---------------------------------------------------------------------------------//
-  public OldMessage getMessage (int id)
+  public Message getMessage (int id)
   // ---------------------------------------------------------------------------------//
   {
-    for (OldMessage message : messages)
+    for (Message message : messages)
       if (message.match (id))
         return message;
 
@@ -79,7 +88,7 @@ public class Messages
   {
     StringBuilder text = new StringBuilder ();
 
-    for (OldMessage message : messages)
+    for (Message message : messages)
     {
       text.append (message);
       text.append ("\n\n");
