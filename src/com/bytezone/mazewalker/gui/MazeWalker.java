@@ -17,6 +17,7 @@ import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
+import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -249,7 +250,7 @@ public class MazeWalker extends AppBase
     specialsStage.setTitle ("Special squares");
     specialsPane = new SpecialsPane (wizardry, specialsStage);
 
-    Scene scene = new Scene (specialsPane, 980, 600);               // wh
+    Scene scene = new Scene (specialsPane, 1020, 600);               // wh
     specialsStage.setScene (scene);
     scene.setOnKeyPressed (e -> specialsPane.keyPressed (e));
   }
@@ -412,10 +413,17 @@ public class MazeWalker extends AppBase
               break;
 
             case 4:
+              description.append ("\n\nSearch (Y/N)?");
               if (aux[0] >= 0)               // monster
                 description.append ("\n\nEncounter: " + wizardry.getMonster (aux[0]));
+              else if (aux[0] > -1200)
+                description.append ("\n\nObtain : " + wizardry.getItem (aux[0] * -1 - 1000));
               else
-                description.append ("\n\nObtain : " + wizardry.getItemNegative (aux[0]));
+              {
+                Trade trade = wizardry.getItemTrade (aux[0]);
+                description.append ("\n\nTrade : " + wizardry.getItemName (trade.item1 ()) + " for "
+                    + wizardry.getItemName (trade.item2 ()));
+              }
               break;
 
             case 5:                       // requires

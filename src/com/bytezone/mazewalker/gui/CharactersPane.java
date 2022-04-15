@@ -64,7 +64,7 @@ public class CharactersPane extends BasePane
   {
     super (wizardry, stage);
 
-    setColumnConstraints (110, 69, 70, 20, 20, 20, 40, 40, 90, 20, 80, 20, 80, 20);
+    setColumnConstraints (110, 69, 70, 20, 20, 20, 30, 50, 90, 20, 80, 20, 80, 20);
 
     // make all rows the same height
     RowConstraints rowCo = new RowConstraints (25);
@@ -187,6 +187,11 @@ public class CharactersPane extends BasePane
       {
         Possession possession = character.possessions.get (i);
         Item item = wizardry.getItem (possession.id ());
+        if (item == null)
+        {
+          System.out.println ("null item # " + possession.id ());
+          break;
+        }
 
         if (possession.identified ())
         {

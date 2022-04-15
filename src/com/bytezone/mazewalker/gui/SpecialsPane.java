@@ -7,6 +7,7 @@ import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -35,7 +36,7 @@ public class SpecialsPane extends BasePane
     super (wizardry, stage);
 
     int width = 65;
-    setColumnConstraints (110, 120, width, width, width, width, width, 280);
+    setColumnConstraints (110, 120, width, width, width, width, width, 320);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
@@ -117,11 +118,17 @@ public class SpecialsPane extends BasePane
                 description.append ("3 = ??");
               break;
 
-            case 4:
+            case 4:               // Search (Y/N)
               if (aux0 >= 0)
                 description.append ("Encounter : " + wizardry.getMonster (aux0));
+              else if (aux0 > -1200)
+                description.append ("Obtain : " + wizardry.getItem (aux0 * -1 - 1000));
               else
-                description.append ("\n\nObtain : " + wizardry.getItemNegative (aux0));
+              {
+                Trade trade = wizardry.getItemTrade (aux0);
+                description.append ("Trade : " + wizardry.getItemName (trade.item1 ()) + " for "
+                    + wizardry.getItemName (trade.item2 ()));
+              }
               break;
 
             case 5:                       // requires

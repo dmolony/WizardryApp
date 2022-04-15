@@ -58,7 +58,7 @@ public class Character
   LostXYL lostXYL;
 
   // ---------------------------------------------------------------------------------//
-  public Character (int id, DataBlock dataBlock) throws InvalidCharacterException
+  public Character (int id, DataBlock dataBlock, int scenarioId) throws InvalidCharacterException
   // ---------------------------------------------------------------------------------//
   {
     byte[] buffer = dataBlock.buffer;
@@ -69,6 +69,9 @@ public class Character
       throw new InvalidCharacterException ("Name too long");
 
     name = Utility.getPascalString (buffer, offset);
+    if (name.isEmpty () || ("UNSET".equals (name) && buffer[offset + 40] == 0x07))   // 7 = LOST
+      throw new InvalidCharacterException ("Character is UNSET");
+
     password = Utility.getPascalString (buffer, offset + 16);
     inMaze = Utility.getShort (buffer, offset + 32) != 0;
     race = WizardryOrigin.Race.values ()[Utility.getShort (buffer, offset + 34)];
@@ -89,14 +92,18 @@ public class Character
     //    System.out.println (HexFormatter.formatNoHeader (buffer, offset + 48, 4));
 
     gold = Utility.getWizLong (buffer, offset + 52);
-
     possessionsCount = Utility.getShort (buffer, offset + 58);      // 0-8
+
     for (int i = 0; i < possessionsCount; i++)
     {
       boolean equipped = Utility.getShort (buffer, offset + 60 + i * 8) == 1;
       boolean cursed = Utility.getShort (buffer, offset + 62 + i * 8) == 1;
       boolean identified = Utility.getShort (buffer, offset + 64 + i * 8) == 1;
+
       int itemId = Utility.getShort (buffer, offset + 66 + i * 8);
+      if (scenarioId == 3 && itemId >= 1000)
+        itemId -= 1000;             // why?
+
       possessions.add (new Possession (itemId, equipped, cursed, identified));
     }
 
