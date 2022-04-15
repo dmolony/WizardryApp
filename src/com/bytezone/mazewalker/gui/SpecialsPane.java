@@ -143,7 +143,7 @@ public class SpecialsPane extends BasePane
               break;
 
             case 8:                               // BCK2SHOP
-              description.append ("8 = Return to castle??");
+              description.append ("Return to castle");
               break;
 
             case 9:                               // LOOKOUT

@@ -431,7 +431,7 @@ public class MazeWalker extends AppBase
               break;
 
             case 8:
-              description.append ("\n\nReturn to castle??");
+              description.append ("\n\nReturn to castle");
               break;
 
             case 9:
