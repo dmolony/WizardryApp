@@ -16,7 +16,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class RewardsPane extends BasePane
+public class RewardsPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int MAX_ITEMS = 5;

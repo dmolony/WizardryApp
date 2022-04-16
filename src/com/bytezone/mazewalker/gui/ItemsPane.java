@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class ItemsPane extends BasePane
+public class ItemsPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int GENERIC_NAME = 0;

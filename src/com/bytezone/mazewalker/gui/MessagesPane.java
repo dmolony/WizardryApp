@@ -14,7 +14,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class MessagesPane extends BasePane
+public class MessagesPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   TextField[] textOut1;

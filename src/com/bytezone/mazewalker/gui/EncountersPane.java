@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class EncountersPane extends BasePane
+public class EncountersPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int MAX_GROUPS = 3;

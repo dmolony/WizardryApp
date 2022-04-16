@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class MonstersPane extends BasePane
+public class MonstersPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int GENERIC_NAME = 0;

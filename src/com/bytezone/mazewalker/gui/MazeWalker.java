@@ -297,7 +297,7 @@ public class MazeWalker extends AppBase
   }
 
   // ---------------------------------------------------------------------------------//
-  private Scene getScene (BasePane pane, int width, int height)
+  private Scene getScene (DataPane pane, int width, int height)
   // ---------------------------------------------------------------------------------//
   {
     Scene scene = new Scene (pane, width, height);

@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class SpecialsPane extends BasePane
+public class SpecialsPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   ComboBox<MazeLevel> mazeLevelList = new ComboBox<> ();

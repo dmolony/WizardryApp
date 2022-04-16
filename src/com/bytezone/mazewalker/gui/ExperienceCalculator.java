@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class ExperienceCalculator extends BasePane
+public class ExperienceCalculator extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int HP_DICE = 0;

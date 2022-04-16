@@ -15,7 +15,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class CharactersPane extends BasePane
+public class CharactersPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int PASSWORD = 0;
