@@ -119,13 +119,23 @@ public class WizardryOrigin
     byte[] buffer = disk.getScenarioData ();
     header = new Header (buffer);
 
+    // add messages
+    messages = new Messages (disk.getScenarioMessages (), getScenarioId ());
+
     // add maze levels
     ScenarioData sd = header.get (MAZE_AREA);
     mazeLevels = new ArrayList<> (sd.totalUnits);
 
     int id = 0;
     for (DataBlock dataBlock : sd.dataBlocks)
-      mazeLevels.add (new MazeLevel (++id, dataBlock));
+    {
+      MazeLevel mazeLevel = new MazeLevel (++id, dataBlock);
+      mazeLevels.add (mazeLevel);
+
+      for (Extra extra : mazeLevel.extra)
+        if (extra.square == Square.SCNMSG)
+          getMessage (extra.aux[1]);            // force message creation
+    }
 
     // add characters
     sd = header.get (CHARACTER_AREA);
@@ -175,9 +185,6 @@ public class WizardryOrigin
     id = 0;
     for (DataBlock dataBlock : sd.dataBlocks)
       images.add (new Image (id++, dataBlock, getScenarioId ()));
-
-    // add messages
-    messages = new Messages (disk.getScenarioMessages (), getScenarioId ());
 
     if (false)
       for (Square square : Square.values ())

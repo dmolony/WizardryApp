@@ -4,7 +4,6 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
@@ -97,14 +96,22 @@ public class SpecialsPane extends BasePane
       {
         case SCNMSG:
           setText (textOut6[i], aux1);
-          Message message = wizardry.getMessage (aux1);
-          if (message.getId () != aux1)
-            description.append (String.format ("%d = Invalid message id. ", aux1));
 
           switch (aux2)
           {
-            case 1:                                 //
-              description.append ("1 = ??");
+            case 1:                                 // conditional
+              switch (aux0)
+              {
+                case 0:
+                  description.append ("Never shown");
+                  break;
+                case -1:
+                  description.append ("Always shown");
+                  break;
+                default:
+                  description.append (aux0 + " left");
+                  break;
+              }
               break;
 
             case 2:                                 // TRYGET               
@@ -135,11 +142,11 @@ public class SpecialsPane extends BasePane
               break;
 
             case 6:                               // CHKALIGN
-              description.append ("6 = ??");
+              description.append ("Check alignment");
               break;
 
             case 7:                               // CHKAUX0
-              description.append ("7 = ??");
+              description.append ("Check AUX0");
               break;
 
             case 8:                               // BCK2SHOP

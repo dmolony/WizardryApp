@@ -1,7 +1,10 @@
 package com.bytezone.wizardry.origin;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 // -----------------------------------------------------------------------------------//
 public class Messages
@@ -9,7 +12,7 @@ public class Messages
 {
   private int codeOffset = 185;
   private List<MessageLine> messageLines = new ArrayList<> ();
-  private List<Message> messages = new ArrayList<> ();
+  private Map<Integer, Message> messages = new TreeMap<> ();
 
   // ---------------------------------------------------------------------------------//
   public Messages (byte[] buffer, int scenarioId)
@@ -21,28 +24,11 @@ public class Messages
     {
       for (int i = 0; i < 504; i += 42)
       {
-        String line = scenarioId == 1 ? Utility.getPascalString (buffer, offset + i) //
+        String line = scenarioId == 1 ? Utility.getPascalString (buffer, offset + i)
             : getCodedLine (buffer, offset + i);
         messageLines.add (new MessageLine (line, buffer[offset + i + 40] == 1));
       }
       offset += 512;
-    }
-
-    // create messages
-    int ptr = 0;
-    Message message = null;
-
-    for (MessageLine messageLine : messageLines)
-    {
-      if (message == null)
-        message = new Message (ptr);
-      message.addLine (messageLine);
-      if (messageLine.endOfMessage)
-      {
-        messages.add (message);
-        message = null;
-      }
-      ++ptr;
     }
   }
 
@@ -64,36 +50,31 @@ public class Messages
   }
 
   // ---------------------------------------------------------------------------------//
-  public List<Message> getMessages ()
+  public Collection<Message> getMessages ()
   // ---------------------------------------------------------------------------------//
   {
-    return messages;
+    return messages.values ();
   }
 
   // ---------------------------------------------------------------------------------//
   public Message getMessage (int id)
   // ---------------------------------------------------------------------------------//
   {
-    for (Message message : messages)
-      if (message.match (id))
-        return message;
+    Message message = messages.get (id);
+    if (message != null)
+      return message;
 
-    return null;
-  }
+    message = new Message (id);
 
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public String toString ()
-  // ---------------------------------------------------------------------------------//
-  {
-    StringBuilder text = new StringBuilder ();
-
-    for (Message message : messages)
+    while (id < messageLines.size ())
     {
-      text.append (message);
-      text.append ("\n\n");
+      MessageLine messageLine = messageLines.get (id++);
+      message.addLine (messageLine);
+      if (messageLine.endOfMessage)
+        break;
     }
 
-    return text.toString ();
+    messages.put (message.getId (), message);
+    return message;
   }
 }

@@ -12,7 +12,6 @@ import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -367,18 +366,23 @@ public class MazeWalker extends AppBase
       switch (extra.getSquare ())
       {
         case SCNMSG:
-          Message message = wizardry.getMessage (aux[1]);
-          description.append (message.getText ());
-          if (message.getId () != aux[1])
-            description.append ("\n\n(not actual message)");
+          description.append (wizardry.getMessageText (aux[1]));
 
           switch (aux[2])
           {
             case 1:
-              if (aux[0] == 0)
-                description.append ("\n\nMessage will not be displayed");
-              else if (aux[0] > 0)
-                description.append ("\n\n(" + aux[0] + " left)");
+              switch (aux[0])
+              {
+                case 0:
+                  description.append ("\n\nNever shown");
+                  break;
+                case -1:
+                  description.append ("\n\nAlways shown");
+                  break;
+                default:
+                  description.append ("\n\n" + aux[0] + " left");
+                  break;
+              }
               break;
 
             case 2:                       // special obtain (only blue ribbon so far)

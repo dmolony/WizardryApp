@@ -1,6 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -61,7 +61,7 @@ public class BasePane extends Pane
   }
 
   // ---------------------------------------------------------------------------------//
-  <T> void createComboBox (String labelText, ComboBox<T> comboBox, List<T> list,
+  <T> void createComboBox (String labelText, ComboBox<T> comboBox, Collection<T> list,
       ChangeListener<T> listener, LabelPlacement labelPos, DataPlacement dataPos)
   // ---------------------------------------------------------------------------------//
   {
