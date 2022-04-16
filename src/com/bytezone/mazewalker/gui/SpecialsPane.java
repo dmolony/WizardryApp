@@ -179,6 +179,14 @@ public class SpecialsPane extends BasePane
             case 14:
               description.append ("14 = ??");
               break;
+
+            case 15:
+              description.append ("15 = ??");
+              break;
+
+            case 16:
+              description.append ("16 = ??");
+              break;
           }
           break;
 

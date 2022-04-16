@@ -41,7 +41,7 @@ public class MazeLevel
     addWalls (north, buffer, offset + 0x168);
 
     addLairs (buffer, offset + 0x1E0);
-    addExtras (buffer, offset + 0x230);
+    addSquareExtras (buffer, offset + 0x230);
 
     addExtra (buffer, offset + 0x2F8);
 
@@ -53,13 +53,12 @@ public class MazeLevel
         Location location = new Location (level, col, row);
         Walls walls = new Walls (west[col][row], south[col][row], east[col][row], north[col][row]);
         MazeCell mazeCell = new MazeCell (location, walls, lair[col][row]);
+
         int index = sqrextra[col][row];
         extra[index].addLocation (location);
 
         if (index != 0)
-        {
           mazeCell.addExtra (extra[index]);
-        }
 
         mazeCells[col][row] = mazeCell;
       }
@@ -154,7 +153,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addExtras (byte[] buffer, int ptr)
+  private void addSquareExtras (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     for (int col = 0; col < 20; col++)

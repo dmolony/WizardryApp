@@ -119,7 +119,7 @@ public class WizardryOrigin
     byte[] buffer = disk.getScenarioData ();
     header = new Header (buffer);
 
-    // add messages
+    // add messages (before maze levels)
     messages = new Messages (disk.getScenarioMessages (), getScenarioId ());
 
     // add maze levels
@@ -134,7 +134,10 @@ public class WizardryOrigin
 
       for (Extra extra : mazeLevel.extra)
         if (extra.square == Square.SCNMSG)
-          getMessage (extra.aux[1]);            // force message creation
+        {
+          Message message = getMessage (extra.aux[1]);          // force message creation
+          message.addLocations (extra.locations);
+        }
     }
 
     // add characters
