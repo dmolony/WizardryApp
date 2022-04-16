@@ -1,7 +1,7 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.MazeLevel;
+import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 
@@ -73,24 +73,19 @@ public class SpecialsPane extends BasePane
   {
     for (int i = 0; i < 16; i++)
     {
-      Special extra = mazeLevel.getExtra ()[i];
+      Special special = mazeLevel.getSpecial (i);
 
-      int aux0 = extra.aux[0];
-      int aux1 = extra.aux[1];
-      int aux2 = extra.aux[2];
+      setText (textOut1[i], special.square);
+      setText (textOut2[i], special.aux[0]);
+      setText (textOut3[i], special.aux[1]);
+      setText (textOut4[i], special.aux[2]);
+      setText (textOut5[i], special.locations.size ());
+      setText (textOut7[i], special.getText ());
 
-      setText (textOut1[i], extra.square);
-      setText (textOut2[i], aux0);
-      setText (textOut3[i], aux1);
-      setText (textOut4[i], aux2);
-      setText (textOut5[i], extra.locations.size ());
-
-      if (extra.square == Square.SCNMSG)
-        setText (textOut6[i], aux1);
+      if (special.square == Square.SCNMSG)
+        setText (textOut6[i], special.aux[1]);
       else
         setText (textOut6[i], "");
-
-      setText (textOut7[i], extra.getText ());
     }
   }
 }

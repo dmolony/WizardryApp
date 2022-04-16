@@ -132,11 +132,11 @@ public class WizardryOrigin
       MazeLevel mazeLevel = new MazeLevel (this, ++id, dataBlock);
       mazeLevels.add (mazeLevel);
 
-      for (Special extra : mazeLevel.extra)
-        if (extra.square == Square.SCNMSG)
+      for (Special special : mazeLevel.getSpecials ())
+        if (special.square == Square.SCNMSG)
         {
-          Message message = getMessage (extra.aux[1]);          // force message creation
-          message.addLocations (extra.locations);
+          Message message = getMessage (special.aux[1]);          // force message creation
+          message.addLocations (special.locations);
         }
     }
 
@@ -189,31 +189,31 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       images.add (new Image (id++, dataBlock, getScenarioId ()));
 
-    if (false)
-      for (Square square : Square.values ())
-      {
-        showExtra (square);
-        System.out.println ();
-      }
+    //    if (false)
+    //      for (Square square : Square.values ())
+    //      {
+    //        showExtra (square);
+    //        System.out.println ();
+    //      }
   }
 
   // ---------------------------------------------------------------------------------//
-  private void showExtra (Square square)
-  // ---------------------------------------------------------------------------------//
-  {
-    for (MazeLevel level : mazeLevels)
-      for (int col = 0; col < 20; col++)
-        for (int row = 0; row < 20; row++)
-        {
-          MazeCell mazeCell = level.getMazeCell (col, row);
-          Special extra = mazeCell.getExtra ();
-          if (extra != null && extra.is (square))
-          {
-            String fight = level.lair[col][row] ? " lair" : "";
-            System.out.printf ("%s  %s %s%n", extra, mazeCell.getLocation (), fight);
-          }
-        }
-  }
+  //  private void showExtra (Square square)
+  //  // ---------------------------------------------------------------------------------//
+  //  {
+  //    for (MazeLevel level : mazeLevels)
+  //      for (int col = 0; col < 20; col++)
+  //        for (int row = 0; row < 20; row++)
+  //        {
+  //          MazeCell mazeCell = level.getMazeCell (col, row);
+  //          Special extra = mazeCell.getExtra ();
+  //          if (extra != null && extra.is (square))
+  //          {
+  //            String fight = level.lair[col][row] ? " lair" : "";
+  //            System.out.printf ("%s  %s %s%n", extra, mazeCell.getLocation (), fight);
+  //          }
+  //        }
+  //  }
 
   // ---------------------------------------------------------------------------------//
   public int getScenarioId ()

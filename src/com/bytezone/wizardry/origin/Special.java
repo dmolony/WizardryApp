@@ -8,6 +8,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
 
 // -----------------------------------------------------------------------------------//
 public class Special
+// -----------------------------------------------------------------------------------//
 {
   private final WizardryOrigin wizardry;
 
@@ -201,7 +202,7 @@ public class Special
         break;
 
       case FIZZLE:
-        description.append ("Spells cannot be cast here");
+        description.append ("Spells fizzle out");
         break;
 
       case ENCOUNTE:

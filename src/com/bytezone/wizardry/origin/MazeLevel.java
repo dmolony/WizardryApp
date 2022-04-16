@@ -16,12 +16,10 @@ public class MazeLevel
 
   private MazeCell[][] mazeCells = new MazeCell[20][20];
 
-  boolean[][] lair = new boolean[20][20];
-  byte[][] sqrextra = new byte[20][20];
-
-  Special[] extra = new Special[16];
-
-  EnemyCalc[] enemyCalc = new EnemyCalc[3];
+  private boolean[][] lair;
+  private byte[][] sqrextra;
+  private Special[] specials;
+  private EnemyCalc[] enemyCalc;
 
   // ---------------------------------------------------------------------------------//
   public MazeLevel (WizardryOrigin wizardry, int level, DataBlock dataBlock)
@@ -33,22 +31,15 @@ public class MazeLevel
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
 
-    Wall[][] west = new Wall[20][20];
-    Wall[][] south = new Wall[20][20];
-    Wall[][] east = new Wall[20][20];
-    Wall[][] north = new Wall[20][20];
+    Wall[][] west = addWalls (buffer, offset);
+    Wall[][] south = addWalls (buffer, offset + 0x78);
+    Wall[][] east = addWalls (buffer, offset + 0xF0);
+    Wall[][] north = addWalls (buffer, offset + 0x168);
 
-    addWalls (west, buffer, offset);
-    addWalls (south, buffer, offset + 0x78);
-    addWalls (east, buffer, offset + 0xF0);
-    addWalls (north, buffer, offset + 0x168);
-
-    addLairs (buffer, offset + 0x1E0);
-    addSquareExtras (buffer, offset + 0x230);
-
-    addExtra (buffer, offset + 0x2F8);
-
-    addEnemyCalc (buffer, offset + 0x360);
+    lair = addLairs (buffer, offset + 0x1E0);
+    sqrextra = addSquareExtras (buffer, offset + 0x230);
+    specials = addSpecials (buffer, offset + 0x2F8);
+    enemyCalc = addEnemyCalc (buffer, offset + 0x360);
 
     for (int col = 0; col < 20; col++)
       for (int row = 0; row < 20; row++)
@@ -58,10 +49,10 @@ public class MazeLevel
         MazeCell mazeCell = new MazeCell (location, walls, lair[col][row]);
 
         int index = sqrextra[col][row];
-        extra[index].addLocation (location);
+        specials[index].addLocation (location);
 
         if (index != 0)
-          mazeCell.addExtra (extra[index]);
+          mazeCell.addExtra (specials[index]);
 
         mazeCells[col][row] = mazeCell;
       }
@@ -106,10 +97,17 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  public Special[] getExtra ()
+  public Special getSpecial (int index)
   // ---------------------------------------------------------------------------------//
   {
-    return extra;
+    return specials[index];
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Special[] getSpecials ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return specials;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -120,9 +118,11 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addWalls (Wall[][] walls, byte[] buffer, int ptr)
+  private Wall[][] addWalls (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
+    Wall[][] walls = new Wall[20][20];
+
     for (int col = 0; col < 20; col++)
     {
       int row = 0;
@@ -138,12 +138,16 @@ public class MazeLevel
 
       ptr++;                                        // skip last byte
     }
+
+    return walls;
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addLairs (byte[] buffer, int ptr)
+  private boolean[][] addLairs (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
+    boolean[][] lair = new boolean[20][20];
+
     for (int col = 0; col < 20; col++)
     {
       int val = Utility.readTriple (buffer, ptr + col * 4) & 0x0FFFFF;
@@ -153,12 +157,16 @@ public class MazeLevel
         val >>>= 1;
       }
     }
+
+    return lair;
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addSquareExtras (byte[] buffer, int ptr)
+  private byte[][] addSquareExtras (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
+    byte[][] sqrextra = new byte[20][20];
+
     for (int col = 0; col < 20; col++)
       for (int row = 0; row < 20; row += 2)
       {
@@ -166,29 +174,39 @@ public class MazeLevel
         sqrextra[col][row + 1] = (byte) ((buffer[ptr] & 0xF0) >>> 4);
         ptr++;
       }
+
+    return sqrextra;
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addExtra (byte[] buffer, int ptr)
+  private Special[] addSpecials (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
+    Special[] specials = new Special[16];
+
     int pos = 0;
     for (int i = 0; i < 8; i++)
     {
-      extra[pos] = new Special (wizardry, pos++, buffer, ptr);
-      extra[pos] = new Special (wizardry, pos++, buffer, ptr);
+      specials[pos] = new Special (wizardry, pos++, buffer, ptr);
+      specials[pos] = new Special (wizardry, pos++, buffer, ptr);
     }
+
+    return specials;
   }
 
   // ---------------------------------------------------------------------------------//
-  private void addEnemyCalc (byte[] buffer, int ptr)
+  private EnemyCalc[] addEnemyCalc (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
+    EnemyCalc[] enemyCalc = new EnemyCalc[3];
+
     for (int i = 0; i < 3; i++)
     {
       enemyCalc[i] = new EnemyCalc (buffer, ptr);
       ptr += 10;
     }
+
+    return enemyCalc;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -230,25 +248,17 @@ public class MazeLevel
     {
       text.append (String.format ("%2d |", row));
       for (int col = 0; col < 20; col++)
-      {
-        //        MazeCell mazeCell = mazeCells[col][row];
-        //        Extra extra = mazeCell.getExtra ();
         if (sqrextra[col][row] == 0)
           text.append ("   ");
         else
           text.append (String.format (" %X ", sqrextra[col][row]));
-        //        if (extra == null)
-        //          text.append ("   ");
-        //        else
-        //          text.append (String.format (" %X ", extra.square.ordinal ()));
-      }
 
       text.append ("|\n");
     }
     appendGridBottom (text);
 
     for (int i = 0; i < 16; i++)
-      text.append (String.format ("%X  %s%n", i, extra[i]));
+      text.append (String.format ("%X  %s%n", i, specials[i]));
 
     return text.toString ();
   }
