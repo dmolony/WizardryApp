@@ -19,7 +19,7 @@ public class MazeLevel
   private boolean[][] lair;
   private byte[][] sqrextra;
   private Special[] specials;
-  private EnemyCalc[] enemyCalc;
+  private EnemyOdds[] enemyOdds;
 
   // ---------------------------------------------------------------------------------//
   public MazeLevel (WizardryOrigin wizardry, int level, DataBlock dataBlock)
@@ -37,9 +37,9 @@ public class MazeLevel
     Wall[][] north = addWalls (buffer, offset + 0x168);
 
     lair = addLairs (buffer, offset + 0x1E0);
-    sqrextra = addSquareExtras (buffer, offset + 0x230);
-    specials = addSpecials (buffer, offset + 0x2F8);
-    enemyCalc = addEnemyCalc (buffer, offset + 0x360);
+    sqrextra = getSquareExtras (buffer, offset + 0x230);
+    specials = getSpecials (buffer, offset + 0x2F8);
+    enemyOdds = getEnemyOdds (buffer, offset + 0x360);
 
     for (int col = 0; col < 20; col++)
       for (int row = 0; row < 20; row++)
@@ -111,10 +111,10 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  public EnemyCalc[] getEnemyCalc ()
+  public EnemyOdds[] getEnemyOdds ()
   // ---------------------------------------------------------------------------------//
   {
-    return enemyCalc;
+    return enemyOdds;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -162,7 +162,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private byte[][] addSquareExtras (byte[] buffer, int ptr)
+  private byte[][] getSquareExtras (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     byte[][] sqrextra = new byte[20][20];
@@ -179,7 +179,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private Special[] addSpecials (byte[] buffer, int ptr)
+  private Special[] getSpecials (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
     Special[] specials = new Special[16];
@@ -195,14 +195,14 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  private EnemyCalc[] addEnemyCalc (byte[] buffer, int ptr)
+  private EnemyOdds[] getEnemyOdds (byte[] buffer, int ptr)
   // ---------------------------------------------------------------------------------//
   {
-    EnemyCalc[] enemyCalc = new EnemyCalc[3];
+    EnemyOdds[] enemyCalc = new EnemyOdds[3];
 
     for (int i = 0; i < 3; i++)
     {
-      enemyCalc[i] = new EnemyCalc (buffer, ptr);
+      enemyCalc[i] = new EnemyOdds (buffer, ptr);
       ptr += 10;
     }
 

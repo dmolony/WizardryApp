@@ -1,6 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.EnemyCalc;
+import com.bytezone.wizardry.origin.EnemyOdds;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -64,15 +64,15 @@ public class EncountersPane extends BasePane
   private void update (MazeLevel mazeLevel)
   // ---------------------------------------------------------------------------------//
   {
-    EnemyCalc[] enemyCalc = mazeLevel.getEnemyCalc ();
+    EnemyOdds[] enemyOdds = mazeLevel.getEnemyOdds ();
 
     for (int i = 0; i < MAX_GROUPS; i++)
     {
-      int minEnemy = enemyCalc[i].minEnemy;
-      int range0n = enemyCalc[i].range0n;
-      int multWors = enemyCalc[i].multWors;
-      int worse01 = enemyCalc[i].worse01;
-      int percWors = enemyCalc[i].percWors;
+      int minEnemy = enemyOdds[i].minEnemy;
+      int range0n = enemyOdds[i].range0n;
+      int multWors = enemyOdds[i].multWors;
+      int worse01 = enemyOdds[i].worse01;
+      int percWors = enemyOdds[i].percWors;
 
       setText (textOut1[i][0], minEnemy);
       setText (textOut1[i][1], multWors);

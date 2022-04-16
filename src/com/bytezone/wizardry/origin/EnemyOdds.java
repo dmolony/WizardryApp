@@ -1,8 +1,7 @@
 package com.bytezone.wizardry.origin;
 
 // -----------------------------------------------------------------------------------//
-public class EnemyCalc
-// -----------------------------------------------------------------------------------//
+public class EnemyOdds
 {
   public final int minEnemy;       // ptr
   public final int multWors;       // classize
@@ -11,7 +10,7 @@ public class EnemyCalc
   public final int percWors;       // prob
 
   // ---------------------------------------------------------------------------------//
-  public EnemyCalc (byte[] buffer, int offset)
+  public EnemyOdds (byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
     minEnemy = Utility.getShort (buffer, offset);
