@@ -1,6 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.Extra;
+import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Square;
@@ -73,7 +73,7 @@ public class SpecialsPane extends BasePane
   {
     for (int i = 0; i < 16; i++)
     {
-      Extra extra = mazeLevel.getExtra ()[i];
+      Special extra = mazeLevel.getExtra ()[i];
 
       int aux0 = extra.aux[0];
       int aux1 = extra.aux[1];

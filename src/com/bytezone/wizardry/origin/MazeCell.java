@@ -22,7 +22,7 @@ public class MazeCell
 
   private Location location;
   private Walls walls;
-  private Extra extra;
+  private Special extra;
   private boolean lair;
 
   // ---------------------------------------------------------------------------------//
@@ -35,7 +35,7 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
-  public void addExtra (Extra extra)
+  public void addExtra (Special extra)
   // ---------------------------------------------------------------------------------//
   {
     this.extra = extra;
@@ -49,7 +49,7 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
-  public Extra getExtra ()
+  public Special getExtra ()
   // ---------------------------------------------------------------------------------//
   {
     return extra;

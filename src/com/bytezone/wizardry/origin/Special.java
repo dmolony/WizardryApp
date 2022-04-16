@@ -7,8 +7,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
 
 // -----------------------------------------------------------------------------------//
-public class Extra
-// -----------------------------------------------------------------------------------//
+public class Special
 {
   private final WizardryOrigin wizardry;
 
@@ -17,7 +16,7 @@ public class Extra
   public final List<Location> locations = new ArrayList<> ();
 
   // ---------------------------------------------------------------------------------//
-  public Extra (WizardryOrigin wizardry, int index, byte[] buffer, int offset)
+  public Special (WizardryOrigin wizardry, int index, byte[] buffer, int offset)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

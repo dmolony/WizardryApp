@@ -19,7 +19,7 @@ public class MazeLevel
   boolean[][] lair = new boolean[20][20];
   byte[][] sqrextra = new byte[20][20];
 
-  Extra[] extra = new Extra[16];
+  Special[] extra = new Special[16];
 
   EnemyCalc[] enemyCalc = new EnemyCalc[3];
 
@@ -106,7 +106,7 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  public Extra[] getExtra ()
+  public Special[] getExtra ()
   // ---------------------------------------------------------------------------------//
   {
     return extra;
@@ -175,8 +175,8 @@ public class MazeLevel
     int pos = 0;
     for (int i = 0; i < 8; i++)
     {
-      extra[pos] = new Extra (wizardry, pos++, buffer, ptr);
-      extra[pos] = new Extra (wizardry, pos++, buffer, ptr);
+      extra[pos] = new Special (wizardry, pos++, buffer, ptr);
+      extra[pos] = new Special (wizardry, pos++, buffer, ptr);
     }
   }
 

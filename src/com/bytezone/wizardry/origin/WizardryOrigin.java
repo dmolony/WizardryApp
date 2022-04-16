@@ -132,7 +132,7 @@ public class WizardryOrigin
       MazeLevel mazeLevel = new MazeLevel (this, ++id, dataBlock);
       mazeLevels.add (mazeLevel);
 
-      for (Extra extra : mazeLevel.extra)
+      for (Special extra : mazeLevel.extra)
         if (extra.square == Square.SCNMSG)
         {
           Message message = getMessage (extra.aux[1]);          // force message creation
@@ -206,7 +206,7 @@ public class WizardryOrigin
         for (int row = 0; row < 20; row++)
         {
           MazeCell mazeCell = level.getMazeCell (col, row);
-          Extra extra = mazeCell.getExtra ();
+          Special extra = mazeCell.getExtra ();
           if (extra != null && extra.is (square))
           {
             String fight = level.lair[col][row] ? " lair" : "";

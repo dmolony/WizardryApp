@@ -9,7 +9,7 @@ import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.mazewalker.gui.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.origin.Damage;
-import com.bytezone.wizardry.origin.Extra;
+import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Monster;
@@ -355,7 +355,7 @@ public class MazeWalker extends AppBase
     description.append (currentWalker.toString ());
 
     MazeCell currentMazeCell = currentWalker.getCurrentMazeCell ();
-    Extra extra = currentMazeCell.getExtra ();
+    Special extra = currentMazeCell.getExtra ();
     boolean lair = currentMazeCell.getLair ();
 
     if (extra != null)
