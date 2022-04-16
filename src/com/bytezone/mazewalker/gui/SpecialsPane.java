@@ -1,12 +1,9 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Extra;
-import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryOrigin;
-import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
+import com.bytezone.wizardry.origin.WizardryOrigin.Square;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -88,162 +85,12 @@ public class SpecialsPane extends BasePane
       setText (textOut4[i], aux2);
       setText (textOut5[i], extra.locations.size ());
 
-      setText (textOut6[i], "");
+      if (extra.square == Square.SCNMSG)
+        setText (textOut6[i], aux1);
+      else
+        setText (textOut6[i], "");
 
-      StringBuilder description = new StringBuilder ();
-
-      switch (extra.square)
-      {
-        case SCNMSG:
-          setText (textOut6[i], aux1);
-
-          switch (aux2)
-          {
-            case 1:                                 // conditional
-              switch (aux0)
-              {
-                case 0:
-                  description.append ("Never shown");
-                  break;
-                case -1:
-                  description.append ("Always shown");
-                  break;
-                default:
-                  description.append (aux0 + " left");
-                  break;
-              }
-              break;
-
-            case 2:                                 // TRYGET               
-              // special obtain (only blue ribbon so far)
-              description.append ("Obtain : " + wizardry.getItem (aux0));
-              break;
-
-            case 3:                                 // WHOWADE
-              if (aux0 > 0)
-                description.append ("Wade : " + wizardry.getItemName (aux0));
-              break;
-
-            case 4:                                 // GETYN
-              if (aux0 >= 0)
-                description.append ("Encounter : " + wizardry.getMonster (aux0));
-              else if (aux0 > -1200)
-                description.append ("Obtain : " + wizardry.getItem (aux0 * -1 - 1000));
-              else
-              {
-                Trade trade = wizardry.getItemTrade (aux0);
-                description.append ("Trade : " + wizardry.getItemName (trade.item1 ()) + " for "
-                    + wizardry.getItemName (trade.item2 ()));
-              }
-              break;
-
-            case 5:                               // ITM2PASS
-              description.append ("Requires : " + wizardry.getItemName (aux0));
-              break;
-
-            case 6:                               // CHKALIGN
-              description.append ("Check alignment");
-              break;
-
-            case 7:                               // CHKAUX0
-              description.append ("Check AUX0");
-              break;
-
-            case 8:                               // BCK2SHOP
-              description.append ("Return to castle");
-              break;
-
-            case 9:                               // LOOKOUT
-              description.append (String.format ("Look out : surrounded by fights"));
-              break;
-
-            case 10:                              // RIDDLES
-              description.append ("Answer : " + wizardry.getMessageText (aux0));
-              break;
-
-            case 11:                              // FEEIS
-              description.append ("Pay : " + wizardry.getMessageText (aux0));
-              break;
-
-            case 12:
-              description.append ("12 = ??");
-              break;
-
-            case 13:
-              if (aux0 > 0)
-                description.append ("Requires : " + wizardry.getItemName (aux0));
-              else
-                description.append ("13 = ??");
-              break;
-
-            case 14:
-              description.append ("14 = ??");
-              break;
-
-            case 15:
-              description.append ("15 = ??");
-              break;
-
-            case 16:
-              description.append ("16 = ??");
-              break;
-          }
-          break;
-
-        case STAIRS:
-          Location location = new Location (extra.aux);
-          description.append (String.format ("Stairs to : %s", location));
-          break;
-
-        case PIT:
-          Damage damage = new Damage (extra.aux);
-          description.append (String.format ("Pit - %s", damage));
-          break;
-
-        case CHUTE:
-          location = new Location (extra.aux);
-          description.append (String.format ("Chute to : %s", location));
-          break;
-
-        case SPINNER:
-          description.append ("Spinner");
-          break;
-
-        case DARK:
-          break;
-
-        case TRANSFER:
-          location = new Location (extra.aux);
-          description.append (String.format ("Teleport to : %s", location));
-          break;
-
-        case OUCHY:
-          break;
-
-        case BUTTONZ:
-          description.append (String.format ("Elevator levels : %d to %d", aux2, aux1));
-          break;
-
-        case ROCKWATE:
-          description.append ("Rock/water");
-          break;
-
-        case FIZZLE:
-          description.append ("Spells cannot be cast here");
-          break;
-
-        case ENCOUNTE:
-          Monster monster = wizardry.getMonster (aux2);
-          String when = aux0 == -1 ? "always" : aux0 + " left";
-          description.append (String.format ("%s (%s)", monster, when));
-          //          if (!lair)
-          //            description.append ("\n\nError - room is not a LAIR");
-          break;
-
-        case NORMAL:
-          break;
-      }
-      setText (textOut7[i], description.toString ());
+      setText (textOut7[i], extra.getText ());
     }
   }
 }

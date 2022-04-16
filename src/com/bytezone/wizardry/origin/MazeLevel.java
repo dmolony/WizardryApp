@@ -12,6 +12,7 @@ public class MazeLevel
       "---+------------------------------------------------------------+\n";
 
   private int level;
+  private WizardryOrigin wizardry;
 
   private MazeCell[][] mazeCells = new MazeCell[20][20];
 
@@ -23,10 +24,12 @@ public class MazeLevel
   EnemyCalc[] enemyCalc = new EnemyCalc[3];
 
   // ---------------------------------------------------------------------------------//
-  public MazeLevel (int level, DataBlock dataBlock)
+  public MazeLevel (WizardryOrigin wizardry, int level, DataBlock dataBlock)
   // ---------------------------------------------------------------------------------//
   {
+    this.wizardry = wizardry;
     this.level = level;
+
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
 
@@ -172,8 +175,8 @@ public class MazeLevel
     int pos = 0;
     for (int i = 0; i < 8; i++)
     {
-      extra[pos] = new Extra (pos++, buffer, ptr);
-      extra[pos] = new Extra (pos++, buffer, ptr);
+      extra[pos] = new Extra (wizardry, pos++, buffer, ptr);
+      extra[pos] = new Extra (wizardry, pos++, buffer, ptr);
     }
   }
 

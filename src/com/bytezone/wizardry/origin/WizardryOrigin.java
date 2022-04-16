@@ -129,7 +129,7 @@ public class WizardryOrigin
     int id = 0;
     for (DataBlock dataBlock : sd.dataBlocks)
     {
-      MazeLevel mazeLevel = new MazeLevel (++id, dataBlock);
+      MazeLevel mazeLevel = new MazeLevel (this, ++id, dataBlock);
       mazeLevels.add (mazeLevel);
 
       for (Extra extra : mazeLevel.extra)
