@@ -9,14 +9,13 @@ import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.mazewalker.gui.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.origin.Damage;
-import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
-import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -355,74 +354,20 @@ public class MazeWalker extends AppBase
     description.append (currentWalker.toString ());
 
     MazeCell currentMazeCell = currentWalker.getCurrentMazeCell ();
-    Special extra = currentMazeCell.getExtra ();
+    Special special = currentMazeCell.getSpecial ();
     boolean lair = currentMazeCell.getLair ();
 
-    if (extra != null)
+    if (special != null)
     {
-      description.append ("\n\n" + extra + "\n\n");
-      int[] aux = extra.getAux ();
+      description.append ("\n\n" + special + "\n\n");
+      int[] aux = special.getAux ();
 
-      switch (extra.getSquare ())
+      switch (special.getSquare ())
       {
         case SCNMSG:
           description.append (wizardry.getMessageText (aux[1]));
-
-          switch (aux[2])
-          {
-            case 1:
-              switch (aux[0])
-              {
-                case 0:
-                  description.append ("\n\nNever shown");
-                  break;
-                case -1:
-                  description.append ("\n\nAlways shown");
-                  break;
-                default:
-                  description.append ("\n\n" + aux[0] + " left");
-                  break;
-              }
-              break;
-
-            case 2:                       // special obtain (only blue ribbon so far)
-              description.append ("\n\nObtain: " + wizardry.getItemName (aux[0]));
-              break;
-
-            case 4:
-              description.append ("\n\nSearch (Y/N)?");
-              if (aux[0] >= 0)               // monster
-                description.append ("\n\nEncounter: " + wizardry.getMonster (aux[0]));
-              else if (aux[0] > -1200)
-                description.append ("\n\nObtain : " + wizardry.getItem (aux[0] * -1 - 1000));
-              else
-              {
-                Trade trade = wizardry.getItemTrade (aux[0]);
-                description.append ("\n\nTrade : " + wizardry.getItemName (trade.item1 ()) + " for "
-                    + wizardry.getItemName (trade.item2 ()));
-              }
-              break;
-
-            case 5:                       // requires
-              description.append ("\n\nRequires: " + wizardry.getItemName (aux[0]));
-              break;
-
-            case 8:
-              description.append ("\n\nReturn to castle");
-              break;
-
-            case 9:
-              description.append (String.format ("%n%nLook out : surrounded by fights"));
-              break;
-
-            case 10:
-              description.append ("\n\nAnswer : " + wizardry.getMessageText (aux[0]));
-              break;
-
-            case 11:
-              description.append ("\n\nPay : " + wizardry.getMessageText (aux[0]));
-              break;
-          }
+          description.append ("\n\n");
+          description.append (special.getText ());
           break;
 
         case STAIRS:

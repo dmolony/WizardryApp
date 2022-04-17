@@ -7,13 +7,12 @@ import java.util.List;
 public class Header
 // -----------------------------------------------------------------------------------//
 {
-  static String[] typeText =
+  static public final String[] typeText =
       { "header", "maze", "monsters", "rewards", "items", "characters", "images", "char levels" };
-  static String[] scenarioNames = { "PROVING GROUNDS OF THE MAD OVERLORD!",
+  static public final String[] scenarioNames = { "PROVING GROUNDS OF THE MAD OVERLORD!",
       "THE KNIGHT OF DIAMONDS", "THE LEGACY OF LLYLGAMYN", "THE RETURN OF WERDNA" };
-  static int[] recordLengths = { 0, 894, 158, 168, 78, 208, 512, 78 };
 
-  byte[] buffer;
+  //  byte[] buffer;
   List<ScenarioData> scenarioData = new ArrayList<> ();
   String scenarioName;
   int scenarioId;
@@ -22,7 +21,7 @@ public class Header
   public Header (byte[] buffer)
   // ---------------------------------------------------------------------------------//
   {
-    this.buffer = buffer;
+    //    this.buffer = buffer;
 
     scenarioName = Utility.getPascalString (buffer, 0);
 
@@ -35,10 +34,6 @@ public class Header
 
     for (int i = 0; i < typeText.length; i++)
       scenarioData.add (new ScenarioData (buffer, i));
-
-    if (false)
-      for (ScenarioData sd : scenarioData)
-        System.out.println (sd);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -47,6 +42,27 @@ public class Header
   {
     return scenarioData.get (index);
   }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    StringBuilder text = new StringBuilder ();
+
+    text.append (String.format ("Scenario # ........ %d%n", scenarioId));
+    text.append (String.format ("Scenario name ..... %s%n", scenarioName));
+
+    text.append ("\n");
+    for (ScenarioData sd : scenarioData)
+    {
+      text.append (sd);
+      text.append ("\n");
+    }
+
+    return text.toString ();
+  }
+
   /*
   TEXP = ARRAY[ FIGHTER..NINJA] OF ARRAY[ 0..12] OF TWIZLONG;
   TBCD = ARRAY[ 0..13] OF INTEGER;

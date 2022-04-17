@@ -34,6 +34,7 @@ public class WizardryOrigin
 
   public static final String[] race = { "No race", "Human", "Elf", "Dwarf", "Gnome", "Hobbit" };
 
+  static final int HEADER_AREA = 0;
   static final int MAZE_AREA = 1;
   static final int MONSTER_AREA = 2;
   static final int TREASURE_TABLE_AREA = 3;

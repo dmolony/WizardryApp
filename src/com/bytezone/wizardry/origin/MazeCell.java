@@ -22,7 +22,7 @@ public class MazeCell
 
   private Location location;
   private Walls walls;
-  private Special extra;
+  private Special special;
   private boolean lair;
 
   // ---------------------------------------------------------------------------------//
@@ -35,10 +35,10 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
-  public void addExtra (Special extra)
+  public void addExtra (Special special)
   // ---------------------------------------------------------------------------------//
   {
-    this.extra = extra;
+    this.special = special;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -49,10 +49,10 @@ public class MazeCell
   }
 
   // ---------------------------------------------------------------------------------//
-  public Special getExtra ()
+  public Special getSpecial ()
   // ---------------------------------------------------------------------------------//
   {
-    return extra;
+    return special;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -126,10 +126,10 @@ public class MazeCell
     gc.setFill (lair ? Color.DARKGREY : Color.LIGHTGREY);
     gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
 
-    if (extra != null)
+    if (special != null)
     {
       gc.setFill (Color.GREEN);
-      switch (extra.getSquare ())
+      switch (special.getSquare ())
       {
         case NORMAL:
           gc.fillText ("N", textLeft, textBase);
@@ -225,9 +225,9 @@ public class MazeCell
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    if (extra == null)
+    if (special == null)
       return String.format ("%s %s %s", location, walls, lair);
 
-    return String.format ("%s %s %s %s", location, walls, lair, extra);
+    return String.format ("%s %s %s %s", location, walls, lair, special);
   }
 }

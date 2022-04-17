@@ -5,7 +5,7 @@ import com.bytezone.wizardry.origin.WizardryOrigin;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class ImagesPane extends BasePane
+public class ImagesPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
 

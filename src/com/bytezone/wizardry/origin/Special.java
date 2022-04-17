@@ -14,6 +14,7 @@ public class Special
 
   public final Square square;
   public final int[] aux = new int[3];
+
   public final List<Location> locations = new ArrayList<> ();
 
   // ---------------------------------------------------------------------------------//
@@ -68,7 +69,6 @@ public class Special
     switch (square)
     {
       case SCNMSG:
-        //        setText (textOut6[i], aux[1]);
 
         switch (aux[2])
         {
@@ -111,7 +111,7 @@ public class Special
             break;
 
           case 5:                               // ITM2PASS
-            description.append ("Requires : " + wizardry.getItemName (aux[0]));
+            description.append ("Access requires : " + wizardry.getItemName (aux[0]));
             break;
 
           case 6:                               // CHKALIGN
@@ -150,7 +150,11 @@ public class Special
             break;
 
           case 14:
-            description.append ("14 = ??");
+            int currentLevel = locations.get (0).getLevel ();
+            int north = aux[0] / 100;     // not yet tested if these are in the correct order
+            int east = aux[0] % 100;      // also not tested if relative or absolute
+            description
+                .append ("Same level teleport : " + new Location (currentLevel, north, east));
             break;
 
           case 15:
@@ -224,7 +228,7 @@ public class Special
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return String.format ("%-8s  %5d  %4d  %4d  (%2d)", square, aux[0], aux[1], aux[2],
-        locations.size ());
+    String extra = locations.size () == 1 ? "" : "(" + locations.size () + ")";
+    return String.format ("%-8s  %5d  %4d  %4d  %s", square, aux[0], aux[1], aux[2], extra);
   }
 }

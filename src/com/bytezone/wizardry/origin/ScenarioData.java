@@ -7,14 +7,15 @@ import java.util.List;
 class ScenarioData
 // ---------------------------------------------------------------------------------//
 {
-  byte[] buffer;
+  static final int[] recordLengths = { 512, 894, 158, 168, 78, 208, 512, 78 };
 
-  String title;
+  String title;               // game name
 
-  int unitsPerBuffer;
-  int totalUnits;
-  int totalBlocks;
-  int firstBlock;
+  int unitsPerBuffer;         // records per 2 x 512 byte blocks
+  int totalUnits;             // records per disk
+  int totalBlocks;            // 512 byte blocks
+  int firstBlock;             // bloff
+
   int type;
   int calc1;
 
@@ -24,8 +25,6 @@ class ScenarioData
   public ScenarioData (byte[] buffer, int seq)
   // -------------------------------------------------------------------------------//
   {
-    this.buffer = buffer;
-
     title = Utility.getPascalString (buffer, 0);
 
     int offset = 42 + seq * 2;
@@ -35,16 +34,9 @@ class ScenarioData
     firstBlock = buffer[offset + 48] & 0xFF;
     type = seq;
 
-    createDataBlocks ();
-  }
-
-  // -------------------------------------------------------------------------------//
-  public void createDataBlocks ()
-  // -------------------------------------------------------------------------------//
-  {
-    int offset = firstBlock * 512;
-    int totalUnits = 0;
-    int unitSize = Header.recordLengths[type];
+    offset = firstBlock * 512;
+    int total = 0;
+    int unitSize = recordLengths[type];
 
     for (int bufferNo = 0; bufferNo < totalBlocks / 2; bufferNo++)
     {
@@ -52,7 +44,7 @@ class ScenarioData
       for (int unitNo = 0; unitNo < unitsPerBuffer; unitNo++)
       {
         dataBlocks.add (new DataBlock (buffer, ptr, unitSize));
-        if (++totalUnits == this.totalUnits)
+        if (++total == totalUnits)
           break;
         ptr += unitSize;
       }
