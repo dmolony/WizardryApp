@@ -8,10 +8,8 @@ import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.mazewalker.gui.RecentFiles.FileNameSelectedListener;
-import com.bytezone.wizardry.origin.Damage;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -229,7 +227,7 @@ public class MazeWalker extends AppBase
   {
     Stage stage = getStage ("Special squares");
     specialsPane = new SpecialsPane (wizardry, stage);
-    stage.setScene (getScene (specialsPane, 1020, 600));
+    stage.setScene (getScene (specialsPane, 1120, 600));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -351,85 +349,26 @@ public class MazeWalker extends AppBase
   // ---------------------------------------------------------------------------------//
   {
     StringBuilder description = new StringBuilder ();
+
     description.append (currentWalker.toString ());
 
     MazeCell currentMazeCell = currentWalker.getCurrentMazeCell ();
     Special special = currentMazeCell.getSpecial ();
-    boolean lair = currentMazeCell.getLair ();
 
     if (special != null)
     {
-      description.append ("\n\n" + special + "\n\n");
       int[] aux = special.getAux ();
+      description.append ("\n\n" + special + "\n\n");
 
-      switch (special.getSquare ())
+      if (special.isMessage ())
       {
-        case SCNMSG:
-          if (aux[2] <= 13)
-          {
-            description.append (wizardry.getMessageText (aux[1]));
-            description.append ("\n\n");
-          }
-          description.append (special.getText ());
-          break;
-
-        case STAIRS:
-          Location location = new Location (aux);
-          description.append (String.format ("Stairs to: %s", location));
-          break;
-
-        case PIT:
-          Damage damage = new Damage (aux);
-          description.append (String.format ("Pit - %s", damage));
-          break;
-
-        case CHUTE:
-          location = new Location (aux);
-          description.append (String.format ("Chute to %s", location));
-          break;
-
-        case SPINNER:
-          description.append ("Spinner");
-          break;
-
-        case DARK:
-          description.append ("It is very dark here");
-          break;
-
-        case TRANSFER:
-          location = new Location (aux);
-          description.append (String.format ("Teleport to: %s", location));
-          break;
-
-        case OUCHY:
-          break;
-
-        case BUTTONZ:
-          description.append (String.format ("Elevator levels : %d to %d", aux[2], aux[1]));
-          break;
-
-        case ROCKWATE:
-          description.append ("You are in rock/water");
-          break;
-
-        case FIZZLE:
-          description.append ("Spells cannot be cast here");
-          break;
-
-        case ENCOUNTE:
-          Monster monster = wizardry.getMonster (aux[2]);
-          String when = aux[0] == -1 ? "always" : aux[0] + " left";
-          description.append (String.format ("An encounter : %s (%s)", monster, when));
-          if (!lair)
-            description.append ("\n\nError - room is not a LAIR");
-          break;
-
-        case NORMAL:
-          break;
+        description.append (wizardry.getMessageText (aux[1]));
+        description.append ("\n\n");
       }
+      description.append (special.getText ());
     }
 
-    if (lair)
+    if (currentMazeCell.getLair ())
       description.append ("\n\nLAIR");
 
     text.setText (description.toString ());

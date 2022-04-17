@@ -64,6 +64,22 @@ public class Special
   }
 
   // ---------------------------------------------------------------------------------//
+  public boolean isMessage ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return square == Square.SCNMSG && aux[2] <= 13;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public String getLocationText ()
+  // ---------------------------------------------------------------------------------//
+  {
+    if (square == Square.NORMAL || locations.size () == 0)
+      return "";
+    return locations.get (0).toString ().substring (5);
+  }
+
+  // ---------------------------------------------------------------------------------//
   public String getText ()
   // ---------------------------------------------------------------------------------//
   {
@@ -152,7 +168,7 @@ public class Special
               description.append ("PICTMESS but aux[0] = 0");
             break;
 
-          case 14:                             // ITMORTEL
+          case 14:                              // ITMORTEL
             int east = aux[0] / 100;
             int north = aux[0] % 100;
             String item = wizardry.getItemName (aux[1]);
@@ -160,11 +176,11 @@ public class Special
                 .append (String.format ("Required : %s else teleport N%d E%d", item, north, east));
             break;
 
-          case 15:                             // SPCMONST( CRYSEVIL)
+          case 15:                              // SPCMONST( CRYSEVIL)
             description.append ("SPCMONST (CRYSEVIL) : " + wizardry.getMonster (aux[1]));
             break;
 
-          case 16:                             // SPCMONST( CRYSGOOD)
+          case 16:                              // SPCMONST( CRYSGOOD)
             description.append ("SPCMONST (CRYSGOOD) : " + wizardry.getMonster (aux[1]));
             break;
         }
