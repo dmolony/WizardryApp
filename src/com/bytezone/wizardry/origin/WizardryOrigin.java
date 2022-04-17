@@ -134,7 +134,7 @@ public class WizardryOrigin
       mazeLevels.add (mazeLevel);
 
       for (Special special : mazeLevel.getSpecials ())
-        if (special.square == Square.SCNMSG)
+        if (special.square == Square.SCNMSG && special.aux[2] <= 13)
         {
           Message message = getMessage (special.aux[1]);          // force message creation
           message.addLocations (special.locations);

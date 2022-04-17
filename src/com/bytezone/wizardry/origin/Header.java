@@ -12,17 +12,18 @@ public class Header
   static public final String[] scenarioNames = { "PROVING GROUNDS OF THE MAD OVERLORD!",
       "THE KNIGHT OF DIAMONDS", "THE LEGACY OF LLYLGAMYN", "THE RETURN OF WERDNA" };
 
-  //  byte[] buffer;
   List<ScenarioData> scenarioData = new ArrayList<> ();
   String scenarioName;
   int scenarioId;
+
+  Font alphabet;
+  Font graphics;
+  Font unknownFont;
 
   // ---------------------------------------------------------------------------------//
   public Header (byte[] buffer)
   // ---------------------------------------------------------------------------------//
   {
-    //    this.buffer = buffer;
-
     scenarioName = Utility.getPascalString (buffer, 0);
 
     for (int i = 0; i < scenarioNames.length; i++)
@@ -34,6 +35,13 @@ public class Header
 
     for (int i = 0; i < typeText.length; i++)
       scenarioData.add (new ScenarioData (buffer, i));
+
+    if (scenarioId < 3)
+    {
+      alphabet = new Font (buffer, 512, 512);
+      graphics = new Font (buffer, 1024, 512);
+      //      unknownFont = new Font (buffer, 1536, 512);
+    }
   }
 
   // ---------------------------------------------------------------------------------//

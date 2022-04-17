@@ -10,6 +10,9 @@ import com.bytezone.wizardry.origin.WizardryOrigin.Trade;
 public class Special
 // -----------------------------------------------------------------------------------//
 {
+  public static final String[] auxTypes = { "", "", "TRYGET", "WHOWADE", "DOSEARCH", "ITM2PASS",
+      "CHKALIGN", "CHKAUX0", "BCK2SHOP", "LOOKOUT", "RIDDLES", "FEEIS", "", "PICTMESS", "ITMORTEL",
+      "SPCMONST(CE)", "SPCMONST(CG)" };
   private final WizardryOrigin wizardry;
 
   public final Square square;
@@ -69,7 +72,6 @@ public class Special
     switch (square)
     {
       case SCNMSG:
-
         switch (aux[2])
         {
           case 1:                                 // conditional
@@ -97,7 +99,7 @@ public class Special
               description.append ("Wade : " + wizardry.getItemName (aux[0]));
             break;
 
-          case 4:                                 // GETYN
+          case 4:                                 // GETYN / DOSEARCH
             if (aux[0] >= 0)
               description.append ("Encounter : " + wizardry.getMonster (aux[0]));
             else if (aux[0] > -1200)
@@ -111,6 +113,7 @@ public class Special
             break;
 
           case 5:                               // ITM2PASS
+            // at least one party member must be carrying the item
             description.append ("Access requires : " + wizardry.getItemName (aux[0]));
             break;
 
@@ -142,27 +145,27 @@ public class Special
             description.append ("12 = ??");
             break;
 
-          case 13:
+          case 13:                              // PICTMESS
             if (aux[0] > 0)
               description.append ("Requires : " + wizardry.getItemName (aux[0]));
             else
-              description.append ("13 = ??");
+              description.append ("PICTMESS but aux[0] = 0");
             break;
 
-          case 14:
-            int currentLevel = locations.get (0).getLevel ();
-            int north = aux[0] / 100;     // not yet tested if these are in the correct order
-            int east = aux[0] % 100;      // also not tested if relative or absolute
+          case 14:                             // ITMORTEL
+            int east = aux[0] / 100;
+            int north = aux[0] % 100;
+            String item = wizardry.getItemName (aux[1]);
             description
-                .append ("Same level teleport : " + new Location (currentLevel, north, east));
+                .append (String.format ("Required : %s else teleport N%d E%d", item, north, east));
             break;
 
-          case 15:
-            description.append ("15 = ??");
+          case 15:                             // SPCMONST( CRYSEVIL)
+            description.append ("SPCMONST (CRYSEVIL) : " + wizardry.getMonster (aux[1]));
             break;
 
-          case 16:
-            description.append ("16 = ??");
+          case 16:                             // SPCMONST( CRYSGOOD)
+            description.append ("SPCMONST (CRYSGOOD) : " + wizardry.getMonster (aux[1]));
             break;
         }
         break;

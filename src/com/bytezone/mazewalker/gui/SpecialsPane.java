@@ -78,11 +78,16 @@ public class SpecialsPane extends DataPane
       setText (textOut1[i], special.square);
       setText (textOut2[i], special.aux[0]);
       setText (textOut3[i], special.aux[1]);
+
+      //      if (special.is (Square.SCNMSG))
+      //        setText (textOut4[i], Special.auxTypes[special.aux[2]]);
+      //      else
       setText (textOut4[i], special.aux[2]);
+
       setText (textOut5[i], special.locations.size ());
       setText (textOut7[i], special.getText ());
 
-      if (special.square == Square.SCNMSG)
+      if (special.square == Square.SCNMSG && special.aux[2] <= 13)
         setText (textOut6[i], special.aux[1]);
       else
         setText (textOut6[i], "");

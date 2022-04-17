@@ -365,8 +365,11 @@ public class MazeWalker extends AppBase
       switch (special.getSquare ())
       {
         case SCNMSG:
-          description.append (wizardry.getMessageText (aux[1]));
-          description.append ("\n\n");
+          if (aux[2] <= 13)
+          {
+            description.append (wizardry.getMessageText (aux[1]));
+            description.append ("\n\n");
+          }
           description.append (special.getText ());
           break;
 
