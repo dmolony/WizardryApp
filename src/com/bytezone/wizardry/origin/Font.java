@@ -1,12 +1,26 @@
 package com.bytezone.wizardry.origin;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.paint.Color;
+
 // -----------------------------------------------------------------------------------//
 public class Font
 // -----------------------------------------------------------------------------------//
 {
+  private static int nextId = 1;
+
   String name;
   byte[] buffer;
   int offset;
+  int id = nextId++;
+
+  Color color = Color.LIGHTGREEN;
+
+  int inset = 2;
+  int size = 2;
+  int charWidth = 7 * size;
+  int charHeight = 8 * size;
 
   // ---------------------------------------------------------------------------------//
   public Font (String name, byte[] buffer, int offset, int length)
@@ -15,45 +29,41 @@ public class Font
     this.name = name;
     this.buffer = buffer;
     this.offset = offset;
-
-    System.out.println (printChars ());
-    System.out.println (getChar (5));
   }
 
   // ---------------------------------------------------------------------------------//
-  private String printChars ()
+  public int id ()
   // ---------------------------------------------------------------------------------//
   {
-    StringBuilder text = new StringBuilder ();
-    for (int i = offset; i < offset + 512; i += 64)
+    return id;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void setColor (Color color)
+  // ---------------------------------------------------------------------------------//
+  {
+    this.color = color;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void drawString (String text, int column, int row, GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    for (char c : text.toCharArray ())
     {
-      for (int line = 0; line < 8; line++)
-      {
-        for (int j = 0; j < 8; j++)
-        {
-          int value = buffer[i + line + j * 8] & 0xFF;
-          for (int bit = 0; bit < 7; bit++)
-          {
-            if ((value & 0x01) != 0)
-              text.append ("O");
-            else
-              text.append (".");
-            value >>>= 1;
-          }
-          text.append ("   ");
-        }
-        text.append ("\n");
-      }
-      text.append ("\n");
+      drawChar (c - 32, column, row, gc);
+      column++;
     }
-    return text.toString ();
   }
 
   // ---------------------------------------------------------------------------------//
-  private String getChar (int charNo)
+  private void drawChar (int charNo, int column, int row, GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
-    StringBuilder text = new StringBuilder ();
+    PixelWriter pixelWriter = gc.getPixelWriter ();
+
+    int x = inset + column * charWidth;
+    int y = inset + row * charHeight;
 
     int ptr = offset + charNo * 8;
     for (int i = 0; i < 8; i++)
@@ -62,15 +72,78 @@ public class Font
       for (int bit = 0; bit < 7; bit++)
       {
         if ((value & 0x01) != 0)
-          text.append ("O");
-        else
-          text.append (".");
+          switch (size)
+          {
+            case 2:
+              writePixel2 (pixelWriter, x, y);
+              break;
+            case 3:
+              writePixel3 (pixelWriter, x, y);
+              break;
+            case 4:
+              writePixel4 (pixelWriter, x, y);
+              break;
+          }
         value >>>= 1;
+        x += size;
       }
-      text.append ("\n");
-    }
 
-    return text.toString ();
+      x = inset + column * charWidth;
+      y += size;
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void writePixel2 (PixelWriter pixelWriter, int x, int y)
+  // ---------------------------------------------------------------------------------//
+  {
+    pixelWriter.setColor (x, y, color);
+    pixelWriter.setColor (x + 1, y, color);
+
+    pixelWriter.setColor (x, y + 1, color);
+    pixelWriter.setColor (x + 1, y + 1, color);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void writePixel3 (PixelWriter pixelWriter, int x, int y)
+  // ---------------------------------------------------------------------------------//
+  {
+    pixelWriter.setColor (x, y, color);
+    pixelWriter.setColor (x + 1, y, color);
+    pixelWriter.setColor (x + 2, y, color);
+
+    pixelWriter.setColor (x, y + 1, color);
+    pixelWriter.setColor (x + 1, y + 1, color);
+    pixelWriter.setColor (x + 2, y + 1, color);
+
+    pixelWriter.setColor (x, y + 2, color);
+    pixelWriter.setColor (x + 1, y + 2, color);
+    pixelWriter.setColor (x + 2, y + 2, color);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void writePixel4 (PixelWriter pixelWriter, int x, int y)
+  // ---------------------------------------------------------------------------------//
+  {
+    pixelWriter.setColor (x, y, color);
+    pixelWriter.setColor (x + 1, y, color);
+    pixelWriter.setColor (x + 2, y, color);
+    pixelWriter.setColor (x + 3, y, color);
+
+    pixelWriter.setColor (x, y + 1, color);
+    pixelWriter.setColor (x + 1, y + 1, color);
+    pixelWriter.setColor (x + 2, y + 1, color);
+    pixelWriter.setColor (x + 3, y + 1, color);
+
+    pixelWriter.setColor (x, y + 2, color);
+    pixelWriter.setColor (x + 1, y + 2, color);
+    pixelWriter.setColor (x + 2, y + 2, color);
+    pixelWriter.setColor (x + 3, y + 2, color);
+
+    pixelWriter.setColor (x, y + 3, color);
+    pixelWriter.setColor (x + 1, y + 3, color);
+    pixelWriter.setColor (x + 2, y + 3, color);
+    pixelWriter.setColor (x + 3, y + 3, color);
   }
 
   // ---------------------------------------------------------------------------------//

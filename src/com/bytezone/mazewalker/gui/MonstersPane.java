@@ -11,6 +11,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
@@ -183,6 +184,6 @@ public class MonstersPane extends DataPane
       property >>>= 1;
     }
 
-    wizardry.getImage (monster.image).draw (canvas);
+    wizardry.getImage (monster.image).draw (canvas, 4, Color.WHITE);
   }
 }
