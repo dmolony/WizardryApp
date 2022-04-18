@@ -158,7 +158,8 @@ public class DisplayPane extends DataPane
         Image image = wizardry.getImage (monster.image);
         image.draw (canvas, 2, color, 16, 47);
       }
-      int howMany = random.nextInt (5) + 1;
+
+      int howMany = monster.groupSize.roll ();
       String test = String.format ("%d) %d %s (%d)", i + 1, howMany,
           howMany == 1 ? monster.name : monster.namePlural, howMany);
       alphabet.drawString (test, column, row++, gc);

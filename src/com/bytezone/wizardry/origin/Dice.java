@@ -1,8 +1,12 @@
 package com.bytezone.wizardry.origin;
 
+import java.util.Random;
+
 // -----------------------------------------------------------------------------------//
 public class Dice
 {
+  private static final Random random = new Random ();
+
   public final int level;
   public final int faces;
   public final int minAdd;
@@ -37,6 +41,19 @@ public class Dice
   // ---------------------------------------------------------------------------------//
   {
     return level + minAdd;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public int roll ()
+  // ---------------------------------------------------------------------------------//
+  {
+    int total = minAdd;
+
+    if (faces > 0)
+      for (int die = 0; die < level; die++)
+        total += random.nextInt (faces) + 1;
+
+    return total;
   }
 
   // ---------------------------------------------------------------------------------//

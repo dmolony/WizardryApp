@@ -216,7 +216,7 @@ public class MazeWalker extends AppBase
 
     if (wizardry.getScenarioId () <= 2)
     {
-      buildFonts ();
+      buildDisplay ();
       displayItem.setDisable (false);
     }
     else
@@ -287,12 +287,12 @@ public class MazeWalker extends AppBase
   }
 
   // ---------------------------------------------------------------------------------//
-  private void buildFonts ()
+  private void buildDisplay ()
   // ---------------------------------------------------------------------------------//
   {
-    Stage stage = getStage ("Fonts");
+    Stage stage = getStage ("Display");
     displayPane = new DisplayPane (wizardry, stage);
-    stage.setScene (getScene (displayPane, 800, 700));
+    stage.setScene (getScene (displayPane, 750, 500));
   }
 
   // ---------------------------------------------------------------------------------//
