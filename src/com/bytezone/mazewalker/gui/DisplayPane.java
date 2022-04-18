@@ -32,8 +32,13 @@ public class DisplayPane extends DataPane
   private List<Monster> monsters;
   private List<Character> characters;
   private Random random = new Random ();
-  private List<DisplayColor> colors = Arrays.asList (new DisplayColor ("Green", Color.LIGHTGREEN),
-      new DisplayColor ("White", Color.WHITE), new DisplayColor ("Cyan", Color.CYAN));
+
+  private List<DisplayColor> colors = Arrays.asList (     //
+      new DisplayColor ("White", Color.WHITE),            //
+      new DisplayColor ("Pale green", Color.PALEGREEN),   //
+      new DisplayColor ("Moccasin", Color.MOCCASIN),      //
+      new DisplayColor ("Goldenrod", Color.GOLDENROD),    //
+      new DisplayColor ("Sky blue", Color.SKYBLUE));
 
   // ---------------------------------------------------------------------------------//
   public DisplayPane (WizardryOrigin wizardry, Stage stage)
@@ -91,59 +96,13 @@ public class DisplayPane extends DataPane
     gc.setFill (Color.BLACK);
     gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
 
-    drawData (gc, displayColor.color);
-    drawGrid (gc, displayColor.color);
+    drawMonster (gc, displayColor.color);
+    drawData (gc);
+    drawGrid (gc);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawGrid (GraphicsContext gc, Color color)
-  // ---------------------------------------------------------------------------------//
-  {
-    int column = 0;
-    int row = 0;
-
-    String test4 = "!XXXXXXXXXXX[XXXXXXXXXXXXXXXXXXXXXXXXXX#";
-    String test1 = "'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX(";
-    String test2 = "$                                      $";
-    String test3 = "%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&";
-    String test5 = "$           \\                          $";
-    String test6 = "'XXXXXXXXXXX^XXXXXXXXXXXXXXXXXXXXXXXXXX(";
-    String test7 = "$           ]XXXXXXXXXXXXXXXXXXXXXXXXXX(";
-
-    // top line
-    graphics.drawString (test4, column, row++, gc);
-
-    // verticals
-    for (int i = 0; i < 4; i++)
-      graphics.drawString (test5, column, row++, gc);
-
-    // half line
-    graphics.drawString (test7, column, row++, gc);
-
-    // verticals
-    for (int i = 0; i < 4; i++)
-      graphics.drawString (test5, column, row++, gc);
-
-    // middle line 1
-    graphics.drawString (test6, column, row++, gc);
-
-    // verticals
-    for (int i = 0; i < 4; i++)
-      graphics.drawString (test2, column, row++, gc);
-
-    // middle line 2
-    graphics.drawString (test1, column, row++, gc);
-
-    // verticals
-    for (int i = 0; i < 7; i++)
-      graphics.drawString (test2, column, row++, gc);
-
-    // bottom line
-    graphics.drawString (test3, column, row++, gc);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void drawData (GraphicsContext gc, Color color)
+  private void drawMonsters (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
     int column = 13;
@@ -164,9 +123,108 @@ public class DisplayPane extends DataPane
           howMany == 1 ? monster.name : monster.namePlural, howMany);
       alphabet.drawString (test, column, row++, gc);
     }
+  }
 
-    row += 5 - groupSize;
-    String test = String.format ("%s'S OPTIONS", characters.get (0));
+  // ---------------------------------------------------------------------------------//
+  private void drawMonster (GraphicsContext gc, Color color)
+  // ---------------------------------------------------------------------------------//
+  {
+    Monster monster = monsters.get (random.nextInt (monsters.size ()));
+    Image image = wizardry.getImage (monster.image);
+    int howMany = monster.groupSize.roll ();
+    image.draw (canvas, 2, color, 16, 47);
+
+    int row = 1;
+    long totalExperience = howMany * monster.expamt;
+
+    drawMonsterGroup (gc, monster, row++, howMany);
+    int totalMonsterGroups = 1;
+
+    while (totalMonsterGroups < 4)
+    {
+      if (monster.enemyTeam == 0 || random.nextInt (100) > monster.teamPercentage)
+        break;
+
+      Monster monster2 = wizardry.getMonster (monster.enemyTeam);
+      howMany = monster2.groupSize.roll ();
+      drawMonsterGroup (gc, monster2, row++, howMany);
+      totalExperience += howMany * monster2.expamt;
+      monster = monster2;
+      ++totalMonsterGroups;
+    }
+
+    String experience = String.format ("TOTAL EXPERIENCE : %,d", totalExperience);
+    alphabet.drawString (experience, 7, 12, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawMonsterGroup (GraphicsContext gc, Monster monster, int row, int howMany)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = 13;
+
+    String test = String.format ("%d) %d %s (%d)", row, howMany,
+        howMany == 1 ? monster.name : monster.namePlural, howMany);
+    alphabet.drawString (test, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawGrid (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = 0;
+    int row = 0;
+
+    String topLine = "!XXXXXXXXXXX[XXXXXXXXXXXXXXXXXXXXXXXXXX#";
+    String vert1 = "$           \\                          $";
+    String half = "$           ]XXXXXXXXXXXXXXXXXXXXXXXXXX(";
+    String mid1 = "'XXXXXXXXXXX^XXXXXXXXXXXXXXXXXXXXXXXXXX(";
+    String vert2 = "$                                      $";
+    String mid2 = "'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX(";
+    String botLine = "%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&";
+
+    // top line
+    graphics.drawString (topLine, column, row++, gc);
+
+    // verticals
+    for (int i = 0; i < 4; i++)
+      graphics.drawString (vert1, column, row++, gc);
+
+    // half line
+    graphics.drawString (half, column, row++, gc);
+
+    // verticals
+    for (int i = 0; i < 4; i++)
+      graphics.drawString (vert1, column, row++, gc);
+
+    // middle line 1
+    graphics.drawString (mid1, column, row++, gc);
+
+    // verticals
+    for (int i = 0; i < 4; i++)
+      graphics.drawString (vert2, column, row++, gc);
+
+    // middle line 2
+    graphics.drawString (mid2, column, row++, gc);
+
+    // verticals
+    for (int i = 0; i < 7; i++)
+      graphics.drawString (vert2, column, row++, gc);
+
+    // bottom line
+    graphics.drawString (botLine, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawData (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = 13;
+    int row = 6;
+
+    String characterName = characters.size () == 0 ? "NOBODY" : characters.get (0).name;
+
+    String test = String.format ("%s'S OPTIONS", characterName);
     alphabet.drawString (test, column, row++, gc);
 
     row++;
@@ -184,6 +242,9 @@ public class DisplayPane extends DataPane
 
     for (int i = 0; i < 6; i++)
     {
+      if (i >= characters.size ())
+        break;
+
       Character character = characters.get (i);
       test = String.format ("%d %-15.15s %1.1s-%3.3s %2d  %3d   %3d", i + 1, character.name,
           character.alignment, character.characterClass, character.armourClass, character.hpLeft,

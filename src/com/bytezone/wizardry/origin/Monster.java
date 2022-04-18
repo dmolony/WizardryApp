@@ -4,11 +4,6 @@ package com.bytezone.wizardry.origin;
 public class Monster
 // -----------------------------------------------------------------------------------//
 {
-  //  public static final String[] property =
-  //      { "Stone", "Poison", "Paralyse", "Autokill", "Be slept", "Run", "Gate in" };
-  //  public static final String[] resistance =
-  //      { "Friends", "Fire", "Cold", "Poison", "Level drain", "Stoning", "Magic" };
-
   public final int id;
   public final String name;                                //   0
   public final String namePlural;                          //  16
@@ -21,7 +16,7 @@ public class Monster
   public final int armourClass;                            //  80          
   public final int recsn;                                  //  82  total recs
   public final Dice[] recs = new Dice[7];                  //  84  damage?
-  public final long expamt;                                // 126  (triple)
+  public final long expamt;                                // 126  wizlong
   public final int drainAmt;                               // 132                    
   public final int healPts;                                // 134                    
   public final int reward1;                                // 136  gold
@@ -37,6 +32,21 @@ public class Monster
   public final int flags2;                                 // 156
 
   public final String damageDice;
+
+  // Scenario #1 values
+  private static int[] experience = {                                     //
+      55, 235, 415, 230, 380, 620, 840, 520, 550, 350,                    // 00-09
+      475, 515, 920, 600, 735, 520, 795, 780, 990, 795,                   // 10-19
+      1360, 1320, 1275, 680, 960, 600, 755, 1120, 2075, 870,              // 20-29
+      960, 600, 1120, 2435, 1080, 2280, 975, 875, 1135, 1200,             // 30-39
+      620, 740, 1460, 1245, 960, 1405, 1040, 1220, 1520, 1000,            // 40-49
+      960, 2340, 2160, 2395, 790, 1140, 1235, 1790, 1720, 2240,           // 50-59
+      1475, 1540, 1720, 1900, 1240, 1220, 1020, 20435, 5100, 3515,        // 60-69
+      2115, 2920, 2060, 2140, 1400, 1640, 1280, 4450, 42840, 3300,        // 70-79
+      40875, 5000, 3300, 2395, 1935, 1600, 3330, 44090, 40840, 5200,      // 80-89
+      4155, 3000, 9200, 3160, 7460, 7320, 15880, 1600, 2200, 1000,        // 90-99
+      1900                                                                // 100 
+  };
 
   // ---------------------------------------------------------------------------------//
   public Monster (int id, DataBlock dataBlock)
@@ -73,7 +83,7 @@ public class Monster
     }
     damageDice = dd.toString ();
 
-    expamt = Utility.getWizLong (buffer, offset + 126);
+    long exp = Utility.getWizLong (buffer, offset + 126);
     drainAmt = Utility.getShort (buffer, offset + 132);
     healPts = Utility.getShort (buffer, offset + 134);
 
@@ -92,25 +102,8 @@ public class Monster
 
     flags1 = Utility.getShort (buffer, offset + 154);             // wepvsty3
     flags2 = Utility.getShort (buffer, offset + 156);             // sppc
-  }
 
-  // ---------------------------------------------------------------------------------//
-  private String getFlagsText (int value, String[] values)
-  // ---------------------------------------------------------------------------------//
-  {
-    StringBuilder p = new StringBuilder ();
-    for (int i = 0; i < 7; i++)
-    {
-      if ((value & 0x01) != 0)
-        p.append (values[i] + ", ");
-      value >>>= 1;
-    }
-    if (p.length () > 0)
-    {
-      p.deleteCharAt (p.length () - 1);
-      p.deleteCharAt (p.length () - 1);
-    }
-    return p.toString ();
+    this.expamt = exp == 0 ? experience[id] : exp;
   }
 
   // ---------------------------------------------------------------------------------//
