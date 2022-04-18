@@ -17,7 +17,7 @@ There is no need to kick doors down, you can simply walk through any wall. None 
 <img src="resources/specials.png" alt="drawing" width="800"/>
 <img src="resources/messages.png" alt="drawing" width="600"/>
 <img src="resources/experience.png" alt="drawing" width="400"/>
-<img src="resources/display.png" alt="drawing" width="600"/>
+<img src="resources/display.png" alt="drawing" width="800"/>
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).
