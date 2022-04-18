@@ -4,13 +4,15 @@ package com.bytezone.wizardry.origin;
 public class Font
 // -----------------------------------------------------------------------------------//
 {
+  String name;
   byte[] buffer;
   int offset;
 
   // ---------------------------------------------------------------------------------//
-  public Font (byte[] buffer, int offset, int length)
+  public Font (String name, byte[] buffer, int offset, int length)
   // ---------------------------------------------------------------------------------//
   {
+    this.name = name;
     this.buffer = buffer;
     this.offset = offset;
 
@@ -69,5 +71,13 @@ public class Font
     }
 
     return text.toString ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public String toString ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return name;
   }
 }

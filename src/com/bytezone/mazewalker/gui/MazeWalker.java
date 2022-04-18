@@ -60,6 +60,7 @@ public class MazeWalker extends AppBase
   private final MenuItem rewardsItem = new MenuItem ("Rewards...");
   private final MenuItem encountersItem = new MenuItem ("Encounters...");
   private final MenuItem specialsItem = new MenuItem ("Specials...");
+  private final MenuItem fontsItem = new MenuItem ("Fonts...");
   private final MenuItem messagesItem = new MenuItem ("Messages...");
 
   private MazeWalkerPane mazePane;
@@ -86,6 +87,7 @@ public class MazeWalker extends AppBase
   RewardsPane rewardsPane;
   EncountersPane encountersPane;
   MessagesPane messagesPane;
+  FontsPane fontsPane;
   ExperienceCalculator experienceCalculator;
 
   // ---------------------------------------------------------------------------------//
@@ -105,6 +107,7 @@ public class MazeWalker extends AppBase
     addItem (menuTools, itemsItem, KeyCode.I, e -> itemsPane.show ());
     addItem (menuTools, rewardsItem, KeyCode.R, e -> rewardsPane.show ());
     addItem (menuTools, encountersItem, KeyCode.E, e -> encountersPane.show ());
+    addItem (menuTools, fontsItem, KeyCode.F, e -> fontsPane.show ());
     addItem (menuTools, experienceItem, KeyCode.X, e -> experienceCalculator.show ());
 
     menuFile.getItems ().add (recentFilesMenu);
@@ -210,6 +213,7 @@ public class MazeWalker extends AppBase
     buildEncounters ();
     buildSpecials ();
     buildMessages ();
+    buildFonts ();
   }
 
   // ---------------------------------------------------------------------------------//
@@ -273,6 +277,15 @@ public class MazeWalker extends AppBase
     Stage stage = getStage ("Encounters");
     encountersPane = new EncountersPane (wizardry, stage);
     stage.setScene (getScene (encountersPane, 640, 440));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void buildFonts ()
+  // ---------------------------------------------------------------------------------//
+  {
+    Stage stage = getStage ("Fonts");
+    fontsPane = new FontsPane (wizardry, stage);
+    stage.setScene (getScene (fontsPane, 640, 440));
   }
 
   // ---------------------------------------------------------------------------------//
