@@ -60,7 +60,7 @@ public class MazeWalker extends AppBase
   private final MenuItem rewardsItem = new MenuItem ("Rewards...");
   private final MenuItem encountersItem = new MenuItem ("Encounters...");
   private final MenuItem specialsItem = new MenuItem ("Specials...");
-  private final MenuItem displayItem = new MenuItem ("Display...");
+  private final MenuItem fightItem = new MenuItem ("Display...");
   private final MenuItem messagesItem = new MenuItem ("Messages...");
 
   private MazeWalkerPane mazePane;
@@ -87,7 +87,7 @@ public class MazeWalker extends AppBase
   RewardsPane rewardsPane;
   EncountersPane encountersPane;
   MessagesPane messagesPane;
-  DisplayPane displayPane;
+  FightPane fightPane;
   ExperienceCalculator experienceCalculator;
 
   // ---------------------------------------------------------------------------------//
@@ -107,7 +107,7 @@ public class MazeWalker extends AppBase
     addItem (menuTools, itemsItem, KeyCode.I, e -> itemsPane.show ());
     addItem (menuTools, rewardsItem, KeyCode.R, e -> rewardsPane.show ());
     addItem (menuTools, encountersItem, KeyCode.E, e -> encountersPane.show ());
-    addItem (menuTools, displayItem, KeyCode.D, e -> displayPane.show ());
+    addItem (menuTools, fightItem, KeyCode.F, e -> fightPane.show ());
     addItem (menuTools, experienceItem, KeyCode.X, e -> experienceCalculator.show ());
 
     menuFile.getItems ().add (recentFilesMenu);
@@ -216,11 +216,11 @@ public class MazeWalker extends AppBase
 
     if (wizardry.getScenarioId () <= 2)
     {
-      buildDisplay ();
-      displayItem.setDisable (false);
+      buildFight ();
+      fightItem.setDisable (false);
     }
     else
-      displayItem.setDisable (true);
+      fightItem.setDisable (true);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -287,12 +287,12 @@ public class MazeWalker extends AppBase
   }
 
   // ---------------------------------------------------------------------------------//
-  private void buildDisplay ()
+  private void buildFight ()
   // ---------------------------------------------------------------------------------//
   {
-    Stage stage = getStage ("Display");
-    displayPane = new DisplayPane (wizardry, stage);
-    stage.setScene (getScene (displayPane, 750, 500));
+    Stage stage = getStage ("Fight");
+    fightPane = new FightPane (wizardry, stage);
+    stage.setScene (getScene (fightPane, 750, 500));
   }
 
   // ---------------------------------------------------------------------------------//

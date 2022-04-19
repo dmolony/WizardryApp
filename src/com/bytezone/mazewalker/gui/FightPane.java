@@ -1,5 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -7,8 +8,11 @@ import java.util.Random;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Font;
 import com.bytezone.wizardry.origin.Image;
+import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.Possession;
 import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryOrigin.CharacterStatus;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -21,7 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class DisplayPane extends DataPane
+public class FightPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private final int scenarioId;
@@ -30,7 +34,8 @@ public class DisplayPane extends DataPane
   private final Font graphics;
 
   private List<Monster> monsters;
-  private List<Character> characters;
+  private List<Character> party;
+
   private Random random = new Random ();
 
   private List<DisplayColor> colors = Arrays.asList (     //
@@ -41,7 +46,7 @@ public class DisplayPane extends DataPane
       new DisplayColor ("Sky blue", Color.SKYBLUE));
 
   // ---------------------------------------------------------------------------------//
-  public DisplayPane (WizardryOrigin wizardry, Stage stage)
+  public FightPane (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);
@@ -59,7 +64,8 @@ public class DisplayPane extends DataPane
 
     scenarioId = wizardry.getScenarioId ();
     monsters = wizardry.getMonsters ();
-    characters = wizardry.getCharacters ();
+    party = getParty ();
+
     canvas = scenarioId < 3 ? new Canvas (565, 390) : null;       // w/h
 
     setColumnConstraints (110, 400);
@@ -96,33 +102,31 @@ public class DisplayPane extends DataPane
     gc.setFill (Color.BLACK);
     gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
 
-    drawMonster (gc, displayColor.color);
-    drawData (gc);
+    switch (random.nextInt (2))
+    {
+      case 0:
+        drawMonster (gc, displayColor.color);
+        break;
+
+      case 1:
+        drawMoves (gc);
+        break;
+
+      default:
+        System.out.println ("empty case");
+        drawSpecial (gc);
+    }
+
+    drawParty (gc);
     drawGrid (gc);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawMonsters (GraphicsContext gc, Color color)
+  private void drawSpecial (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
-    int column = 13;
-    int row = 1;
-
-    int groupSize = random.nextInt (4) + 1;
-    for (int i = 0; i < groupSize; i++)
-    {
-      Monster monster = monsters.get (random.nextInt (monsters.size ()));
-      if (i == 0)
-      {
-        Image image = wizardry.getImage (monster.image);
-        image.draw (canvas, 2, color, 16, 47);
-      }
-
-      int howMany = monster.groupSize.roll ();
-      String test = String.format ("%d) %d %s (%d)", i + 1, howMany,
-          howMany == 1 ? monster.name : monster.namePlural, howMany);
-      alphabet.drawString (test, column, row++, gc);
-    }
+    String experience = String.format ("COME TO KFEST 2022");
+    alphabet.drawString (experience, 11, 12, gc);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -131,10 +135,17 @@ public class DisplayPane extends DataPane
   {
     Monster monster = monsters.get (random.nextInt (monsters.size ()));
     Image image = wizardry.getImage (monster.image);
-    int howMany = monster.groupSize.roll ();
     image.draw (canvas, 2, color, 16, 47);
 
+    if (random.nextInt (10) == 0)
+    {
+      drawFriendly (gc, monster);
+      return;
+    }
+
     int row = 1;
+
+    int howMany = monster.groupSize.roll ();
     long totalExperience = howMany * monster.expamt;
 
     drawMonsterGroup (gc, monster, row++, howMany);
@@ -153,6 +164,8 @@ public class DisplayPane extends DataPane
       ++totalMonsterGroups;
     }
 
+    drawOptions (gc);
+
     String experience = String.format ("TOTAL EXPERIENCE : %,d", totalExperience);
     alphabet.drawString (experience, 7, 12, gc);
   }
@@ -163,9 +176,93 @@ public class DisplayPane extends DataPane
   {
     int column = 13;
 
-    String test = String.format ("%d) %d %s (%d)", row, howMany,
+    String text = String.format ("%d) %d %s (%d)", row, howMany,
         howMany == 1 ? monster.name : monster.namePlural, howMany);
-    alphabet.drawString (test, column, row++, gc);
+    alphabet.drawString (text, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawFriendly (GraphicsContext gc, Monster monster)
+  // ---------------------------------------------------------------------------------//
+  {
+    int row = 11;
+    int column = 1;
+
+    String text = "A FRIENDLY GROUP OF " + monster.genericNamePlural;
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "THEY HAIL YOU IN WELCOME!";
+    alphabet.drawString (text, column, row++, gc);
+
+    row++;
+    text = "YOU MAY F)IGHT OR L)EAVE IN PEACE";
+    alphabet.drawString (text, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawMoves (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    int row = 1;
+    int column = 13;
+
+    String text = "F)ORWARD  C)AMP    S)TATUS";
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "L)EFT     Q)UICK   A<-W->D";
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "R)IGHT    T)IME    CLUSTER";
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "K)ICK     I)NSPECT";
+    alphabet.drawString (text, column, row++, gc);
+
+    row += 2;
+    text = "SPELLS :";
+    alphabet.drawString (text, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawOptions (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = 13;
+    int row = 6;
+
+    int whoFights = random.nextInt (party.size ());
+    String characterName = party.size () == 0 ? "NOBODY" : party.get (whoFights).name;
+
+    String text = String.format ("%s'S OPTIONS", characterName);
+    alphabet.drawString (text, column, row++, gc);
+
+    row++;
+    text = "F)IGHT  S)PELL  P)ARRY";
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "R)UN    U)SE    D)ISPELL";
+    alphabet.drawString (text, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawParty (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = 1;
+    int row = 16;
+
+    String text = "# CHARACTER NAME  CLASS AC HITS STATUS";
+    alphabet.drawString (text, column, row++, gc);
+
+    int ptr = 1;
+    for (Character character : party)
+    {
+      String extra = getExtra (character);
+      text = String.format ("%d %-15.15s %1.1s-%3.3s %2d  %3d%1.1s  %3d", ptr++, character.name,
+          character.alignment, character.characterClass, character.armourClass, character.hpLeft,
+          extra, character.hpMax);
+      alphabet.drawString (text, column, row++, gc);
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -216,40 +313,52 @@ public class DisplayPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawData (GraphicsContext gc)
+  private String getExtra (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    int column = 13;
-    int row = 6;
-
-    String characterName = characters.size () == 0 ? "NOBODY" : characters.get (0).name;
-
-    String test = String.format ("%s'S OPTIONS", characterName);
-    alphabet.drawString (test, column, row++, gc);
-
-    row++;
-    test = "F)IGHT  S)PELL  P)ARRY";
-    alphabet.drawString (test, column, row++, gc);
-
-    test = "R)UN    U)SE    D)ISPELL";
-    alphabet.drawString (test, column, row++, gc);
-
-    column = 1;
-    row += 6;
-
-    test = "# CHARACTER NAME  CLASS AC HITS STATUS";
-    alphabet.drawString (test, column, row++, gc);
-
-    for (int i = 0; i < 6; i++)
+    for (Possession possession : character.possessions)
     {
-      if (i >= characters.size ())
+      Item item = wizardry.getItem (possession.id ());
+      if (possession.equipped () && item.special == 1)
+        return "+";
+    }
+
+    return "";
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private List<Character> getParty ()
+  // ---------------------------------------------------------------------------------//
+  {
+    List<Character> roster = new ArrayList<> (wizardry.getCharacters ());
+    List<Character> party = new ArrayList<> ();
+
+    while (party.size () < 6)
+    {
+      int max = 0;
+      int ptr = -1;
+
+      for (int i = 0; i < roster.size (); i++)
+      {
+        Character character = roster.get (i);
+
+        if (character.status != CharacterStatus.OK)
+          continue;
+
+        if (character.hpMax > max)
+        {
+          max = character.hpMax;
+          ptr = i;
+        }
+      }
+
+      if (ptr < 0)          // nobody qualified
         break;
 
-      Character character = characters.get (i);
-      test = String.format ("%d %-15.15s %1.1s-%3.3s %2d  %3d   %3d", i + 1, character.name,
-          character.alignment, character.characterClass, character.armourClass, character.hpLeft,
-          character.hpMax);
-      alphabet.drawString (test, column, row++, gc);
+      party.add (roster.get (ptr));
+      roster.remove (ptr);
     }
+
+    return party;
   }
 }
