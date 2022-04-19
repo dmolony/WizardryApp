@@ -130,8 +130,7 @@ public class FightPane extends DataPane
   private void drawSpecial (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
-    String experience = String.format ("COME TO KFEST 2022");
-    alphabet.drawString (experience, 11, 12, gc);
+    alphabet.drawString (gc, 11, 12, "COME TO KFEST 2022");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -145,7 +144,7 @@ public class FightPane extends DataPane
     int column = 1;
 
     String text = String.format ("EACH SHARE IS WORTH %d GP!", random.nextInt (1000) + 1);
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, text);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -158,26 +157,16 @@ public class FightPane extends DataPane
     int row = 1;
     int column = 13;
 
-    String text = "FOR KILLING THE MONSTERS";
-    alphabet.drawString (text, column, row++, gc);
-
-    text = String.format ("EACH SURVIVOR GETS 99999");
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "EXPERIENCE POINTS";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "FOR KILLING THE MONSTERS");
+    alphabet.drawString (gc, column, row++, "EACH SURVIVOR GETS 99999");
+    alphabet.drawString (gc, column, row++, "EXPERIENCE POINTS");
 
     row = 6;
-
-    text = "A CHEST! YOU MAY:";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "A CHEST! YOU MAY:");
 
     ++row;
-    text = "O)PEN     C)ALFO   L)EAVE";
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "I)NSPECT  D)ISARM";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "O)PEN     C)ALFO   L)EAVE");
+    alphabet.drawString (gc, column, row++, "I)NSPECT  D)ISARM");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -217,8 +206,7 @@ public class FightPane extends DataPane
 
     drawOptions (gc);
 
-    String experience = String.format ("TOTAL EXPERIENCE : %,d", totalExperience);
-    alphabet.drawString (experience, 7, 12, gc);
+    alphabet.drawString (gc, 7, 12, String.format ("TOTAL EXPERIENCE : %,d", totalExperience));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -229,7 +217,7 @@ public class FightPane extends DataPane
 
     String text = String.format ("%d) %d %s (%d)", row, howMany,
         howMany == 1 ? monster.name : monster.namePlural, howMany);
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, text);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -239,15 +227,10 @@ public class FightPane extends DataPane
     int row = 11;
     int column = 1;
 
-    String text = "A FRIENDLY GROUP OF " + monster.genericNamePlural;
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "THEY HAIL YOU IN WELCOME!";
-    alphabet.drawString (text, column, row++, gc);
-
+    alphabet.drawString (gc, column, row++, "A FRIENDLY GROUP OF " + monster.genericNamePlural);
+    alphabet.drawString (gc, column, row++, "THEY HAIL YOU IN WELCOME!");
     row++;
-    text = "YOU MAY F)IGHT OR L)EAVE IN PEACE";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "YOU MAY F)IGHT OR L)EAVE IN PEACE");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -257,21 +240,12 @@ public class FightPane extends DataPane
     int row = 1;
     int column = 13;
 
-    String text = "F)ORWARD  C)AMP    S)TATUS";
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "L)EFT     Q)UICK   A<-W->D";
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "R)IGHT    T)IME    CLUSTER";
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "K)ICK     I)NSPECT";
-    alphabet.drawString (text, column, row++, gc);
-
+    alphabet.drawString (gc, column, row++, "F)ORWARD  C)AMP    S)TATUS");
+    alphabet.drawString (gc, column, row++, "L)EFT     Q)UICK   A<-W->D");
+    alphabet.drawString (gc, column, row++, "R)IGHT    T)IME    CLUSTER");
+    alphabet.drawString (gc, column, row++, "K)ICK     I)NSPECT");
     row += 2;
-    text = "SPELLS :";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "SPELLS :");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -283,16 +257,11 @@ public class FightPane extends DataPane
 
     int whoFights = random.nextInt (party.size ());
     String characterName = party.size () == 0 ? "NOBODY" : party.get (whoFights).name;
-
-    String text = String.format ("%s'S OPTIONS", characterName);
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, String.format ("%s'S OPTIONS", characterName));
 
     row++;
-    text = "F)IGHT  S)PELL  P)ARRY";
-    alphabet.drawString (text, column, row++, gc);
-
-    text = "R)UN    U)SE    D)ISPELL";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "F)IGHT  S)PELL  P)ARRY");
+    alphabet.drawString (gc, column, row++, "R)UN    U)SE    D)ISPELL");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -302,17 +271,22 @@ public class FightPane extends DataPane
     int column = 1;
     int row = 16;
 
-    String text = "# CHARACTER NAME  CLASS AC HITS STATUS";
-    alphabet.drawString (text, column, row++, gc);
+    alphabet.drawString (gc, column, row++, "# CHARACTER NAME  CLASS AC HITS STATUS");
 
     int ptr = 1;
     for (Character character : party)
     {
-      String extra = getExtra (character);
-      text = String.format ("%d %-15.15s %1.1s-%3.3s %2d  %3d%1.1s  %3d", ptr++, character.name,
-          character.alignment, character.characterClass, character.armourClass, character.hpLeft,
-          extra, character.hpMax);
-      alphabet.drawString (text, column, row++, gc);
+      String text = String.format ("%d %-15.15s %1.1s-%3.3s %2s  %3d%1.1s  %3d",  //
+          ptr++,                                                                  //
+          character.name,                                                         //
+          character.alignment,                                                    //
+          character.characterClass,                                               //
+          character.armourClass <= -10 ? "LO" : character.armourClass + "",       //
+          character.hpLeft,                                                       //
+          getExtra (character),                                                   //
+          character.hpMax);
+
+      alphabet.drawString (gc, column, row++, text);
     }
   }
 
@@ -332,35 +306,35 @@ public class FightPane extends DataPane
     String botLine = "%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&";
 
     // top line
-    graphics.drawString (topLine, column, row++, gc);
+    graphics.drawString (gc, column, row++, topLine);
 
     // verticals
     for (int i = 0; i < 4; i++)
-      graphics.drawString (vert1, column, row++, gc);
+      graphics.drawString (gc, column, row++, vert1);
 
     // half line
-    graphics.drawString (half, column, row++, gc);
+    graphics.drawString (gc, column, row++, half);
 
     // verticals
     for (int i = 0; i < 4; i++)
-      graphics.drawString (vert1, column, row++, gc);
+      graphics.drawString (gc, column, row++, vert1);
 
     // middle line 1
-    graphics.drawString (mid1, column, row++, gc);
+    graphics.drawString (gc, column, row++, mid1);
 
     // verticals
     for (int i = 0; i < 4; i++)
-      graphics.drawString (vert2, column, row++, gc);
+      graphics.drawString (gc, column, row++, vert2);
 
     // middle line 2
-    graphics.drawString (mid2, column, row++, gc);
+    graphics.drawString (gc, column, row++, mid2);
 
     // verticals
     for (int i = 0; i < 7; i++)
-      graphics.drawString (vert2, column, row++, gc);
+      graphics.drawString (gc, column, row++, vert2);
 
     // bottom line
-    graphics.drawString (botLine, column, row++, gc);
+    graphics.drawString (gc, column, row++, botLine);
   }
 
   // ---------------------------------------------------------------------------------//

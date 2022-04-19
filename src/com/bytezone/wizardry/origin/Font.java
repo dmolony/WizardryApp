@@ -46,18 +46,15 @@ public class Font
   }
 
   // ---------------------------------------------------------------------------------//
-  public void drawString (String text, int column, int row, GraphicsContext gc)
+  public void drawString (GraphicsContext gc, int column, int row, String text)
   // ---------------------------------------------------------------------------------//
   {
     for (char c : text.toCharArray ())
-    {
-      drawChar (c - 32, column, row, gc);
-      column++;
-    }
+      drawChar (gc, column++, row, c - 32);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawChar (int charNo, int column, int row, GraphicsContext gc)
+  private void drawChar (GraphicsContext gc, int column, int row, int charNo)
   // ---------------------------------------------------------------------------------//
   {
     PixelWriter pixelWriter = gc.getPixelWriter ();
