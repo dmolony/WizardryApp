@@ -89,12 +89,12 @@ public class WizardryOrigin
     STRENGTH, IQ, PIETY, VITALITY, AGILITY, LUCK
   }
 
-  enum CharacterClass
+  public enum CharacterClass
   {
     FIGHTER, MAGE, PRIEST, THIEF, BISHOP, SAMURAI, LORD, NINJA
   }
 
-  enum Status
+  public enum Status
   {
     OK, AFRAID, ASLEEP, PLYZE, STONED, DEAD, ASHES, LOST
   }
@@ -190,31 +190,16 @@ public class WizardryOrigin
     for (DataBlock dataBlock : sd.dataBlocks)
       images.add (new Image (id++, dataBlock, getScenarioId ()));
 
-    //    if (false)
-    //      for (Square square : Square.values ())
-    //      {
-    //        showExtra (square);
-    //        System.out.println ();
-    //      }
-  }
+    if (false)
+    {
+      int[] imageTotals = new int[images.size ()];
+      for (Monster monster : monsters)
+        imageTotals[monster.image]++;
 
-  // ---------------------------------------------------------------------------------//
-  //  private void showExtra (Square square)
-  //  // ---------------------------------------------------------------------------------//
-  //  {
-  //    for (MazeLevel level : mazeLevels)
-  //      for (int col = 0; col < 20; col++)
-  //        for (int row = 0; row < 20; row++)
-  //        {
-  //          MazeCell mazeCell = level.getMazeCell (col, row);
-  //          Special extra = mazeCell.getExtra ();
-  //          if (extra != null && extra.is (square))
-  //          {
-  //            String fight = level.lair[col][row] ? " lair" : "";
-  //            System.out.printf ("%s  %s %s%n", extra, mazeCell.getLocation (), fight);
-  //          }
-  //        }
-  //  }
+      for (int i = 0; i < imageTotals.length; i++)
+        System.out.printf ("%2d  %2d%n", i, imageTotals[i]);
+    }
+  }
 
   // ---------------------------------------------------------------------------------//
   public int getScenarioId ()

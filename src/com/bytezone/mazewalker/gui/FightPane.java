@@ -1,6 +1,5 @@
 package com.bytezone.mazewalker.gui;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -10,9 +9,9 @@ import com.bytezone.wizardry.origin.Font;
 import com.bytezone.wizardry.origin.Image;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.PartyManager;
 import com.bytezone.wizardry.origin.Possession;
 import com.bytezone.wizardry.origin.WizardryOrigin;
-import com.bytezone.wizardry.origin.WizardryOrigin.CharacterStatus;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -51,20 +50,15 @@ public class FightPane extends DataPane
   {
     super (wizardry, stage);
 
-    if (wizardry.getScenarioId () <= 2)
-    {
-      alphabet = wizardry.getFonts ().get (0);
-      graphics = wizardry.getFonts ().get (1);
-    }
-    else
-    {
-      alphabet = null;
-      graphics = null;
-    }
+    if (wizardry.getScenarioId () >= 3)
+      throw new UnsupportedOperationException ("Wrong scenario for fights");
+
+    alphabet = wizardry.getFonts ().get (0);
+    graphics = wizardry.getFonts ().get (1);
 
     scenarioId = wizardry.getScenarioId ();
     monsters = wizardry.getMonsters ();
-    party = getParty ();
+    party = new PartyManager (wizardry).getParty ();
 
     canvas = scenarioId < 3 ? new Canvas (565, 390) : null;       // w/h
 
@@ -109,7 +103,20 @@ public class FightPane extends DataPane
         break;
 
       case 1:
-        drawMoves (gc);
+        switch (random.nextInt (3))
+        {
+          case 0:
+            drawMoves (gc);
+            break;
+
+          case 1:
+            drawChest (gc, displayColor.color);
+            break;
+
+          case 2:
+            drawGold (gc, displayColor.color);
+            break;
+        }
         break;
 
       default:
@@ -127,6 +134,52 @@ public class FightPane extends DataPane
   {
     String experience = String.format ("COME TO KFEST 2022");
     alphabet.drawString (experience, 11, 12, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawGold (GraphicsContext gc, Color color)
+  // ---------------------------------------------------------------------------------//
+  {
+    Image image = wizardry.getImage (19);
+    image.draw (canvas, 2, color, 16, 47);
+
+    int row = 1;
+    int column = 13;
+
+    String text = "YAY GOLD";
+    alphabet.drawString (text, column, row++, gc);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawChest (GraphicsContext gc, Color color)
+  // ---------------------------------------------------------------------------------//
+  {
+    Image image = wizardry.getImage (18);
+    image.draw (canvas, 2, color, 16, 47);
+
+    int row = 1;
+    int column = 13;
+
+    String text = "FOR KILLING THE MONSTERS";
+    alphabet.drawString (text, column, row++, gc);
+
+    text = String.format ("EACH SURVIVOR GETS 99999");
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "EXPERIENCE POINTS";
+    alphabet.drawString (text, column, row++, gc);
+
+    row = 6;
+
+    text = "A CHEST! YOU MAY:";
+    alphabet.drawString (text, column, row++, gc);
+
+    ++row;
+    text = "O)PEN     C)ALFO   L)EAVE";
+    alphabet.drawString (text, column, row++, gc);
+
+    text = "I)NSPECT  D)ISARM";
+    alphabet.drawString (text, column, row++, gc);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -324,41 +377,5 @@ public class FightPane extends DataPane
     }
 
     return "";
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private List<Character> getParty ()
-  // ---------------------------------------------------------------------------------//
-  {
-    List<Character> roster = new ArrayList<> (wizardry.getCharacters ());
-    List<Character> party = new ArrayList<> ();
-
-    while (party.size () < 6)
-    {
-      int max = 0;
-      int ptr = -1;
-
-      for (int i = 0; i < roster.size (); i++)
-      {
-        Character character = roster.get (i);
-
-        if (character.status != CharacterStatus.OK)
-          continue;
-
-        if (character.hpMax > max)
-        {
-          max = character.hpMax;
-          ptr = i;
-        }
-      }
-
-      if (ptr < 0)          // nobody qualified
-        break;
-
-      party.add (roster.get (ptr));
-      roster.remove (ptr);
-    }
-
-    return party;
   }
 }
