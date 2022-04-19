@@ -16,7 +16,7 @@ public class Monster
   public final int armourClass;                            //  80          
   public final int recsn;                                  //  82  total recs
   public final Dice[] recs = new Dice[7];                  //  84  damage?
-  public final long expamt;                                // 126  wizlong
+  public final long experiencePoints;                                // 126  wizlong
   public final int drainAmt;                               // 132                    
   public final int healPts;                                // 134                    
   public final int reward1;                                // 136  gold
@@ -103,7 +103,7 @@ public class Monster
     flags1 = Utility.getShort (buffer, offset + 154);             // wepvsty3
     flags2 = Utility.getShort (buffer, offset + 156);             // sppc
 
-    this.expamt = exp == 0 ? experience[id] : exp;
+    this.experiencePoints = exp == 0 ? experience[id] : exp;
   }
 
   // ---------------------------------------------------------------------------------//

@@ -156,7 +156,7 @@ public class CharactersPane extends DataPane
   {
     setText (textOut[AWARDS], character.awards);
     setText (textOut[PASSWORD], character.password);
-    setText (textOut[IN_MAZE], character.inMaze);
+    setText (textOut[IN_MAZE], character.inMaze ? "** OUT **" : "");
     setText (textOut[RACE], character.race);
     setText (textOut[CLASS], character.characterClass);
     setText (textOut[AGE], getText (character.age));

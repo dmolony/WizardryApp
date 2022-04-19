@@ -123,7 +123,7 @@ public class MonstersPane extends DataPane
     setText (textOut2[BREATHE], monster.breathe);
     setText (textOut2[DRAIN], monster.drainAmt);
     setText (textOut2[REGEN], monster.healPts);
-    setText (textOut2[EXPERIENCE], monster.expamt);
+    setText (textOut2[EXPERIENCE], monster.experiencePoints);
     setText (textOut2[ARMOUR_CLASS], monster.armourClass);
     setText (textOut2[UNIQUE], monster.unique);
     setText (textOut2[IMAGE], monster.image);

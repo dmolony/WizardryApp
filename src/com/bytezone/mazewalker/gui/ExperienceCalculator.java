@@ -98,7 +98,7 @@ public class ExperienceCalculator extends DataPane
     textIn[ABILITY].setText (monster.flags2 + "");
 
     if (wizardry.getScenarioId () > 1)
-      textOut[TOTAL].setText (getText (monster.expamt));
+      textOut[TOTAL].setText (getText (monster.experiencePoints));
     else
       setExperienceTotal ();
   }

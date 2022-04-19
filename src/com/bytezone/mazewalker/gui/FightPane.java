@@ -7,10 +7,8 @@ import java.util.Random;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Font;
 import com.bytezone.wizardry.origin.Image;
-import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.PartyManager;
-import com.bytezone.wizardry.origin.Possession;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.geometry.HPos;
@@ -143,10 +141,10 @@ public class FightPane extends DataPane
     Image image = wizardry.getImage (19);
     image.draw (canvas, 2, color, 16, 47);
 
-    int row = 1;
-    int column = 13;
+    int row = 12;
+    int column = 1;
 
-    String text = "YAY GOLD";
+    String text = String.format ("EACH SHARE IS WORTH %d GP!", random.nextInt (1000) + 1);
     alphabet.drawString (text, column, row++, gc);
   }
 
@@ -196,25 +194,25 @@ public class FightPane extends DataPane
       return;
     }
 
-    int row = 1;
-
     int howMany = monster.groupSize.roll ();
-    long totalExperience = howMany * monster.expamt;
+    long totalExperience = howMany * monster.experiencePoints;
 
+    int row = 1;
     drawMonsterGroup (gc, monster, row++, howMany);
-    int totalMonsterGroups = 1;
 
-    while (totalMonsterGroups < 4)
+    int chums = 0;
+
+    while (chums < 3)
     {
-      if (monster.enemyTeam == 0 || random.nextInt (100) > monster.teamPercentage)
+      if (monster.enemyTeam == 0 || random.nextInt (100) >= monster.teamPercentage)
         break;
 
-      Monster monster2 = wizardry.getMonster (monster.enemyTeam);
-      howMany = monster2.groupSize.roll ();
-      drawMonsterGroup (gc, monster2, row++, howMany);
-      totalExperience += howMany * monster2.expamt;
-      monster = monster2;
-      ++totalMonsterGroups;
+      Monster chum = wizardry.getMonster (monster.enemyTeam);
+      howMany = chum.groupSize.roll ();
+      drawMonsterGroup (gc, chum, row++, howMany);
+      totalExperience += howMany * chum.experiencePoints;
+      monster = chum;
+      ++chums;
     }
 
     drawOptions (gc);
@@ -369,12 +367,14 @@ public class FightPane extends DataPane
   private String getExtra (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    for (Possession possession : character.possessions)
-    {
-      Item item = wizardry.getItem (possession.id ());
-      if (possession.equipped () && item.special == 1)
-        return "+";
-    }
+    if (character.healPts > 0)
+      return "+";
+    //    for (Possession possession : character.possessions)
+    //    {
+    //      Item item = wizardry.getItem (possession.id ());
+    //      if (possession.equipped () && item. > 0)
+    //        return "+";
+    //    }
 
     return "";
   }
