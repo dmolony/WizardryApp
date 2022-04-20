@@ -214,7 +214,7 @@ public class WizardryOrigin
     int[] totals = new int[monsters.size ()];
     MazeLevel mazeLevel = mazeLevels.get (level);
 
-    float tests = 100000l;
+    int tests = 1_000_000;
     for (int i = 0; i < tests; i++)
       totals[mazeLevel.getRandomMonster ()]++;
 
@@ -223,9 +223,9 @@ public class WizardryOrigin
     {
       if (totals[i] > 0)
       {
-        float percent = totals[i] * 100 / tests;
-        System.out.printf ("%3d  %-20s %6.2f%%  %,9d%n", i, monsters.get (i).name, percent,
-            monsters.get (i).experiencePoints);
+        float percent = totals[i] * 100 / (float) tests;
+        System.out.printf ("%3d  %-20s %6.2f%%  %,11d%n", i, monsters.get (i).name, percent,
+            totals[i]);
         percentTotal += percent;
       }
     }

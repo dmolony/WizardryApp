@@ -60,7 +60,6 @@ public class MazeWalker extends AppBase
   private final MenuItem rewardsItem = new MenuItem ("Rewards...");
   private final MenuItem encountersItem = new MenuItem ("Encounters...");
   private final MenuItem specialsItem = new MenuItem ("Specials...");
-  private final MenuItem fightItem = new MenuItem ("Display...");
   private final MenuItem messagesItem = new MenuItem ("Messages...");
 
   private MazeWalkerPane mazePane;
@@ -87,7 +86,6 @@ public class MazeWalker extends AppBase
   RewardsPane rewardsPane;
   EncountersPane encountersPane;
   MessagesPane messagesPane;
-  FightPane fightPane;
   ExperienceCalculator experienceCalculator;
 
   // ---------------------------------------------------------------------------------//
@@ -107,7 +105,6 @@ public class MazeWalker extends AppBase
     addItem (menuTools, itemsItem, KeyCode.I, e -> itemsPane.show ());
     addItem (menuTools, rewardsItem, KeyCode.R, e -> rewardsPane.show ());
     addItem (menuTools, encountersItem, KeyCode.E, e -> encountersPane.show ());
-    addItem (menuTools, fightItem, KeyCode.F, e -> fightPane.show ());
     addItem (menuTools, experienceItem, KeyCode.X, e -> experienceCalculator.show ());
 
     menuFile.getItems ().add (recentFilesMenu);
@@ -213,14 +210,6 @@ public class MazeWalker extends AppBase
     buildEncounters ();
     buildSpecials ();
     buildMessages ();
-
-    if (wizardry.getScenarioId () <= 2)
-    {
-      buildFight ();
-      fightItem.setDisable (false);
-    }
-    else
-      fightItem.setDisable (true);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -283,16 +272,7 @@ public class MazeWalker extends AppBase
   {
     Stage stage = getStage ("Encounters");
     encountersPane = new EncountersPane (wizardry, stage);
-    stage.setScene (getScene (encountersPane, 640, 440));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void buildFight ()
-  // ---------------------------------------------------------------------------------//
-  {
-    Stage stage = getStage ("Fight");
-    fightPane = new FightPane (wizardry, stage);
-    stage.setScene (getScene (fightPane, 750, 500));
+    stage.setScene (getScene (encountersPane, 1230, 440));
   }
 
   // ---------------------------------------------------------------------------------//

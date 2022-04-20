@@ -7,30 +7,26 @@ import java.util.Random;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Font;
 import com.bytezone.wizardry.origin.Image;
+import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.PartyManager;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
-public class FightPane extends DataPane
+public class Display extends Canvas
 // -----------------------------------------------------------------------------------//
 {
   private final static int CHEST = 18;
   private final static int GOLD = 19;
   private final static int IMAGE_SIZE = 2;
 
+  private final WizardryOrigin wizardry;
   private final int scenarioId;
-  private final Canvas canvas;
+
   private final Font alphabet;
   private final Font graphics;
 
@@ -38,6 +34,7 @@ public class FightPane extends DataPane
   private List<Character> party;
 
   private Random random = new Random ();
+  private DisplayColor displayColor = new DisplayColor ("Pale green", Color.PALEGREEN);
 
   private List<DisplayColor> colors = Arrays.asList (     //
       new DisplayColor ("White", Color.WHITE),            //
@@ -47,88 +44,68 @@ public class FightPane extends DataPane
       new DisplayColor ("Sky blue", Color.SKYBLUE));
 
   // ---------------------------------------------------------------------------------//
-  public FightPane (WizardryOrigin wizardry, Stage stage)
+  public Display (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    super (wizardry, stage);
+    super (565, 390);
 
-    if (wizardry.getScenarioId () >= 3)
-      throw new UnsupportedOperationException ("Wrong scenario for fights");
+    this.wizardry = wizardry;
 
     alphabet = wizardry.getFonts ().get (0);
     graphics = wizardry.getFonts ().get (1);
 
     scenarioId = wizardry.getScenarioId ();
     monsters = wizardry.getMonsters ();
+
     party = new PartyManager (wizardry).getParty ();
-
-    canvas = scenarioId < 3 ? new Canvas (565, 390) : null;       // w/h
-
-    setColumnConstraints (110, 400);
-
-    // make all rows the same height
-    RowConstraints rowCo = new RowConstraints (25);
-    for (int i = 0; i < 10; i++)
-      gridPane.getRowConstraints ().add (rowCo);
-
-    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    ComboBox<DisplayColor> colorsList = new ComboBox<> ();
-    createComboBox ("Color", colorsList, colors, (options, oldValue, newValue) -> update (newValue),
-        lp0, dp0);
-
-    GridPane.setConstraints (canvas, 1, 2);
-    GridPane.setColumnSpan (canvas, 3);
-    GridPane.setRowSpan (canvas, 15);
-
-    gridPane.getChildren ().add (canvas);
-
-    colorsList.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void update (DisplayColor displayColor)
+  public void update (MazeLevel mazeLevel)
   // ---------------------------------------------------------------------------------//
   {
-    GraphicsContext gc = canvas.getGraphicsContext2D ();
+    GraphicsContext gc = getGraphicsContext2D ();
 
     alphabet.setColor (displayColor.color);
     graphics.setColor (displayColor.color);
 
     gc.setFill (Color.BLACK);
-    gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
+    gc.fillRect (0, 0, getWidth (), getHeight ());
 
-    switch (random.nextInt (2))
-    {
-      case 0:
-        drawMonster (gc, displayColor.color);
-        break;
+    Monster monster = monsters.get (mazeLevel.getRandomMonster ());
+    drawMonster (gc, displayColor.color, monster);
 
-      case 1:
-        switch (random.nextInt (4))
-        {
-          case 0:
-            drawMoves (gc);
-            break;
-
-          case 1:
-            drawChest (gc, displayColor.color);
-            break;
-
-          case 2:
-            drawGold (gc, displayColor.color);
-            break;
-
-          case 3:
-            drawTomb (gc);
-            break;
-        }
-        break;
-
-      default:
-        System.out.println ("empty case");
-        drawSpecial (gc);
-    }
+    //    switch (random.nextInt (2))
+    //    {
+    //      case 0:
+    //        drawMonster (gc, displayColor.color);
+    //        break;
+    //
+    //      case 1:
+    //        switch (random.nextInt (4))
+    //        {
+    //          case 0:
+    //            drawMoves (gc);
+    //            break;
+    //
+    //          case 1:
+    //            drawChest (gc, displayColor.color);
+    //            break;
+    //
+    //          case 2:
+    //            drawGold (gc, displayColor.color);
+    //            break;
+    //
+    //          case 3:
+    //            drawTomb (gc);
+    //            break;
+    //        }
+    //        break;
+    //
+    //      default:
+    //        System.out.println ("empty case");
+    //        drawSpecial (gc);
+    //    }
 
     drawParty (gc);
     drawGrid (gc);
@@ -146,7 +123,7 @@ public class FightPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     Image image = wizardry.getImage (GOLD);
-    image.draw (canvas, IMAGE_SIZE, color, 16, 47);
+    image.draw (this, IMAGE_SIZE, color, 16, 47);
 
     int row = 12;
     int column = 1;
@@ -160,7 +137,7 @@ public class FightPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     Image image = wizardry.getImage (CHEST);
-    image.draw (canvas, IMAGE_SIZE, color, 16, 47);
+    image.draw (this, IMAGE_SIZE, color, 16, 47);
 
     int row = 1;
     int column = 13;
@@ -178,18 +155,18 @@ public class FightPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawMonster (GraphicsContext gc, Color color)
+  private void drawMonster (GraphicsContext gc, Color color, Monster monster)
   // ---------------------------------------------------------------------------------//
   {
-    Monster monster = monsters.get (random.nextInt (monsters.size ()));
+    //    Monster monster = monsters.get (random.nextInt (monsters.size ()));
     Image image = wizardry.getImage (monster.image);
-    image.draw (canvas, IMAGE_SIZE, color, 16, 47);
+    image.draw (this, IMAGE_SIZE, color, 16, 47);
 
-    if (random.nextInt (10) == 0)
-    {
-      drawFriendly (gc, monster);
-      return;
-    }
+    //    if (random.nextInt (10) == 0)
+    //    {
+    //      drawFriendly (gc, monster);
+    //      return;
+    //    }
 
     int howMany = monster.groupSize.roll ();
     long totalExperience = howMany * monster.experiencePoints;

@@ -8,6 +8,8 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
@@ -21,41 +23,54 @@ public class EncountersPane extends DataPane
   TextField[][] textOut1 = new TextField[MAX_GROUPS][];
   TextField[][] textOut2 = new TextField[MAX_GROUPS][];
 
+  Display display;
+
   // ---------------------------------------------------------------------------------//
   public EncountersPane (WizardryOrigin wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);
 
-    setColumnConstraints (110, 50, 80, 50, 80, 50, 80);
+    setColumnConstraints (110, 50, 80, 50, 80, 50, 80, 30, 400);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 3);
     createComboBox ("Maze Level", mazeLevelList, wizardry.getMazeLevels (),
         (options, oldValue, newValue) -> update (newValue), lp0, dp0);
 
+    // make all rows the same height
+    RowConstraints rowCo = new RowConstraints (25);
+    for (int i = 0; i < 30; i++)
+      gridPane.getRowConstraints ().add (rowCo);
+
     String[] labels1 = { "minenemy", "multwors", "wors01", "range0n", "percwors" };
     String[] labels2 =
         { "base range", "monster from", "monster to", "ext range", "monster from", "monster to" };
 
     // headings
-    createLabel ("75%", 1, 4, HPos.LEFT, 2);
-    createLabel ("18.75%", 3, 4, HPos.LEFT, 2);
-    createLabel ("6.25%", 5, 4, HPos.LEFT, 2);
+    createLabel ("75%", 1, 1, HPos.LEFT, 2);
+    createLabel ("18.75%", 3, 1, HPos.LEFT, 2);
+    createLabel ("6.25%", 5, 1, HPos.LEFT, 2);
 
-    LabelPlacement lp1 = new LabelPlacement (0, 5, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 5, Pos.CENTER_RIGHT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 2, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 2, Pos.CENTER_RIGHT, 1);
     textOut1[0] = createTextFields (labels1, lp1, dp1);
 
-    textOut1[1] = createTextFields (5, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
-    textOut1[2] = createTextFields (5, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
+    textOut1[1] = createTextFields (5, new DataPlacement (3, 2, Pos.CENTER_RIGHT, 1));
+    textOut1[2] = createTextFields (5, new DataPlacement (5, 2, Pos.CENTER_RIGHT, 1));
 
-    LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_LEFT, 2);
+    LabelPlacement lp2 = new LabelPlacement (0, 7, HPos.RIGHT, 1);
+    DataPlacement dp2 = new DataPlacement (1, 7, Pos.CENTER_LEFT, 2);
     textOut2[0] = createTextFields (labels2, lp2, dp2);
 
-    textOut2[1] = createTextFields (6, new DataPlacement (3, 11, Pos.CENTER_LEFT, 2));
-    textOut2[2] = createTextFields (6, new DataPlacement (5, 11, Pos.CENTER_LEFT, 2));
+    textOut2[1] = createTextFields (6, new DataPlacement (3, 7, Pos.CENTER_LEFT, 2));
+    textOut2[2] = createTextFields (6, new DataPlacement (5, 7, Pos.CENTER_LEFT, 2));
+
+    display = new Display (wizardry);
+    GridPane.setConstraints (display, 8, 0);
+    //    GridPane.setColumnSpan (display, 3);
+    GridPane.setRowSpan (display, 14);
+    gridPane.getChildren ().add (display);
 
     mazeLevelList.getSelectionModel ().select (0);
   }
@@ -96,6 +111,8 @@ public class EncountersPane extends DataPane
         setText (textOut2[i][5], "");
       }
     }
+
+    display.update (mazeLevel);
   }
 
   // ---------------------------------------------------------------------------------//
