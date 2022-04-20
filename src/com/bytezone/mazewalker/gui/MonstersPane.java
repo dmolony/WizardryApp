@@ -78,7 +78,7 @@ public class MonstersPane extends DataPane
     String[] label1Text = { "Plural", "Generic name", "Monster class", "Partner", "Appear dice",
         "Hits dice", "Damage dice" };
     String[] label2Text = { "ID", "Mage level", "Priest level", "Magic resistance", "Partner odds",
-        "Breathe", "Level drain", "Regen", "Experience", "Armour class", "# Encs", "Image",
+        "Breathe", "Level drain", "Regen", "Experience", "Armour class", "Unique", "Image",
         "Gold rewards", "Chest rewards" };
 
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 2);

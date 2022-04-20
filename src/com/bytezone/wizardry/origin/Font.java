@@ -81,6 +81,7 @@ public class Font
               writePixel4 (pixelWriter, x, y);
               break;
           }
+
         value >>>= 1;
         x += size;
       }

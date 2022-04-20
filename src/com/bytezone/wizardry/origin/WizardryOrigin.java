@@ -199,6 +199,38 @@ public class WizardryOrigin
       for (int i = 0; i < imageTotals.length; i++)
         System.out.printf ("%2d  %2d%n", i, imageTotals[i]);
     }
+
+    if (false)
+      for (int i = 0; i < 10; i++)
+        histogram (i);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void histogram (int level)
+  // ---------------------------------------------------------------------------------//
+  {
+    System.out.printf ("%nLevel %d%n", level + 1);
+
+    int[] totals = new int[monsters.size ()];
+    MazeLevel mazeLevel = mazeLevels.get (level);
+
+    float tests = 100000l;
+    for (int i = 0; i < tests; i++)
+      totals[mazeLevel.getRandomMonster ()]++;
+
+    float percentTotal = 0;
+    for (int i = 0; i < totals.length; i++)
+    {
+      if (totals[i] > 0)
+      {
+        float percent = totals[i] * 100 / tests;
+        System.out.printf ("%3d  %-20s %6.2f%%  %,9d%n", i, monsters.get (i).name, percent,
+            monsters.get (i).experiencePoints);
+        percentTotal += percent;
+      }
+    }
+    System.out.println ("                           ------");
+    System.out.printf ("                           %6.2f%n", percentTotal);
   }
 
   // ---------------------------------------------------------------------------------//

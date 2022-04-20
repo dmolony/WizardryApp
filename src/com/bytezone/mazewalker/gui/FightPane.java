@@ -25,6 +25,10 @@ import javafx.stage.Stage;
 public class FightPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
+  private final static int CHEST = 18;
+  private final static int GOLD = 19;
+  private final static int IMAGE_SIZE = 2;
+
   private final int scenarioId;
   private final Canvas canvas;
   private final Font alphabet;
@@ -101,7 +105,7 @@ public class FightPane extends DataPane
         break;
 
       case 1:
-        switch (random.nextInt (3))
+        switch (random.nextInt (4))
         {
           case 0:
             drawMoves (gc);
@@ -113,6 +117,10 @@ public class FightPane extends DataPane
 
           case 2:
             drawGold (gc, displayColor.color);
+            break;
+
+          case 3:
+            drawTomb (gc);
             break;
         }
         break;
@@ -137,8 +145,8 @@ public class FightPane extends DataPane
   private void drawGold (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
-    Image image = wizardry.getImage (19);
-    image.draw (canvas, 2, color, 16, 47);
+    Image image = wizardry.getImage (GOLD);
+    image.draw (canvas, IMAGE_SIZE, color, 16, 47);
 
     int row = 12;
     int column = 1;
@@ -151,8 +159,8 @@ public class FightPane extends DataPane
   private void drawChest (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
-    Image image = wizardry.getImage (18);
-    image.draw (canvas, 2, color, 16, 47);
+    Image image = wizardry.getImage (CHEST);
+    image.draw (canvas, IMAGE_SIZE, color, 16, 47);
 
     int row = 1;
     int column = 13;
@@ -164,7 +172,7 @@ public class FightPane extends DataPane
     row = 6;
     alphabet.drawString (gc, column, row++, "A CHEST! YOU MAY:");
 
-    ++row;
+    row = 8;
     alphabet.drawString (gc, column, row++, "O)PEN     C)ALFO   L)EAVE");
     alphabet.drawString (gc, column, row++, "I)NSPECT  D)ISARM");
   }
@@ -175,7 +183,7 @@ public class FightPane extends DataPane
   {
     Monster monster = monsters.get (random.nextInt (monsters.size ()));
     Image image = wizardry.getImage (monster.image);
-    image.draw (canvas, 2, color, 16, 47);
+    image.draw (canvas, IMAGE_SIZE, color, 16, 47);
 
     if (random.nextInt (10) == 0)
     {
@@ -224,8 +232,8 @@ public class FightPane extends DataPane
   private void drawFriendly (GraphicsContext gc, Monster monster)
   // ---------------------------------------------------------------------------------//
   {
-    int row = 11;
     int column = 1;
+    int row = 11;
 
     alphabet.drawString (gc, column, row++, "A FRIENDLY GROUP OF " + monster.genericNamePlural);
     alphabet.drawString (gc, column, row++, "THEY HAIL YOU IN WELCOME!");
@@ -273,21 +281,44 @@ public class FightPane extends DataPane
 
     alphabet.drawString (gc, column, row++, "# CHARACTER NAME  CLASS AC HITS STATUS");
 
-    int ptr = 1;
+    int position = 1;
     for (Character character : party)
     {
       String text = String.format ("%d %-15.15s %1.1s-%3.3s %2s  %3d%1.1s  %3d",  //
-          ptr++,                                                                  //
+          position++,                                                             //
           character.name,                                                         //
           character.alignment,                                                    //
           character.characterClass,                                               //
           character.armourClass <= -10 ? "LO" : character.armourClass + "",       //
           character.hpLeft,                                                       //
-          getExtra (character),                                                   //
+          character.getRegenerationSign (),                                       //
           character.hpMax);
 
       alphabet.drawString (gc, column, row++, text);
     }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawTomb (GraphicsContext gc)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = 2;
+    int row = 2;
+
+    graphics.drawString (gc, column, row++, "+,-.");
+    graphics.drawString (gc, column, row++, "/012");
+    graphics.drawString (gc, column, row++, "3456");
+    graphics.drawString (gc, column, row++, "789:");
+    graphics.drawString (gc, column, row++, ";<=>");
+    graphics.drawString (gc, column, row++, "?XYZ");
+
+    column++;
+    row -= 2;
+    alphabet.drawString (gc, column, row, "27");
+
+    column += 4;
+    row -= 3;
+    alphabet.drawString (gc, column, row, "FRED");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -297,59 +328,26 @@ public class FightPane extends DataPane
     int column = 0;
     int row = 0;
 
-    String topLine = "!XXXXXXXXXXX[XXXXXXXXXXXXXXXXXXXXXXXXXX#";
-    String vert1 = "$           \\                          $";
-    String half = "$           ]XXXXXXXXXXXXXXXXXXXXXXXXXX(";
-    String mid1 = "'XXXXXXXXXXX^XXXXXXXXXXXXXXXXXXXXXXXXXX(";
-    String vert2 = "$                                      $";
-    String mid2 = "'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX(";
-    String botLine = "%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&";
+    String line1 = "!XXXXXXXXXXX[XXXXXXXXXXXXXXXXXXXXXXXXXX#";
+    String line2 = "$           \\                          $";
+    String line3 = "$           ]XXXXXXXXXXXXXXXXXXXXXXXXXX(";
+    String line4 = "'XXXXXXXXXXX^XXXXXXXXXXXXXXXXXXXXXXXXXX(";
+    String line5 = "$                                      $";
+    String line6 = "'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX(";
+    String line7 = "%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&";
 
-    // top line
-    graphics.drawString (gc, column, row++, topLine);
-
-    // verticals
+    graphics.drawString (gc, column, row++, line1);
     for (int i = 0; i < 4; i++)
-      graphics.drawString (gc, column, row++, vert1);
-
-    // half line
-    graphics.drawString (gc, column, row++, half);
-
-    // verticals
+      graphics.drawString (gc, column, row++, line2);
+    graphics.drawString (gc, column, row++, line3);
     for (int i = 0; i < 4; i++)
-      graphics.drawString (gc, column, row++, vert1);
-
-    // middle line 1
-    graphics.drawString (gc, column, row++, mid1);
-
-    // verticals
+      graphics.drawString (gc, column, row++, line2);
+    graphics.drawString (gc, column, row++, line4);
     for (int i = 0; i < 4; i++)
-      graphics.drawString (gc, column, row++, vert2);
-
-    // middle line 2
-    graphics.drawString (gc, column, row++, mid2);
-
-    // verticals
+      graphics.drawString (gc, column, row++, line5);
+    graphics.drawString (gc, column, row++, line6);
     for (int i = 0; i < 7; i++)
-      graphics.drawString (gc, column, row++, vert2);
-
-    // bottom line
-    graphics.drawString (gc, column, row++, botLine);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private String getExtra (Character character)
-  // ---------------------------------------------------------------------------------//
-  {
-    if (character.healPts > 0)
-      return "+";
-    //    for (Possession possession : character.possessions)
-    //    {
-    //      Item item = wizardry.getItem (possession.id ());
-    //      if (possession.equipped () && item. > 0)
-    //        return "+";
-    //    }
-
-    return "";
+      graphics.drawString (gc, column, row++, line5);
+    graphics.drawString (gc, column, row++, line7);
   }
 }

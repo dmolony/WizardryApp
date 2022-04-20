@@ -1,5 +1,7 @@
 package com.bytezone.wizardry.origin;
 
+import java.util.Random;
+
 import com.bytezone.wizardry.origin.Walls.Wall;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +12,7 @@ public class MazeLevel
 {
   private static final String line =
       "---+------------------------------------------------------------+\n";
+  private static final Random random = new Random ();
 
   private int level;
   private WizardryOrigin wizardry;
@@ -115,6 +118,23 @@ public class MazeLevel
   // ---------------------------------------------------------------------------------//
   {
     return enemyOdds;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public int getRandomMonster ()
+  // ---------------------------------------------------------------------------------//
+  {
+    int encounterType = 0;
+    while (random.nextInt (4) == 2 && encounterType < 2)
+      ++encounterType;
+
+    EnemyOdds odds = enemyOdds[encounterType];
+
+    int encounterCalc = 0;
+    while (random.nextInt (100) < odds.percWors && encounterCalc < odds.worse01)
+      ++encounterCalc;
+
+    return odds.minEnemy + random.nextInt (odds.range0n) + odds.multWors * encounterCalc;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -302,4 +322,41 @@ public class MazeLevel
   {
     return "Maze Level " + level;
   }
+  /*
+  BEGIN
+    ENCB4RUN := TRUE;
+    CLRRECT( 1, 11, 38, 4);
+    MVCURSOR( 14, 12);
+    PRINTSTR( 'AN ENCOUNTER');
+    ENCTYPE := 1;
+    
+    WHILE ((RANDOM MOD 4) = 2) AND (ENCTYPE < 3) DO
+      ENCTYPE := ENCTYPE + 1;
+      
+    WITH MAZE.ENMYCALC[ ENCTYPE] DO
+      BEGIN
+        ENCCALC := 0;
+        
+        WHILE ((RANDOM MOD 100) < PERCWORS) AND (ENCCALC < WORSE01) DO
+          ENCCALC := ENCCALC + 1;
+          
+        ENEMYI := MINENEMY + (RANDOM MOD RANGE0N) + (MULTWORS * ENCCALC);
+        
+        IF CHSTALRM = 1 THEN
+          ATTK012 := 2
+        ELSE
+          IF MAZE.FIGHTS[ MAZEX][ MAZEY] = 1 THEN
+            IF FIGHTMAP[ MAZEX][ MAZEY] THEN
+              ATTK012 := 2
+            ELSE
+              ATTK012 := 1
+          ELSE
+            ATTK012 := 0;
+            
+        ENEMYINX := ENEMYI;
+        XGOTO := XCOMBAT;
+        EXIT( RUNNER)
+      END
+  END;  (* ENCOUNTR *)
+  */
 }

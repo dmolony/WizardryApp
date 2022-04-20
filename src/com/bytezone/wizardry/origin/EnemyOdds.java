@@ -2,6 +2,7 @@ package com.bytezone.wizardry.origin;
 
 // -----------------------------------------------------------------------------------//
 public class EnemyOdds
+// -----------------------------------------------------------------------------------//
 {
   public final int minEnemy;       // ptr
   public final int multWors;       // classize
