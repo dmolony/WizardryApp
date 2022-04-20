@@ -66,11 +66,14 @@ public class EncountersPane extends DataPane
     textOut2[1] = createTextFields (6, new DataPlacement (3, 7, Pos.CENTER_LEFT, 2));
     textOut2[2] = createTextFields (6, new DataPlacement (5, 7, Pos.CENTER_LEFT, 2));
 
-    display = new Display (wizardry);
-    GridPane.setConstraints (display, 8, 0);
-    //    GridPane.setColumnSpan (display, 3);
-    GridPane.setRowSpan (display, 14);
-    gridPane.getChildren ().add (display);
+    if (wizardry.getScenarioId () < 3)
+    {
+      display = new Display (wizardry);
+      GridPane.setConstraints (display, 8, 0);
+      //    GridPane.setColumnSpan (display, 3);
+      GridPane.setRowSpan (display, 14);
+      gridPane.getChildren ().add (display);
+    }
 
     mazeLevelList.getSelectionModel ().select (0);
   }
@@ -112,7 +115,8 @@ public class EncountersPane extends DataPane
       }
     }
 
-    display.update (mazeLevel);
+    if (display != null)
+      display.update (mazeLevel);
   }
 
   // ---------------------------------------------------------------------------------//

@@ -216,6 +216,9 @@ public class MazeWalker extends AppBase
   private void buildCalculator ()
   // ---------------------------------------------------------------------------------//
   {
+    if (experienceCalculator != null)
+      experienceCalculator.hide ();
+
     Stage stage = getStage ("Experience Points");
     experienceCalculator = new ExperienceCalculator (wizardry, stage);
     stage.setScene (getScene (experienceCalculator, 370, 450));
@@ -225,6 +228,9 @@ public class MazeWalker extends AppBase
   private void buildSpecials ()
   // ---------------------------------------------------------------------------------//
   {
+    if (specialsPane != null)
+      specialsPane.hide ();
+
     Stage stage = getStage ("Special squares");
     specialsPane = new SpecialsPane (wizardry, stage);
     stage.setScene (getScene (specialsPane, 1120, 600));
@@ -234,6 +240,9 @@ public class MazeWalker extends AppBase
   private void buildCharacters ()
   // ---------------------------------------------------------------------------------//
   {
+    if (charactersPane != null)
+      charactersPane.hide ();
+
     Stage stage = getStage ("Characters");
     charactersPane = new CharactersPane (wizardry, stage);
     stage.setScene (getScene (charactersPane, 910, 810));
@@ -243,6 +252,9 @@ public class MazeWalker extends AppBase
   private void buildMonsters ()
   // ---------------------------------------------------------------------------------//
   {
+    if (monstersPane != null)
+      monstersPane.hide ();
+
     Stage stage = getStage ("Monsters");
     monstersPane = new MonstersPane (wizardry, stage);
     stage.setScene (getScene (monstersPane, 840, 520));
@@ -252,6 +264,9 @@ public class MazeWalker extends AppBase
   private void buildItems ()
   // ---------------------------------------------------------------------------------//
   {
+    if (itemsPane != null)
+      itemsPane.hide ();
+
     Stage stage = getStage ("Items");
     itemsPane = new ItemsPane (wizardry, stage);
     stage.setScene (getScene (itemsPane, 770, 575));
@@ -261,6 +276,9 @@ public class MazeWalker extends AppBase
   private void buildRewards ()
   // ---------------------------------------------------------------------------------//
   {
+    if (rewardsPane != null)
+      rewardsPane.hide ();
+
     Stage stage = getStage ("Rewards");
     rewardsPane = new RewardsPane (wizardry, stage);
     stage.setScene (getScene (rewardsPane, 940, 575));
@@ -270,15 +288,25 @@ public class MazeWalker extends AppBase
   private void buildEncounters ()
   // ---------------------------------------------------------------------------------//
   {
+    if (encountersPane != null)
+      encountersPane.hide ();
+
     Stage stage = getStage ("Encounters");
     encountersPane = new EncountersPane (wizardry, stage);
-    stage.setScene (getScene (encountersPane, 1230, 440));
+
+    if (wizardry.getScenarioId () < 3)
+      stage.setScene (getScene (encountersPane, 1230, 440));
+    else
+      stage.setScene (getScene (encountersPane, 630, 440));
   }
 
   // ---------------------------------------------------------------------------------//
   private void buildMessages ()
   // ---------------------------------------------------------------------------------//
   {
+    if (messagesPane != null)
+      messagesPane.hide ();
+
     Stage stage = getStage ("Messages");
     messagesPane = new MessagesPane (wizardry, stage);
     stage.setScene (getScene (messagesPane, 640, 540));
