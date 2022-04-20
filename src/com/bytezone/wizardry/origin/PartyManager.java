@@ -117,11 +117,11 @@ public class PartyManager
 
     if (ptr >= 0)
     {
-      Character c = roster.get (ptr);
       party.add (roster.get (ptr));
       roster.remove (ptr);
       return true;
     }
+
     return false;
   }
 

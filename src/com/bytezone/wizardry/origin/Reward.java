@@ -4,7 +4,7 @@ package com.bytezone.wizardry.origin;
 public class Reward
 // -----------------------------------------------------------------------------------//
 {
-  int id;
+  private final int id;
 
   public final boolean isChest;
   public final int trapTypeFlags;

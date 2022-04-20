@@ -15,7 +15,7 @@ public class Font
   int offset;
   int id = nextId++;
 
-  Color color = Color.LIGHTGREEN;
+  Color color = Color.PALEGREEN;
 
   int inset = 2;
   int size = 2;

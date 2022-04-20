@@ -14,7 +14,7 @@ public class RecentFiles
 // -----------------------------------------------------------------------------------//
 {
   private static final String PREFS_FILE_NAME = "recentfiles";
-  private static final int MAX_FILES = 5;
+  private static final int MAX_FILES = 10;
 
   private final List<FileNameSelectedListener> listeners = new ArrayList<> ();
   private final List<String> fileNames = new ArrayList<> ();
