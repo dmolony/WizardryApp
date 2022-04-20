@@ -1,6 +1,5 @@
 package com.bytezone.mazewalker.gui;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -25,7 +24,6 @@ public class Display extends Canvas
   private final static int IMAGE_SIZE = 2;
 
   private final WizardryOrigin wizardry;
-  private final int scenarioId;
 
   private final Font alphabet;
   private final Font graphics;
@@ -34,14 +32,7 @@ public class Display extends Canvas
   private List<Character> party;
 
   private Random random = new Random ();
-  private DisplayColor displayColor = new DisplayColor ("Pale green", Color.PALEGREEN);
-
-  private List<DisplayColor> colors = Arrays.asList (     //
-      new DisplayColor ("White", Color.WHITE),            //
-      new DisplayColor ("Pale green", Color.PALEGREEN),   //
-      new DisplayColor ("Moccasin", Color.MOCCASIN),      //
-      new DisplayColor ("Goldenrod", Color.GOLDENROD),    //
-      new DisplayColor ("Sky blue", Color.SKYBLUE));
+  private Color color = Color.PALEGREEN;
 
   // ---------------------------------------------------------------------------------//
   public Display (WizardryOrigin wizardry)
@@ -53,8 +44,6 @@ public class Display extends Canvas
 
     alphabet = wizardry.getFonts ().get (0);
     graphics = wizardry.getFonts ().get (1);
-
-    scenarioId = wizardry.getScenarioId ();
     monsters = wizardry.getMonsters ();
 
     party = new PartyManager (wizardry).getParty ();
@@ -66,46 +55,14 @@ public class Display extends Canvas
   {
     GraphicsContext gc = getGraphicsContext2D ();
 
-    alphabet.setColor (displayColor.color);
-    graphics.setColor (displayColor.color);
+    alphabet.setColor (color);
+    graphics.setColor (color);
 
     gc.setFill (Color.BLACK);
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
     Monster monster = monsters.get (mazeLevel.getRandomMonster ());
-    drawMonster (gc, displayColor.color, monster);
-
-    //    switch (random.nextInt (2))
-    //    {
-    //      case 0:
-    //        drawMonster (gc, displayColor.color);
-    //        break;
-    //
-    //      case 1:
-    //        switch (random.nextInt (4))
-    //        {
-    //          case 0:
-    //            drawMoves (gc);
-    //            break;
-    //
-    //          case 1:
-    //            drawChest (gc, displayColor.color);
-    //            break;
-    //
-    //          case 2:
-    //            drawGold (gc, displayColor.color);
-    //            break;
-    //
-    //          case 3:
-    //            drawTomb (gc);
-    //            break;
-    //        }
-    //        break;
-    //
-    //      default:
-    //        System.out.println ("empty case");
-    //        drawSpecial (gc);
-    //    }
+    drawMonster (gc, color, monster);
 
     drawParty (gc);
     drawGrid (gc);
@@ -139,9 +96,9 @@ public class Display extends Canvas
     Image image = wizardry.getImage (CHEST);
     image.draw (this, IMAGE_SIZE, color, 16, 47);
 
-    int row = 1;
     int column = 13;
 
+    int row = 1;
     alphabet.drawString (gc, column, row++, "FOR KILLING THE MONSTERS");
     alphabet.drawString (gc, column, row++, "EACH SURVIVOR GETS 99999");
     alphabet.drawString (gc, column, row++, "EXPERIENCE POINTS");
@@ -158,15 +115,8 @@ public class Display extends Canvas
   private void drawMonster (GraphicsContext gc, Color color, Monster monster)
   // ---------------------------------------------------------------------------------//
   {
-    //    Monster monster = monsters.get (random.nextInt (monsters.size ()));
     Image image = wizardry.getImage (monster.image);
     image.draw (this, IMAGE_SIZE, color, 16, 47);
-
-    //    if (random.nextInt (10) == 0)
-    //    {
-    //      drawFriendly (gc, monster);
-    //      return;
-    //    }
 
     int howMany = monster.groupSize.roll ();
     long totalExperience = howMany * monster.experiencePoints;
@@ -201,7 +151,7 @@ public class Display extends Canvas
     int column = 13;
 
     String text = String.format ("%d) %d %s (%d)", row, howMany,
-        howMany == 1 ? monster.name : monster.namePlural, howMany);
+        howMany == 1 ? monster.name : monster.namePlural, monster.id);
     alphabet.drawString (gc, column, row++, text);
   }
 

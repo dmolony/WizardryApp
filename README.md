@@ -1,5 +1,5 @@
 # MazeWalker
-Utility to examine Wizardry mazes. Currently works on the first three scenarios.
+Cross-platform utility to examine Wizardry mazes. Currently works on the first three scenarios.
 
 ## Instructions
 Navigate around the maze using the A/W/S/D keys. To go directly to a particular square, just click on it. To switch to a different maze level, use the Levels menu (or the corresponding shortcut).
