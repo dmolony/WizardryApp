@@ -17,7 +17,7 @@ public class WizardryOrigin
   public static final String[] characterClass =
       { "Fighter", "Mage", "Priest", "Thief", "Bishop", "Samurai", "Lord", "Ninja" };
   public static final String[] property =
-      { "Stone", "Poison", "Paralyze", "Auto Kill", "Be slept", "Run", "Gate in" };
+      { "Stone", "Poison", "Paralyze", "Auto Kill", "Be slept", "Run", "Call for help" };
   public static String[] trapType = { "Trapless chest", "Poison needle", "Gas bomb", "Bolt",
       "Teleporter", "Anti-mage", "Anti-priest", "Alarm" };
   public static String[] trapType3 =

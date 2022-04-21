@@ -119,7 +119,8 @@ public class Display extends Canvas
     Image image = wizardry.getImage (monster.image);
     image.draw (this, IMAGE_SIZE, color, 16, 47);
 
-    int howMany = monster.groupSize.roll ();
+    int howMany = monster.getGroupSize (mazeLevel);
+
     long totalExperience = howMany * monster.experiencePoints;
 
     int row = 1;
@@ -134,7 +135,7 @@ public class Display extends Canvas
         break;
 
       Monster chum = wizardry.getMonster (monster.enemyTeam);
-      howMany = chum.groupSize.roll ();
+      howMany = chum.getGroupSize (mazeLevel);
       drawMonsterGroup (gc, chum, row++, howMany);
       totalExperience += howMany * chum.experiencePoints;
       monster = chum;

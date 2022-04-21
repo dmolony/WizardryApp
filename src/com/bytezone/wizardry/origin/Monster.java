@@ -107,6 +107,22 @@ public class Monster
   }
 
   // ---------------------------------------------------------------------------------//
+  public int getGroupSize (MazeLevel mazeLevel)
+  // ---------------------------------------------------------------------------------//
+  {
+    int howMany = groupSize.roll ();
+
+    if (howMany > mazeLevel.displayLevel + 4)
+      howMany = mazeLevel.displayLevel + 4;
+    if (howMany > 9)
+      howMany = 9;
+    if (howMany < 1)
+      howMany = 1;
+
+    return howMany;
+  }
+
+  // ---------------------------------------------------------------------------------//
   @Override
   public String toString ()       // used by ComboBox
   // ---------------------------------------------------------------------------------//
