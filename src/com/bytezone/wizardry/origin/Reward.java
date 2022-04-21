@@ -40,20 +40,17 @@ public class Reward
   }
 
   // ---------------------------------------------------------------------------------//
-  public String itemRange (int index)
+  public ItemRange itemRange (int index)
   // ---------------------------------------------------------------------------------//
   {
     int count = 0;
+
     for (int i = 0; i < total; i++)
-    {
-      if (rewardDetails[i].itemReward != null)
-      {
-        if (count++ == index)
-          return rewardDetails[i].itemReward.getMin () + " : "
-              + rewardDetails[i].itemReward.getMax ();
-      }
-    }
-    return "";
+      if (rewardDetails[i].itemReward != null && count++ == index)
+        return new ItemRange (rewardDetails[i].itemReward.getMin (),
+            rewardDetails[i].itemReward.getMax ());
+
+    return null;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -62,5 +59,11 @@ public class Reward
   // ---------------------------------------------------------------------------------//
   {
     return "Table # " + id;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public record ItemRange (int itemLo, int itemHi)
+  // ---------------------------------------------------------------------------------//
+  {
   }
 }

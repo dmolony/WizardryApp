@@ -38,7 +38,7 @@ public class Header
     {
       fonts.add (new Font ("Alphabet", buffer, 512, 512));
       fonts.add (new Font ("Graphics", buffer, 1024, 512));
-      //      unknownFont = new Font (buffer, 1536, 512);
+      fonts.add (new Font ("Unknown", buffer, 1536, 512));    // probably not a font
     }
   }
 

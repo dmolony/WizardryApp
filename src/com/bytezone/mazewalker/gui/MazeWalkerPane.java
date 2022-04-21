@@ -14,6 +14,7 @@ public class MazeWalkerPane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
   WizardryOrigin wizardry;
+
   int currentLevel = -1;
   int currentRow;
   int currentColumn;

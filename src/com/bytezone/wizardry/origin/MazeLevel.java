@@ -132,21 +132,19 @@ public class MazeLevel
   }
 
   // ---------------------------------------------------------------------------------//
-  public void showOdds ()
+  public int validateGroupSize (int howMany)
   // ---------------------------------------------------------------------------------//
   {
-    System.out.println ("+--------------------------------------------+");
-    System.out.printf ("|                  Level %2d                  |%n", displayLevel);
-    System.out.println ("+--------------------------------------------+");
+    if (howMany > displayLevel + 4)
+      howMany = displayLevel + 4;
 
-    int group = 1;
-    for (EnemyOdds odds : enemyOdds)
-    {
-      System.out.printf ("Group %d%n", group++);
-      System.out.printf ("-------%n");
-      odds.showOdds ();
-      System.out.println ();
-    }
+    if (howMany > 9)
+      howMany = 9;
+
+    if (howMany < 1)
+      howMany = 1;
+
+    return howMany;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -239,6 +237,24 @@ public class MazeLevel
     }
 
     return enemyCalc;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void showOdds ()
+  // ---------------------------------------------------------------------------------//
+  {
+    System.out.println ("+--------------------------------------------+");
+    System.out.printf ("|                  Level %2d                  |%n", displayLevel);
+    System.out.println ("+--------------------------------------------+");
+
+    int group = 1;
+    for (EnemyOdds odds : enemyOdds)
+    {
+      System.out.printf ("Group %d%n", group++);
+      System.out.printf ("-------%n");
+      odds.showOdds ();
+      System.out.println ();
+    }
   }
 
   // ---------------------------------------------------------------------------------//

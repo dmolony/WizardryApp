@@ -178,7 +178,7 @@ public class MazeWalker extends AppBase
     leftVBox.getChildren ().addAll (viewPane, sp);
 
     rightVBox.getChildren ().clear ();
-    rightVBox.getChildren ().addAll (mazePane);
+    rightVBox.getChildren ().add (mazePane);
 
     int levels = wizardry.getMazeLevels ().size ();
     walker = new Walker[levels];

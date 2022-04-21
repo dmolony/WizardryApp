@@ -88,14 +88,14 @@ public class ExperienceCalculator extends DataPane
     textIn[HP_SIDES].setText (monster.hitPoints.faces + "");
     textIn[BREATHE].setText (monster.breathe + "");
     textIn[AC].setText (monster.armourClass + "");
-    textIn[RECSN].setText (monster.recsn + "");
+    textIn[RECSN].setText (monster.damageDiceSize + "");
     textIn[MAGE_LEVEL].setText (monster.mageSpells + "");
     textIn[PRIEST_LEVEL].setText (monster.priestSpells + "");
-    textIn[DRAIN].setText (monster.drainAmt + "");
-    textIn[HEAL].setText (monster.healPts + "");
+    textIn[DRAIN].setText (monster.drain + "");
+    textIn[HEAL].setText (monster.regen + "");
     textIn[MAGIC_RESISTANCE].setText (monster.unaffect + "");
-    textIn[RESISTANCE].setText (monster.flags1 + "");
-    textIn[ABILITY].setText (monster.flags2 + "");
+    textIn[RESISTANCE].setText (monster.resistance + "");
+    textIn[ABILITY].setText (monster.properties + "");
 
     if (wizardry.getScenarioId () > 1)
       textOut[TOTAL].setText (getText (monster.experiencePoints));

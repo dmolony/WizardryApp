@@ -117,4 +117,19 @@ public class Utility
     String bits = "000000000000000" + Integer.toBinaryString (value);
     return bits.substring (bits.length () - bitLength);
   }
+
+  // ---------------------------------------------------------------------------------//
+  public static void trimComma (StringBuilder text)
+  // ---------------------------------------------------------------------------------//
+  {
+    while (text.length () > 0)
+    {
+      if (text.charAt (text.length () - 1) == ' ')
+        text.deleteCharAt (text.length () - 1);
+      else if (text.charAt (text.length () - 1) == ',')
+        text.deleteCharAt (text.length () - 1);
+      else
+        break;
+    }
+  }
 }

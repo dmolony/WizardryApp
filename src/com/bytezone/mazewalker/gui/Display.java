@@ -131,10 +131,10 @@ public class Display extends Canvas
 
     while (chums < maxChums)
     {
-      if (monster.enemyTeam == 0 || random.nextInt (100) >= monster.teamPercentage)
+      if (monster.partnerId == 0 || random.nextInt (100) >= monster.partnerOdds)
         break;
 
-      Monster chum = wizardry.getMonster (monster.enemyTeam);
+      Monster chum = wizardry.getMonster (monster.partnerId);
       howMany = chum.getGroupSize (mazeLevel);
       drawMonsterGroup (gc, chum, row++, howMany);
       totalExperience += howMany * chum.experiencePoints;
