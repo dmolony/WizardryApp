@@ -128,13 +128,25 @@ public class MazeLevel
     while (random.nextInt (4) == 2 && encounterType < 2)
       ++encounterType;
 
-    EnemyOdds odds = enemyOdds[encounterType];
+    return enemyOdds[encounterType].getRandomMonster ();
+  }
 
-    int encounterCalc = 0;
-    while (random.nextInt (100) < odds.percWors && encounterCalc < odds.worse01)
-      ++encounterCalc;
+  // ---------------------------------------------------------------------------------//
+  public void showOdds ()
+  // ---------------------------------------------------------------------------------//
+  {
+    System.out.println ("+--------------------------------------------+");
+    System.out.printf ("|                  Level %2d                  |%n", level);
+    System.out.println ("+--------------------------------------------+");
 
-    return odds.minEnemy + random.nextInt (odds.range0n) + odds.multWors * encounterCalc;
+    int group = 1;
+    for (EnemyOdds odds : enemyOdds)
+    {
+      System.out.printf ("Group %d%n", group++);
+      System.out.printf ("-------%n");
+      odds.showOdds ();
+      System.out.println ();
+    }
   }
 
   // ---------------------------------------------------------------------------------//

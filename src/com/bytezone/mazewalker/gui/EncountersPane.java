@@ -43,9 +43,9 @@ public class EncountersPane extends DataPane
     for (int i = 0; i < 30; i++)
       gridPane.getRowConstraints ().add (rowCo);
 
-    String[] labels1 = { "minenemy", "multwors", "wors01", "range0n", "percwors" };
+    String[] labels1 = { "Minimum", "Range", "Multiplier", "Maximum", "Worse" };
     String[] labels2 =
-        { "base range", "monster from", "monster to", "ext range", "monster from", "monster to" };
+        { "Base range", "Monster from", "Monster to", "Max range", "Monster from", "Monster to" };
 
     // headings
     createLabel ("75%", 1, 1, HPos.LEFT, 2);
@@ -70,7 +70,6 @@ public class EncountersPane extends DataPane
     {
       display = new Display (wizardry);
       GridPane.setConstraints (display, 8, 0);
-      //    GridPane.setColumnSpan (display, 3);
       GridPane.setRowSpan (display, 14);
       gridPane.getChildren ().add (display);
     }
@@ -93,17 +92,17 @@ public class EncountersPane extends DataPane
       int percWors = enemyOdds[i].percWors;
 
       setText (textOut1[i][0], minEnemy);
-      setText (textOut1[i][1], multWors);
-      setText (textOut1[i][2], worse01);
-      setText (textOut1[i][3], range0n);
-      setText (textOut1[i][4], percWors);
+      setText (textOut1[i][1], range0n);
+      setText (textOut1[i][2], multWors);
+      setText (textOut1[i][3], worse01);
+      setText (textOut1[i][4], percWors + "%");
 
       int maxEnemy = minEnemy + range0n - 1;
       setMinMax (i, 0, minEnemy, maxEnemy);
 
       if (worse01 > 0)
       {
-        minEnemy += range0n;
+        minEnemy += multWors * worse01;
         maxEnemy += multWors * worse01;
         setMinMax (i, 3, minEnemy, maxEnemy);
       }
