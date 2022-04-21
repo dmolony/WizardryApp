@@ -14,7 +14,7 @@ public class MazeLevel
       "---+------------------------------------------------------------+\n";
   private static final Random random = new Random ();
 
-  public final int level;
+  public final int displayLevel;                 // starts at 1
   private WizardryOrigin wizardry;
 
   private MazeCell[][] mazeCells = new MazeCell[20][20];
@@ -25,11 +25,11 @@ public class MazeLevel
   private EnemyOdds[] enemyOdds;
 
   // ---------------------------------------------------------------------------------//
-  public MazeLevel (WizardryOrigin wizardry, int level, DataBlock dataBlock)
+  public MazeLevel (WizardryOrigin wizardry, int displayLevel, DataBlock dataBlock)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
-    this.level = level;
+    this.displayLevel = displayLevel;
 
     byte[] buffer = dataBlock.buffer;
     int offset = dataBlock.offset;
@@ -47,7 +47,7 @@ public class MazeLevel
     for (int col = 0; col < 20; col++)
       for (int row = 0; row < 20; row++)
       {
-        Location location = new Location (level, col, row);
+        Location location = new Location (displayLevel, col, row);
         Walls walls = new Walls (west[col][row], south[col][row], east[col][row], north[col][row]);
         MazeCell mazeCell = new MazeCell (location, walls, lair[col][row]);
 
@@ -74,7 +74,7 @@ public class MazeLevel
   public MazeCell getMazeCell (Location location)
   // ---------------------------------------------------------------------------------//
   {
-    if (location.getLevel () != this.level)
+    if (location.getLevel () != this.displayLevel)
     {
       System.out.println ("Wrong level");
       return null;
@@ -136,7 +136,7 @@ public class MazeLevel
   // ---------------------------------------------------------------------------------//
   {
     System.out.println ("+--------------------------------------------+");
-    System.out.printf ("|                  Level %2d                  |%n", level);
+    System.out.printf ("|                  Level %2d                  |%n", displayLevel);
     System.out.println ("+--------------------------------------------+");
 
     int group = 1;
@@ -245,7 +245,7 @@ public class MazeLevel
   public String getText ()
   // ---------------------------------------------------------------------------------//
   {
-    StringBuilder text = new StringBuilder ("*******  Level " + level + "  *******\n\n");
+    StringBuilder text = new StringBuilder ("*******  Level " + displayLevel + "  *******\n\n");
 
     text.append ("West walls\n");
     appendWalls (text, Walls.WEST);
@@ -332,7 +332,7 @@ public class MazeLevel
   public String toString ()
   // ---------------------------------------------------------------------------------//
   {
-    return "Maze Level " + level;
+    return "Maze Level " + displayLevel;
   }
   /*
   BEGIN
