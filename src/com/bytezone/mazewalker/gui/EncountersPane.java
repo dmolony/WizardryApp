@@ -43,7 +43,8 @@ public class EncountersPane extends DataPane
     for (int i = 0; i < 30; i++)
       gridPane.getRowConstraints ().add (rowCo);
 
-    String[] labels1 = { "Minimum", "Range", "Multiplier", "Maximum", "Worse" };
+    String[] labels1 =
+        { "Minimum", "Range size", "Extra range chance", "Extra ranges", "Extra range size" };
     String[] labels2 =
         { "Base range", "Monster from", "Monster to", "Max range", "Monster from", "Monster to" };
 
@@ -93,14 +94,14 @@ public class EncountersPane extends DataPane
 
       setText (textOut1[i][0], minEnemy);
       setText (textOut1[i][1], range0n);
-      setText (textOut1[i][2], multWors);
+      setText (textOut1[i][2], percWors + "%");
       setText (textOut1[i][3], worse01);
-      setText (textOut1[i][4], percWors + "%");
+      setText (textOut1[i][4], multWors);
 
       int maxEnemy = minEnemy + range0n - 1;
       setMinMax (i, 0, minEnemy, maxEnemy);
 
-      if (worse01 > 0)
+      if (percWors > 0)
       {
         minEnemy += multWors * worse01;
         maxEnemy += multWors * worse01;

@@ -8,11 +8,11 @@ public class EnemyOdds
 {
   private static final Random random = new Random ();
 
-  public final int minEnemy;       // ptr
-  public final int multWors;       // classize
-  public final int worse01;        // classmax
-  public final int range0n;        // element
-  public final int percWors;       // prob
+  public final int minEnemy;       // first monster
+  public final int range0n;        // range size
+  public final int percWors;       // chance of upgrade
+  public final int worse01;        // max upgrades possible
+  public final int multWors;       // upgrade range size
 
   // ---------------------------------------------------------------------------------//
   public EnemyOdds (byte[] buffer, int offset)
@@ -46,24 +46,24 @@ public class EnemyOdds
 
     double worse = percWors / 100.0;
 
-    double right = 1.0;
-    double left;
+    double odds;
+    double oddsLeft = 1.0;
     double total = 0.0;
 
     for (int i = 0; i <= worse01; i++)
     {
-      left = right * (1 - worse);
-      right = right * worse;
+      odds = oddsLeft * (1 - worse);
+      oddsLeft = oddsLeft * worse;
 
-      total += left;
+      total += odds;
 
-      if (i == worse01)
+      if (i == worse01)         // last line, so combine both fields
       {
-        System.out.printf ("%2d  %2d:%2d  %12.8f%n", i + 1, min, max, (left + right) * 100);
-        total += right;
+        System.out.printf ("%2d  %2d:%2d  %12.8f%n", i + 1, min, max, (odds + oddsLeft) * 100);
+        total += oddsLeft;
       }
       else
-        System.out.printf ("%2d  %2d:%2d  %12.8f%n", i + 1, min, max, left * 100);
+        System.out.printf ("%2d  %2d:%2d  %12.8f%n", i + 1, min, max, odds * 100);
 
       min += multWors;
       max += multWors;

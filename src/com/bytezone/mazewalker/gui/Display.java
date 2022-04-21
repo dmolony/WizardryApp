@@ -62,7 +62,7 @@ public class Display extends Canvas
     gc.fillRect (0, 0, getWidth (), getHeight ());
 
     Monster monster = monsters.get (mazeLevel.getRandomMonster ());
-    drawMonster (gc, color, monster);
+    drawMonster (gc, color, monster, mazeLevel.level);
 
     drawParty (gc);
     drawGrid (gc);
@@ -112,7 +112,7 @@ public class Display extends Canvas
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawMonster (GraphicsContext gc, Color color, Monster monster)
+  private void drawMonster (GraphicsContext gc, Color color, Monster monster, int mazeLevel)
   // ---------------------------------------------------------------------------------//
   {
     Image image = wizardry.getImage (monster.image);
@@ -125,8 +125,13 @@ public class Display extends Canvas
     drawMonsterGroup (gc, monster, row++, howMany);
 
     int chums = 0;
+    int maxChums = 3;
+    if (mazeLevel == 1)
+      maxChums = 1;
+    else if (mazeLevel == 2)
+      maxChums = 2;
 
-    while (chums < 3)
+    while (chums < maxChums)
     {
       if (monster.enemyTeam == 0 || random.nextInt (100) >= monster.teamPercentage)
         break;

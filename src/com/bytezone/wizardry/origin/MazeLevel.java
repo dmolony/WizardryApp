@@ -14,7 +14,7 @@ public class MazeLevel
       "---+------------------------------------------------------------+\n";
   private static final Random random = new Random ();
 
-  private int level;
+  public final int level;
   private WizardryOrigin wizardry;
 
   private MazeCell[][] mazeCells = new MazeCell[20][20];
