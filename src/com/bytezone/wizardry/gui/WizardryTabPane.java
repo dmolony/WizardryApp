@@ -17,6 +17,7 @@ public class WizardryTabPane extends TabPaneBase
   SpecialsTab specialsTab = new SpecialsTab ("Specials", KeyCode.S);
   RewardsTab rewardsTab = new RewardsTab ("Rewards", KeyCode.R);
   EncountersTab encountersTab = new EncountersTab ("Encounters", KeyCode.E);
+  MazeTab mazeTab = new MazeTab ("Maze", KeyCode.L);
 
   // ---------------------------------------------------------------------------------//
   public WizardryTabPane (WizardryApp app, String prefsId)
@@ -33,6 +34,7 @@ public class WizardryTabPane extends TabPaneBase
     add (specialsTab);
     add (rewardsTab);
     add (encountersTab);
+    add (mazeTab);
 
     app.addScenarioChangeListener (summaryTab);
     app.addScenarioChangeListener (charactersTab);
@@ -41,6 +43,7 @@ public class WizardryTabPane extends TabPaneBase
     app.addScenarioChangeListener (specialsTab);
     app.addScenarioChangeListener (rewardsTab);
     app.addScenarioChangeListener (encountersTab);
+    app.addScenarioChangeListener (mazeTab);
 
     setDefaultTab (0);
   }

@@ -91,6 +91,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
       case R:       // rewards
       case S:       // specials
       case T:       // messages
+      case L:       // maze levels
         wizardryTabPane.keyPressed (keyEvent);
         break;
 
