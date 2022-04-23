@@ -115,6 +115,13 @@ public class MazeCell
   public void draw (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
+    draw (gc, location);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void draw (GraphicsContext gc, Location location)
+  // ---------------------------------------------------------------------------------//
+  {
     int top = (19 - location.getRow ()) * CELL_SIZE + INSET;
     int bottom = top + CELL_SIZE - 2;
     int left = location.getColumn () * CELL_SIZE + INSET;
