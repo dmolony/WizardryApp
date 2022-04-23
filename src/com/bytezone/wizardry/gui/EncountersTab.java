@@ -18,7 +18,6 @@ public class EncountersTab extends TabBase implements ScenarioChangeListener
 {
   private static final String PREFS_INDEX = "EncountersIndex";
 
-  private WizardryOrigin wizardry;
   private ListView<MazeLevel> mazeLevels = new ListView<> ();
   private EncounterPane encounterPane = new EncounterPane ();
 
@@ -62,8 +61,6 @@ public class EncountersTab extends TabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     encounterPane.setWizardry (wizardry);
 
     mazeLevels.getItems ().clear ();

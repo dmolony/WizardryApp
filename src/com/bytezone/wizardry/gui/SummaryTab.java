@@ -16,7 +16,6 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
   private final Text text = new Text ();
   private final TextFlow textFlow = new TextFlow (text);
   private final ScrollPane scrollPane = new ScrollPane (textFlow);
-  private WizardryOrigin wizardry;
 
   // ---------------------------------------------------------------------------------//
   public SummaryTab (String title, KeyCode keyCode)
@@ -42,8 +41,6 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
 
     setValid (true);
 
-    if (wizardry != null)
-      text.setText (wizardry.getScenarioName ());
   }
 
   // ---------------------------------------------------------------------------------//
@@ -51,7 +48,8 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
+    text.setText (wizardry.getScenarioName ());
+
     refresh ();
   }
 }

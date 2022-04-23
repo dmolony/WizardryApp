@@ -18,7 +18,6 @@ public class RewardsTab extends TabBase implements ScenarioChangeListener
 {
   private static final String PREFS_INDEX = "RewardsIndex";
 
-  private WizardryOrigin wizardry;
   private ListView<Reward> rewards = new ListView<> ();
   private RewardPane rewardPane = new RewardPane ();
 
@@ -60,8 +59,6 @@ public class RewardsTab extends TabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     rewardPane.setWizardry (wizardry);
 
     rewards.getItems ().clear ();

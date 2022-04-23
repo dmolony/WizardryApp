@@ -18,7 +18,6 @@ public class CharactersTab extends TabBase implements ScenarioChangeListener
 {
   private static final String PREFS_INDEX = "CharactersIndex";
 
-  private WizardryOrigin wizardry;
   private ListView<Character> characters = new ListView<> ();
   private CharacterPane characterPane = new CharacterPane ();
 
@@ -62,8 +61,6 @@ public class CharactersTab extends TabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     characterPane.setWizardry (wizardry);
 
     characters.getItems ().clear ();
