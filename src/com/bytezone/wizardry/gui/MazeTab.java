@@ -1,5 +1,7 @@
 package com.bytezone.wizardry.gui;
 
+import java.util.prefs.Preferences;
+
 import com.bytezone.appbase.TabBase;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -14,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 public class MazeTab extends TabBase implements ScenarioChangeListener
 //-----------------------------------------------------------------------------------//
 {
+  private static final String PREFS_INDEX = "MazeIndex";
+
   private WizardryOrigin wizardry;
   private ListView<MazeLevel> mazeLevels = new ListView<> ();
   private MazePane mazePane = new MazePane ();
@@ -51,12 +55,6 @@ public class MazeTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
-
-    mazePane.setWizardry (wizardry);
-
-    mazeLevels.getItems ().clear ();
-    mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
-    mazeLevels.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -66,6 +64,31 @@ public class MazeTab extends TabBase implements ScenarioChangeListener
   {
     this.wizardry = wizardry;
 
+    mazePane.setWizardry (wizardry);
+
+    mazeLevels.getItems ().clear ();
+    mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
+    mazeLevels.getSelectionModel ().select (0);
+
     refresh ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void save (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    int index = mazeLevels.getSelectionModel ().getSelectedIndex ();
+    prefs.putInt (PREFS_INDEX, index);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void restore (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    int index = prefs.getInt (PREFS_INDEX, -1);
+    if (index >= 0)
+      mazeLevels.getSelectionModel ().select (index);
   }
 }

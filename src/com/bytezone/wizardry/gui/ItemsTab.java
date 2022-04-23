@@ -1,5 +1,7 @@
 package com.bytezone.wizardry.gui;
 
+import java.util.prefs.Preferences;
+
 import com.bytezone.appbase.TabBase;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -14,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 public class ItemsTab extends TabBase implements ScenarioChangeListener
 // -----------------------------------------------------------------------------------//
 {
+  private static final String PREFS_INDEX = "ItemsIndex";
+
   private WizardryOrigin wizardry;
   private ListView<Item> items = new ListView<> ();
   private ItemPane itemPane = new ItemPane ();
@@ -49,12 +53,6 @@ public class ItemsTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
-
-    itemPane.setWizardry (wizardry);
-
-    items.getItems ().clear ();
-    items.getItems ().addAll (wizardry.getItems ());
-    items.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -64,6 +62,31 @@ public class ItemsTab extends TabBase implements ScenarioChangeListener
   {
     this.wizardry = wizardry;
 
+    itemPane.setWizardry (wizardry);
+
+    items.getItems ().clear ();
+    items.getItems ().addAll (wizardry.getItems ());
+    items.getSelectionModel ().select (0);
+
     refresh ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void save (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    int index = items.getSelectionModel ().getSelectedIndex ();
+    prefs.putInt (PREFS_INDEX, index);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void restore (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    int index = prefs.getInt (PREFS_INDEX, -1);
+    if (index >= 0)
+      items.getSelectionModel ().select (index);
   }
 }

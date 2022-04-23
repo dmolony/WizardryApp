@@ -1,5 +1,7 @@
 package com.bytezone.wizardry.gui;
 
+import java.util.prefs.Preferences;
+
 import com.bytezone.appbase.TabBase;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.WizardryOrigin;
@@ -14,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 public class CharactersTab extends TabBase implements ScenarioChangeListener
 // -----------------------------------------------------------------------------------//
 {
+  private static final String PREFS_INDEX = "CharactersIndex";
+
   private WizardryOrigin wizardry;
   private ListView<Character> characters = new ListView<> ();
   private CharacterPane characterPane = new CharacterPane ();
@@ -51,12 +55,6 @@ public class CharactersTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
-
-    characterPane.setWizardry (wizardry);
-
-    characters.getItems ().clear ();
-    characters.getItems ().addAll (wizardry.getCharacters ());
-    characters.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -66,6 +64,31 @@ public class CharactersTab extends TabBase implements ScenarioChangeListener
   {
     this.wizardry = wizardry;
 
+    characterPane.setWizardry (wizardry);
+
+    characters.getItems ().clear ();
+    characters.getItems ().addAll (wizardry.getCharacters ());
+    characters.getSelectionModel ().select (0);
+
     refresh ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void save (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    int index = characters.getSelectionModel ().getSelectedIndex ();
+    prefs.putInt (PREFS_INDEX, index);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void restore (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    int index = prefs.getInt (PREFS_INDEX, -1);
+    if (index >= 0)
+      characters.getSelectionModel ().select (index);
   }
 }
