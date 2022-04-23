@@ -49,6 +49,12 @@ public class ItemsTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
+
+    itemPane.setWizardry (wizardry);
+
+    items.getItems ().clear ();
+    items.getItems ().addAll (wizardry.getItems ());
+    items.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -57,12 +63,6 @@ public class ItemsTab extends TabBase implements ScenarioChangeListener
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
-
-    itemPane.setWizardry (wizardry);
-
-    items.getItems ().clear ();
-    items.getItems ().addAll (wizardry.getItems ());
-    items.getSelectionModel ().select (0);
 
     refresh ();
   }

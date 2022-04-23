@@ -51,6 +51,12 @@ public class EncountersTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
+
+    encounterPane.setWizardry (wizardry);
+
+    mazeLevels.getItems ().clear ();
+    mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
+    mazeLevels.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -59,12 +65,6 @@ public class EncountersTab extends TabBase implements ScenarioChangeListener
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
-
-    encounterPane.setWizardry (wizardry);
-
-    mazeLevels.getItems ().clear ();
-    mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
-    mazeLevels.getSelectionModel ().select (0);
 
     refresh ();
   }

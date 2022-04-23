@@ -49,6 +49,12 @@ public class RewardsTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
+
+    rewardPane.setWizardry (wizardry);
+
+    rewards.getItems ().clear ();
+    rewards.getItems ().addAll (wizardry.getRewards ());
+    rewards.getSelectionModel ().select (0);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -57,12 +63,6 @@ public class RewardsTab extends TabBase implements ScenarioChangeListener
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
-
-    rewardPane.setWizardry (wizardry);
-
-    rewards.getItems ().clear ();
-    rewards.getItems ().addAll (wizardry.getRewards ());
-    rewards.getSelectionModel ().select (0);
 
     refresh ();
   }
