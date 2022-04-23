@@ -86,6 +86,9 @@ public class MonstersTab extends TabBase implements ScenarioChangeListener
   {
     int index = prefs.getInt (PREFS_INDEX, -1);
     if (index >= 0)
+    {
       monsters.getSelectionModel ().select (index);
+      monsters.scrollTo (index);
+    }
   }
 }

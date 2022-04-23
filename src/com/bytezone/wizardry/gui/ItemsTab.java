@@ -84,6 +84,9 @@ public class ItemsTab extends TabBase implements ScenarioChangeListener
   {
     int index = prefs.getInt (PREFS_INDEX, -1);
     if (index >= 0)
+    {
       items.getSelectionModel ().select (index);
+      items.scrollTo (index);
+    }
   }
 }
