@@ -8,8 +8,6 @@ import javafx.scene.input.KeyCode;
 public class WizardryTabPane extends TabPaneBase
 // -----------------------------------------------------------------------------------//
 {
-  WizardryApp app;
-
   CharactersTab charactersTab = new CharactersTab ("Characters", KeyCode.C);
   MonstersTab monstersTab = new MonstersTab ("Monsters", KeyCode.M);
   SummaryTab summaryTab = new SummaryTab ("Disk", KeyCode.D);
@@ -20,12 +18,10 @@ public class WizardryTabPane extends TabPaneBase
   MazeTab mazeTab = new MazeTab ("Maze", KeyCode.L);
 
   // ---------------------------------------------------------------------------------//
-  public WizardryTabPane (WizardryApp app, String prefsId)
+  public WizardryTabPane (String prefsId)
   // ---------------------------------------------------------------------------------//
   {
     super (prefsId);
-
-    this.app = app;
 
     add (summaryTab);
     add (charactersTab);
@@ -36,15 +32,6 @@ public class WizardryTabPane extends TabPaneBase
     add (encountersTab);
     add (mazeTab);
 
-    app.addScenarioChangeListener (summaryTab);
-    app.addScenarioChangeListener (charactersTab);
-    app.addScenarioChangeListener (monstersTab);
-    app.addScenarioChangeListener (itemsTab);
-    app.addScenarioChangeListener (specialsTab);
-    app.addScenarioChangeListener (rewardsTab);
-    app.addScenarioChangeListener (encountersTab);
-    app.addScenarioChangeListener (mazeTab);
-
-    setDefaultTab (0);
+    setDefaultTab (2);
   }
 }

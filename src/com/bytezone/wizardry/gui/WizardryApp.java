@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -56,9 +57,18 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
     addItem (menuFile, openFileItem, KeyCode.O, e -> getWizardryDisk ());
     menuFile.getItems ().add (recentFilesMenu);
 
-    wizardryTabPane = new WizardryTabPane (this, "Wizardry");
+    wizardryTabPane = new WizardryTabPane ("Wizardry");
 
-    saveStateList.addAll (Arrays.asList (this));
+    for (Tab tab : wizardryTabPane.getTabs ())
+    {
+      if (tab instanceof ScenarioChangeListener scenarioChangeListener)
+        addScenarioChangeListener (scenarioChangeListener);
+
+      if (tab instanceof SaveState saveState)       // none are yet
+        saveStateList.add (saveState);
+    }
+
+    saveStateList.addAll (Arrays.asList (this, wizardryTabPane));
     recentFiles.addListener (this);
 
     return wizardryTabPane;
