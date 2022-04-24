@@ -20,7 +20,7 @@ public class EncounterPane extends DataPane
   ComboBox<MazeLevel> mazeLevelList = new ComboBox<> ();
 
   TextField[][] textOut1 = new TextField[MAX_GROUPS][];
-  TextField[][] textOut2 = new TextField[MAX_GROUPS][];
+  TextField[][] textOut2 = new TextField[MAX_GROUPS * 2][];
 
   Display display;
   private WizardryOrigin wizardry;
@@ -29,31 +29,32 @@ public class EncounterPane extends DataPane
   public EncounterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (20, 90, 50, 80, 50, 80, 50, 80, 30, 30);
+    setColumnConstraints (110, 60, 130, 60, 130, 60, 130, 570);
 
-    String[] labels1 =
-        { "Minimum", "Range size", "Extra range chance", "Extra ranges", "Extra range size" };
-    String[] labels2 =
-        { "Base range", "Monster from", "Monster to", "Max range", "Monster from", "Monster to" };
+    String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range chance",
+        "Extra ranges", "Extra range size" };
 
-    // headings
-    createLabel ("75%", 2, 0, HPos.LEFT, 2);
-    createLabel ("18.75%", 4, 0, HPos.LEFT, 2);
-    createLabel ("6.25%", 6, 0, HPos.LEFT, 2);
+    String[] labels2 = new String[22];
+    labels2[0] = "Base range";
+    for (int i = 1; i < 11; i++)
+      labels2[i * 2] = "Extra range " + i;
 
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 2);
-    DataPlacement dp1 = new DataPlacement (2, 1, Pos.CENTER_RIGHT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_RIGHT, 1);
     textOut1[0] = createTextFields (labels1, lp1, dp1);
 
-    textOut1[1] = createTextFields (5, new DataPlacement (4, 1, Pos.CENTER_RIGHT, 1));
-    textOut1[2] = createTextFields (5, new DataPlacement (6, 1, Pos.CENTER_RIGHT, 1));
+    textOut1[1] = createTextFields (6, new DataPlacement (3, 0, Pos.CENTER_RIGHT, 1));
+    textOut1[2] = createTextFields (6, new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1));
 
-    LabelPlacement lp2 = new LabelPlacement (0, 6, HPos.RIGHT, 2);
-    DataPlacement dp2 = new DataPlacement (2, 6, Pos.CENTER_LEFT, 2);
+    LabelPlacement lp2 = new LabelPlacement (0, 6, HPos.RIGHT, 1);
+    DataPlacement dp2 = new DataPlacement (1, 6, Pos.CENTER_RIGHT, 1);
     textOut2[0] = createTextFields (labels2, lp2, dp2);
 
-    textOut2[1] = createTextFields (6, new DataPlacement (4, 6, Pos.CENTER_LEFT, 2));
-    textOut2[2] = createTextFields (6, new DataPlacement (6, 6, Pos.CENTER_LEFT, 2));
+    textOut2[1] = createTextFields (22, new DataPlacement (2, 6, Pos.CENTER_LEFT, 1));
+    textOut2[2] = createTextFields (22, new DataPlacement (3, 6, Pos.CENTER_RIGHT, 1));
+    textOut2[3] = createTextFields (22, new DataPlacement (4, 6, Pos.CENTER_LEFT, 1));
+    textOut2[4] = createTextFields (22, new DataPlacement (5, 6, Pos.CENTER_RIGHT, 1));
+    textOut2[5] = createTextFields (22, new DataPlacement (6, 6, Pos.CENTER_LEFT, 1));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -62,14 +63,22 @@ public class EncounterPane extends DataPane
   {
     this.wizardry = wizardry;
 
-    if (wizardry.getScenarioId () < 3)
-    {
-      display = new Display (wizardry);
-      GridPane.setConstraints (display, 1, 12);
-      //      GridPane.setColumnSpan (display, 8);
-      GridPane.setRowSpan (display, 15);
-      gridPane.getChildren ().add (display);
-    }
+    if (false)
+      if (wizardry.getScenarioId () < 3)
+      {
+        display = new Display (wizardry);
+        GridPane.setConstraints (display, 7, 1);
+        //      GridPane.setColumnSpan (display, 8);
+        GridPane.setRowSpan (display, 12);
+        gridPane.getChildren ().add (display);
+      }
+      else
+      {
+        if (display != null)
+        {
+          gridPane.getChildren ().remove (display);
+        }
+      }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -77,6 +86,7 @@ public class EncounterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     EnemyOdds[] enemyOdds = mazeLevel.getEnemyOdds ();
+    double[] groupOdds = { 75, 18.75, 6.25 };
 
     for (int i = 0; i < MAX_GROUPS; i++)
     {
@@ -86,26 +96,27 @@ public class EncounterPane extends DataPane
       int worse01 = enemyOdds[i].worse01;
       int percWors = enemyOdds[i].percWors;
 
-      setText (textOut1[i][0], minEnemy);
-      setText (textOut1[i][1], range0n);
-      setText (textOut1[i][2], percWors + "%");
-      setText (textOut1[i][3], worse01);
-      setText (textOut1[i][4], multWors);
+      for (int row = 2; row < 22; row++)
+      {
+        setText (textOut2[i * 2][row], "");
+        setText (textOut2[i * 2 + 1][row], "");
+      }
+
+      setText (textOut1[i][0], groupOdds[i] + "%");
+      setText (textOut1[i][1], minEnemy);
+      setText (textOut1[i][2], range0n);
+      setText (textOut1[i][3], percWors + "%");
+      setText (textOut1[i][4], worse01);
+      setText (textOut1[i][5], multWors);
 
       int maxEnemy = minEnemy + range0n - 1;
-      setMinMax (i, 0, minEnemy, maxEnemy);
+      setMinMax (i * 2, 0, minEnemy, maxEnemy);
 
-      if (percWors > 0)
+      for (int row = 1; row <= worse01; row++)
       {
-        minEnemy += multWors * worse01;
-        maxEnemy += multWors * worse01;
-        setMinMax (i, 3, minEnemy, maxEnemy);
-      }
-      else
-      {
-        setText (textOut2[i][3], "");
-        setText (textOut2[i][4], "");
-        setText (textOut2[i][5], "");
+        minEnemy += multWors;
+        maxEnemy += multWors;
+        setMinMax (i * 2, row * 2, minEnemy, maxEnemy);
       }
     }
 
@@ -117,8 +128,9 @@ public class EncounterPane extends DataPane
   private void setMinMax (int index1, int index2, int minEnemy, int maxEnemy)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut2[index1][index2++], minEnemy + " : " + maxEnemy);
-    setText (textOut2[index1][index2++], wizardry.getMonster (minEnemy).name);
-    setText (textOut2[index1][index2++], wizardry.getMonster (maxEnemy).name);
+    setText (textOut2[index1][index2], minEnemy);
+    setText (textOut2[index1 + 1][index2], wizardry.getMonster (minEnemy).name);
+    setText (textOut2[index1][index2 + 1], maxEnemy);
+    setText (textOut2[index1 + 1][index2 + 1], wizardry.getMonster (maxEnemy).name);
   }
 }

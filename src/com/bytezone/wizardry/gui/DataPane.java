@@ -21,7 +21,7 @@ import javafx.scene.layout.RowConstraints;
 public class DataPane extends Pane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int ROW_HEIGHT = 30;
+  private static final int ROW_HEIGHT = 25;
 
   GridPane gridPane = new GridPane ();
 
@@ -34,6 +34,7 @@ public class DataPane extends Pane
     gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
 
     setRowHeights (30);           // make all rows the same height
+    //    gridPane.setGridLinesVisible (true);
 
     getChildren ().add (gridPane);
   }

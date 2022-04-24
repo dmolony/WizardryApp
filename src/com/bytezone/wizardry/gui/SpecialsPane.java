@@ -35,27 +35,27 @@ public class SpecialsPane extends DataPane
     for (int i = 0; i < squaresText.length; i++)
       squaresText[i] = i + "";
 
-    LabelPlacement lp1 = new LabelPlacement (0, 5, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 5, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
     textOut1 = createTextFields (squaresText, lp1, dp1);
 
-    textOut2 = createTextFields (16, new DataPlacement (2, 5, Pos.CENTER_RIGHT, 1));
-    textOut3 = createTextFields (16, new DataPlacement (3, 5, Pos.CENTER_RIGHT, 1));
-    textOut4 = createTextFields (16, new DataPlacement (4, 5, Pos.CENTER_RIGHT, 1));
-    textOut5 = createTextFields (16, new DataPlacement (5, 5, Pos.CENTER_RIGHT, 1));
-    textOut7 = createTextFields (16, new DataPlacement (7, 5, Pos.CENTER_RIGHT, 1));
-    textOut6 = createTextFields (16, new DataPlacement (6, 5, Pos.CENTER_LEFT, 1));
-    textOut8 = createTextFields (16, new DataPlacement (8, 5, Pos.CENTER_LEFT, 1));
+    textOut2 = createTextFields (16, new DataPlacement (2, 1, Pos.CENTER_RIGHT, 1));
+    textOut3 = createTextFields (16, new DataPlacement (3, 1, Pos.CENTER_RIGHT, 1));
+    textOut4 = createTextFields (16, new DataPlacement (4, 1, Pos.CENTER_RIGHT, 1));
+    textOut5 = createTextFields (16, new DataPlacement (5, 1, Pos.CENTER_RIGHT, 1));
+    textOut7 = createTextFields (16, new DataPlacement (7, 1, Pos.CENTER_RIGHT, 1));
+    textOut6 = createTextFields (16, new DataPlacement (6, 1, Pos.CENTER_LEFT, 1));
+    textOut8 = createTextFields (16, new DataPlacement (8, 1, Pos.CENTER_LEFT, 1));
 
     // headings
-    createLabel ("Square type", 1, 4, HPos.LEFT, 1);
-    createLabel ("Aux 0", 2, 4, HPos.LEFT, 1);
-    createLabel ("Aux 1", 3, 4, HPos.LEFT, 1);
-    createLabel ("Aux 2", 4, 4, HPos.LEFT, 1);
-    createLabel ("Occurs", 5, 4, HPos.LEFT, 1);
-    createLabel ("First location", 6, 4, HPos.LEFT, 1);
-    createLabel ("Msg #", 7, 4, HPos.LEFT, 1);
-    createLabel ("Description", 8, 4, HPos.LEFT, 1);
+    createLabel ("Square type", 1, 0, HPos.LEFT, 1);
+    createLabel ("Aux 0", 2, 0, HPos.LEFT, 1);
+    createLabel ("Aux 1", 3, 0, HPos.LEFT, 1);
+    createLabel ("Aux 2", 4, 0, HPos.LEFT, 1);
+    createLabel ("Occurs", 5, 0, HPos.LEFT, 1);
+    createLabel ("First location", 6, 0, HPos.LEFT, 1);
+    createLabel ("Msg #", 7, 0, HPos.LEFT, 1);
+    createLabel ("Description", 8, 0, HPos.LEFT, 1);
   }
 
   // ---------------------------------------------------------------------------------//
