@@ -16,7 +16,7 @@ Display details for every resource on the disk.
 ## WizardryApp Screens
 <img src="resources/characters.png" alt="drawing" width="900"/>
 <img src="resources/monsters.png" alt="drawing" width="900"/>
-<img src="resources/item.png" alt="drawing" width="900"/>
+<img src="resources/items.png" alt="drawing" width="900"/>
 <img src="resources/rewards.png" alt="drawing" width="900"/>
 <img src="resources/encounters.png" alt="drawing" width="900"/>
 <img src="resources/specials.png" alt="drawing" width="900"/>
