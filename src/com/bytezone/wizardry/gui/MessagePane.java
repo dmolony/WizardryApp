@@ -28,7 +28,7 @@ public class MessagePane extends DataPane
   public MessagePane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 120, 300);
+    setColumnConstraints (110, 120, 310);
 
     // make all rows the same height
     RowConstraints rowCo = new RowConstraints (30);
@@ -73,29 +73,14 @@ public class MessagePane extends DataPane
 
     setText (textOut1[0], locations.size ());
 
-    if (locations.size () > 0)
-    {
-      setText (textOut2[0], locations.get (0));
-      Special special = wizardry.getSpecial (locations.get (0));
-      if (special != null)
-        setText (textOut4[0], special.getText ());
-    }
-
-    if (locations.size () > 1)
-    {
-      setText (textOut2[1], locations.get (1));
-      Special special = wizardry.getSpecial (locations.get (1));
-      if (special != null)
-        setText (textOut4[1], special.getText ());
-    }
-
-    if (locations.size () > 2)
-    {
-      setText (textOut2[2], locations.get (2));
-      Special special = wizardry.getSpecial (locations.get (2));
-      if (special != null)
-        setText (textOut4[2], special.getText ());
-    }
+    for (int i = 0; i < 3; i++)
+      if (locations.size () > i)
+      {
+        setText (textOut2[i], locations.get (i));
+        Special special = wizardry.getSpecial (locations.get (i));
+        if (special != null)
+          setText (textOut4[i], special.getText ());
+      }
 
     textOut3.setText (message.getText ());
   }
