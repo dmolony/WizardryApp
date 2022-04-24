@@ -3,7 +3,7 @@ package com.bytezone.wizardry.gui;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.TabBase;
-import com.bytezone.wizardry.origin.Monster;
+import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.beans.value.ChangeListener;
@@ -13,34 +13,34 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
 // -----------------------------------------------------------------------------------//
-public class MonstersTab extends TabBase implements ScenarioChangeListener
+public class MessagesTab extends TabBase implements ScenarioChangeListener
 // -----------------------------------------------------------------------------------//
 {
-  private static final String PREFS_INDEX = "MonstersIndex";
+  private static final String PREFS_INDEX = "MessagesIndex";
 
-  private ListView<Monster> monsters = new ListView<> ();
-  private MonsterPane monsterPane = new MonsterPane ();
+  private ListView<Message> messages = new ListView<> ();
+  private MessagePane messagePane = new MessagePane ();
 
   // ---------------------------------------------------------------------------------//
-  public MonstersTab (String title, KeyCode keyCode)
+  public MessagesTab (String title, KeyCode keyCode)
   // ---------------------------------------------------------------------------------//
   {
     super (title, keyCode);
 
     BorderPane layout = new BorderPane ();
     setContent (layout);
-    layout.setLeft (monsters);
-    layout.setCenter (monsterPane);
+    layout.setLeft (messages);
+    layout.setCenter (messagePane);
 
-    monsters.getSelectionModel ().selectedItemProperty ()
-        .addListener (new ChangeListener<Monster> ()
+    messages.getSelectionModel ().selectedItemProperty ()
+        .addListener (new ChangeListener<Message> ()
         {
           @Override
-          public void changed (ObservableValue<? extends Monster> ov, Monster old_val,
-              Monster new_val)
+          public void changed (ObservableValue<? extends Message> ov, Message old_val,
+              Message new_val)
           {
             if (new_val != null)
-              monsterPane.update (new_val);
+              messagePane.update (new_val);
           }
         });
   }
@@ -61,11 +61,11 @@ public class MonstersTab extends TabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryOrigin wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    monsterPane.setWizardry (wizardry);
+    messagePane.setWizardry (wizardry);
 
-    monsters.getItems ().clear ();
-    monsters.getItems ().addAll (wizardry.getMonsters ());
-    monsters.getSelectionModel ().select (0);
+    messages.getItems ().clear ();
+    messages.getItems ().addAll (wizardry.getMessages ().getMessages ());
+    messages.getSelectionModel ().select (0);
 
     refresh ();
   }
@@ -75,7 +75,7 @@ public class MonstersTab extends TabBase implements ScenarioChangeListener
   public void save (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
-    int index = monsters.getSelectionModel ().getSelectedIndex ();
+    int index = messages.getSelectionModel ().getSelectedIndex ();
     prefs.putInt (PREFS_INDEX, index);
   }
 
@@ -87,8 +87,8 @@ public class MonstersTab extends TabBase implements ScenarioChangeListener
     int index = prefs.getInt (PREFS_INDEX, -1);
     if (index >= 0)
     {
-      monsters.getSelectionModel ().select (index);
-      monsters.scrollTo (index);
+      messages.getSelectionModel ().select (index);
+      messages.scrollTo (index);
     }
   }
 }

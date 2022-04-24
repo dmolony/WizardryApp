@@ -16,6 +16,7 @@ public class WizardryTabPane extends TabPaneBase
   RewardsTab rewardsTab = new RewardsTab ("Rewards", KeyCode.R);
   EncountersTab encountersTab = new EncountersTab ("Encounters", KeyCode.E);
   MazeTab mazeTab = new MazeTab ("Maze", KeyCode.L);
+  MessagesTab messagesTab = new MessagesTab ("Messages", KeyCode.T);
 
   // ---------------------------------------------------------------------------------//
   public WizardryTabPane (String prefsId)
@@ -31,6 +32,7 @@ public class WizardryTabPane extends TabPaneBase
     add (rewardsTab);
     add (encountersTab);
     add (mazeTab);
+    add (messagesTab);
 
     setDefaultTab (2);
   }
