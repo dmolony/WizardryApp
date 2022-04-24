@@ -15,21 +15,22 @@ import javafx.scene.layout.RowConstraints;
 public class CharacterPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int PASSWORD = 0;
-  private static final int AWARDS = 1;
-  private static final int IN_MAZE = 2;
-  private static final int RACE = 3;
-  private static final int CLASS = 4;
-  private static final int AGE = 5;
-  private static final int STATUS = 6;
-  private static final int ALIGNMENT = 7;
-  private static final int GOLD = 8;
-  private static final int EXPERIENCE = 9;
-  private static final int CRIT = 10;
-  private static final int HP_DAM_DICE = 11;
-  private static final int MAGE_TOTALS = 12;
-  private static final int PRIEST_TOTALS = 13;
-  private static final int MYSTERY = 14;
+  private static final int NAME = 0;
+  private static final int PASSWORD = 1;
+  private static final int AWARDS = 7;
+  private static final int IN_MAZE = 8;
+  private static final int RACE = 4;
+  private static final int CLASS = 5;
+  private static final int AGE = 6;
+  private static final int STATUS = 2;
+  private static final int ALIGNMENT = 3;
+  private static final int GOLD = 9;
+  private static final int EXPERIENCE = 10;
+  private static final int CRIT = 11;
+  private static final int HP_DAM_DICE = 12;
+  private static final int MAGE_TOTALS = 13;
+  private static final int PRIEST_TOTALS = 14;
+  private static final int MYSTERY = 15;
 
   private static final int MAXLEVAC = 0;
   private static final int CHAR_LEV = 1;
@@ -67,8 +68,8 @@ public class CharacterPane extends DataPane
       gridPane.getRowConstraints ().add (rowCo);
 
     String[] labelText1 =
-        { "Password", "Awards", "In maze", "Race", "Class", "Age (weeks)", "Status", "Alignment",
-            "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
+        { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
+            "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
 
     String[] labelText2 =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
@@ -76,8 +77,8 @@ public class CharacterPane extends DataPane
     String[] attributesText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
 
     // text values
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 2);
+    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
     textOut = createTextFields (labelText1, lp1, dp1);
 
     // attributes
@@ -147,6 +148,7 @@ public class CharacterPane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
+    setText (textOut[NAME], character.name);
     setText (textOut[AWARDS], character.awards);
     setText (textOut[PASSWORD], character.password);
     setText (textOut[IN_MAZE], character.inMaze ? "** OUT **" : "");

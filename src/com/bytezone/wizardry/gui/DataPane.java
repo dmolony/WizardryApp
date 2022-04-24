@@ -27,8 +27,8 @@ public class DataPane extends Pane
   public DataPane ()
   // ---------------------------------------------------------------------------------//
   {
-    gridPane.setHgap (12);
-    gridPane.setVgap (4);
+    gridPane.setHgap (10);
+    gridPane.setVgap (3);
     gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
 
     getChildren ().add (gridPane);

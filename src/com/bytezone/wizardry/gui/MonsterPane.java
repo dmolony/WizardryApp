@@ -13,19 +13,22 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 
 // -----------------------------------------------------------------------------------//
 public class MonsterPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int NAME_PLURAL = 0;
-  private static final int GENERIC_NAME = 1;
-  private static final int MONSTER_CLASS = 2;
-  private static final int PARTNER = 3;
-  private static final int GROUP_DICE = 4;
-  private static final int HP_DICE = 5;
-  private static final int RECSN = 6;
+  private static final int NAME = 0;
+  private static final int NAME_PLURAL = 1;
+  private static final int GENERIC_NAME = 2;
+  private static final int GENERIC_NAME_PLURAL = 3;
+  private static final int MONSTER_CLASS = 4;
+  private static final int PARTNER = 5;
+  private static final int GROUP_DICE = 6;
+  private static final int HP_DICE = 7;
+  private static final int RECSN = 8;
 
   private static final int ID = 0;
   private static final int MAGE_LEVEL = 1;
@@ -60,40 +63,46 @@ public class MonsterPane extends DataPane
   {
     canvas = new Canvas (280, 200);
 
-    setColumnConstraints (50, 60, 160, 30, 110, 65, 90, 20, 80, 20);
+    setColumnConstraints (110, 90, 100, 30, 100, 30, 130);
 
-    GridPane.setConstraints (canvas, 1, 9);
+    // make all rows the same height
+    RowConstraints rowCo = new RowConstraints (25);
+    for (int i = 0; i < 20; i++)
+      gridPane.getRowConstraints ().add (rowCo);
+
+    GridPane.setConstraints (canvas, 4, 1);
     GridPane.setColumnSpan (canvas, 3);
     GridPane.setRowSpan (canvas, 7);
 
     gridPane.getChildren ().add (canvas);
+    //    gridPane.setGridLinesVisible (true);
 
-    String[] label1Text = { "Plural", "Generic name", "Monster class", "Partner", "Appear dice",
-        "Hits dice", "Damage dice" };
+    String[] label1Text = { "Name", "Plural", "Generic name", "Generic plural", "Monster class",
+        "Partner", "Appear dice", "Hits dice", "Damage dice" };
+
     String[] label2Text = { "ID", "Mage level", "Priest level", "Magic resistance", "Partner odds",
         "Image", "Level drain", "Regen", "Experience", "Armour class", "Unique", "Breathe",
         "Wandering reward", "Lair reward" };
 
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 2);
-    DataPlacement dp1 = new DataPlacement (2, 1, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
     textOut1 = createTextFields (label1Text, lp1, dp1);
 
-    LabelPlacement lp2 = new LabelPlacement (4, 0, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1);
+    LabelPlacement lp2 = new LabelPlacement (0, 10, HPos.RIGHT, 1);
+    DataPlacement dp2 = new DataPlacement (1, 10, Pos.CENTER_RIGHT, 1);
     textOut2 = createTextFields (label2Text, lp2, dp2);
 
-    textOut3 = createTextFields (1, new DataPlacement (6, 12, Pos.CENTER_LEFT, 1));
-    textOut4 = createTextFields (3, new DataPlacement (6, 13, Pos.CENTER_LEFT, 4));
-
-    textOut5 = createTextFields (1, new DataPlacement (6, 11, Pos.CENTER_LEFT, 1));
+    textOut5 = createTextFields (1, new DataPlacement (2, 21, Pos.CENTER_LEFT, 1));
+    textOut3 = createTextFields (1, new DataPlacement (2, 22, Pos.CENTER_LEFT, 1));
+    textOut4 = createTextFields (3, new DataPlacement (2, 23, Pos.CENTER_LEFT, 3));
 
     // resistance
-    createLabel ("Resistance", 6, 0, HPos.RIGHT, 2);
-    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 6, 1);
+    createLabel ("Resistance", 2, 10, HPos.RIGHT, 2);
+    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 2, 11);
 
     // properties
-    createLabel ("Property", 8, 0, HPos.RIGHT, 2);
-    checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 8, 1);
+    createLabel ("Property", 4, 10, HPos.RIGHT, 2);
+    checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 4, 11);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -107,8 +116,10 @@ public class MonsterPane extends DataPane
   void update (Monster monster)
   // ---------------------------------------------------------------------------------//
   {
+    setText (textOut1[NAME], monster.name);
     setText (textOut1[NAME_PLURAL], monster.namePlural);
     setText (textOut1[GENERIC_NAME], monster.genericName);
+    setText (textOut1[GENERIC_NAME_PLURAL], monster.genericNamePlural);
     setText (textOut1[MONSTER_CLASS], WizardryOrigin.monsterClass[monster.monsterClass]);
     setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
     setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
