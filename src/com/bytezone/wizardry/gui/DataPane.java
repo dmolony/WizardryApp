@@ -21,6 +21,8 @@ import javafx.scene.layout.RowConstraints;
 public class DataPane extends Pane
 // -----------------------------------------------------------------------------------//
 {
+  private static final int ROW_HEIGHT = 30;
+
   GridPane gridPane = new GridPane ();
 
   // ---------------------------------------------------------------------------------//
@@ -30,6 +32,8 @@ public class DataPane extends Pane
     gridPane.setHgap (10);
     gridPane.setVgap (3);
     gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
+
+    setRowHeights (30);           // make all rows the same height
 
     getChildren ().add (gridPane);
   }
@@ -48,6 +52,15 @@ public class DataPane extends Pane
   {
     for (int i = 0; i < height.length; i++)
       gridPane.getRowConstraints ().add (new RowConstraints (height[i]));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setRowHeights (int totalRows)
+  // ---------------------------------------------------------------------------------//
+  {
+    RowConstraints rowCo = new RowConstraints (ROW_HEIGHT);
+    for (int i = 0; i < totalRows; i++)
+      gridPane.getRowConstraints ().add (rowCo);
   }
 
   // ---------------------------------------------------------------------------------//

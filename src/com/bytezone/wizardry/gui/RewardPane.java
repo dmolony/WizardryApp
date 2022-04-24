@@ -12,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.RowConstraints;
 
 //-----------------------------------------------------------------------------------//
 public class RewardPane extends DataPane
@@ -57,11 +56,6 @@ public class RewardPane extends DataPane
   {
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width, width);
-
-    // make all rows the same height
-    RowConstraints rowCo = new RowConstraints (25);
-    for (int i = 0; i < 20; i++)
-      gridPane.getRowConstraints ().add (rowCo);
 
     // basic attributes
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);

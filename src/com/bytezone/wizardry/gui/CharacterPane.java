@@ -9,7 +9,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.RowConstraints;
 
 // -----------------------------------------------------------------------------------//
 public class CharacterPane extends DataPane
@@ -61,11 +60,6 @@ public class CharacterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 69, 70, 20, 20, 20, 30, 50, 90, 20, 80, 20, 80, 20);
-
-    // make all rows the same height
-    RowConstraints rowCo = new RowConstraints (25);
-    for (int i = 0; i < 20; i++)
-      gridPane.getRowConstraints ().add (rowCo);
 
     String[] labelText1 =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",

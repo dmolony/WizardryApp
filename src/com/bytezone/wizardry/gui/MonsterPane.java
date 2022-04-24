@@ -13,7 +13,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 
 // -----------------------------------------------------------------------------------//
@@ -64,11 +63,6 @@ public class MonsterPane extends DataPane
     canvas = new Canvas (280, 200);
 
     setColumnConstraints (110, 90, 100, 30, 100, 30, 130);
-
-    // make all rows the same height
-    RowConstraints rowCo = new RowConstraints (25);
-    for (int i = 0; i < 20; i++)
-      gridPane.getRowConstraints ().add (rowCo);
 
     GridPane.setConstraints (canvas, 4, 1);
     GridPane.setColumnSpan (canvas, 3);

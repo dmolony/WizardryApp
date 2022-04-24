@@ -10,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 
 //-----------------------------------------------------------------------------------//
 public class EncounterPane extends DataPane
@@ -31,11 +30,6 @@ public class EncounterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (20, 90, 50, 80, 50, 80, 50, 80, 30, 30);
-
-    // make all rows the same height
-    RowConstraints rowCo = new RowConstraints (25);
-    for (int i = 0; i < 30; i++)
-      gridPane.getRowConstraints ().add (rowCo);
 
     String[] labels1 =
         { "Minimum", "Range size", "Extra range chance", "Extra ranges", "Extra range size" };
