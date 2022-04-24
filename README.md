@@ -21,8 +21,8 @@ Display details for every resource on the disk.
 <img src="resources/rewards.png" alt="drawing" width="900"/>
 <img src="resources/encounters.png" alt="drawing" width="900"/>
 <img src="resources/maze.png" alt="drawing" width="900"/>
+<img src="resources/messages.png" alt="drawing" width="900"/>
 
-<img src="resources/messages.png" alt="drawing" width="600"/>
 <img src="resources/experience.png" alt="drawing" width="400"/>
 
 ## Installation
