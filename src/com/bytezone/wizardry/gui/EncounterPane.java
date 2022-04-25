@@ -29,15 +29,19 @@ public class EncounterPane extends DataPane
   public EncounterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 60, 130, 60, 130, 60, 130, 570);
+    setColumnConstraints (110, 80, 130, 80, 130, 80, 130, 570);
 
-    String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range chance",
-        "Extra ranges", "Extra range size" };
+    String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range odds", "Extra ranges",
+        "Range offset" };
 
     String[] labels2 = new String[22];
     labels2[0] = "Base range";
+    labels2[1] = "odds";
     for (int i = 1; i < 11; i++)
+    {
       labels2[i * 2] = "Extra range " + i;
+      labels2[i * 2 + 1] = "odds";
+    }
 
     LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_RIGHT, 1);
@@ -68,7 +72,6 @@ public class EncounterPane extends DataPane
       {
         display = new Display (wizardry);
         GridPane.setConstraints (display, 7, 1);
-        //      GridPane.setColumnSpan (display, 8);
         GridPane.setRowSpan (display, 12);
         gridPane.getChildren ().add (display);
       }
@@ -96,6 +99,8 @@ public class EncounterPane extends DataPane
       int worse01 = enemyOdds[i].worse01;
       int percWors = enemyOdds[i].percWors;
 
+      double[] oddsTable = enemyOdds[i].showOdds ();
+
       for (int row = 2; row < 22; row++)
       {
         setText (textOut2[i * 2][row], "");
@@ -111,12 +116,14 @@ public class EncounterPane extends DataPane
 
       int maxEnemy = minEnemy + range0n - 1;
       setMinMax (i * 2, 0, minEnemy, maxEnemy);
+      setText (textOut2[i * 2][1], String.format ("%5.3f%%", oddsTable[0] * 100));
 
       for (int row = 1; row <= worse01; row++)
       {
         minEnemy += multWors;
         maxEnemy += multWors;
         setMinMax (i * 2, row * 2, minEnemy, maxEnemy);
+        setText (textOut2[i * 2][row * 2 + 1], String.format ("%5.3f%%", oddsTable[row] * 100));
       }
     }
 
@@ -128,9 +135,9 @@ public class EncounterPane extends DataPane
   private void setMinMax (int index1, int index2, int minEnemy, int maxEnemy)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut2[index1][index2], minEnemy);
+    setText (textOut2[index1][index2], minEnemy + " : " + maxEnemy);
     setText (textOut2[index1 + 1][index2], wizardry.getMonster (minEnemy).name);
-    setText (textOut2[index1][index2 + 1], maxEnemy);
+    //    setText (textOut2[index1][index2 + 1], maxEnemy);
     setText (textOut2[index1 + 1][index2 + 1], wizardry.getMonster (maxEnemy).name);
   }
 }

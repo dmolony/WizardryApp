@@ -21,7 +21,7 @@ import javafx.scene.layout.RowConstraints;
 public class DataPane extends Pane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int ROW_HEIGHT = 25;
+  private static final int ROW_HEIGHT = 26;
 
   GridPane gridPane = new GridPane ();
 
