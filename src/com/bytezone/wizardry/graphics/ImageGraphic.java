@@ -1,6 +1,6 @@
 package com.bytezone.wizardry.graphics;
 
-import com.bytezone.wizardry.origin.Image;
+import com.bytezone.wizardry.origin.WizardryImage;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,10 +11,10 @@ import javafx.scene.paint.Color;
 public class ImageGraphic
 // -----------------------------------------------------------------------------------//
 {
-  Image image;
+  WizardryImage image;
 
   // ---------------------------------------------------------------------------------//
-  public ImageGraphic (Image image)
+  public ImageGraphic (WizardryImage image)
   // ---------------------------------------------------------------------------------//
   {
     this.image = image;

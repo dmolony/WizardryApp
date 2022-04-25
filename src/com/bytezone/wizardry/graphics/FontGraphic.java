@@ -1,6 +1,6 @@
 package com.bytezone.wizardry.graphics;
 
-import com.bytezone.wizardry.origin.Font;
+import com.bytezone.wizardry.origin.WizardryFont;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 public class FontGraphic
 // -----------------------------------------------------------------------------------//
 {
-  Font font;
+  WizardryFont font;
   Color color = Color.PALEGREEN;
 
   int inset = 2;
@@ -19,7 +19,7 @@ public class FontGraphic
   int charHeight = 8 * size;
 
   // ---------------------------------------------------------------------------------//
-  public FontGraphic (Font font)
+  public FontGraphic (WizardryFont font)
   // ---------------------------------------------------------------------------------//
   {
     this.font = font;
