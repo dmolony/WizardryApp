@@ -2,6 +2,7 @@ package com.bytezone.wizardry.gui;
 
 import java.util.List;
 
+import com.bytezone.wizardry.graphics.ImageGraphic;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.Reward.ItemRange;
@@ -183,6 +184,7 @@ public class MonsterPane extends DataPane
       property >>>= 1;
     }
 
-    wizardry.getImage (monster.image).draw (canvas, 4, Color.WHITE);
+    ImageGraphic imageGraphic = new ImageGraphic (wizardry.getImage (monster.image));
+    imageGraphic.draw (canvas, 4, Color.WHITE);
   }
 }

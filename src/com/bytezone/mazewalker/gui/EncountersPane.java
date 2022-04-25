@@ -87,24 +87,24 @@ public class EncountersPane extends DataPane
     for (int i = 0; i < MAX_GROUPS; i++)
     {
       int minEnemy = enemyOdds[i].minEnemy;
-      int range0n = enemyOdds[i].range0n;
-      int multWors = enemyOdds[i].multWors;
-      int worse01 = enemyOdds[i].worse01;
-      int percWors = enemyOdds[i].percWors;
+      int rangeSize = enemyOdds[i].rangeSize;
+      int extraRangeOffset = enemyOdds[i].extraRangeOffset;
+      int totExtraRanges = enemyOdds[i].totExtraRanges;
+      int extraRangeOdds = enemyOdds[i].extraRangeOdds;
 
       setText (textOut1[i][0], minEnemy);
-      setText (textOut1[i][1], range0n);
-      setText (textOut1[i][2], percWors + "%");
-      setText (textOut1[i][3], worse01);
-      setText (textOut1[i][4], multWors);
+      setText (textOut1[i][1], rangeSize);
+      setText (textOut1[i][2], extraRangeOdds + "%");
+      setText (textOut1[i][3], totExtraRanges);
+      setText (textOut1[i][4], extraRangeOffset);
 
-      int maxEnemy = minEnemy + range0n - 1;
+      int maxEnemy = minEnemy + rangeSize - 1;
       setMinMax (i, 0, minEnemy, maxEnemy);
 
-      if (percWors > 0)
+      if (extraRangeOdds > 0)
       {
-        minEnemy += multWors * worse01;
-        maxEnemy += multWors * worse01;
+        minEnemy += extraRangeOffset * totExtraRanges;
+        maxEnemy += extraRangeOffset * totExtraRanges;
         setMinMax (i, 3, minEnemy, maxEnemy);
       }
       else

@@ -68,6 +68,10 @@ public class EncounterPane extends DataPane
     this.wizardry = wizardry;
 
     if (false)
+    {
+      if (display != null)
+        gridPane.getChildren ().remove (display);
+
       if (wizardry.getScenarioId () < 3)
       {
         display = new Display (wizardry);
@@ -75,13 +79,7 @@ public class EncounterPane extends DataPane
         GridPane.setRowSpan (display, 12);
         gridPane.getChildren ().add (display);
       }
-      else
-      {
-        if (display != null)
-        {
-          gridPane.getChildren ().remove (display);
-        }
-      }
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -94,12 +92,12 @@ public class EncounterPane extends DataPane
     for (int i = 0; i < MAX_GROUPS; i++)
     {
       int minEnemy = enemyOdds[i].minEnemy;
-      int range0n = enemyOdds[i].range0n;
-      int multWors = enemyOdds[i].multWors;
-      int worse01 = enemyOdds[i].worse01;
-      int percWors = enemyOdds[i].percWors;
+      int rangeSize = enemyOdds[i].rangeSize;
+      int extraRangeOffset = enemyOdds[i].extraRangeOffset;
+      int totExtraRanges = enemyOdds[i].totExtraRanges;
+      int extraRangeOdds = enemyOdds[i].extraRangeOdds;
 
-      double[] oddsTable = enemyOdds[i].showOdds ();
+      double[] oddsTable = enemyOdds[i].getOdds ();
 
       for (int row = 2; row < 22; row++)
       {
@@ -109,19 +107,19 @@ public class EncounterPane extends DataPane
 
       setText (textOut1[i][0], groupOdds[i] + "%");
       setText (textOut1[i][1], minEnemy);
-      setText (textOut1[i][2], range0n);
-      setText (textOut1[i][3], percWors + "%");
-      setText (textOut1[i][4], worse01);
-      setText (textOut1[i][5], multWors);
+      setText (textOut1[i][2], rangeSize);
+      setText (textOut1[i][3], extraRangeOdds + "%");
+      setText (textOut1[i][4], totExtraRanges);
+      setText (textOut1[i][5], extraRangeOffset);
 
-      int maxEnemy = minEnemy + range0n - 1;
+      int maxEnemy = minEnemy + rangeSize - 1;
       setMinMax (i * 2, 0, minEnemy, maxEnemy);
       setText (textOut2[i * 2][1], String.format ("%5.3f%%", oddsTable[0] * 100));
 
-      for (int row = 1; row <= worse01; row++)
+      for (int row = 1; row <= totExtraRanges; row++)
       {
-        minEnemy += multWors;
-        maxEnemy += multWors;
+        minEnemy += extraRangeOffset;
+        maxEnemy += extraRangeOffset;
         setMinMax (i * 2, row * 2, minEnemy, maxEnemy);
         setText (textOut2[i * 2][row * 2 + 1], String.format ("%5.3f%%", oddsTable[row] * 100));
       }
@@ -137,7 +135,6 @@ public class EncounterPane extends DataPane
   {
     setText (textOut2[index1][index2], minEnemy + " : " + maxEnemy);
     setText (textOut2[index1 + 1][index2], wizardry.getMonster (minEnemy).name);
-    //    setText (textOut2[index1][index2 + 1], maxEnemy);
     setText (textOut2[index1 + 1][index2 + 1], wizardry.getMonster (maxEnemy).name);
   }
 }

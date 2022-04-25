@@ -1,7 +1,9 @@
 package com.bytezone.mazewalker.gui;
 
+import com.bytezone.wizardry.graphics.CellGraphic;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
+import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
 import javafx.scene.canvas.Canvas;
@@ -18,6 +20,8 @@ public class MazeWalkerPane extends Canvas implements MovementListener
   int currentLevel = -1;
   int currentRow;
   int currentColumn;
+
+  private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
   // ---------------------------------------------------------------------------------//
   public MazeWalkerPane (WizardryOrigin wizardry)
@@ -53,20 +57,32 @@ public class MazeWalkerPane extends Canvas implements MovementListener
     {
       MazeCell cell =
           walker.mazeLevel.getMazeCell (new Location (currentLevel, currentColumn, currentRow));
-      cell.draw (gc);
+      //      cell.draw (gc);
+      cellGraphic.draw (cell);
     }
     else
     {
       currentLevel = walker.location.getLevel ();
       gc.setFill (Color.LIGHTGRAY);
       gc.fillRect (0, 0, getWidth (), getHeight ());
-      walker.mazeLevel.draw (gc);
+      //      walker.mazeLevel.draw (gc);
+      drawMazeLevel (walker.mazeLevel);
     }
 
     MazeCell cell = walker.mazeLevel.getMazeCell (walker.location);
-    cell.drawWalker (gc, walker.location, walker.direction);
+    //    cell.drawWalker (gc, walker.location, walker.direction);
+    cellGraphic.drawWalker (cell, walker);
 
     currentRow = walker.location.getRow ();
     currentColumn = walker.location.getColumn ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void drawMazeLevel (MazeLevel mazeLevel)
+  // ---------------------------------------------------------------------------------//
+  {
+    for (int col = 0; col < 20; col++)
+      for (int row = 0; row < 20; row++)
+        cellGraphic.draw (mazeLevel.getMazeCell (col, row));
   }
 }

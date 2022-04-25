@@ -1,5 +1,6 @@
 package com.bytezone.wizardry.gui;
 
+import com.bytezone.wizardry.graphics.CellGraphic;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryOrigin;
 
@@ -13,6 +14,7 @@ public class MazePane extends Canvas
 // -----------------------------------------------------------------------------------//
 {
   private WizardryOrigin wizardry;
+  private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
   // ---------------------------------------------------------------------------------//
   public MazePane ()
@@ -36,6 +38,8 @@ public class MazePane extends Canvas
   void update (MazeLevel mazeLevel)
   // ---------------------------------------------------------------------------------//
   {
-    mazeLevel.draw (getGraphicsContext2D ());
+    for (int col = 0; col < 20; col++)
+      for (int row = 0; row < 20; row++)
+        cellGraphic.draw (mazeLevel.getMazeCell (col, row));
   }
 }

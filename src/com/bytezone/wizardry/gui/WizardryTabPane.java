@@ -24,15 +24,8 @@ public class WizardryTabPane extends TabPaneBase
   {
     super (prefsId);
 
-    add (summaryTab);
-    add (charactersTab);
-    add (monstersTab);
-    add (itemsTab);
-    add (specialsTab);
-    add (rewardsTab);
-    add (encountersTab);
-    add (mazeTab);
-    add (messagesTab);
+    addAll (summaryTab, charactersTab, monstersTab, itemsTab, specialsTab, rewardsTab,
+        encountersTab, messagesTab, mazeTab);
 
     setDefaultTab (2);
   }

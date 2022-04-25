@@ -3,9 +3,9 @@ package com.bytezone.mazewalker.gui;
 import java.util.List;
 import java.util.Random;
 
+import com.bytezone.wizardry.graphics.FontGraphic;
+import com.bytezone.wizardry.graphics.ImageGraphic;
 import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.Font;
-import com.bytezone.wizardry.origin.Image;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.PartyManager;
@@ -25,8 +25,10 @@ public class Display extends Canvas
 
   private final WizardryOrigin wizardry;
 
-  private final Font alphabet;
-  private final Font graphics;
+  private final FontGraphic alphabet;
+  private final FontGraphic graphics;
+  private final ImageGraphic gold;
+  private final ImageGraphic chest;
 
   private List<Monster> monsters;
   private List<Character> party;
@@ -42,9 +44,12 @@ public class Display extends Canvas
 
     this.wizardry = wizardry;
 
-    alphabet = wizardry.getFonts ().get (0);
-    graphics = wizardry.getFonts ().get (1);
+    alphabet = new FontGraphic (wizardry.getFonts ().get (0));
+    graphics = new FontGraphic (wizardry.getFonts ().get (1));
     monsters = wizardry.getMonsters ();
+
+    gold = new ImageGraphic (wizardry.getImage (GOLD));
+    chest = new ImageGraphic (wizardry.getImage (CHEST));
 
     party = new PartyManager (wizardry).getParty ();
   }
@@ -78,8 +83,8 @@ public class Display extends Canvas
   private void drawGold (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
-    Image image = wizardry.getImage (GOLD);
-    image.draw (this, IMAGE_SIZE, color, 16, 47);
+    //    Image image = wizardry.getImage (GOLD);
+    gold.draw (this, IMAGE_SIZE, color, 16, 47);
 
     int row = 12;
     int column = 1;
@@ -92,8 +97,8 @@ public class Display extends Canvas
   private void drawChest (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
-    Image image = wizardry.getImage (CHEST);
-    image.draw (this, IMAGE_SIZE, color, 16, 47);
+    //    Image image = wizardry.getImage (CHEST);
+    chest.draw (this, IMAGE_SIZE, color, 16, 47);
 
     int column = 13;
 
@@ -116,7 +121,8 @@ public class Display extends Canvas
   {
     Monster monster = monsters.get (mazeLevel.getRandomMonster ());
 
-    Image image = wizardry.getImage (monster.image);
+    //    Image image = wizardry.getImage (monster.image);
+    ImageGraphic image = new ImageGraphic (wizardry.getImage (monster.image));
     image.draw (this, IMAGE_SIZE, color, 16, 47);
 
     int howMany = monster.getGroupSize (mazeLevel);
