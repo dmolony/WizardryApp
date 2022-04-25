@@ -1,7 +1,10 @@
 # MazeWalker
 Cross-platform utility to examine Wizardry mazes. Currently works on the first three scenarios.
 
-## Instructions
+# WizardryApp
+Display details for every resource on the disk.
+
+## MazeWalker Instructions
 Navigate around the maze using the A/W/S/D keys. To go directly to a particular square, just click on it. To switch to a different maze level, use the Levels menu (or the corresponding shortcut).
 There is no need to kick doors down, you can simply walk through any wall. None of the special squares affect you, and you can see perfectly well in the dark. You are invincible.
 
@@ -9,9 +12,7 @@ There is no need to kick doors down, you can simply walk through any wall. None 
 ![Proving Grounds of the Mad Overlord](resources/scenario1.png?raw=true "Proving Grounds of the Mad Overlord")
 ![Knight of Diamonds](resources/scenario2.png?raw=true "Knight of Diamonds")
 ![Legacy of Llylgamyn](resources/scenario3.png?raw=true "Legacy of Llylgamyn")
-
-# WizardryApp
-Display details for every resource on the disk.
+<img src="resources/experience.png" alt="drawing" width="400"/>
 
 ## WizardryApp Screens
 <img src="resources/characters.png" alt="drawing" width="900"/>
@@ -23,11 +24,10 @@ Display details for every resource on the disk.
 <img src="resources/maze.png" alt="drawing" width="900"/>
 <img src="resources/messages.png" alt="drawing" width="900"/>
 
-<img src="resources/experience.png" alt="drawing" width="400"/>
 
 ## Installation
 - Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).
-- Download [MazeWalker](https://github.com/dmolony/MazeWalker/releases).
+- Download [MazeWalker and/or WizardryApp](https://github.com/dmolony/MazeWalker/releases).
 - Create executable run file.  
 
 #### MacOS or Linux shell file  
@@ -45,7 +45,7 @@ Display details for every resource on the disk.
 C:\path\to\jdk-18\bin\java.exe                    \
 --module-path C:\path\to\javafx-sdk-18\lib        \
 --add-modules=javafx.controls                     \
--jar C:\path\to\MazeWalker.jar
+-jar C:\path\to\WizardryApp.jar
 ```
 
 #### Hints
