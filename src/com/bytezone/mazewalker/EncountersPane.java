@@ -1,5 +1,6 @@
 package com.bytezone.mazewalker;
 
+import com.bytezone.wizardry.graphics.Display;
 import com.bytezone.wizardry.origin.EnemyOdds;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryData;

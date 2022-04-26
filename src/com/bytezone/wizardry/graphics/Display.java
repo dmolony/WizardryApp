@@ -1,10 +1,9 @@
-package com.bytezone.mazewalker;
+package com.bytezone.wizardry.graphics;
 
 import java.util.List;
 import java.util.Random;
 
-import com.bytezone.wizardry.graphics.FontGraphic;
-import com.bytezone.wizardry.graphics.ImageGraphic;
+import com.bytezone.mazewalker.PartyManager;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Monster;
