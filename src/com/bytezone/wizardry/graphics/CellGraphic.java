@@ -8,7 +8,7 @@ import static com.bytezone.wizardry.origin.Walls.Wall.DOOR;
 import static com.bytezone.wizardry.origin.Walls.Wall.HIDEDOOR;
 import static com.bytezone.wizardry.origin.Walls.Wall.WALL;
 
-import com.bytezone.mazewalker.gui.Walker;
+import com.bytezone.mazewalker.Walker;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Special;
