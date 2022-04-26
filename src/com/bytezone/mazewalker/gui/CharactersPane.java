@@ -2,7 +2,6 @@ package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Item;
-import com.bytezone.wizardry.origin.Possession;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
@@ -166,8 +165,8 @@ public class CharactersPane extends DataPane
     setText (textOut[EXPERIENCE], character.experience);
     setText (textOut[CRIT], character.crithitm);
     setText (textOut[HP_DAM_DICE], character.hpdamrc);
-    setText (textOut[MAGE_TOTALS], add (character.mageSpells));
-    setText (textOut[PRIEST_TOTALS], add (character.priestSpells));
+    setText (textOut[MAGE_TOTALS], getSpellCounts (character.mageSpells));
+    setText (textOut[PRIEST_TOTALS], getSpellCounts (character.priestSpells));
     setText (textOut[MYSTERY], character.mysteryBit);
 
     setText (textOut2[MAXLEVAC], character.maxlevac);
@@ -185,7 +184,8 @@ public class CharactersPane extends DataPane
     for (int i = 0; i < 8; i++)
       if (i < character.possessionsCount)
       {
-        Possession possession = character.possessions.get (i);
+        com.bytezone.wizardry.origin.Character.Possession possession =
+            character.possessions.get (i);
         Item item = wizardry.getItem (possession.id ());
         if (item == null)
         {
@@ -236,7 +236,7 @@ public class CharactersPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  private String add (int[] totals)
+  private String getSpellCounts (int[] totals)
   // ---------------------------------------------------------------------------------//
   {
     StringBuilder text = new StringBuilder ();

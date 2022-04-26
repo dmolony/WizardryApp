@@ -37,23 +37,25 @@ public class RewardPane extends DataPane
   private static final int ELEMENT = 6;
   private static final int ITEM_ODDS_2 = 7;
 
-  String[] label1Text = { "Is chest" };
-  String[] goldLabels = { "Probability", "# Dice", "Base", "Mult", "Gold min", "Gold max", };
-  String[] itemLabels = { "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
-      "Element", "Probability" };
-
   ComboBox<Reward> rewardsList = new ComboBox<> ();
 
   TextField[] textOut1;
   TextField[] gold;
   TextField[][] items = new TextField[MAX_ITEMS][];
   CheckBox[] traps;
+
   private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public RewardPane ()
   // ---------------------------------------------------------------------------------//
   {
+
+    String[] label1Text = { "Is chest" };
+    String[] goldLabels = { "Probability", "# Dice", "Base", "Mult", "Gold min", "Gold max", };
+    String[] itemLabels = { "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
+        "Element", "Probability" };
+
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width, width);
 

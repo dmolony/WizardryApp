@@ -2,7 +2,6 @@ package com.bytezone.wizardry.gui;
 
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Item;
-import com.bytezone.wizardry.origin.Possession;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
@@ -174,7 +173,8 @@ public class CharacterPane extends DataPane
     for (int i = 0; i < 8; i++)
       if (i < character.possessionsCount)
       {
-        Possession possession = character.possessions.get (i);
+        com.bytezone.wizardry.origin.Character.Possession possession =
+            character.possessions.get (i);
         Item item = wizardry.getItem (possession.id ());
         if (item == null)
         {

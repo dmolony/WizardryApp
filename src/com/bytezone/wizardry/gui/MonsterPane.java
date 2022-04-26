@@ -70,7 +70,6 @@ public class MonsterPane extends DataPane
     GridPane.setRowSpan (canvas, 7);
 
     gridPane.getChildren ().add (canvas);
-    //    gridPane.setGridLinesVisible (true);
 
     String[] label1Text = { "Name", "Plural", "Generic name", "Generic plural", "Monster class",
         "Partner", "Appear dice", "Hits dice", "Damage dice" };
@@ -168,7 +167,7 @@ public class MonsterPane extends DataPane
       }
     }
     else
-      setText (textOut4[0], rewards.get (monster.rewardLair).goldRange () + " GP");
+      setText (textOut4[0], reward.goldRange () + " GP");
 
     int resistance = monster.resistance;
     for (int i = 0; i < WizardryData.resistance.length; i++)
