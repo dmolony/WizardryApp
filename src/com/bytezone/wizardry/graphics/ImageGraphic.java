@@ -4,11 +4,10 @@ import com.bytezone.wizardry.origin.WizardryImage;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
 
 // -----------------------------------------------------------------------------------//
-public class ImageGraphic
+public class ImageGraphic extends Graphic
 // -----------------------------------------------------------------------------------//
 {
   WizardryImage image;
@@ -21,14 +20,14 @@ public class ImageGraphic
   }
 
   // ---------------------------------------------------------------------------------//
-  public void draw (Canvas canvas, int size, Color color)
+  public void draw (Canvas canvas, int size)
   // ---------------------------------------------------------------------------------//
   {
-    draw (canvas, size, color, 0, 0);
+    draw (canvas, size, 0, 0);
   }
 
   // ---------------------------------------------------------------------------------//
-  public void draw (Canvas canvas, int size, Color color, int xInset, int yInset)
+  public void draw (Canvas canvas, int size, int xInset, int yInset)
   // ---------------------------------------------------------------------------------//
   {
     GraphicsContext gc = canvas.getGraphicsContext2D ();
@@ -36,19 +35,19 @@ public class ImageGraphic
     gc.setFill (Color.BLACK);
     gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
 
-    gc.setStroke (color);
+    //    gc.setStroke (color);
 
     if (image.scenarioId == 3)
-      drawV2 (gc, size, color, xInset, yInset);
+      drawV2 (gc, size, xInset, yInset);
     else
-      drawV1 (gc, size, color, xInset, yInset);
+      drawV1 (gc, size, xInset, yInset);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawV1 (GraphicsContext gc, int size, Color color, int xInset, int yInset)
+  private void drawV1 (GraphicsContext gc, int size, int xInset, int yInset)
   // ---------------------------------------------------------------------------------//
   {
-    PixelWriter pixelWriter = gc.getPixelWriter ();
+    pixelWriter = gc.getPixelWriter ();
 
     int x = xInset;
     int y = yInset;
@@ -61,11 +60,11 @@ public class ImageGraphic
       {
         if ((bits & 1) == 1)
           if (size == 2)
-            writePixel2 (pixelWriter, x, y, color);
+            writePixel2 (x, y);
           else if (size == 3)
-            writePixel3 (pixelWriter, x, y, color);
+            writePixel3 (x, y);
           else
-            writePixel4 (pixelWriter, x, y, color);
+            writePixel4 (x, y);
 
         bits >>= 1;
         x += size;
@@ -79,11 +78,11 @@ public class ImageGraphic
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawV2 (GraphicsContext gc, int size, Color color, int xInset, int yInset)
+  private void drawV2 (GraphicsContext gc, int size, int xInset, int yInset)
   // ---------------------------------------------------------------------------------//
   {
     //    gc.translate (xInset, yInset);
-    PixelWriter pixelWriter = gc.getPixelWriter ();
+    pixelWriter = gc.getPixelWriter ();
 
     int offset = image.offset;
 
@@ -100,69 +99,16 @@ public class ImageGraphic
           {
             if ((bits & 1) == 1)
               if (size == 2)
-                writePixel2 (pixelWriter, x, y, color);
+                writePixel2 (x, y);
               else if (size == 3)
-                writePixel3 (pixelWriter, x, y, color);
+                writePixel3 (x, y);
               else
-                writePixel4 (pixelWriter, x, y, color);
+                writePixel4 (x, y);
 
             bits >>= 1;
             x += size;
           }
         }
     //    gc.translate (-xInset, -yInset);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void writePixel2 (PixelWriter pixelWriter, int x, int y, Color color)
-  // ---------------------------------------------------------------------------------//
-  {
-    pixelWriter.setColor (x, y, color);
-    pixelWriter.setColor (x + 1, y, color);
-
-    pixelWriter.setColor (x, y + 1, color);
-    pixelWriter.setColor (x + 1, y + 1, color);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void writePixel3 (PixelWriter pixelWriter, int x, int y, Color color)
-  // ---------------------------------------------------------------------------------//
-  {
-    pixelWriter.setColor (x, y, color);
-    pixelWriter.setColor (x + 1, y, color);
-    pixelWriter.setColor (x + 2, y, color);
-
-    pixelWriter.setColor (x, y + 1, color);
-    pixelWriter.setColor (x + 1, y + 1, color);
-    pixelWriter.setColor (x + 2, y + 1, color);
-
-    pixelWriter.setColor (x, y + 2, color);
-    pixelWriter.setColor (x + 1, y + 2, color);
-    pixelWriter.setColor (x + 2, y + 2, color);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private void writePixel4 (PixelWriter pixelWriter, int x, int y, Color color)
-  // ---------------------------------------------------------------------------------//
-  {
-    pixelWriter.setColor (x, y, color);
-    pixelWriter.setColor (x + 1, y, color);
-    pixelWriter.setColor (x + 2, y, color);
-    pixelWriter.setColor (x + 3, y, color);
-
-    pixelWriter.setColor (x, y + 1, color);
-    pixelWriter.setColor (x + 1, y + 1, color);
-    pixelWriter.setColor (x + 2, y + 1, color);
-    pixelWriter.setColor (x + 3, y + 1, color);
-
-    pixelWriter.setColor (x, y + 2, color);
-    pixelWriter.setColor (x + 1, y + 2, color);
-    pixelWriter.setColor (x + 2, y + 2, color);
-    pixelWriter.setColor (x + 3, y + 2, color);
-
-    pixelWriter.setColor (x, y + 3, color);
-    pixelWriter.setColor (x + 1, y + 3, color);
-    pixelWriter.setColor (x + 2, y + 3, color);
-    pixelWriter.setColor (x + 3, y + 3, color);
   }
 }

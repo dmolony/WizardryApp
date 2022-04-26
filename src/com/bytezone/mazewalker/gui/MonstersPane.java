@@ -186,6 +186,7 @@ public class MonstersPane extends DataPane
     }
 
     ImageGraphic imageGraphic = new ImageGraphic (wizardry.getImage (monster.image));
-    imageGraphic.draw (canvas, 4, Color.WHITE);
+    imageGraphic.setColor (Color.WHITE);
+    imageGraphic.draw (canvas, 4);
   }
 }

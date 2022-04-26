@@ -84,7 +84,8 @@ public class Display extends Canvas
   // ---------------------------------------------------------------------------------//
   {
     //    Image image = wizardry.getImage (GOLD);
-    gold.draw (this, IMAGE_SIZE, color, 16, 47);
+    gold.setColor (color);
+    gold.draw (this, IMAGE_SIZE, 16, 47);
 
     int row = 12;
     int column = 1;
@@ -98,7 +99,8 @@ public class Display extends Canvas
   // ---------------------------------------------------------------------------------//
   {
     //    Image image = wizardry.getImage (CHEST);
-    chest.draw (this, IMAGE_SIZE, color, 16, 47);
+    chest.setColor (color);
+    chest.draw (this, IMAGE_SIZE, 16, 47);
 
     int column = 13;
 
@@ -123,7 +125,8 @@ public class Display extends Canvas
 
     //    Image image = wizardry.getImage (monster.image);
     ImageGraphic image = new ImageGraphic (wizardry.getImage (monster.image));
-    image.draw (this, IMAGE_SIZE, color, 16, 47);
+    image.setColor (color);
+    image.draw (this, IMAGE_SIZE, 16, 47);
 
     int howMany = monster.getGroupSize (mazeLevel);
 
