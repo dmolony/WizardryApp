@@ -2,7 +2,7 @@ package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.EnemyOdds;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -26,7 +26,7 @@ public class EncountersPane extends DataPane
   Display display;
 
   // ---------------------------------------------------------------------------------//
-  public EncountersPane (WizardryOrigin wizardry, Stage stage)
+  public EncountersPane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);

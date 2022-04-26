@@ -6,7 +6,7 @@ import static com.bytezone.wizardry.origin.Walls.Wall.OPEN;
 
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Walls.Wall;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -27,10 +27,10 @@ public class ViewPane extends Canvas implements MovementListener
   private static final int RIGHT_1 = 3;
   private static final int RIGHT_2 = 4;
 
-  WizardryOrigin wizardry;
+  WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
-  public ViewPane (WizardryOrigin wizardry)
+  public ViewPane (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     super (400, 400);

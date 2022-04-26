@@ -12,7 +12,7 @@ import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Walls.Wall;
-import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
+import com.bytezone.wizardry.origin.WizardryData.Direction;
 
 // -----------------------------------------------------------------------------------//
 public class Walker

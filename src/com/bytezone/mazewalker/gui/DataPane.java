@@ -2,7 +2,7 @@ package com.bytezone.mazewalker.gui;
 
 import java.util.Collection;
 
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
@@ -28,7 +28,7 @@ public class DataPane extends BasePane
   GridPane gridPane = new GridPane ();
 
   // ---------------------------------------------------------------------------------//
-  public DataPane (WizardryOrigin wizardry, Stage stage)
+  public DataPane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);

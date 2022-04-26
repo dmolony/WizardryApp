@@ -12,7 +12,7 @@ import com.bytezone.appbase.StatusBar;
 import com.bytezone.mazewalker.gui.RecentFiles;
 import com.bytezone.mazewalker.gui.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.origin.Utility;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -40,7 +40,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
 
   private RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
   private String wizardryFileName;
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
   private WizardryTabPane wizardryTabPane;
 
   private List<ScenarioChangeListener> listeners = new ArrayList<> ();
@@ -134,7 +134,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   private void setWizardryDisk ()
   // ---------------------------------------------------------------------------------//
   {
-    wizardry = new WizardryOrigin (wizardryFileName);
+    wizardry = new WizardryData (wizardryFileName);
     recentFiles.addLastFileName (wizardryFileName);
 
     for (ScenarioChangeListener listener : listeners)

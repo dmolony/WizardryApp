@@ -1,7 +1,7 @@
 package com.bytezone.wizardry.gui;
 
 import com.bytezone.appbase.TextTabBase;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
@@ -45,7 +45,7 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
 
   // ---------------------------------------------------------------------------------//
   @Override
-  public void scenarioChanged (WizardryOrigin wizardry)
+  public void scenarioChanged (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     text.setText (wizardry.getScenarioName ());

@@ -4,7 +4,7 @@ import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.TabBase;
 import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -58,7 +58,7 @@ public class CharactersTab extends TabBase implements ScenarioChangeListener
 
   // ---------------------------------------------------------------------------------//
   @Override
-  public void scenarioChanged (WizardryOrigin wizardry)
+  public void scenarioChanged (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     characterPane.setWizardry (wizardry);

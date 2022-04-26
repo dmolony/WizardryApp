@@ -12,8 +12,8 @@ import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.Utility;
-import com.bytezone.wizardry.origin.WizardryOrigin;
-import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
+import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.origin.WizardryData.Direction;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -71,7 +71,7 @@ public class MazeWalker extends AppBase
   private ScrollPane sp = new ScrollPane (text);
 
   private final BorderPane mainPane = new BorderPane ();
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   private Walker[] walker;
   private Walker currentWalker;
@@ -162,7 +162,7 @@ public class MazeWalker extends AppBase
   private void setWizardryDisk ()
   // ---------------------------------------------------------------------------------//
   {
-    wizardry = new WizardryOrigin (wizardryFileName);
+    wizardry = new WizardryData (wizardryFileName);
     recentFiles.addLastFileName (wizardryFileName);
 
     primaryStage.setTitle (Utility.removeUserName (wizardryFileName));

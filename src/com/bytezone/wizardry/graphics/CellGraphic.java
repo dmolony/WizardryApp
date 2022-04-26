@@ -13,7 +13,7 @@ import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.Walls;
-import com.bytezone.wizardry.origin.WizardryOrigin.Direction;
+import com.bytezone.wizardry.origin.WizardryData.Direction;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

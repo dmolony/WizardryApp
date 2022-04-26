@@ -3,7 +3,7 @@ package com.bytezone.wizardry.gui;
 import com.bytezone.mazewalker.gui.Display;
 import com.bytezone.wizardry.origin.EnemyOdds;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -23,7 +23,7 @@ public class EncounterPane extends DataPane
   TextField[][] textOut2 = new TextField[MAX_GROUPS * 2][];
 
   Display display;
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public EncounterPane ()
@@ -62,7 +62,7 @@ public class EncounterPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

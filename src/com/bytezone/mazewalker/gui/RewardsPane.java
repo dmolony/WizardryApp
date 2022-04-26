@@ -5,7 +5,7 @@ import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.RewardDetails;
 import com.bytezone.wizardry.origin.RewardDetails.GoldReward;
 import com.bytezone.wizardry.origin.RewardDetails.ItemReward;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -52,7 +52,7 @@ public class RewardsPane extends DataPane
   CheckBox[] traps;
 
   // ---------------------------------------------------------------------------------//
-  public RewardsPane (WizardryOrigin wizardry, Stage stage)
+  public RewardsPane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);
@@ -91,7 +91,7 @@ public class RewardsPane extends DataPane
       items[i] = createTextFields (8, new DataPlacement (i + 1, 10, Pos.CENTER_LEFT, 1));
 
     // traps
-    traps = createCheckBoxes (WizardryOrigin.trapType, 2, 1);
+    traps = createCheckBoxes (WizardryData.trapType, 2, 1);
 
     rewardsList.getSelectionModel ().select (0);
   }
@@ -122,7 +122,7 @@ public class RewardsPane extends DataPane
     }
 
     // erase traps
-    for (int j = 0; j < WizardryOrigin.trapType.length; j++)
+    for (int j = 0; j < WizardryData.trapType.length; j++)
       traps[j].setSelected (false);
 
     setText (textOut1[IS_CHEST], reward.isChest);
@@ -166,7 +166,7 @@ public class RewardsPane extends DataPane
       }
 
       int trap = reward.trapTypeFlags;
-      for (int j = 0; j < WizardryOrigin.trapType.length; j++)
+      for (int j = 0; j < WizardryData.trapType.length; j++)
       {
         traps[j].setSelected ((trap & 0x01) != 0);
         trap >>>= 1;

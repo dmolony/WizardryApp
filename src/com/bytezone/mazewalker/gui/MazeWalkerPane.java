@@ -4,7 +4,7 @@ import com.bytezone.wizardry.graphics.CellGraphic;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 public class MazeWalkerPane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
-  WizardryOrigin wizardry;
+  WizardryData wizardry;
 
   int currentLevel = -1;
   int currentRow;
@@ -24,7 +24,7 @@ public class MazeWalkerPane extends Canvas implements MovementListener
   private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
   // ---------------------------------------------------------------------------------//
-  public MazeWalkerPane (WizardryOrigin wizardry)
+  public MazeWalkerPane (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     super (808, 808);

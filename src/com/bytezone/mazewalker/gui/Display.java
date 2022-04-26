@@ -9,7 +9,7 @@ import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.PartyManager;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,7 +23,7 @@ public class Display extends Canvas
   private final static int GOLD = 19;
   private final static int IMAGE_SIZE = 2;
 
-  private final WizardryOrigin wizardry;
+  private final WizardryData wizardry;
 
   private final FontGraphic alphabet;
   private final FontGraphic graphics;
@@ -37,7 +37,7 @@ public class Display extends Canvas
   private Color color = Color.PALEGREEN;
 
   // ---------------------------------------------------------------------------------//
-  public Display (WizardryOrigin wizardry)
+  public Display (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     super (565, 390);

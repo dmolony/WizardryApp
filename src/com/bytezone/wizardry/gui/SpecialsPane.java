@@ -2,7 +2,7 @@ package com.bytezone.wizardry.gui;
 
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -21,7 +21,7 @@ public class SpecialsPane extends DataPane
   TextField[] textOut7;
   TextField[] textOut8;
 
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public SpecialsPane ()
@@ -59,7 +59,7 @@ public class SpecialsPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

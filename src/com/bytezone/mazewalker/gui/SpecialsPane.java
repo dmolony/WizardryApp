@@ -2,7 +2,7 @@ package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -26,7 +26,7 @@ public class SpecialsPane extends DataPane
   TextField[] textOut8;
 
   // ---------------------------------------------------------------------------------//
-  public SpecialsPane (WizardryOrigin wizardry, Stage stage)
+  public SpecialsPane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);

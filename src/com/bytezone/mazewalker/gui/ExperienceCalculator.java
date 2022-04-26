@@ -1,7 +1,7 @@
 package com.bytezone.mazewalker.gui;
 
 import com.bytezone.wizardry.origin.Monster;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -40,7 +40,7 @@ public class ExperienceCalculator extends DataPane
   ComboBox<Monster> monsters = new ComboBox<> ();
 
   // ---------------------------------------------------------------------------------//
-  public ExperienceCalculator (WizardryOrigin wizardry, Stage stage)
+  public ExperienceCalculator (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);

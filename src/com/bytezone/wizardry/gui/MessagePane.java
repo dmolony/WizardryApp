@@ -5,7 +5,7 @@ import java.util.List;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 public class MessagePane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   TextField[] textOut1;
   TextField[] textOut2;
@@ -48,7 +48,7 @@ public class MessagePane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

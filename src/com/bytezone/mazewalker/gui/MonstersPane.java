@@ -6,7 +6,7 @@ import com.bytezone.wizardry.graphics.ImageGraphic;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.Reward.ItemRange;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -58,7 +58,7 @@ public class MonstersPane extends DataPane
   private final Canvas canvas;
 
   // ---------------------------------------------------------------------------------//
-  public MonstersPane (WizardryOrigin wizardry, Stage stage)
+  public MonstersPane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);
@@ -101,11 +101,11 @@ public class MonstersPane extends DataPane
 
     // resistance
     createLabel ("Resistance", 6, 0, HPos.RIGHT, 2);
-    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 6, 1);
+    checkBoxes1 = createCheckBoxes (WizardryData.resistance, 6, 1);
 
     // properties
     createLabel ("Property", 8, 0, HPos.RIGHT, 2);
-    checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 8, 1);
+    checkBoxes2 = createCheckBoxes (WizardryData.property, 8, 1);
 
     monstersList.getSelectionModel ().select (0);
   }
@@ -116,7 +116,7 @@ public class MonstersPane extends DataPane
   {
     setText (textOut1[NAME_PLURAL], monster.namePlural);
     setText (textOut1[GENERIC_NAME], monster.genericName);
-    setText (textOut1[MONSTER_CLASS], WizardryOrigin.monsterClass[monster.monsterClass]);
+    setText (textOut1[MONSTER_CLASS], WizardryData.monsterClass[monster.monsterClass]);
     setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
     setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
     setText (textOut1[HP_DICE], monster.hitPoints.toString ());
@@ -172,14 +172,14 @@ public class MonstersPane extends DataPane
       setText (textOut4[0], rewards.get (monster.rewardLair).goldRange () + " GP");
 
     int resistance = monster.resistance;
-    for (int i = 0; i < WizardryOrigin.resistance.length; i++)
+    for (int i = 0; i < WizardryData.resistance.length; i++)
     {
       checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
       resistance >>>= 1;
     }
 
     int property = monster.properties;
-    for (int i = 0; i < WizardryOrigin.property.length; i++)
+    for (int i = 0; i < WizardryData.property.length; i++)
     {
       checkBoxes2[i].setSelected ((property & 0x01) != 0);
       property >>>= 1;

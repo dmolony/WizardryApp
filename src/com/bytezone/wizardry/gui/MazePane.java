@@ -2,7 +2,7 @@ package com.bytezone.wizardry.gui;
 
 import com.bytezone.wizardry.graphics.CellGraphic;
 import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 public class MazePane extends Canvas
 // -----------------------------------------------------------------------------------//
 {
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
   private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
   // ---------------------------------------------------------------------------------//
@@ -28,7 +28,7 @@ public class MazePane extends Canvas
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

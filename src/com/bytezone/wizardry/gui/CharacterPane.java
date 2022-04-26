@@ -3,7 +3,7 @@ package com.bytezone.wizardry.gui;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.Possession;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -53,7 +53,7 @@ public class CharacterPane extends DataPane
   CheckBox[] checkBox5;
   CheckBox[] checkBox6;
 
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public CharacterPane ()
@@ -120,11 +120,11 @@ public class CharacterPane extends DataPane
     String[] priestSpells2 = new String[8];
 
     for (int i = 0; i < mageSpells.length; i++)
-      mageSpells[i] = WizardryOrigin.spells[i];
+      mageSpells[i] = WizardryData.spells[i];
     for (int i = 0; i < priestSpells1.length; i++)
-      priestSpells1[i] = WizardryOrigin.spells[21 + i];
+      priestSpells1[i] = WizardryData.spells[21 + i];
     for (int i = 0; i < priestSpells2.length; i++)
-      priestSpells2[i] = WizardryOrigin.spells[42 + i];
+      priestSpells2[i] = WizardryData.spells[42 + i];
 
     checkBox1 = createCheckBoxes (mageSpells, 8, 1);
     checkBox2 = createCheckBoxes (priestSpells1, 10, 1);
@@ -132,7 +132,7 @@ public class CharacterPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

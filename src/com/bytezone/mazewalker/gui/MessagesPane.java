@@ -3,7 +3,7 @@ package com.bytezone.mazewalker.gui;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.Message;
 import com.bytezone.wizardry.origin.Messages;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -22,7 +22,7 @@ public class MessagesPane extends DataPane
   TextArea textOut3;
 
   // ---------------------------------------------------------------------------------//
-  public MessagesPane (WizardryOrigin wizardry, Stage stage)
+  public MessagesPane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     super (wizardry, stage);

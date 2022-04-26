@@ -6,7 +6,7 @@ import com.bytezone.wizardry.graphics.ImageGraphic;
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.Reward.ItemRange;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -55,7 +55,7 @@ public class MonsterPane extends DataPane
   private final CheckBox[] checkBoxes2;
 
   private final Canvas canvas;
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public MonsterPane ()
@@ -93,15 +93,15 @@ public class MonsterPane extends DataPane
 
     // resistance
     createLabel ("Resistance", 2, 10, HPos.RIGHT, 2);
-    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 2, 11);
+    checkBoxes1 = createCheckBoxes (WizardryData.resistance, 2, 11);
 
     // properties
     createLabel ("Property", 4, 10, HPos.RIGHT, 2);
-    checkBoxes2 = createCheckBoxes (WizardryOrigin.property, 4, 11);
+    checkBoxes2 = createCheckBoxes (WizardryData.property, 4, 11);
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
@@ -115,7 +115,7 @@ public class MonsterPane extends DataPane
     setText (textOut1[NAME_PLURAL], monster.namePlural);
     setText (textOut1[GENERIC_NAME], monster.genericName);
     setText (textOut1[GENERIC_NAME_PLURAL], monster.genericNamePlural);
-    setText (textOut1[MONSTER_CLASS], WizardryOrigin.monsterClass[monster.monsterClass]);
+    setText (textOut1[MONSTER_CLASS], WizardryData.monsterClass[monster.monsterClass]);
     setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
     setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
     setText (textOut1[HP_DICE], monster.hitPoints.toString ());
@@ -171,14 +171,14 @@ public class MonsterPane extends DataPane
       setText (textOut4[0], rewards.get (monster.rewardLair).goldRange () + " GP");
 
     int resistance = monster.resistance;
-    for (int i = 0; i < WizardryOrigin.resistance.length; i++)
+    for (int i = 0; i < WizardryData.resistance.length; i++)
     {
       checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
       resistance >>>= 1;
     }
 
     int property = monster.properties;
-    for (int i = 0; i < WizardryOrigin.property.length; i++)
+    for (int i = 0; i < WizardryData.property.length; i++)
     {
       checkBoxes2[i].setSelected ((property & 0x01) != 0);
       property >>>= 1;

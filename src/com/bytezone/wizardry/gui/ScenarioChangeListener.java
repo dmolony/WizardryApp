@@ -1,10 +1,10 @@
 package com.bytezone.wizardry.gui;
 
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 // -----------------------------------------------------------------------------------//
 public interface ScenarioChangeListener
 // -----------------------------------------------------------------------------------//
 {
-  public void scenarioChanged (WizardryOrigin wizardry);
+  public void scenarioChanged (WizardryData wizardry);
 }

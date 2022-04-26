@@ -1,6 +1,6 @@
 package com.bytezone.mazewalker.gui;
 
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -9,11 +9,11 @@ import javafx.stage.Stage;
 public class BasePane extends Pane
 // -----------------------------------------------------------------------------------//
 {
-  WizardryOrigin wizardry;
+  WizardryData wizardry;
   Stage stage;
 
   // ---------------------------------------------------------------------------------//
-  public BasePane (WizardryOrigin wizardry, Stage stage)
+  public BasePane (WizardryData wizardry, Stage stage)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

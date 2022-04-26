@@ -1,7 +1,7 @@
 package com.bytezone.wizardry.gui;
 
 import com.bytezone.wizardry.origin.Item;
-import com.bytezone.wizardry.origin.WizardryOrigin;
+import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -46,7 +46,7 @@ public class ItemPane extends DataPane
   CheckBox[] checkBoxes2;
   CheckBox[] checkBoxes3;
   CheckBox[] checkBoxes4;
-  private WizardryOrigin wizardry;
+  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public ItemPane ()
@@ -70,20 +70,20 @@ public class ItemPane extends DataPane
     textOut2 = createTextFields (label2Text, lp2, dp2);
 
     // used by
-    checkBoxes2 = createCheckBoxes (WizardryOrigin.characterClass, 3, 1);
+    checkBoxes2 = createCheckBoxes (WizardryData.characterClass, 3, 1);
 
     // resistance
-    checkBoxes1 = createCheckBoxes (WizardryOrigin.resistance, 3, 11);
+    checkBoxes1 = createCheckBoxes (WizardryData.resistance, 3, 11);
 
     // protection vs
-    checkBoxes3 = createCheckBoxes (WizardryOrigin.monsterClass, 5, 1);
+    checkBoxes3 = createCheckBoxes (WizardryData.monsterClass, 5, 1);
 
     // purposed vs
     checkBoxes4 = createCheckBoxes (checkBoxes3.length, 7, 1);
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryOrigin wizardry)
+  public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
@@ -104,7 +104,7 @@ public class ItemPane extends DataPane
     setText (textOut1[DAMAGE_DICE], item.wephpdam);
 
     if (item.spellPwr > 0)
-      setText (textOut1[SPELL_POWER], WizardryOrigin.spells[item.spellPwr - 1]);
+      setText (textOut1[SPELL_POWER], WizardryData.spells[item.spellPwr - 1]);
     else
       setText (textOut1[SPELL_POWER], "");
 
@@ -120,7 +120,7 @@ public class ItemPane extends DataPane
 
     int protection = item.wepvsty2Flags;
     int purposed = item.wepvstyFlags;
-    for (int i = 0; i < WizardryOrigin.monsterClass.length; i++)
+    for (int i = 0; i < WizardryData.monsterClass.length; i++)
     {
       checkBoxes3[i].setSelected ((protection & 0x01) != 0);
       checkBoxes4[i].setSelected ((purposed & 0x01) != 0);
@@ -130,14 +130,14 @@ public class ItemPane extends DataPane
     }
 
     int resistance = item.wepvsty3Flags;
-    for (int i = 0; i < WizardryOrigin.resistance.length; i++)
+    for (int i = 0; i < WizardryData.resistance.length; i++)
     {
       checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
       resistance >>>= 1;
     }
 
     int characterClass = item.classUseFlags;
-    for (int i = 0; i < WizardryOrigin.characterClass.length; i++)
+    for (int i = 0; i < WizardryData.characterClass.length; i++)
     {
       checkBoxes2[i].setSelected ((characterClass & 0x01) != 0);
       characterClass >>>= 1;
