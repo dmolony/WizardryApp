@@ -171,6 +171,7 @@ public class Walker
       case EAST -> Direction.NORTH;
       case WEST -> Direction.SOUTH;
     };
+
     notifyListeners ();
   }
 
@@ -185,6 +186,7 @@ public class Walker
       case EAST -> Direction.SOUTH;
       case WEST -> Direction.NORTH;
     };
+
     notifyListeners ();
   }
 

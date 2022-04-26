@@ -35,8 +35,6 @@ public class ImageGraphic extends Graphic
     gc.setFill (Color.BLACK);
     gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
 
-    //    gc.setStroke (color);
-
     if (image.scenarioId == 3)
       drawV2 (gc, size, xInset, yInset);
     else

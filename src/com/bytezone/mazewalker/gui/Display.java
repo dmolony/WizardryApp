@@ -83,7 +83,6 @@ public class Display extends Canvas
   private void drawGold (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
-    //    Image image = wizardry.getImage (GOLD);
     gold.setColor (color);
     gold.draw (this, IMAGE_SIZE, 16, 47);
 
@@ -98,7 +97,6 @@ public class Display extends Canvas
   private void drawChest (GraphicsContext gc, Color color)
   // ---------------------------------------------------------------------------------//
   {
-    //    Image image = wizardry.getImage (CHEST);
     chest.setColor (color);
     chest.draw (this, IMAGE_SIZE, 16, 47);
 
