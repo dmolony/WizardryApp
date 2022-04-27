@@ -44,11 +44,11 @@ public class Display extends Canvas
 
     alphabet = new FontGraphic (wizardry.getFonts ().get (0));
     graphics = new FontGraphic (wizardry.getFonts ().get (1));
-    monsters = wizardry.getMonsters ();
 
     gold = new ImageGraphic (wizardry.getImage (GOLD));
     chest = new ImageGraphic (wizardry.getImage (CHEST));
 
+    monsters = wizardry.getMonsters ();
     party = new PartyManager (wizardry).getParty ();
   }
 

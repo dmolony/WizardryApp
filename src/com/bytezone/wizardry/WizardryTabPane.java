@@ -10,7 +10,7 @@ public class WizardryTabPane extends TabPaneBase
 {
   CharactersTab charactersTab = new CharactersTab ("Characters", KeyCode.C);
   MonstersTab monstersTab = new MonstersTab ("Monsters", KeyCode.M);
-  SummaryTab summaryTab = new SummaryTab ("Disk", KeyCode.D);
+  SummaryTab headerTab = new SummaryTab ("Header", KeyCode.H);
   ItemsTab itemsTab = new ItemsTab ("Items", KeyCode.I);
   SpecialsTab specialsTab = new SpecialsTab ("Specials", KeyCode.S);
   RewardsTab rewardsTab = new RewardsTab ("Rewards", KeyCode.R);
@@ -24,8 +24,8 @@ public class WizardryTabPane extends TabPaneBase
   {
     super (prefsId);
 
-    addAll (summaryTab, charactersTab, monstersTab, itemsTab, specialsTab, rewardsTab,
-        encountersTab, messagesTab, mazeTab);
+    addAll (headerTab, charactersTab, monstersTab, itemsTab, specialsTab, rewardsTab, encountersTab,
+        messagesTab, mazeTab);
 
     setDefaultTab (2);
   }

@@ -3,23 +3,46 @@ package com.bytezone.wizardry;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.TabBase;
+import com.bytezone.wizardry.origin.Location;
+import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
+import com.bytezone.wizardry.origin.Special;
 import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.origin.WizardryData.Direction;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 //-----------------------------------------------------------------------------------//
-public class MazeTab extends TabBase implements ScenarioChangeListener
+public class MazeTab extends TabBase implements ScenarioChangeListener, MovementListener
 //-----------------------------------------------------------------------------------//
 {
   private static final String PREFS_INDEX = "MazeIndex";
 
   private ListView<MazeLevel> mazeLevels = new ListView<> ();
+
   private MazePane mazePane = new MazePane ();
+  private ViewPane viewPane = new ViewPane ();
+
+  private Walker[] walker;
+  private Walker currentWalker;
+
+  private WizardryData wizardry;
+
+  private Text text = new Text ();
+  private ScrollPane sp = new ScrollPane (text);
+  private VBox leftVBox = new VBox (10);
 
   // ---------------------------------------------------------------------------------//
   public MazeTab (String title, KeyCode keyCode)
@@ -27,10 +50,17 @@ public class MazeTab extends TabBase implements ScenarioChangeListener
   {
     super (title, keyCode);
 
+    leftVBox.setPadding (new Insets (10));
+
+    text.setFont (new Font ("Courier new", 14));
+    sp.setStyle ("-fx-background-color:transparent;");
+
     BorderPane layout = new BorderPane ();
     setContent (layout);
+
     layout.setLeft (mazeLevels);
     layout.setCenter (mazePane);
+    layout.setRight (leftVBox);
 
     mazeLevels.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<MazeLevel> ()
@@ -40,7 +70,10 @@ public class MazeTab extends TabBase implements ScenarioChangeListener
               MazeLevel new_val)
           {
             if (new_val != null)
+            {
               mazePane.update (new_val);
+              setLevel (new_val.displayLevel - 1);
+            }
           }
         });
   }
@@ -54,6 +87,7 @@ public class MazeTab extends TabBase implements ScenarioChangeListener
       return;
 
     setValid (true);
+
   }
 
   // ---------------------------------------------------------------------------------//
@@ -61,13 +95,112 @@ public class MazeTab extends TabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
+    this.wizardry = wizardry;
+
     mazePane.setWizardry (wizardry);
+    viewPane.setWizardry (wizardry);
+
+    mazePane.setOnMouseClicked (e -> mouseClick (e));
+    mazePane.setOnMouseEntered (e -> mazePane.setCursor (Cursor.HAND));
+    mazePane.setOnMouseExited (e -> mazePane.setCursor (Cursor.DEFAULT));
+
+    leftVBox.getChildren ().clear ();
+    leftVBox.getChildren ().addAll (viewPane, sp);
+
+    int levels = wizardry.getMazeLevels ().size ();
+    walker = new Walker[levels];
+
+    for (int i = 0; i < levels; i++)
+    {
+      walker[i] = new Walker (wizardry.getMazeLevels ().get (i), Direction.NORTH,
+          new Location (i + 1, 0, 0));
+      walker[i].addWalkerListener (mazePane);
+      walker[i].addWalkerListener (viewPane);
+      walker[i].addWalkerListener (this);
+    }
 
     mazeLevels.getItems ().clear ();
     mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
     mazeLevels.getSelectionModel ().select (0);
 
     refresh ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void mouseClick (MouseEvent e)
+  // ---------------------------------------------------------------------------------//
+  {
+    Location location = mazePane.getLocation (e.getX (), e.getY ());
+    currentWalker.setLocation (location);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void walkerMoved (Walker walker)
+  // ---------------------------------------------------------------------------------//
+  {
+    StringBuilder description = new StringBuilder ();
+
+    description.append (currentWalker.toString ());
+
+    MazeCell currentMazeCell = currentWalker.getCurrentMazeCell ();
+    Special special = currentMazeCell.getSpecial ();
+
+    if (special != null)
+    {
+      int[] aux = special.getAux ();
+      description.append ("\n\n" + special + "\n\n");
+
+      if (special.isMessage ())
+      {
+        description.append (wizardry.getMessageText (aux[1]));
+        description.append ("\n\n");
+      }
+      description.append (special.getText ());
+    }
+
+    if (currentMazeCell.getLair ())
+      description.append ("\n\nLAIR");
+
+    text.setText (description.toString ());
+  }
+
+  // ---------------------------------------------------------------------------------//
+  protected void keyPressed (KeyEvent keyEvent)
+  // ---------------------------------------------------------------------------------//
+  {
+    if (keyEvent.isMetaDown ())
+      return;
+
+    switch (keyEvent.getCode ())
+    {
+      case A:
+        currentWalker.turnLeft ();
+        break;
+
+      case W:
+        currentWalker.forward ();
+        break;
+
+      case D:
+        currentWalker.turnRight ();
+        break;
+
+      case S:
+        currentWalker.back ();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void setLevel (int level)
+  // ---------------------------------------------------------------------------------//
+  {
+    currentWalker = walker[level];
+    currentWalker.activate ();
   }
 
   // ---------------------------------------------------------------------------------//

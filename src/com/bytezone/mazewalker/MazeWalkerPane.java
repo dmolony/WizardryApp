@@ -71,7 +71,7 @@ public class MazeWalkerPane extends Canvas implements MovementListener
 
     MazeCell cell = walker.mazeLevel.getMazeCell (walker.location);
     //    cell.drawWalker (gc, walker.location, walker.direction);
-    cellGraphic.drawWalker (cell, walker);
+    cellGraphic.drawWalker (cell, walker.direction, walker.location);
 
     currentRow = walker.location.getRow ();
     currentColumn = walker.location.getColumn ();

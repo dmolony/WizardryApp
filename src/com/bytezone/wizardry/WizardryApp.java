@@ -91,22 +91,34 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   {
     super.keyPressed (keyEvent);
 
+    //    switch (keyEvent.getCode ())
+    //    {
+    //      case C:       // characters
+    //      case H:       // header
+    //      case M:       // monsters
+    //      case I:       // items
+    //      case E:       // encounters
+    //      case R:       // rewards
+    //      case S:       // specials
+    //      case T:       // messages
+    //      case L:       // maze levels
+    //        wizardryTabPane.keyPressed (keyEvent);
+    //        break;
+    //
+    //      default:
+    //        break;
+    //    }
+
     switch (keyEvent.getCode ())
     {
-      case C:       // characters
-      case D:       // disk
-      case M:       // monsters
-      case I:       // items
-      case E:       // encounters
-      case R:       // rewards
-      case S:       // specials
-      case T:       // messages
-      case L:       // maze levels
-        wizardryTabPane.keyPressed (keyEvent);
+      case A:
+      case S:
+      case D:
+      case W:
+        wizardryTabPane.mazeTab.keyPressed (keyEvent);
         break;
 
       default:
-        break;
     }
   }
 

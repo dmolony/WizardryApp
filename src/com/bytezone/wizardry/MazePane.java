@@ -1,6 +1,8 @@
 package com.bytezone.wizardry;
 
 import com.bytezone.wizardry.graphics.CellGraphic;
+import com.bytezone.wizardry.origin.Location;
+import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.WizardryData;
 
@@ -10,10 +12,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 // -----------------------------------------------------------------------------------//
-public class MazePane extends Canvas
+public class MazePane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
   private WizardryData wizardry;
+  int currentLevel = -1;
+  int currentRow;
+  int currentColumn;
   private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
   // ---------------------------------------------------------------------------------//
@@ -32,6 +37,46 @@ public class MazePane extends Canvas
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Location getLocation (double x, double y)
+  // ---------------------------------------------------------------------------------//
+  {
+    int row = (int) ((getHeight () - y - MazeCell.INSET) / MazeCell.CELL_SIZE);
+    int column = (int) ((x - MazeCell.INSET) / MazeCell.CELL_SIZE);
+
+    return new Location (0, column, row);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public void walkerMoved (Walker walker)
+  // ---------------------------------------------------------------------------------//
+  {
+    GraphicsContext gc = getGraphicsContext2D ();
+
+    if (currentLevel == walker.location.getLevel ())
+    {
+      MazeCell cell =
+          walker.mazeLevel.getMazeCell (new Location (currentLevel, currentColumn, currentRow));
+      cellGraphic.draw (cell);
+    }
+    else
+    {
+      currentLevel = walker.location.getLevel ();
+      gc.setFill (Color.LIGHTGRAY);
+      gc.fillRect (0, 0, getWidth (), getHeight ());
+
+      update (walker.mazeLevel);
+    }
+
+    MazeCell cell = walker.mazeLevel.getMazeCell (walker.location);
+
+    cellGraphic.drawWalker (cell, walker.direction, walker.location);
+
+    currentRow = walker.location.getRow ();
+    currentColumn = walker.location.getColumn ();
   }
 
   // ---------------------------------------------------------------------------------//
