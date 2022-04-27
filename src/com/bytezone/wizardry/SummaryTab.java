@@ -6,6 +6,7 @@ import com.bytezone.wizardry.origin.WizardryData;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -24,6 +25,7 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
     super (title, keyCode);
 
     textFlow.setLineSpacing (1);
+    text.setFont (Font.font (java.awt.Font.MONOSPACED, 14));
 
     scrollPane.setPadding (new Insets (5, 5, 5, 5));
     scrollPane.setStyle ("-fx-background: white;-fx-border-color: lightgray;");
@@ -48,7 +50,7 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
   public void scenarioChanged (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    text.setText (wizardry.getScenarioName ());
+    text.setText (wizardry.getHeader ().toString ());
 
     refresh ();
   }
