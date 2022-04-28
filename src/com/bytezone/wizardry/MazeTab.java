@@ -35,7 +35,7 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
   private MazePane mazePane = new MazePane ();
   private ViewPane viewPane = new ViewPane ();
 
-  private Walker[] walker;
+  private Walker[] walkers;
   private Walker currentWalker;
 
   private WizardryData wizardry;
@@ -43,6 +43,8 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
   private Text text = new Text ();
   private ScrollPane sp = new ScrollPane (text);
   private VBox leftVBox = new VBox (10);
+
+  private boolean initialising = true;
 
   // ---------------------------------------------------------------------------------//
   public MazeTab (String title, KeyCode keyCode)
@@ -108,20 +110,21 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
     leftVBox.getChildren ().addAll (viewPane, sp);
 
     int levels = wizardry.getMazeLevels ().size ();
-    walker = new Walker[levels];
+    walkers = new Walker[levels];
 
     for (int i = 0; i < levels; i++)
     {
-      walker[i] = new Walker (wizardry.getMazeLevels ().get (i), Direction.NORTH,
+      walkers[i] = new Walker (wizardry.getMazeLevels ().get (i), Direction.NORTH,
           new Location (i + 1, 0, 0));
-      walker[i].addWalkerListener (mazePane);
-      walker[i].addWalkerListener (viewPane);
-      walker[i].addWalkerListener (this);
+      walkers[i].addWalkerListener (mazePane);
+      walkers[i].addWalkerListener (viewPane);
+      walkers[i].addWalkerListener (this);
     }
 
     mazeLevels.getItems ().clear ();
     mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
-    mazeLevels.getSelectionModel ().select (0);
+    if (!initialising)
+      mazeLevels.getSelectionModel ().select (0);
 
     refresh ();
   }
@@ -199,8 +202,8 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
   private void setLevel (int level)
   // ---------------------------------------------------------------------------------//
   {
-    currentWalker = walker[level];
-    currentWalker.activate ();
+    currentWalker = walkers[level];
+    currentWalker.activate ();      // calls notifyListeners
   }
 
   // ---------------------------------------------------------------------------------//
@@ -210,6 +213,9 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
   {
     int index = mazeLevels.getSelectionModel ().getSelectedIndex ();
     prefs.putInt (PREFS_INDEX, index);
+
+    for (Walker walker : walkers)
+      walker.save (prefs);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -217,8 +223,12 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
   public void restore (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
+    for (Walker walker : walkers)
+      walker.restore (prefs);
+
     int index = prefs.getInt (PREFS_INDEX, -1);
-    if (index >= 0)
-      mazeLevels.getSelectionModel ().select (index);
+    mazeLevels.getSelectionModel ().select (index < 0 ? 0 : index);
+
+    initialising = false;
   }
 }

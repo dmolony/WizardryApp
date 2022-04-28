@@ -60,13 +60,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
     wizardryTabPane = new WizardryTabPane ("Wizardry");
 
     for (Tab tab : wizardryTabPane.getTabs ())
-    {
-      if (tab instanceof ScenarioChangeListener scenarioChangeListener)
-        addScenarioChangeListener (scenarioChangeListener);
-
-      if (tab instanceof SaveState saveState)       // none are yet
-        saveStateList.add (saveState);
-    }
+      addScenarioChangeListener ((ScenarioChangeListener) tab);
 
     saveStateList.addAll (Arrays.asList (this, wizardryTabPane));
     recentFiles.addListener (this);

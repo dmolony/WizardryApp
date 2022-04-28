@@ -35,8 +35,6 @@ public class ViewPane extends Canvas implements MovementListener
   {
     super (400, 400);
 
-    //    this.wizardry = wizardry;
-
     GraphicsContext gc = getGraphicsContext2D ();
     gc.setFill (Color.LIGHTGRAY);
     gc.setFont (Font.font (20));
@@ -50,7 +48,8 @@ public class ViewPane extends Canvas implements MovementListener
   }
 
   // ---------------------------------------------------------------------------------//
-  private void drawView (Walker walker)
+  @Override
+  public void walkerMoved (Walker walker)
   // ---------------------------------------------------------------------------------//
   {
     GraphicsContext gc = getGraphicsContext2D ();
@@ -225,13 +224,5 @@ public class ViewPane extends Canvas implements MovementListener
       gc.setStroke (wall == DOOR ? Color.BLACK : Color.BLUE);
       gc.strokePolygon (xx, yy, xx.length);
     }
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public void walkerMoved (Walker walker)
-  // ---------------------------------------------------------------------------------//
-  {
-    drawView (walker);
   }
 }

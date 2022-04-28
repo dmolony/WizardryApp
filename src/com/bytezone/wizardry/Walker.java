@@ -7,6 +7,7 @@ import static com.bytezone.wizardry.origin.Walls.WEST;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
@@ -16,7 +17,10 @@ import com.bytezone.wizardry.origin.WizardryData.Direction;
 
 // -----------------------------------------------------------------------------------//
 public class Walker
+// -----------------------------------------------------------------------------------//
 {
+  private static final String PREFS_WALKER = "Walker:L";
+
   public Location location;
   public Direction direction;
   public MazeLevel mazeLevel;
@@ -236,5 +240,32 @@ public class Walker
     text.append ("Facing   : " + direction);
 
     return text.toString ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void save (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    String key = String.format ("%s%02d", PREFS_WALKER, location.getLevel ());
+    String value = String.format ("%s D:%02d", location.toString (), direction.ordinal ());
+    prefs.put (key, value);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void restore (Preferences prefs)
+  // ---------------------------------------------------------------------------------//
+  {
+    String key = String.format ("%s%02d", PREFS_WALKER, location.getLevel ());
+    String value = prefs.get (key, "");
+
+    if (!value.isEmpty ())
+    {
+      int north = Integer.parseInt (value.substring (8, 10));
+      int east = Integer.parseInt (value.substring (14, 16));
+      int dir = Integer.parseInt (value.substring (20));
+
+      location.set (north, east);
+      direction = Direction.values ()[dir];
+    }
   }
 }
