@@ -10,7 +10,6 @@ import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
-import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.application.Application;
@@ -84,24 +83,6 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   {
     super.keyPressed (keyEvent);
 
-    //    switch (keyEvent.getCode ())
-    //    {
-    //      case C:       // characters
-    //      case H:       // header
-    //      case M:       // monsters
-    //      case I:       // items
-    //      case E:       // encounters
-    //      case R:       // rewards
-    //      case S:       // specials
-    //      case T:       // messages
-    //      case L:       // maze levels
-    //        wizardryTabPane.keyPressed (keyEvent);
-    //        break;
-    //
-    //      default:
-    //        break;
-    //    }
-
     switch (keyEvent.getCode ())
     {
       case A:
@@ -141,11 +122,12 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   {
     wizardry = new WizardryData (wizardryFileName);
     recentFiles.addLastFileName (wizardryFileName);
+    wizardryTabPane.setFileName (wizardryFileName);
 
     for (ScenarioChangeListener listener : listeners)
       listener.scenarioChanged (wizardry);
 
-    primaryStage.setTitle (Utility.removeUserName (wizardryFileName));
+    primaryStage.setTitle (wizardry.getScenarioName ());
   }
 
   // ---------------------------------------------------------------------------------//

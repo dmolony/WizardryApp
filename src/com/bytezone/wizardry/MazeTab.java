@@ -123,6 +123,7 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
 
     mazeLevels.getItems ().clear ();
     mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
+
     if (!initialising)
       mazeLevels.getSelectionModel ().select (0);
 
@@ -162,7 +163,7 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
       description.append (special.getText ());
     }
 
-    if (currentMazeCell.getLair ())
+    if (currentMazeCell.isLair ())
       description.append ("\n\nLAIR");
 
     text.setText (description.toString ());

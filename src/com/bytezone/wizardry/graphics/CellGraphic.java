@@ -39,7 +39,6 @@ public class CellGraphic
   {
     Location location = mazeCell.getLocation ();
     Special special = mazeCell.getSpecial ();
-    boolean lair = mazeCell.getLair ();
     Walls walls = mazeCell.getWalls ();
 
     int top = (19 - location.getRow ()) * CELL_SIZE + INSET;
@@ -50,7 +49,7 @@ public class CellGraphic
     int textLeft = left + 12;
     int textBase = top + 25;
 
-    gc.setFill (lair ? Color.DARKGREY : Color.LIGHTGREY);
+    gc.setFill (mazeCell.isLair () ? Color.DARKGREY : Color.LIGHTGREY);
     gc.fillRect (left - 1, top - 1, CELL_SIZE, CELL_SIZE);
 
     if (special != null)
