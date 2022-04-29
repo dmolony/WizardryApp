@@ -2,7 +2,6 @@ package com.bytezone.wizardry;
 
 import java.util.prefs.Preferences;
 
-import com.bytezone.appbase.TabBase;
 import com.bytezone.wizardry.origin.Reward;
 import com.bytezone.wizardry.origin.WizardryData;
 
@@ -13,7 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
 //-----------------------------------------------------------------------------------//
-public class RewardsTab extends TabBase implements ScenarioChangeListener
+public class RewardsTab extends WizardryTabBase
 //-----------------------------------------------------------------------------------//
 {
   private static final String PREFS_INDEX = "RewardsIndex";
@@ -31,6 +30,8 @@ public class RewardsTab extends TabBase implements ScenarioChangeListener
     setContent (layout);
     layout.setLeft (rewards);
     layout.setCenter (rewardPane);
+
+    rewards.setPrefWidth (LIST_WIDTH);
 
     rewards.getSelectionModel ().selectedItemProperty ().addListener (new ChangeListener<Reward> ()
     {

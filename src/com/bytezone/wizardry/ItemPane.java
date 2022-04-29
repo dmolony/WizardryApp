@@ -13,16 +13,17 @@ import javafx.scene.control.TextField;
 public class ItemPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
-  private static final int GENERIC_NAME = 0;
-  private static final int ITEM_CLASS = 1;
-  private static final int ALIGNMENT = 2;
-  private static final int CURSED = 3;
-  private static final int CRIT_HIT = 4;
-  private static final int CHANCE = 5;
-  private static final int CHANGE_TO = 6;
-  private static final int DAMAGE_DICE = 7;
-  private static final int SPELL_POWER = 8;
-  private static final int PRICE = 9;
+  private static final int NAME = 0;
+  private static final int GENERIC_NAME = 1;
+  private static final int ITEM_CLASS = 2;
+  private static final int ALIGNMENT = 3;
+  private static final int CURSED = 4;
+  private static final int CRIT_HIT = 5;
+  private static final int CHANCE = 6;
+  private static final int CHANGE_TO = 7;
+  private static final int DAMAGE_DICE = 8;
+  private static final int SPELL_POWER = 9;
+  private static final int PRICE = 10;
 
   private static final int ID = 0;
   private static final int SPECIAL = 1;
@@ -32,8 +33,8 @@ public class ItemPane extends DataPane
   private static final int BOLTAC = 5;
   private static final int REGEN = 6;
 
-  String[] label1Text = { "Generic name", "Kind", "Alignment", "Cursed", "Auto kill", "Decay odds",
-      "Decay to", "Damage dice", "Spell", "Value" };
+  String[] label1Text = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
+      "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
   String[] label2Text =
       { "Id", "Special #", "AC", "To hit +", "# swings", "In store", "Regeneration" };
 
@@ -60,8 +61,8 @@ public class ItemPane extends DataPane
     createLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
 
     // basic attributes
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 2);
+    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
     textOut1 = createTextFields (label1Text, lp1, dp1);
 
     // numeric attributes
@@ -93,6 +94,7 @@ public class ItemPane extends DataPane
   void update (Item item)
   // ---------------------------------------------------------------------------------//
   {
+    setText (textOut1[NAME], item.name);
     setText (textOut1[GENERIC_NAME], item.nameUnknown);
     setText (textOut1[ITEM_CLASS], item.type);
     setText (textOut1[ALIGNMENT], item.alignment);

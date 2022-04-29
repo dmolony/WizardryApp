@@ -2,7 +2,6 @@ package com.bytezone.wizardry;
 
 import java.util.prefs.Preferences;
 
-import com.bytezone.appbase.TabBase;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.MazeLevel;
@@ -25,7 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 //-----------------------------------------------------------------------------------//
-public class MazeTab extends TabBase implements ScenarioChangeListener, MovementListener
+public class MazeTab extends WizardryTabBase implements MovementListener
 //-----------------------------------------------------------------------------------//
 {
   private static final String PREFS_INDEX = "MazeIndex";
@@ -63,6 +62,8 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
     layout.setLeft (mazeLevels);
     layout.setCenter (mazePane);
     layout.setRight (leftVBox);
+
+    mazeLevels.setPrefWidth (LIST_WIDTH);
 
     mazeLevels.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<MazeLevel> ()

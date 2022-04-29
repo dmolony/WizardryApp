@@ -36,7 +36,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   private final MenuItem openFileItem = new MenuItem ("Open file...");
   private final Menu recentFilesMenu = new Menu ("Recent files");
 
-  private RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
+  private final RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
   private String wizardryFileName;
   private WizardryData wizardry;
   private WizardryTabPane wizardryTabPane;
@@ -122,7 +122,6 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   {
     wizardry = new WizardryData (wizardryFileName);
     recentFiles.addLastFileName (wizardryFileName);
-    wizardryTabPane.setFileName (wizardryFileName);
 
     for (ScenarioChangeListener listener : listeners)
       listener.scenarioChanged (wizardry);
@@ -148,6 +147,23 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
 
   // ---------------------------------------------------------------------------------//
   @Override
+  public void fileNameSelected (String fileName)
+  // ---------------------------------------------------------------------------------//
+  {
+    wizardryFileName = fileName;
+    setWizardryDisk ();
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void addScenarioChangeListener (ScenarioChangeListener listener)
+  // ---------------------------------------------------------------------------------//
+  {
+    if (!listeners.contains (listener))
+      listeners.add (listener);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
   public void save (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
@@ -166,23 +182,6 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
     wizardryFileName = prefs.get (PREFS_FILE_NAME, "");
     if (!wizardryFileName.isEmpty ())
       setWizardryDisk ();
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public void fileNameSelected (String fileName)
-  // ---------------------------------------------------------------------------------//
-  {
-    wizardryFileName = fileName;
-    setWizardryDisk ();
-  }
-
-  // ---------------------------------------------------------------------------------//
-  public void addScenarioChangeListener (ScenarioChangeListener listener)
-  // ---------------------------------------------------------------------------------//
-  {
-    if (!listeners.contains (listener))
-      listeners.add (listener);
   }
 
   // ---------------------------------------------------------------------------------//

@@ -18,7 +18,6 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
   private final Text text = new Text ();
   private final TextFlow textFlow = new TextFlow (text);
   private final ScrollPane scrollPane = new ScrollPane (textFlow);
-  private String fileName;
 
   // ---------------------------------------------------------------------------------//
   public SummaryTab (String title, KeyCode keyCode)
@@ -48,20 +47,14 @@ public class SummaryTab extends TextTabBase implements ScenarioChangeListener
   }
 
   // ---------------------------------------------------------------------------------//
-  void setFileName (String fileName)
-  // ---------------------------------------------------------------------------------//
-  {
-    this.fileName = fileName;
-  }
-
-  // ---------------------------------------------------------------------------------//
   @Override
   public void scenarioChanged (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-
     StringBuilder text = new StringBuilder ();
-    text.append (String.format ("Disk file ......... %s%n", Utility.removeUserName (fileName)));
+
+    text.append (String.format ("Disk file ......... %s%n",
+        Utility.removeUserName (wizardry.getFileName ())));
     text.append (wizardry.getHeader ().toString ());
     this.text.setText (text.toString ());
 

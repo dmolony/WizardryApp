@@ -60,26 +60,26 @@ public class RewardPane extends DataPane
     setColumnConstraints (110, width, width, width, width, width, width);
 
     // basic attributes
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
     textOut1 = createTextFields (label1Text, lp1, dp1);
 
     // gold reward
-    LabelPlacement lp3 = new LabelPlacement (0, 3, HPos.RIGHT, 1);
-    DataPlacement dp3 = new DataPlacement (1, 4, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp3 = new LabelPlacement (0, 2, HPos.RIGHT, 1);
+    DataPlacement dp3 = new DataPlacement (1, 2, Pos.CENTER_LEFT, 1);
     gold = createTextFields (goldLabels, lp3, dp3);
 
     // first item reward
-    LabelPlacement lp4 = new LabelPlacement (0, 10, HPos.RIGHT, 1);
-    DataPlacement dp4 = new DataPlacement (1, 10, Pos.CENTER_LEFT, 1);
+    LabelPlacement lp4 = new LabelPlacement (0, 9, HPos.RIGHT, 1);
+    DataPlacement dp4 = new DataPlacement (1, 9, Pos.CENTER_LEFT, 1);
     items[0] = createTextFields (itemLabels, lp4, dp4);
 
     // second  thru fourth item rewards
     for (int i = 1; i < MAX_ITEMS; i++)
-      items[i] = createTextFields (8, new DataPlacement (i + 1, 10, Pos.CENTER_LEFT, 1));
+      items[i] = createTextFields (8, new DataPlacement (i + 1, 9, Pos.CENTER_LEFT, 1));
 
     // traps
-    traps = createCheckBoxes (WizardryData.trapType, 2, 1);
+    traps = createCheckBoxes (WizardryData.trapType, 2, 0);
   }
 
   // ---------------------------------------------------------------------------------//

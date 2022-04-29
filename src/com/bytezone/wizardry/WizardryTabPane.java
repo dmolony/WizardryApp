@@ -29,11 +29,4 @@ public class WizardryTabPane extends TabPaneBase
 
     setDefaultTab (2);
   }
-
-  // ---------------------------------------------------------------------------------//
-  void setFileName (String fileName)
-  // ---------------------------------------------------------------------------------//
-  {
-    headerTab.setFileName (fileName);
-  }
 }
