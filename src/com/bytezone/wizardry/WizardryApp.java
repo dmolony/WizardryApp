@@ -9,8 +9,7 @@ import java.util.prefs.Preferences;
 import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
-import com.bytezone.mazewalker.RecentFiles;
-import com.bytezone.mazewalker.RecentFiles.FileNameSelectedListener;
+import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.origin.Utility;
 import com.bytezone.wizardry.origin.WizardryData;
 

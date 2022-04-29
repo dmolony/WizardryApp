@@ -1,4 +1,4 @@
-package com.bytezone.mazewalker;
+package com.bytezone.wizardry;
 
 import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryData;
@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 // -----------------------------------------------------------------------------------//
 public class ExperienceCalculator extends DataPane
@@ -38,12 +37,13 @@ public class ExperienceCalculator extends DataPane
   TextField[] textOut = new TextField[labelText.length];
 
   ComboBox<Monster> monsters = new ComboBox<> ();
+  WizardryData wizardry;        // this hasn't been set yet - NPE
 
   // ---------------------------------------------------------------------------------//
-  public ExperienceCalculator (WizardryData wizardry, Stage stage)
+  public ExperienceCalculator ()
   // ---------------------------------------------------------------------------------//
   {
-    super (wizardry, stage);
+    //    super (wizardry, stage);
 
     setColumnConstraints (125, 60, 80);
 

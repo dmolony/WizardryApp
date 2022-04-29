@@ -3,7 +3,7 @@ package com.bytezone.wizardry.graphics;
 import java.util.List;
 import java.util.Random;
 
-import com.bytezone.mazewalker.PartyManager;
+import com.bytezone.wizardry.PartyManager;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.MazeLevel;
 import com.bytezone.wizardry.origin.Monster;

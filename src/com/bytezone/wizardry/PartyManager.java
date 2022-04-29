@@ -1,4 +1,4 @@
-package com.bytezone.mazewalker;
+package com.bytezone.wizardry;
 
 import java.util.ArrayList;
 import java.util.Collections;

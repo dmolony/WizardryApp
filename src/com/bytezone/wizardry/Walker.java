@@ -207,13 +207,6 @@ public class Walker
   }
 
   // ---------------------------------------------------------------------------------//
-  public void activate ()
-  // ---------------------------------------------------------------------------------//
-  {
-    notifyListeners ();
-  }
-
-  // ---------------------------------------------------------------------------------//
   public void addWalkerListener (MovementListener listener)
   // ---------------------------------------------------------------------------------//
   {
@@ -222,7 +215,7 @@ public class Walker
   }
 
   // ---------------------------------------------------------------------------------//
-  private void notifyListeners ()
+  void notifyListeners ()
   // ---------------------------------------------------------------------------------//
   {
     for (MovementListener listener : listeners)
@@ -243,7 +236,7 @@ public class Walker
   }
 
   // ---------------------------------------------------------------------------------//
-  public void save (Preferences prefs)
+  void save (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
     String key = String.format ("%s%02d", PREFS_WALKER, location.getLevel ());
@@ -252,7 +245,7 @@ public class Walker
   }
 
   // ---------------------------------------------------------------------------------//
-  public void restore (Preferences prefs)
+  void restore (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
     String key = String.format ("%s%02d", PREFS_WALKER, location.getLevel ());

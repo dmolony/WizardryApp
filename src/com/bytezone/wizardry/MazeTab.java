@@ -203,7 +203,7 @@ public class MazeTab extends TabBase implements ScenarioChangeListener, Movement
   // ---------------------------------------------------------------------------------//
   {
     currentWalker = walkers[level];
-    currentWalker.activate ();      // calls notifyListeners
+    currentWalker.notifyListeners ();
   }
 
   // ---------------------------------------------------------------------------------//
