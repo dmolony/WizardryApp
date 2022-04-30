@@ -7,18 +7,25 @@ Select a tab to display the various Wizardry components
 ## Screens
 ### Characters
 <img src="resources/characters.png" alt="drawing" width="900"/>
+
 ### Monsters
 <img src="resources/monsters.png" alt="drawing" width="900"/>
+
 ### Items
 <img src="resources/items.png" alt="drawing" width="900"/>
+
 ### Specials
 <img src="resources/specials.png" alt="drawing" width="900"/>
+
 ### Rewards
 <img src="resources/rewards.png" alt="drawing" width="900"/>
+
 ### Encounters
 <img src="resources/encounters.png" alt="drawing" width="900"/>
+
 ### Messages
 <img src="resources/messages.png" alt="drawing" width="900"/>
+
 ### Mazes
 Navigate around the maze using the A/W/S/D keys. To go directly to a particular square, just click on it. There is no need to kick doors down, you can simply walk through any wall. None of the special squares affect you, and you can see perfectly well in the dark. You are invincible.
 <img src="resources/maze.png" alt="drawing" width="900"/>
