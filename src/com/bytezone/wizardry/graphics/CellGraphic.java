@@ -8,6 +8,7 @@ import static com.bytezone.wizardry.origin.Walls.Wall.DOOR;
 import static com.bytezone.wizardry.origin.Walls.Wall.HIDEDOOR;
 import static com.bytezone.wizardry.origin.Walls.Wall.WALL;
 
+import com.bytezone.wizardry.Walker;
 import com.bytezone.wizardry.origin.Location;
 import com.bytezone.wizardry.origin.MazeCell;
 import com.bytezone.wizardry.origin.Special;
@@ -147,11 +148,12 @@ public class CellGraphic
   }
 
   // ---------------------------------------------------------------------------------//
-  public void drawWalker (MazeCell cell, Direction direction, Location location)
+  public void drawWalker (Walker walker)
   // ---------------------------------------------------------------------------------//
   {
-    //    Location location = walker.location;
-    //    Direction direction = walker.direction;
+    MazeCell cell = walker.getCurrentMazeCell ();
+    Location location = cell.getLocation ();
+    Direction direction = walker.direction;
 
     if (!cell.getLocation ().matches (location))
     {
