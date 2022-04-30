@@ -36,11 +36,11 @@ public class EncounterPane extends DataPane
 
     String[] labels2 = new String[22];
     labels2[0] = "Base range";
-    labels2[1] = "odds";
+    labels2[1] = "Odds";
     for (int i = 1; i < 11; i++)
     {
       labels2[i * 2] = "Extra range " + i;
-      labels2[i * 2 + 1] = "odds";
+      labels2[i * 2 + 1] = labels2[1];
     }
 
     LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);

@@ -225,6 +225,9 @@ public class MazeTab extends WizardryTabBase implements MovementListener
   public void restore (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
+    if (walkers == null)
+      return;
+
     for (Walker walker : walkers)
       walker.restore (prefs);
 

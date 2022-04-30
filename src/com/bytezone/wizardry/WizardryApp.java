@@ -103,6 +103,13 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
     FileChooser fileChooser = new FileChooser ();
     fileChooser.setTitle ("Select Wizardry Disk");
 
+    if (!wizardryFileName.isEmpty ())
+    {
+      File file = new File (wizardryFileName);
+      if (!file.exists () || !file.isFile ())
+        wizardryFileName = "";
+    }
+
     if (wizardryFileName.isEmpty ())
       fileChooser.setInitialDirectory (new File (System.getProperty ("user.home")));
     else
@@ -181,7 +188,11 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
 
     wizardryFileName = prefs.get (PREFS_FILE_NAME, "");
     if (!wizardryFileName.isEmpty ())
-      setWizardryDisk ();
+    {
+      File file = new File (wizardryFileName);
+      if (file.exists () && file.isFile ())
+        setWizardryDisk ();
+    }
   }
 
   // ---------------------------------------------------------------------------------//
