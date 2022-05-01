@@ -1,6 +1,7 @@
 package com.bytezone.wizardry;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,12 +11,14 @@ import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
+import com.bytezone.wizardry.origin.DiskFormatException;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
@@ -117,23 +120,29 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
 
     File file = fileChooser.showOpenDialog (null);
     if (file != null && file.isFile () && !file.getAbsolutePath ().equals (wizardryFileName))
-    {
-      wizardryFileName = file.getAbsolutePath ();
-      setWizardryDisk ();
-    }
+      setWizardryDisk (file.getAbsolutePath ());
   }
 
   // ---------------------------------------------------------------------------------//
-  private void setWizardryDisk ()
+  private void setWizardryDisk (String fileName)
   // ---------------------------------------------------------------------------------//
   {
-    wizardry = new WizardryData (wizardryFileName);
-    recentFiles.addLastFileName (wizardryFileName);
+    try
+    {
+      wizardry = new WizardryData (fileName);
 
-    for (ScenarioChangeListener listener : listeners)
-      listener.scenarioChanged (wizardry);
+      wizardryFileName = fileName;
+      recentFiles.addLastFileName (fileName);
 
-    primaryStage.setTitle (wizardry.getScenarioName ());
+      for (ScenarioChangeListener listener : listeners)
+        listener.scenarioChanged (wizardry);
+
+      primaryStage.setTitle (wizardry.getScenarioName ());
+    }
+    catch (DiskFormatException | FileNotFoundException e)
+    {
+      showAlert (AlertType.ERROR, "Disk Format Error", e.getMessage ());
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -157,8 +166,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   public void fileNameSelected (String fileName)
   // ---------------------------------------------------------------------------------//
   {
-    wizardryFileName = fileName;
-    setWizardryDisk ();
+    setWizardryDisk (fileName);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -186,12 +194,12 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   {
     recentFiles.restore (prefs);
 
-    wizardryFileName = prefs.get (PREFS_FILE_NAME, "");
-    if (!wizardryFileName.isEmpty ())
+    String fileName = prefs.get (PREFS_FILE_NAME, "");
+    if (!fileName.isEmpty ())
     {
-      File file = new File (wizardryFileName);
+      File file = new File (fileName);
       if (file.exists () && file.isFile ())
-        setWizardryDisk ();
+        setWizardryDisk (fileName);
     }
   }
 
