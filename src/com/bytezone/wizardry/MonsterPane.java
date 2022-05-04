@@ -11,6 +11,7 @@ import com.bytezone.wizardry.origin.WizardryData;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -113,6 +114,10 @@ public class MonsterPane extends DataPane
 
     reset (checkBoxes1);
     reset (checkBoxes2);
+
+    GraphicsContext gc = canvas.getGraphicsContext2D ();
+    gc.setFill (Color.BLACK);
+    gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
   }
 
   // ---------------------------------------------------------------------------------//
