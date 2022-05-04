@@ -40,7 +40,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   private final Menu recentFilesMenu = new Menu ("Recent files");
 
   private final RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
-  private String wizardryFileName;
+  private String wizardryFileName = "";
   private WizardryData wizardry;
   private WizardryTabPane wizardryTabPane;
 

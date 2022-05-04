@@ -67,6 +67,11 @@ public class EncounterPane extends DataPane
   {
     this.wizardry = wizardry;
 
+    for (int i = 0; i < MAX_GROUPS; i++)
+      reset (textOut1[i]);
+    for (int i = 0; i < MAX_GROUPS * 2; i++)
+      reset (textOut2[i]);
+
     if (false)
     {
       if (display != null)

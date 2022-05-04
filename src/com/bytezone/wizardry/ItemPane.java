@@ -47,6 +47,7 @@ public class ItemPane extends DataPane
   CheckBox[] checkBoxes2;
   CheckBox[] checkBoxes3;
   CheckBox[] checkBoxes4;
+
   private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
@@ -88,6 +89,14 @@ public class ItemPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    reset (textOut1);
+    reset (textOut2);
+
+    reset (checkBoxes1);
+    reset (checkBoxes2);
+    reset (checkBoxes3);
+    reset (checkBoxes4);
   }
 
   // ---------------------------------------------------------------------------------//

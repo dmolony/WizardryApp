@@ -63,6 +63,15 @@ public class SpecialsPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    reset (textOut1);
+    reset (textOut2);
+    reset (textOut3);
+    reset (textOut4);
+    reset (textOut5);
+    reset (textOut6);
+    reset (textOut7);
+    reset (textOut8);
   }
 
   // ---------------------------------------------------------------------------------//

@@ -87,6 +87,14 @@ public class RewardPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    reset (textOut1);
+    reset (gold);
+
+    reset (traps);
+
+    for (int i = 0; i < MAX_ITEMS; i++)
+      reset (items[i]);
   }
 
   // ---------------------------------------------------------------------------------//

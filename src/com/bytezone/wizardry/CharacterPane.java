@@ -135,6 +135,20 @@ public class CharacterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    reset (textOut);
+    reset (textOut1);
+    reset (textOut2);
+    reset (textOut3);
+    reset (textOut4);
+
+    reset (textOut2);
+    reset (checkBox1);
+    reset (checkBox2);
+    reset (checkBox3);
+    reset (checkBox4);
+    reset (checkBox5);
+    reset (checkBox6);
   }
 
   // ---------------------------------------------------------------------------------//

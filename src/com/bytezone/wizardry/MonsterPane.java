@@ -104,6 +104,15 @@ public class MonsterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    reset (textOut1);
+    reset (textOut2);
+    reset (textOut3);
+    reset (textOut4);
+    reset (textOut5);
+
+    reset (checkBoxes1);
+    reset (checkBoxes2);
   }
 
   // ---------------------------------------------------------------------------------//

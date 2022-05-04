@@ -21,6 +21,7 @@ public class MessagePane extends DataPane
   TextField[] textOut1;
   TextField[] textOut2;
   TextField[] textOut4;
+
   TextArea textOut3;
 
   // ---------------------------------------------------------------------------------//
@@ -52,6 +53,12 @@ public class MessagePane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    reset (textOut1);
+    reset (textOut2);
+    reset (textOut4);
+
+    textOut3.setText ("");
   }
 
   // ---------------------------------------------------------------------------------//

@@ -16,9 +16,11 @@ public class MazePane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
   private WizardryData wizardry;
+
   int currentLevel = -1;
   int currentRow;
   int currentColumn;
+
   private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
   // ---------------------------------------------------------------------------------//
@@ -37,6 +39,13 @@ public class MazePane extends Canvas implements MovementListener
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
+
+    if (wizardry.getMazeLevels ().size () == 0)
+    {
+      GraphicsContext gc = getGraphicsContext2D ();
+      gc.setFill (Color.LIGHTGRAY);
+      gc.fillRect (0, 0, getWidth (), getHeight ());
+    }
   }
 
   // ---------------------------------------------------------------------------------//
