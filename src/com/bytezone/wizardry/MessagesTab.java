@@ -7,6 +7,7 @@ import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +33,7 @@ public class MessagesTab extends WizardryTabBase
     layout.setCenter (messagePane);
 
     messages.setPrefWidth (LIST_WIDTH);
+    messages.setPlaceholder (new Label ("Messages not found"));
 
     messages.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<Message> ()

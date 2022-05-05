@@ -3,6 +3,7 @@ package com.bytezone.wizardry;
 import com.bytezone.wizardry.graphics.Display;
 import com.bytezone.wizardry.origin.EnemyOdds;
 import com.bytezone.wizardry.origin.MazeLevel;
+import com.bytezone.wizardry.origin.Monster;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
@@ -138,8 +139,13 @@ public class EncounterPane extends DataPane
   private void setMinMax (int index1, int index2, int minEnemy, int maxEnemy)
   // ---------------------------------------------------------------------------------//
   {
+    Monster minMonster = wizardry.getMonster (minEnemy);
+    Monster maxMonster = wizardry.getMonster (maxEnemy);
+    String minName = minMonster == null ? "?" : minMonster.name;
+    String maxName = maxMonster == null ? "?" : minMonster.name;
+
     setText (textOut2[index1][index2], minEnemy + " : " + maxEnemy);
-    setText (textOut2[index1 + 1][index2], wizardry.getMonster (minEnemy).name);
-    setText (textOut2[index1 + 1][index2 + 1], wizardry.getMonster (maxEnemy).name);
+    setText (textOut2[index1 + 1][index2], minName);
+    setText (textOut2[index1 + 1][index2 + 1], maxName);
   }
 }

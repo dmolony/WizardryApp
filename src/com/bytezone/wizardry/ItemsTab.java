@@ -7,6 +7,7 @@ import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +33,7 @@ public class ItemsTab extends WizardryTabBase
     layout.setCenter (itemPane);
 
     items.setPrefWidth (LIST_WIDTH);
+    items.setPlaceholder (new Label ("Items not found"));
 
     items.getSelectionModel ().selectedItemProperty ().addListener (new ChangeListener<Item> ()
     {
