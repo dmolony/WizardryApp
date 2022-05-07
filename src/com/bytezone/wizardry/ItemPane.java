@@ -105,6 +105,11 @@ public class ItemPane extends DataPane
   {
     setText (textOut1[NAME], item.name);
     setText (textOut1[GENERIC_NAME], item.nameUnknown);
+    setText (textOut2[ID], item.id);
+
+    if (item.type == null)
+      return;
+
     setText (textOut1[ITEM_CLASS], item.type);
     setText (textOut1[ALIGNMENT], item.alignment);
     setText (textOut1[CURSED], item.cursed);
@@ -121,7 +126,6 @@ public class ItemPane extends DataPane
 
     setText (textOut1[PRICE], item.price);
 
-    setText (textOut2[ID], item.id);
     setText (textOut2[SPECIAL], item.special);
     setText (textOut2[AC], item.armourClass);
     setText (textOut2[WEP_HIT_MOD], item.wephitmd);

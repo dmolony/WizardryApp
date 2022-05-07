@@ -12,16 +12,7 @@ import javafx.scene.control.TextField;
 public class SpecialsPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
-  TextField[] textOut1;
-  TextField[] textOut2;
-  TextField[] textOut3;
-  TextField[] textOut4;
-  TextField[] textOut5;
-  TextField[] textOut6;
-  TextField[] textOut7;
-  TextField[] textOut8;
-
-  private WizardryData wizardry;
+  TextField[][] textOut = new TextField[8][];
 
   // ---------------------------------------------------------------------------------//
   public SpecialsPane ()
@@ -37,15 +28,15 @@ public class SpecialsPane extends DataPane
 
     LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
     DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
-    textOut1 = createTextFields (squaresText, lp1, dp1);
+    textOut[0] = createTextFields (squaresText, lp1, dp1);
 
-    textOut2 = createTextFields (16, new DataPlacement (2, 1, Pos.CENTER_RIGHT, 1));
-    textOut3 = createTextFields (16, new DataPlacement (3, 1, Pos.CENTER_RIGHT, 1));
-    textOut4 = createTextFields (16, new DataPlacement (4, 1, Pos.CENTER_RIGHT, 1));
-    textOut5 = createTextFields (16, new DataPlacement (5, 1, Pos.CENTER_RIGHT, 1));
-    textOut7 = createTextFields (16, new DataPlacement (7, 1, Pos.CENTER_RIGHT, 1));
-    textOut6 = createTextFields (16, new DataPlacement (6, 1, Pos.CENTER_LEFT, 1));
-    textOut8 = createTextFields (16, new DataPlacement (8, 1, Pos.CENTER_LEFT, 1));
+    textOut[1] = createTextFields (16, new DataPlacement (2, 1, Pos.CENTER_RIGHT, 1));
+    textOut[2] = createTextFields (16, new DataPlacement (3, 1, Pos.CENTER_RIGHT, 1));
+    textOut[3] = createTextFields (16, new DataPlacement (4, 1, Pos.CENTER_RIGHT, 1));
+    textOut[4] = createTextFields (16, new DataPlacement (5, 1, Pos.CENTER_RIGHT, 1));
+    textOut[5] = createTextFields (16, new DataPlacement (6, 1, Pos.CENTER_LEFT, 1));
+    textOut[6] = createTextFields (16, new DataPlacement (7, 1, Pos.CENTER_RIGHT, 1));
+    textOut[7] = createTextFields (16, new DataPlacement (8, 1, Pos.CENTER_LEFT, 1));
 
     // headings
     createLabel ("Square type", 1, 0, HPos.LEFT, 1);
@@ -62,16 +53,8 @@ public class SpecialsPane extends DataPane
   public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
-    reset (textOut1);
-    reset (textOut2);
-    reset (textOut3);
-    reset (textOut4);
-    reset (textOut5);
-    reset (textOut6);
-    reset (textOut7);
-    reset (textOut8);
+    for (int i = 0; i < textOut.length; i++)
+      reset (textOut[i]);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -82,14 +65,14 @@ public class SpecialsPane extends DataPane
     {
       Special special = mazeLevel.getSpecial (i);
 
-      setText (textOut1[i], special.square);
-      setText (textOut2[i], special.aux[0]);
-      setText (textOut3[i], special.aux[1]);
-      setText (textOut4[i], special.aux[2]);
-      setText (textOut5[i], special.locations.size ());
-      setText (textOut7[i], special.isMessage () ? special.aux[1] : "");
-      setText (textOut6[i], special.getLocationText ());
-      setText (textOut8[i], special.getText ());
+      setText (textOut[0][i], special.square);
+      setText (textOut[1][i], special.aux[0]);
+      setText (textOut[2][i], special.aux[1]);
+      setText (textOut[3][i], special.aux[2]);
+      setText (textOut[4][i], special.locations.size ());
+      setText (textOut[5][i], special.getLocationText ());
+      setText (textOut[6][i], special.isMessage () ? special.aux[1] : "");
+      setText (textOut[7][i], special.getText ());
     }
   }
 }

@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 public class MazePane extends Canvas implements MovementListener
 // -----------------------------------------------------------------------------------//
 {
-  private WizardryData wizardry;
+  //  private WizardryData wizardry;
 
   int currentLevel = -1;
   int currentRow;
@@ -38,7 +38,7 @@ public class MazePane extends Canvas implements MovementListener
   public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
+    //    this.wizardry = wizardry;
 
     if (wizardry.getMazeLevels ().size () == 0)
     {

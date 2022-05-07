@@ -128,13 +128,17 @@ public class MonsterPane extends DataPane
     setText (textOut1[NAME_PLURAL], monster.namePlural);
     setText (textOut1[GENERIC_NAME], monster.genericName);
     setText (textOut1[GENERIC_NAME_PLURAL], monster.genericNamePlural);
+    setText (textOut2[ID], monster.id);
+
+    if (monster.image == -1)      // incomplete
+      return;
+
     setText (textOut1[MONSTER_CLASS], WizardryData.monsterClass[monster.monsterClass]);
     setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
     setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
     setText (textOut1[HP_DICE], monster.hitPoints.toString ());
     setText (textOut1[RECSN], monster.damageDiceText);
 
-    setText (textOut2[ID], monster.id);
     setText (textOut2[MAGE_LEVEL], monster.mageSpells + "");
     setText (textOut2[PRIEST_LEVEL], monster.priestSpells + "");
     setText (textOut2[MAGIC_RESIST], monster.unaffect + "%");
