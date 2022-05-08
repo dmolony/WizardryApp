@@ -89,6 +89,9 @@ public class CharactersTab extends WizardryTabBase
   {
     int index = prefs.getInt (PREFS_INDEX, -1);
     if (index >= 0)
+    {
       characters.getSelectionModel ().select (index);
+      characters.scrollTo (index);
+    }
   }
 }
