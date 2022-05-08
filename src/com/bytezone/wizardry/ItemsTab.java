@@ -65,7 +65,7 @@ public class ItemsTab extends WizardryTabBase
     itemPane.setWizardry (wizardry);
 
     items.getItems ().clear ();
-    items.getItems ().addAll (wizardry.getItems ());
+    items.getItems ().addAll (wizardry.getItems ().values ());
     items.getSelectionModel ().select (0);
 
     refresh ();

@@ -104,7 +104,7 @@ public class ItemPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setText (textOut1[NAME], item.name);
-    setText (textOut1[GENERIC_NAME], item.nameUnknown);
+    setText (textOut1[GENERIC_NAME], item.nameGeneric);
     setText (textOut2[ID], item.id);
 
     if (item.type == null)

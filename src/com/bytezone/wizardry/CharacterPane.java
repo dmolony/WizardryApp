@@ -209,7 +209,7 @@ public class CharacterPane extends DataPane
         }
         else
         {
-          setText (textOut3[i], item.nameUnknown);
+          setText (textOut3[i], item.nameGeneric);
           setText (textOut4[i], "?");           // formatted as text
 
           checkBox4[i].setSelected (false);
