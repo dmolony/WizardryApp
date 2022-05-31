@@ -1,6 +1,7 @@
 package com.bytezone.wizardry;
 
 import com.bytezone.wizardry.origin.Character;
+import com.bytezone.wizardry.origin.Character.Possession;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryData;
 
@@ -44,6 +45,7 @@ public class CharacterPane extends DataPane
   TextField[] textOut2;
   TextField[] textOut3;
   TextField[] textOut4;
+  TextField[] textOut5;
 
   CheckBox[] checkBox1;
   CheckBox[] checkBox2;
@@ -58,7 +60,7 @@ public class CharacterPane extends DataPane
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 69, 70, 20, 20, 20, 30, 50, 90, 20, 80, 20, 80, 20);
+    setColumnConstraints (110, 75, 70, 20, 20, 20, 30, 50, 80, 50, 80, 20, 80, 20, 80, 20);
 
     String[] labelText1 =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
@@ -68,6 +70,7 @@ public class CharacterPane extends DataPane
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
 
     String[] attributesText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
+    String[] saveVsText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
 
     // text values
     LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
@@ -78,6 +81,11 @@ public class CharacterPane extends DataPane
     LabelPlacement lp2 = new LabelPlacement (4, 1, HPos.RIGHT, 3);
     DataPlacement dp2 = new DataPlacement (7, 1, Pos.CENTER_RIGHT, 1);
     textOut1 = createTextFields (attributesText, lp2, dp2);
+
+    // save Vs
+    LabelPlacement lp5 = new LabelPlacement (8, 1, HPos.RIGHT, 1);
+    DataPlacement dp5 = new DataPlacement (9, 1, Pos.CENTER_RIGHT, 1);
+    textOut5 = createTextFields (saveVsText, lp5, dp5);
 
     // numeric values
     LabelPlacement lp3 = new LabelPlacement (4, 8, HPos.RIGHT, 3);
@@ -106,12 +114,12 @@ public class CharacterPane extends DataPane
     checkBox6 = createCheckBoxes (8, 5, 18);
 
     // possessions value
-    DataPlacement dp5 = new DataPlacement (6, 18, Pos.CENTER_RIGHT, 2);
-    textOut4 = createTextFields (8, dp5);
+    DataPlacement dp6 = new DataPlacement (6, 18, Pos.CENTER_RIGHT, 2);
+    textOut4 = createTextFields (8, dp6);
 
     // spells headings
-    createLabel ("Mage spells", 8, 0, HPos.RIGHT, 2);
-    createLabel ("Priest spells", 11, 0, HPos.LEFT, 2);
+    createLabel ("Mage spells", 10, 0, HPos.RIGHT, 2);
+    createLabel ("Priest spells", 13, 0, HPos.LEFT, 2);
 
     // spells
     String[] mageSpells = new String[21];
@@ -125,9 +133,9 @@ public class CharacterPane extends DataPane
     for (int i = 0; i < priestSpells2.length; i++)
       priestSpells2[i] = WizardryData.spells[42 + i];
 
-    checkBox1 = createCheckBoxes (mageSpells, 8, 1);
-    checkBox2 = createCheckBoxes (priestSpells1, 10, 1);
-    checkBox3 = createCheckBoxes (priestSpells2, 12, 1);
+    checkBox1 = createCheckBoxes (mageSpells, 10, 1);
+    checkBox2 = createCheckBoxes (priestSpells1, 12, 1);
+    checkBox3 = createCheckBoxes (priestSpells2, 14, 1);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -184,15 +192,17 @@ public class CharacterPane extends DataPane
     for (int i = 0; i < textOut1.length; i++)
       setText (textOut1[i], character.attributes[i]);
 
+    for (int i = 0; i < textOut5.length; i++)
+      setText (textOut5[i], character.saveVs[i]);
+
     for (int i = 0; i < 8; i++)
       if (i < character.possessionsCount)
       {
-        com.bytezone.wizardry.origin.Character.Possession possession =
-            character.possessions.get (i);
+        Possession possession = character.possessions.get (i);
         Item item = wizardry.getItem (possession.id ());
         if (item == null)
         {
-          System.out.println ("null item # " + possession.id ());
+          System.out.printf ("%d null item #%d ", character.id, possession.id ());
           break;
         }
 

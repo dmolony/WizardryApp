@@ -17,7 +17,9 @@ public class PartyManager
 {
   WizardryData wizardry;
 
+  // ---------------------------------------------------------------------------------//
   public PartyManager (WizardryData wizardry)
+  // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
   }

@@ -34,7 +34,7 @@ public class DataPane extends Pane
     gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
 
     setRowHeights (30);           // make all rows the same height
-    //    gridPane.setGridLinesVisible (true);
+    gridPane.setGridLinesVisible (false);
 
     getChildren ().add (gridPane);
   }

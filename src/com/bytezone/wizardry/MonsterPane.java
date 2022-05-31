@@ -130,11 +130,9 @@ public class MonsterPane extends DataPane
     setText (textOut1[GENERIC_NAME_PLURAL], monster.genericNamePlural);
     setText (textOut2[ID], monster.id);
 
-    if (monster.image == -1)      // incomplete
-      return;
-
     setText (textOut1[MONSTER_CLASS], WizardryData.monsterClass[monster.monsterClass]);
-    setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
+    if (wizardry.getScenarioId () <= 3)
+      setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
     setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
     setText (textOut1[HP_DICE], monster.hitPoints.toString ());
     setText (textOut1[RECSN], monster.damageDiceText);
@@ -142,7 +140,8 @@ public class MonsterPane extends DataPane
     setText (textOut2[MAGE_LEVEL], monster.mageSpells + "");
     setText (textOut2[PRIEST_LEVEL], monster.priestSpells + "");
     setText (textOut2[MAGIC_RESIST], monster.unaffect + "%");
-    setText (textOut2[PARTNER_PCT], monster.partnerOdds + "%");
+    if (wizardry.getScenarioId () <= 3)
+      setText (textOut2[PARTNER_PCT], monster.partnerOdds + "%");
     setText (textOut2[BREATHE], monster.breathe);
     setText (textOut2[DRAIN], monster.drain);
     setText (textOut2[REGEN], monster.regen);
@@ -154,6 +153,23 @@ public class MonsterPane extends DataPane
     setText (textOut2[LAIR_REWARDS], monster.rewardLair);
 
     setText (textOut5[0], monster.getBreatheEffect ());
+
+    int resistance = monster.resistance;
+    for (int i = 0; i < WizardryData.resistance.length; i++)
+    {
+      checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
+      resistance >>>= 1;
+    }
+
+    int property = monster.properties;
+    for (int i = 0; i < WizardryData.property.length; i++)
+    {
+      checkBoxes2[i].setSelected ((property & 0x01) != 0);
+      property >>>= 1;
+    }
+
+    if (wizardry.getScenarioId () > 3)
+      return;
 
     List<Reward> rewards = wizardry.getRewards ();
 
@@ -186,20 +202,6 @@ public class MonsterPane extends DataPane
     }
     else
       setText (textOut4[0], reward.goldRange () + " GP");
-
-    int resistance = monster.resistance;
-    for (int i = 0; i < WizardryData.resistance.length; i++)
-    {
-      checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
-      resistance >>>= 1;
-    }
-
-    int property = monster.properties;
-    for (int i = 0; i < WizardryData.property.length; i++)
-    {
-      checkBoxes2[i].setSelected ((property & 0x01) != 0);
-      property >>>= 1;
-    }
 
     ImageGraphic imageGraphic = new ImageGraphic (wizardry.getImage (monster.image));
     imageGraphic.setColor (Color.WHITE);

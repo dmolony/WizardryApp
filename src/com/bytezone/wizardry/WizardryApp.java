@@ -12,6 +12,7 @@ import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.origin.DiskFormatException;
+import com.bytezone.wizardry.origin.Wizardry;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.application.Application;
@@ -129,7 +130,7 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   {
     try
     {
-      wizardry = new WizardryData (fileName);
+      wizardry = Wizardry.getWizardryData (fileName);
 
       wizardryFileName = fileName;
       recentFiles.addLastFileName (fileName);
