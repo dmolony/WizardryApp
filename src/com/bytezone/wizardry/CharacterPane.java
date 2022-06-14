@@ -8,12 +8,16 @@ import com.bytezone.wizardry.origin.WizardryData;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
 public class CharacterPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
+  static int MAGE_SPELLS = 0;
+  static int PRIEST_SPELLS = 1;
+
   private static final int NAME = 0;
   private static final int PASSWORD = 1;
   private static final int AWARDS = 7;
@@ -48,11 +52,15 @@ public class CharacterPane extends DataPane
   TextField[] textOut5;
 
   CheckBox[] checkBox1;
+  CheckBox[] checkBox11;
   CheckBox[] checkBox2;
   CheckBox[] checkBox3;
   CheckBox[] checkBox4;
   CheckBox[] checkBox5;
   CheckBox[] checkBox6;
+
+  TextField[] textOut6;
+  TextArea textArea;
 
   private WizardryData wizardry;
 
@@ -60,7 +68,7 @@ public class CharacterPane extends DataPane
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 75, 70, 20, 20, 20, 30, 50, 80, 50, 80, 20, 80, 20, 80, 20);
+    setColumnConstraints (110, 75, 70, 20, 20, 20, 30, 50, 80, 50, 80, 20, 80, 20, 80, 20, 80, 20);
 
     String[] labelText1 =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
@@ -68,6 +76,8 @@ public class CharacterPane extends DataPane
 
     String[] labelText2 =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
+
+    String[] labelText6 = { "Party", "Slogan" };
 
     String[] attributesText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
     String[] saveVsText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
@@ -118,24 +128,28 @@ public class CharacterPane extends DataPane
     textOut4 = createTextFields (8, dp6);
 
     // spells headings
-    createLabel ("Mage spells", 10, 0, HPos.RIGHT, 2);
-    createLabel ("Priest spells", 13, 0, HPos.LEFT, 2);
+    createLabel ("Mage spells", 11, 0, HPos.LEFT, 2);
+    createLabel ("Priest spells", 15, 0, HPos.LEFT, 2);
 
     // spells
-    String[] mageSpells = new String[21];
-    String[] priestSpells1 = new String[21];
-    String[] priestSpells2 = new String[8];
+    String[] mageSpells1 = new String[11];
+    String[] mageSpells2 = new String[10];
+    String[] priestSpells1 = new String[15];
+    String[] priestSpells2 = new String[14];
 
-    for (int i = 0; i < mageSpells.length; i++)
-      mageSpells[i] = WizardryData.spells[i];
+    for (int i = 0; i < mageSpells1.length; i++)
+      mageSpells1[i] = WizardryData.spells[i];
+    for (int i = 0; i < mageSpells2.length; i++)
+      mageSpells2[i] = WizardryData.spells[11 + i];
     for (int i = 0; i < priestSpells1.length; i++)
       priestSpells1[i] = WizardryData.spells[21 + i];
     for (int i = 0; i < priestSpells2.length; i++)
-      priestSpells2[i] = WizardryData.spells[42 + i];
+      priestSpells2[i] = WizardryData.spells[28 + i];
 
-    checkBox1 = createCheckBoxes (mageSpells, 10, 1);
-    checkBox2 = createCheckBoxes (priestSpells1, 12, 1);
-    checkBox3 = createCheckBoxes (priestSpells2, 14, 1);
+    checkBox1 = createCheckBoxes (mageSpells1, 10, 1);
+    checkBox11 = createCheckBoxes (mageSpells2, 12, 1);
+    checkBox2 = createCheckBoxes (priestSpells1, 14, 1);
+    checkBox3 = createCheckBoxes (priestSpells2, 16, 1);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -176,8 +190,8 @@ public class CharacterPane extends DataPane
     setText (textOut[EXPERIENCE], character.experience);
     setText (textOut[CRIT], character.crithitm);
     setText (textOut[HP_DAM_DICE], character.hpdamrc);
-    setText (textOut[MAGE_TOTALS], add (character.mageSpells));
-    setText (textOut[PRIEST_TOTALS], add (character.priestSpells));
+    setText (textOut[MAGE_TOTALS], add (character.spellAllowance[MAGE_SPELLS]));
+    setText (textOut[PRIEST_TOTALS], add (character.spellAllowance[PRIEST_SPELLS]));
     setText (textOut[MYSTERY], character.mysteryBit);
 
     setText (textOut2[MAXLEVAC], character.maxlevac);
@@ -246,6 +260,11 @@ public class CharacterPane extends DataPane
       checkBox2[i].setSelected (character.spellsKnown[i + checkBox1.length]);
     for (int i = 0; i < checkBox3.length; i++)
       checkBox3[i].setSelected (character.spellsKnown[i + checkBox1.length + checkBox2.length]);
+
+    if (wizardry.getScenarioId () == 4)
+    {
+      System.out.println (character.getParty ());
+    }
   }
 
   // ---------------------------------------------------------------------------------//
