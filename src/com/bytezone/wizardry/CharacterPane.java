@@ -2,6 +2,7 @@ package com.bytezone.wizardry;
 
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Character.Possession;
+import com.bytezone.wizardry.origin.CharacterParty;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryData;
 
@@ -60,7 +61,7 @@ public class CharacterPane extends DataPane
   CheckBox[] checkBox6;
 
   TextField[] textOut6;
-  TextArea textArea;
+  TextArea partyText;
 
   private WizardryData wizardry;
 
@@ -76,8 +77,6 @@ public class CharacterPane extends DataPane
 
     String[] labelText2 =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
-
-    String[] labelText6 = { "Party", "Slogan" };
 
     String[] attributesText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
     String[] saveVsText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
@@ -163,6 +162,13 @@ public class CharacterPane extends DataPane
     reset (textOut2);
     reset (textOut3);
     reset (textOut4);
+    reset (textOut5);
+
+    //    if (wizardry.getScenarioId () == 4)
+    //    {
+    //      reset (textOut6);
+    //      partyText.setText ("");
+    //    }
 
     reset (textOut2);
     reset (checkBox1);
@@ -171,6 +177,25 @@ public class CharacterPane extends DataPane
     reset (checkBox4);
     reset (checkBox5);
     reset (checkBox6);
+
+    // party
+    if (wizardry.getScenarioId () == 4)
+    {
+      String[] partyLabels = { "Party", "Slogan", "1", "2", "3", "4", "5", "6" };
+
+      LabelPlacement lp7 = new LabelPlacement (7, 18, HPos.RIGHT, 2);
+      DataPlacement dp7 = new DataPlacement (9, 18, Pos.CENTER_LEFT, 6);
+      textOut6 = createTextFields (partyLabels, lp7, dp7);
+
+      //      String[] label3Text = { "Members" };
+      //      LabelPlacement lp8 = new LabelPlacement (7, 20, HPos.RIGHT, 2);
+      //      DataPlacement2 dp8 = new DataPlacement2 (9, 20, Pos.CENTER_LEFT, 16, 6);
+      //      partyText = createTextArea (label3Text, lp8, dp8);
+    }
+    else
+    {
+      // remove fields
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -263,7 +288,16 @@ public class CharacterPane extends DataPane
 
     if (wizardry.getScenarioId () == 4)
     {
-      System.out.println (character.getParty ());
+      CharacterParty party = character.getParty ();
+      setText (textOut6[0], party.getName ());
+      setText (textOut6[1], party.getMessage ());
+
+      int pos = 2;
+      if (party.size () > 1)
+        for (Character member : party)
+          setText (textOut6[pos++], member.name);
+      for (int i = pos; i < 8; i++)
+        setText (textOut6[i], "");
     }
   }
 
