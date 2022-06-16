@@ -2,15 +2,14 @@ package com.bytezone.wizardry;
 
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.Character.Possession;
-import com.bytezone.wizardry.origin.CharacterParty;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 // -----------------------------------------------------------------------------------//
 public class CharacterPane extends DataPane
@@ -60,16 +59,21 @@ public class CharacterPane extends DataPane
   CheckBox[] checkBox5;
   CheckBox[] checkBox6;
 
-  TextField[] textOut6;
-  TextArea partyText;
+  TextField[] textOut7;
+  TextField[] textOut8;
+  TextField[] textOut9;
+  TextField[] textOut10;
+  TextField[] textOut11;
+  TextField[] textOut12;
 
   private WizardryData wizardry;
+  private PartyPane partyPane = new PartyPane ();
 
   // ---------------------------------------------------------------------------------//
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 75, 70, 20, 20, 20, 30, 50, 80, 50, 80, 20, 80, 20, 80, 20, 80, 20);
+    setColumnConstraints (110, 75, 70, 20, 20, 20, 30, 50, 80, 50, 80, 30, 70, 30, 70, 30, 70, 30);
 
     String[] labelText1 =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
@@ -143,7 +147,7 @@ public class CharacterPane extends DataPane
     for (int i = 0; i < priestSpells1.length; i++)
       priestSpells1[i] = WizardryData.spells[21 + i];
     for (int i = 0; i < priestSpells2.length; i++)
-      priestSpells2[i] = WizardryData.spells[28 + i];
+      priestSpells2[i] = WizardryData.spells[36 + i];
 
     checkBox1 = createCheckBoxes (mageSpells1, 10, 1);
     checkBox11 = createCheckBoxes (mageSpells2, 12, 1);
@@ -181,21 +185,40 @@ public class CharacterPane extends DataPane
     // party
     if (wizardry.getScenarioId () == 4)
     {
-      String[] partyLabels = { "Party", "Slogan", "1", "2", "3", "4", "5", "6" };
+      GridPane.setConstraints (partyPane, 8, 17);
+      GridPane.setColumnSpan (partyPane, 10);
+      GridPane.setColumnSpan (partyPane, 10);
+      gridPane.getChildren ().add (partyPane);
 
-      LabelPlacement lp7 = new LabelPlacement (7, 18, HPos.RIGHT, 2);
-      DataPlacement dp7 = new DataPlacement (9, 18, Pos.CENTER_LEFT, 6);
-      textOut6 = createTextFields (partyLabels, lp7, dp7);
-
-      //      String[] label3Text = { "Members" };
-      //      LabelPlacement lp8 = new LabelPlacement (7, 20, HPos.RIGHT, 2);
-      //      DataPlacement2 dp8 = new DataPlacement2 (9, 20, Pos.CENTER_LEFT, 16, 6);
-      //      partyText = createTextArea (label3Text, lp8, dp8);
+      partyPane.setWizardry (wizardry);
     }
-    else
-    {
-      // remove fields
-    }
+    //      String[] partyLabels1 = { "Party", "Slogan" };
+    //      String[] partyLabels2 = { "1", "2", "3", "4", "5", "6" };
+    //
+    //      LabelPlacement lp7 = new LabelPlacement (7, 18, HPos.RIGHT, 2);
+    //      DataPlacement dp7 = new DataPlacement (9, 18, Pos.CENTER_LEFT, 6);
+    //      textOut7 = createTextFields (partyLabels1, lp7, dp7);
+    //
+    //      LabelPlacement lp8 = new LabelPlacement (7, 20, HPos.RIGHT, 2);
+    //      DataPlacement dp8 = new DataPlacement (9, 20, Pos.CENTER_LEFT, 2);
+    //      textOut8 = createTextFields (partyLabels2, lp8, dp8);
+    //
+    //      DataPlacement dp9 = new DataPlacement (10, 20, Pos.CENTER_LEFT, 1);
+    //      textOut9 = createTextFields (6, dp9);
+    //
+    //      DataPlacement dp10 = new DataPlacement (11, 20, Pos.CENTER_LEFT, 1);
+    //      textOut10 = createTextFields (6, dp10);
+    //
+    //      DataPlacement dp11 = new DataPlacement (12, 20, Pos.CENTER_LEFT, 1);
+    //      textOut11 = createTextFields (6, dp11);
+    //
+    //      DataPlacement dp12 = new DataPlacement (13, 20, Pos.CENTER_LEFT, 1);
+    //      textOut12 = createTextFields (6, dp12);
+    //    }
+    //    else
+    //    {
+    //      // remove fields
+    //    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -288,16 +311,27 @@ public class CharacterPane extends DataPane
 
     if (wizardry.getScenarioId () == 4)
     {
-      CharacterParty party = character.getParty ();
-      setText (textOut6[0], party.getName ());
-      setText (textOut6[1], party.getMessage ());
-
-      int pos = 2;
-      if (party.size () > 1)
-        for (Character member : party)
-          setText (textOut6[pos++], member.name);
-      for (int i = pos; i < 8; i++)
-        setText (textOut6[i], "");
+      partyPane.update (character);
+      //      CharacterParty party = character.getParty ();
+      //      setText (textOut7[0], party.getName ());
+      //      setText (textOut7[1], party.getMessage ());
+      //
+      //      int pos = 0;
+      //      if (party.size () > 1)
+      //        for (Character member : party)
+      //        {
+      //          setText (textOut8[pos], member.id);
+      //          setText (textOut9[pos], member.name);
+      //          setText (textOut10[pos], member.getTypeString ());
+      //          setText (textOut11[pos], member.armourClass);
+      //          setText (textOut12[pos], member.hpLeft);
+      //          pos++;
+      //        }
+      //      for (int i = pos; i < 6; i++)
+      //      {
+      //        setText (textOut8[i], "");
+      //        setText (textOut9[i], "");
+      //      }
     }
   }
 
