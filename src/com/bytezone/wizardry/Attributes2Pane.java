@@ -21,7 +21,7 @@ public class Attributes2Pane extends DataPane
   private static final int REGEN = 6;
   private static final int SWING = 7;
 
-  TextField[] textOut2;
+  TextField[] textOut;
 
   private WizardryData wizardry;
 
@@ -32,13 +32,12 @@ public class Attributes2Pane extends DataPane
     setColumnConstraints (90, 50);
     gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
 
-    String[] labelText2 =
+    String[] labelText =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
 
-    // numeric values
-    LabelPlacement lp3 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp3 = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
-    textOut2 = createTextFields (labelText2, lp3, dp3);
+    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
+    textOut = createTextFields (labelText, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -47,20 +46,20 @@ public class Attributes2Pane extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (textOut2);
+    reset (textOut);
   }
 
   // ---------------------------------------------------------------------------------//
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut2[MAXLEVAC], character.maxlevac);
-    setText (textOut2[CHAR_LEV], character.charlev);
-    setText (textOut2[HP_LEFT], character.hpLeft);
-    setText (textOut2[HP_MAX], character.hpMax);
-    setText (textOut2[HP_CALC_MD], character.hpCalCmd);
-    setText (textOut2[AC], character.armourClass);
-    setText (textOut2[REGEN], character.healPts);
-    setText (textOut2[SWING], character.swingCount);
+    setText (textOut[MAXLEVAC], character.maxlevac);
+    setText (textOut[CHAR_LEV], character.charlev);
+    setText (textOut[HP_LEFT], character.hpLeft);
+    setText (textOut[HP_MAX], character.hpMax);
+    setText (textOut[HP_CALC_MD], character.hpCalCmd);
+    setText (textOut[AC], character.armourClass);
+    setText (textOut[REGEN], character.healPts);
+    setText (textOut[SWING], character.swingCount);
   }
 }

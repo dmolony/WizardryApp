@@ -17,13 +17,13 @@ public class Attributes1Pane extends DataPane
 
   private static final int NAME = 0;
   private static final int PASSWORD = 1;
-  private static final int AWARDS = 7;
-  private static final int IN_MAZE = 8;
+  private static final int STATUS = 2;
+  private static final int ALIGNMENT = 3;
   private static final int RACE = 4;
   private static final int CLASS = 5;
   private static final int AGE = 6;
-  private static final int STATUS = 2;
-  private static final int ALIGNMENT = 3;
+  private static final int AWARDS = 7;
+  private static final int IN_MAZE = 8;
   private static final int GOLD = 9;
   private static final int EXPERIENCE = 10;
   private static final int CRIT = 11;
@@ -43,14 +43,13 @@ public class Attributes1Pane extends DataPane
     setColumnConstraints (110, 145);
     gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
 
-    String[] labelText1 =
+    String[] labelText =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
             "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
 
-    // text values
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
-    textOut = createTextFields (labelText1, lp1, dp1);
+    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
+    textOut = createTextFields (labelText, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -67,14 +66,14 @@ public class Attributes1Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setText (textOut[NAME], character.name);
-    setText (textOut[AWARDS], character.awards);
     setText (textOut[PASSWORD], character.password);
-    setText (textOut[IN_MAZE], character.inMaze ? "** OUT **" : "");
+    setText (textOut[STATUS], character.status);
+    setText (textOut[ALIGNMENT], character.alignment);
     setText (textOut[RACE], character.race);
     setText (textOut[CLASS], character.characterClass);
     setText (textOut[AGE], getText (character.age));
-    setText (textOut[STATUS], character.status);
-    setText (textOut[ALIGNMENT], character.alignment);
+    setText (textOut[AWARDS], character.awards);
+    setText (textOut[IN_MAZE], character.inMaze ? "** OUT **" : "");
     setText (textOut[GOLD], character.gold);
     setText (textOut[EXPERIENCE], character.experience);
     setText (textOut[CRIT], character.crithitm);

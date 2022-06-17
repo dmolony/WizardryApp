@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 public class Attributes3Pane extends DataPane
 {
-  TextField[] textOut1;
+  TextField[] textOut;
 
   private WizardryData wizardry;
 
@@ -23,10 +23,9 @@ public class Attributes3Pane extends DataPane
 
     String[] attributesText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
 
-    // attributes
-    LabelPlacement lp2 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
-    textOut1 = createTextFields (attributesText, lp2, dp2);
+    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
+    textOut = createTextFields (attributesText, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -34,14 +33,15 @@ public class Attributes3Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
-    reset (textOut1);
+
+    reset (textOut);
   }
 
   // ---------------------------------------------------------------------------------//
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    for (int i = 0; i < textOut1.length; i++)
-      setText (textOut1[i], character.attributes[i]);
+    for (int i = 0; i < textOut.length; i++)
+      setText (textOut[i], character.attributes[i]);
   }
 }
