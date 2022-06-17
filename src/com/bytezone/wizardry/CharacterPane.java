@@ -36,11 +36,11 @@ public class CharacterPane extends DataPane
     GridPane.setColumnSpan (partyPane, 2);
     GridPane.setRowSpan (partyPane, 8);
 
-    GridPane.setConstraints (attributes3Pane, 10, 1);
+    GridPane.setConstraints (attributes3Pane, 10, 1);       // Strength/Agility etc
     GridPane.setColumnSpan (partyPane, 2);
     GridPane.setRowSpan (partyPane, 6);
 
-    GridPane.setConstraints (attributes4Pane, 15, 1);
+    GridPane.setConstraints (attributes4Pane, 15, 1);       // SaveVs
     GridPane.setColumnSpan (partyPane, 2);
     GridPane.setRowSpan (partyPane, 6);
 
@@ -65,7 +65,7 @@ public class CharacterPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

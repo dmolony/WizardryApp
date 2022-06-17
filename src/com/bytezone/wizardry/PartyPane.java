@@ -13,15 +13,15 @@ import javafx.scene.control.TextField;
 public class PartyPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  TextField[] textOut7;
-  TextField[] textOut8;
-  TextField[] textOut9;
-  TextField[] textOut10;
-  TextField[] textOut11;
-  TextField[] textOut12;
-  TextField[] textOut13;
-  TextField[] textOut14;
-  TextField[] textOut15;
+  private TextField[] textOut7;
+  private TextField[] textOut8;
+  private TextField[] textOut9;
+  private TextField[] textOut10;
+  private TextField[] textOut11;
+  private TextField[] textOut12;
+  private TextField[] textOut13;
+  private TextField[] textOut14;
+  private TextField[] textOut15;
 
   private WizardryData wizardry;
 
@@ -67,7 +67,7 @@ public class PartyPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

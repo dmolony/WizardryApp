@@ -21,7 +21,7 @@ public class Attributes2Pane extends DataPane
   private static final int REGEN = 6;
   private static final int SWING = 7;
 
-  TextField[] textOut;
+  private TextField[] textOut;
 
   private WizardryData wizardry;
 
@@ -41,7 +41,7 @@ public class Attributes2Pane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

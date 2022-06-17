@@ -15,12 +15,12 @@ import javafx.scene.control.TextField;
 public class BaggagePane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  TextField[] textOut3;
-  TextField[] textOut4;
+  private TextField[] textOut3;
+  private TextField[] textOut4;
 
-  CheckBox[] checkBox4;
-  CheckBox[] checkBox5;
-  CheckBox[] checkBox6;
+  private CheckBox[] checkBox4;
+  private CheckBox[] checkBox5;
+  private CheckBox[] checkBox6;
 
   private WizardryData wizardry;
 
@@ -58,7 +58,7 @@ public class BaggagePane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

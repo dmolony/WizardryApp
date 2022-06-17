@@ -11,8 +11,8 @@ import javafx.scene.control.CheckBox;
 public class MageSpellsPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  CheckBox[] checkBox1;
-  CheckBox[] checkBox2;
+  private CheckBox[] checkBox1;
+  private CheckBox[] checkBox2;
 
   private WizardryData wizardry;
 
@@ -38,7 +38,7 @@ public class MageSpellsPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
@@ -55,6 +55,6 @@ public class MageSpellsPane extends DataPane
       checkBox1[i].setSelected (character.spellsKnown[i]);
 
     for (int i = 0; i < checkBox2.length; i++)
-      checkBox1[i].setSelected (character.spellsKnown[i + checkBox1.length]);
+      checkBox2[i].setSelected (character.spellsKnown[i + checkBox1.length]);
   }
 }

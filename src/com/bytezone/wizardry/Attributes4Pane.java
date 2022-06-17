@@ -8,9 +8,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
+// -----------------------------------------------------------------------------------//
 public class Attributes4Pane extends DataPane
+// -----------------------------------------------------------------------------------//
 {
-  TextField[] textOut;
+  private TextField[] textOut;
 
   private WizardryData wizardry;
 
@@ -21,15 +23,15 @@ public class Attributes4Pane extends DataPane
     setColumnConstraints (90, 50);
     gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
 
-    String[] saveVsText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
+    String[] labelText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
 
     LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
-    textOut = createTextFields (saveVsText, lp, dp);
+    textOut = createTextFields (labelText, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

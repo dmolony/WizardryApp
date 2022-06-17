@@ -32,7 +32,7 @@ public class Attributes1Pane extends DataPane
   private static final int PRIEST_TOTALS = 14;
   private static final int MYSTERY = 15;
 
-  TextField[] textOut;
+  private TextField[] textOut;
 
   private WizardryData wizardry;
 
@@ -49,11 +49,12 @@ public class Attributes1Pane extends DataPane
 
     LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
+
     textOut = createTextFields (labelText, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;

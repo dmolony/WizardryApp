@@ -11,8 +11,8 @@ import javafx.scene.control.CheckBox;
 public class PriestSpellsPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  CheckBox[] checkBox1;
-  CheckBox[] checkBox2;
+  private CheckBox[] checkBox1;
+  private CheckBox[] checkBox2;
 
   private WizardryData wizardry;
 
@@ -38,7 +38,7 @@ public class PriestSpellsPane extends DataPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
+  void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
     this.wizardry = wizardry;
