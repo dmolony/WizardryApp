@@ -153,6 +153,10 @@ public class CharacterPane extends DataPane
     checkBox11 = createCheckBoxes (mageSpells2, 12, 1);
     checkBox2 = createCheckBoxes (priestSpells1, 14, 1);
     checkBox3 = createCheckBoxes (priestSpells2, 16, 1);
+
+    GridPane.setConstraints (partyPane, 8, 17);
+    GridPane.setColumnSpan (partyPane, 10);
+    GridPane.setColumnSpan (partyPane, 10);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -168,12 +172,6 @@ public class CharacterPane extends DataPane
     reset (textOut4);
     reset (textOut5);
 
-    //    if (wizardry.getScenarioId () == 4)
-    //    {
-    //      reset (textOut6);
-    //      partyText.setText ("");
-    //    }
-
     reset (textOut2);
     reset (checkBox1);
     reset (checkBox2);
@@ -185,40 +183,11 @@ public class CharacterPane extends DataPane
     // party
     if (wizardry.getScenarioId () == 4)
     {
-      GridPane.setConstraints (partyPane, 8, 17);
-      GridPane.setColumnSpan (partyPane, 10);
-      GridPane.setColumnSpan (partyPane, 10);
       gridPane.getChildren ().add (partyPane);
-
       partyPane.setWizardry (wizardry);
     }
-    //      String[] partyLabels1 = { "Party", "Slogan" };
-    //      String[] partyLabels2 = { "1", "2", "3", "4", "5", "6" };
-    //
-    //      LabelPlacement lp7 = new LabelPlacement (7, 18, HPos.RIGHT, 2);
-    //      DataPlacement dp7 = new DataPlacement (9, 18, Pos.CENTER_LEFT, 6);
-    //      textOut7 = createTextFields (partyLabels1, lp7, dp7);
-    //
-    //      LabelPlacement lp8 = new LabelPlacement (7, 20, HPos.RIGHT, 2);
-    //      DataPlacement dp8 = new DataPlacement (9, 20, Pos.CENTER_LEFT, 2);
-    //      textOut8 = createTextFields (partyLabels2, lp8, dp8);
-    //
-    //      DataPlacement dp9 = new DataPlacement (10, 20, Pos.CENTER_LEFT, 1);
-    //      textOut9 = createTextFields (6, dp9);
-    //
-    //      DataPlacement dp10 = new DataPlacement (11, 20, Pos.CENTER_LEFT, 1);
-    //      textOut10 = createTextFields (6, dp10);
-    //
-    //      DataPlacement dp11 = new DataPlacement (12, 20, Pos.CENTER_LEFT, 1);
-    //      textOut11 = createTextFields (6, dp11);
-    //
-    //      DataPlacement dp12 = new DataPlacement (13, 20, Pos.CENTER_LEFT, 1);
-    //      textOut12 = createTextFields (6, dp12);
-    //    }
-    //    else
-    //    {
-    //      // remove fields
-    //    }
+    else
+      gridPane.getChildren ().remove (partyPane);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -310,29 +279,7 @@ public class CharacterPane extends DataPane
       checkBox3[i].setSelected (character.spellsKnown[i + checkBox1.length + checkBox2.length]);
 
     if (wizardry.getScenarioId () == 4)
-    {
       partyPane.update (character);
-      //      CharacterParty party = character.getParty ();
-      //      setText (textOut7[0], party.getName ());
-      //      setText (textOut7[1], party.getMessage ());
-      //
-      //      int pos = 0;
-      //      if (party.size () > 1)
-      //        for (Character member : party)
-      //        {
-      //          setText (textOut8[pos], member.id);
-      //          setText (textOut9[pos], member.name);
-      //          setText (textOut10[pos], member.getTypeString ());
-      //          setText (textOut11[pos], member.armourClass);
-      //          setText (textOut12[pos], member.hpLeft);
-      //          pos++;
-      //        }
-      //      for (int i = pos; i < 6; i++)
-      //      {
-      //        setText (textOut8[i], "");
-      //        setText (textOut9[i], "");
-      //      }
-    }
   }
 
   // ---------------------------------------------------------------------------------//
