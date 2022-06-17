@@ -9,9 +9,6 @@ import javafx.scene.layout.GridPane;
 public class CharacterPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  static int MAGE_SPELLS = 0;
-  static int PRIEST_SPELLS = 1;
-
   private WizardryData wizardry;
 
   private PartyPane partyPane = new PartyPane ();
@@ -95,7 +92,6 @@ public class CharacterPane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-
     attributes1Pane.update (character);
     attributes2Pane.update (character);
     attributes3Pane.update (character);

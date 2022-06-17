@@ -79,24 +79,8 @@ public class Attributes1Pane extends DataPane
     setText (textOut[EXPERIENCE], character.experience);
     setText (textOut[CRIT], character.crithitm);
     setText (textOut[HP_DAM_DICE], character.hpdamrc);
-    setText (textOut[MAGE_TOTALS], add (character.spellAllowance[MAGE_SPELLS]));
-    setText (textOut[PRIEST_TOTALS], add (character.spellAllowance[PRIEST_SPELLS]));
+    setText (textOut[MAGE_TOTALS], character.getSpellsString (MAGE_SPELLS));
+    setText (textOut[PRIEST_TOTALS], character.getSpellsString (PRIEST_SPELLS));
     setText (textOut[MYSTERY], character.mysteryBit);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  private String add (int[] totals)
-  // ---------------------------------------------------------------------------------//
-  {
-    StringBuilder text = new StringBuilder ();
-
-    for (int i = 0; i < totals.length; i++)
-      text.append (totals[i] + " / ");
-
-    text.deleteCharAt (text.length () - 1);
-    text.deleteCharAt (text.length () - 1);
-    text.deleteCharAt (text.length () - 1);
-
-    return text.toString ();
   }
 }
