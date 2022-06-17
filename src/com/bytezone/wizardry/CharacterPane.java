@@ -1,8 +1,6 @@
 package com.bytezone.wizardry;
 
 import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.Character.Possession;
-import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
@@ -47,17 +45,17 @@ public class CharacterPane extends DataPane
   TextField[] textOut;
   TextField[] textOut1;
   TextField[] textOut2;
-  TextField[] textOut3;
-  TextField[] textOut4;
+  //  TextField[] textOut3;
+  //  TextField[] textOut4;
   TextField[] textOut5;
 
   CheckBox[] checkBox1;
   CheckBox[] checkBox11;
   CheckBox[] checkBox2;
   CheckBox[] checkBox3;
-  CheckBox[] checkBox4;
-  CheckBox[] checkBox5;
-  CheckBox[] checkBox6;
+  //  CheckBox[] checkBox4;
+  //  CheckBox[] checkBox5;
+  //  CheckBox[] checkBox6;
 
   TextField[] textOut7;
   TextField[] textOut8;
@@ -68,6 +66,7 @@ public class CharacterPane extends DataPane
 
   private WizardryData wizardry;
   private PartyPane partyPane = new PartyPane ();
+  private BaggagePane baggagePane = new BaggagePane ();
 
   // ---------------------------------------------------------------------------------//
   public CharacterPane ()
@@ -105,31 +104,6 @@ public class CharacterPane extends DataPane
     DataPlacement dp3 = new DataPlacement (7, 8, Pos.CENTER_RIGHT, 1);
     textOut2 = createTextFields (labelText2, lp3, dp3);
 
-    // possessions headings
-    createLabel ("Item", 1, 17, HPos.CENTER, 1);
-    createLabel ("Eq", 3, 17, HPos.LEFT, 1);
-    createLabel ("Cu", 4, 17, HPos.LEFT, 1);
-    createLabel ("Id", 5, 17, HPos.LEFT, 1);
-    createLabel ("Value", 6, 17, HPos.CENTER, 2);
-
-    // possessions
-    String[] possessionsText = new String[8];
-    for (int i = 0; i < possessionsText.length; i++)
-      possessionsText[i] = "# " + (i + 1);
-
-    LabelPlacement lp4 = new LabelPlacement (0, 18, HPos.RIGHT, 1);
-    DataPlacement dp4 = new DataPlacement (1, 18, Pos.CENTER_LEFT, 2);
-    textOut3 = createTextFields (possessionsText, lp4, dp4);
-
-    // possessions eq/cu/id
-    checkBox4 = createCheckBoxes (8, 3, 18);
-    checkBox5 = createCheckBoxes (8, 4, 18);
-    checkBox6 = createCheckBoxes (8, 5, 18);
-
-    // possessions value
-    DataPlacement dp6 = new DataPlacement (6, 18, Pos.CENTER_RIGHT, 2);
-    textOut4 = createTextFields (8, dp6);
-
     // spells headings
     createLabel ("Mage spells", 11, 0, HPos.LEFT, 2);
     createLabel ("Priest spells", 15, 0, HPos.LEFT, 2);
@@ -157,6 +131,11 @@ public class CharacterPane extends DataPane
     GridPane.setConstraints (partyPane, 8, 17);
     GridPane.setColumnSpan (partyPane, 10);
     GridPane.setColumnSpan (partyPane, 10);
+
+    GridPane.setConstraints (baggagePane, 0, 17);
+    GridPane.setColumnSpan (baggagePane, 7);
+    GridPane.setColumnSpan (baggagePane, 7);
+    gridPane.getChildren ().add (baggagePane);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -168,17 +147,14 @@ public class CharacterPane extends DataPane
     reset (textOut);
     reset (textOut1);
     reset (textOut2);
-    reset (textOut3);
-    reset (textOut4);
     reset (textOut5);
 
     reset (textOut2);
     reset (checkBox1);
     reset (checkBox2);
     reset (checkBox3);
-    reset (checkBox4);
-    reset (checkBox5);
-    reset (checkBox6);
+
+    baggagePane.setWizardry (wizardry);
 
     // party
     if (wizardry.getScenarioId () == 4)
@@ -226,57 +202,14 @@ public class CharacterPane extends DataPane
     for (int i = 0; i < textOut5.length; i++)
       setText (textOut5[i], character.saveVs[i]);
 
-    for (int i = 0; i < 8; i++)
-      if (i < character.possessionsCount)
-      {
-        Possession possession = character.possessions.get (i);
-        Item item = wizardry.getItem (possession.id ());
-        if (item == null)
-        {
-          System.out.printf ("%d null item #%d ", character.id, possession.id ());
-          break;
-        }
-
-        if (possession.identified ())
-        {
-          setText (textOut3[i], item.name);
-          setText (textOut4[i], item.price);    // formatted as number
-
-          checkBox4[i].setSelected (possession.equipped ());
-          checkBox5[i].setSelected (possession.cursed ());
-          checkBox6[i].setSelected (true);
-
-          checkBox5[i].setIndeterminate (false);
-        }
-        else
-        {
-          setText (textOut3[i], item.nameGeneric);
-          setText (textOut4[i], "?");           // formatted as text
-
-          checkBox4[i].setSelected (false);
-          checkBox6[i].setSelected (false);
-
-          checkBox5[i].setIndeterminate (true);
-        }
-      }
-      else
-      {
-        setText (textOut3[i], "");
-        setText (textOut4[i], "");
-
-        checkBox4[i].setSelected (false);
-        checkBox5[i].setSelected (false);
-        checkBox6[i].setSelected (false);
-
-        checkBox5[i].setIndeterminate (false);
-      }
-
     for (int i = 0; i < checkBox1.length; i++)
       checkBox1[i].setSelected (character.spellsKnown[i]);
     for (int i = 0; i < checkBox2.length; i++)
       checkBox2[i].setSelected (character.spellsKnown[i + checkBox1.length]);
     for (int i = 0; i < checkBox3.length; i++)
       checkBox3[i].setSelected (character.spellsKnown[i + checkBox1.length + checkBox2.length]);
+
+    baggagePane.update (character);
 
     if (wizardry.getScenarioId () == 4)
       partyPane.update (character);
