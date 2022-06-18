@@ -3,50 +3,17 @@ package com.bytezone.wizardry;
 import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryData;
 
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 //-----------------------------------------------------------------------------------//
 public class ItemPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
-  private static final int NAME = 0;
-  private static final int GENERIC_NAME = 1;
-  private static final int ITEM_CLASS = 2;
-  private static final int ALIGNMENT = 3;
-  private static final int CURSED = 4;
-  private static final int CRIT_HIT = 5;
-  private static final int CHANCE = 6;
-  private static final int CHANGE_TO = 7;
-  private static final int DAMAGE_DICE = 8;
-  private static final int SPELL_POWER = 9;
-  private static final int PRICE = 10;
-
-  private static final int ID = 0;
-  private static final int SPECIAL = 1;
-  private static final int AC = 2;
-  private static final int WEP_HIT_MOD = 3;
-  private static final int XTRA_SWING = 4;
-  private static final int BOLTAC = 5;
-  private static final int REGEN = 6;
-
-  String[] label1Text = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
-      "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
-  String[] label2Text =
-      { "Id", "Special #", "AC", "To hit +", "# swings", "In store", "Regeneration" };
-
-  ComboBox<Item> itemsList = new ComboBox<> ();
-
-  TextField[] textOut1;
-  TextField[] textOut2;
-
-  CheckBox[] checkBoxes1;
-  CheckBox[] checkBoxes2;
-  CheckBox[] checkBoxes3;
-  CheckBox[] checkBoxes4;
+  private ItemPane1 itemPane1 = new ItemPane1 ();
+  private ItemPane2 itemPane2 = new ItemPane2 ();
+  private ItemPane3 itemPane3 = new ItemPane3 ();
+  private ItemPane4 itemPane4 = new ItemPane4 ();
+  private ItemPane5 itemPane5 = new ItemPane5 ();
 
   private WizardryData wizardry;
 
@@ -54,35 +21,35 @@ public class ItemPane extends DataPane
   public ItemPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 64, 90, 110, 20, 110, 30, 100);
+    //    setColumnConstraints (110, 64, 90, 110, 20, 110, 30, 100);
+    //    setPadding (defaultInsets);
+
+    setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
+    setAllRowConstraints (20, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setGridLinesVisible (false);
     setPadding (defaultInsets);
 
-    createLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
-    createLabel ("Resistance", 3, 10, HPos.RIGHT, 2);
-    createLabel ("Protection vs", 5, 0, HPos.RIGHT, 2);
-    createLabel ("Purposed vs", 7, 0, HPos.LEFT, 2);
+    GridPane.setConstraints (itemPane1, 0, 0);
+    GridPane.setColumnSpan (itemPane1, 2);
+    GridPane.setRowSpan (itemPane1, 11);
 
-    // basic attributes
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
-    textOut1 = createTextFields (label1Text, lp1, dp1);
+    GridPane.setConstraints (itemPane2, 0, 12);
+    GridPane.setColumnSpan (itemPane2, 2);
+    GridPane.setRowSpan (itemPane2, 7);
 
-    // numeric attributes
-    LabelPlacement lp2 = new LabelPlacement (0, 11, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (1, 11, Pos.CENTER_RIGHT, 1);
-    textOut2 = createTextFields (label2Text, lp2, dp2);
+    GridPane.setConstraints (itemPane3, 11, 0);
+    GridPane.setColumnSpan (itemPane3, 2);
+    GridPane.setRowSpan (itemPane3, 8);
 
-    // used by
-    checkBoxes2 = createCheckBoxes (WizardryData.characterClass, 3, 1);
+    GridPane.setConstraints (itemPane4, 11, 10);
+    GridPane.setColumnSpan (itemPane4, 2);
+    GridPane.setRowSpan (itemPane4, 9);
 
-    // resistance
-    checkBoxes1 = createCheckBoxes (WizardryData.resistance, 3, 11);
+    GridPane.setConstraints (itemPane5, 18, 0);
+    GridPane.setColumnSpan (itemPane5, 2);
+    GridPane.setRowSpan (itemPane5, 15);
 
-    // protection vs
-    checkBoxes3 = createCheckBoxes (WizardryData.monsterClass, 5, 1);
-
-    // purposed vs
-    checkBoxes4 = createCheckBoxes (checkBoxes3.length, 7, 1);
+    getChildren ().addAll (itemPane1, itemPane2, itemPane3, itemPane4, itemPane5);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -91,72 +58,21 @@ public class ItemPane extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (textOut1);
-    reset (textOut2);
-
-    reset (checkBoxes1);
-    reset (checkBoxes2);
-    reset (checkBoxes3);
-    reset (checkBoxes4);
+    itemPane1.setWizardry (wizardry);
+    itemPane2.setWizardry (wizardry);
+    itemPane3.setWizardry (wizardry);
+    itemPane4.setWizardry (wizardry);
+    itemPane5.setWizardry (wizardry);
   }
 
   // ---------------------------------------------------------------------------------//
   void update (Item item)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut1[NAME], item.name);
-    setText (textOut1[GENERIC_NAME], item.nameGeneric);
-    setText (textOut2[ID], item.id);
-
-    if (item.type == null)
-      return;
-
-    setText (textOut1[ITEM_CLASS], item.type);
-    setText (textOut1[ALIGNMENT], item.alignment);
-    setText (textOut1[CURSED], item.cursed);
-    setText (textOut1[CRIT_HIT], item.crithitm);                    // Auto kill
-    setText (textOut1[CHANGE_TO],
-        item.changeChance > 0 ? wizardry.getItem (item.changeTo).name : "");
-    setText (textOut1[CHANCE], item.changeChance > 0 ? item.changeChance + "%" : "");
-    setText (textOut1[DAMAGE_DICE], item.wephpdam);
-
-    if (item.spellPwr > 0)
-      setText (textOut1[SPELL_POWER], WizardryData.spells[item.spellPwr - 1]);
-    else
-      setText (textOut1[SPELL_POWER], "");
-
-    setText (textOut1[PRICE], item.price);
-
-    setText (textOut2[SPECIAL], item.special);
-    setText (textOut2[AC], item.armourClass);
-    setText (textOut2[WEP_HIT_MOD], item.wephitmd);
-    setText (textOut2[XTRA_SWING], item.xtraSwing);
-    setText (textOut2[BOLTAC], item.boltac);
-    setText (textOut2[REGEN], item.healPts);
-
-    int protection = item.wepvsty2Flags;
-    int purposed = item.wepvstyFlags;
-    for (int i = 0; i < WizardryData.monsterClass.length; i++)
-    {
-      checkBoxes3[i].setSelected ((protection & 0x01) != 0);
-      checkBoxes4[i].setSelected ((purposed & 0x01) != 0);
-
-      protection >>>= 1;
-      purposed >>>= 1;
-    }
-
-    int resistance = item.wepvsty3Flags;
-    for (int i = 0; i < WizardryData.resistance.length; i++)
-    {
-      checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
-      resistance >>>= 1;
-    }
-
-    int characterClass = item.classUseFlags;
-    for (int i = 0; i < WizardryData.characterClass.length; i++)
-    {
-      checkBoxes2[i].setSelected ((characterClass & 0x01) != 0);
-      characterClass >>>= 1;
-    }
+    itemPane1.update (item);
+    itemPane2.update (item);
+    itemPane3.update (item);
+    itemPane4.update (item);
+    itemPane5.update (item);
   }
 }

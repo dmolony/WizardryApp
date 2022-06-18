@@ -32,7 +32,7 @@ public class DataPane extends GridPane
     //    setPadding (new Insets (15, 10, 12, 10));      // trbl
 
     //    setAllRowConstraints (20, ROW_HEIGHT);           // make all rows the same height
-    setGridLinesVisible (false);
+    setGridLinesVisible (true);
   }
 
   // ---------------------------------------------------------------------------------//
