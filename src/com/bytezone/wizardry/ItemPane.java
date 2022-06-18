@@ -55,6 +55,7 @@ public class ItemPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 64, 90, 110, 20, 110, 30, 100);
+    setPadding (defaultInsets);
 
     createLabel ("Can be used by", 3, 0, HPos.RIGHT, 2);
     createLabel ("Resistance", 3, 10, HPos.RIGHT, 2);

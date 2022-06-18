@@ -5,6 +5,7 @@ import java.util.Collection;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -20,6 +21,7 @@ public class DataPane extends GridPane
 // -----------------------------------------------------------------------------------//
 {
   static final int ROW_HEIGHT = 26;
+  static final Insets defaultInsets = new Insets (15, 10, 12, 10);
 
   // ---------------------------------------------------------------------------------//
   public DataPane ()

@@ -58,6 +58,7 @@ public class RewardPane extends DataPane
 
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width, width);
+    setPadding (defaultInsets);
 
     // basic attributes
     LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);

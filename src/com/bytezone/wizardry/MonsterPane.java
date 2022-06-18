@@ -65,6 +65,7 @@ public class MonsterPane extends DataPane
     canvas = new Canvas (280, 200);
 
     setColumnConstraints (110, 90, 100, 30, 100, 30, 130);
+    setPadding (defaultInsets);
 
     GridPane.setConstraints (canvas, 4, 1);
     GridPane.setColumnSpan (canvas, 3);

@@ -29,6 +29,7 @@ public class MessagePane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 120, 310);
+    setPadding (defaultInsets);
 
     String[] label1Text = { "Used" };
     LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);

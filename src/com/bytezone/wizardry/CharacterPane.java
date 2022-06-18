@@ -3,7 +3,6 @@ package com.bytezone.wizardry;
 import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.WizardryData;
 
-import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 
 // -----------------------------------------------------------------------------------//
@@ -28,7 +27,7 @@ public class CharacterPane extends DataPane
     setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
     setAllRowConstraints (26, DataPane.ROW_HEIGHT);           // make all rows the same height
     setGridLinesVisible (false);
-    setPadding (new Insets (15, 10, 12, 10));                 // trbl
+    setPadding (defaultInsets);
 
     GridPane.setConstraints (attributes1Pane, 0, 0);
     GridPane.setColumnSpan (attributes1Pane, 2);
@@ -50,10 +49,6 @@ public class CharacterPane extends DataPane
     GridPane.setColumnSpan (attributes4Pane, 2);
     GridPane.setRowSpan (attributes4Pane, 6);
 
-    GridPane.setConstraints (partyPane, 16, 17);
-    GridPane.setColumnSpan (partyPane, 2);
-    GridPane.setRowSpan (partyPane, 8);
-
     GridPane.setConstraints (mageSpellsPane, 22, 0);
     GridPane.setColumnSpan (mageSpellsPane, 2);
     GridPane.setRowSpan (mageSpellsPane, 12);
@@ -61,6 +56,10 @@ public class CharacterPane extends DataPane
     GridPane.setConstraints (priestSpellsPane, 31, 0);
     GridPane.setColumnSpan (priestSpellsPane, 2);
     GridPane.setRowSpan (priestSpellsPane, 16);
+
+    GridPane.setConstraints (partyPane, 16, 18);
+    GridPane.setColumnSpan (partyPane, 2);
+    GridPane.setRowSpan (partyPane, 8);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, mageSpellsPane, priestSpellsPane);

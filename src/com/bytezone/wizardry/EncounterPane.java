@@ -31,6 +31,7 @@ public class EncounterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 80, 130, 80, 130, 80, 130, 570);
+    setPadding (defaultInsets);
 
     String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range odds", "Extra ranges",
         "Range offset" };
