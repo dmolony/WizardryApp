@@ -4,7 +4,6 @@ import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
@@ -41,14 +40,14 @@ public class Attributes1Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145);
-    gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
+    setAllRowConstraints (15, DataPane.ROW_HEIGHT);           // make all rows the same height
 
     String[] labelText =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
             "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
 
     LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
+    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
 
     textOut = createTextFields (labelText, lp, dp);
   }

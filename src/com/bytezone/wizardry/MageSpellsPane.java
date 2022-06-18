@@ -4,7 +4,6 @@ import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
@@ -20,8 +19,8 @@ public class MageSpellsPane extends DataPane
   public MageSpellsPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (70, 30);
-    gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
+    setColumnConstraints (70, 30, 70, 30);
+    setAllRowConstraints (12, DataPane.ROW_HEIGHT);           // make all rows the same height
 
     createLabel ("Mage spells", 1, 0, HPos.LEFT, 2);
 

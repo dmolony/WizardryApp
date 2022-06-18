@@ -5,7 +5,6 @@ import java.util.Collection;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -14,29 +13,24 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
 // -----------------------------------------------------------------------------------//
-public class DataPane extends Pane
+public class DataPane extends GridPane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int ROW_HEIGHT = 26;
-
-  GridPane gridPane = new GridPane ();
+  static final int ROW_HEIGHT = 26;
 
   // ---------------------------------------------------------------------------------//
   public DataPane ()
   // ---------------------------------------------------------------------------------//
   {
-    gridPane.setHgap (10);
-    gridPane.setVgap (3);
-    gridPane.setPadding (new Insets (15, 10, 12, 10));      // trbl
+    setHgap (10);
+    setVgap (3);
+    //    setPadding (new Insets (15, 10, 12, 10));      // trbl
 
-    setRowHeights (30);           // make all rows the same height
-    gridPane.setGridLinesVisible (false);
-
-    getChildren ().add (gridPane);
+    //    setAllRowConstraints (20, ROW_HEIGHT);           // make all rows the same height
+    setGridLinesVisible (false);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -44,7 +38,17 @@ public class DataPane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < width.length; i++)
-      gridPane.getColumnConstraints ().add (new ColumnConstraints (width[i]));
+      getColumnConstraints ().add (new ColumnConstraints (width[i]));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void setAllColumnConstraints (int numColumns, int colWidth)
+  // ---------------------------------------------------------------------------------//
+  {
+    ColumnConstraints colConstraints = new ColumnConstraints (colWidth);
+
+    for (int i = 0; i < numColumns; i++)
+      getColumnConstraints ().add (colConstraints);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -52,16 +56,17 @@ public class DataPane extends Pane
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < height.length; i++)
-      gridPane.getRowConstraints ().add (new RowConstraints (height[i]));
+      getRowConstraints ().add (new RowConstraints (height[i]));
   }
 
   // ---------------------------------------------------------------------------------//
-  void setRowHeights (int totalRows)
+  void setAllRowConstraints (int numRows, int rowHeight)
   // ---------------------------------------------------------------------------------//
   {
-    RowConstraints rowCo = new RowConstraints (ROW_HEIGHT);
-    for (int i = 0; i < totalRows; i++)
-      gridPane.getRowConstraints ().add (rowCo);
+    RowConstraints rowConstraints = new RowConstraints (rowHeight);
+
+    for (int i = 0; i < numRows; i++)
+      getRowConstraints ().add (rowConstraints);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -78,7 +83,7 @@ public class DataPane extends Pane
     GridPane.setConstraints (comboBox, dataPos.col, dataPos.row);
     GridPane.setColumnSpan (comboBox, dataPos.colSpan);
 
-    gridPane.getChildren ().addAll (label, comboBox);
+    getChildren ().addAll (label, comboBox);
 
     comboBox.setItems (FXCollections.observableArrayList (list));
     comboBox.setVisibleRowCount (20);
@@ -94,7 +99,8 @@ public class DataPane extends Pane
     GridPane.setConstraints (label, col, row);
     GridPane.setHalignment (label, alignment);
     GridPane.setColumnSpan (label, span);
-    gridPane.getChildren ().add (label);
+
+    getChildren ().add (label);
 
     return label;
   }
@@ -121,7 +127,7 @@ public class DataPane extends Pane
       GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
 
       GridPane.setHalignment (label, labelPos.alignment);
-      gridPane.getChildren ().addAll (label, textOut[i]);
+      getChildren ().addAll (label, textOut[i]);
 
       row++;
     }
@@ -147,7 +153,7 @@ public class DataPane extends Pane
       textOut[i].setEditable (false);
       textOut[i].setFocusTraversable (false);
 
-      gridPane.getChildren ().add (textOut[i]);
+      getChildren ().add (textOut[i]);
 
       row++;
     }
@@ -176,7 +182,7 @@ public class DataPane extends Pane
       textArea.setFocusTraversable (false);
 
       GridPane.setHalignment (label, labelPos.alignment);
-      gridPane.getChildren ().addAll (label, textArea);
+      getChildren ().addAll (label, textArea);
 
       row++;
     }
@@ -203,7 +209,7 @@ public class DataPane extends Pane
       checkBoxes[i].setFocusTraversable (false);
 
       GridPane.setHalignment (label, HPos.RIGHT);
-      gridPane.getChildren ().addAll (label, checkBoxes[i]);
+      getChildren ().addAll (label, checkBoxes[i]);
 
       row++;
     }
@@ -227,7 +233,7 @@ public class DataPane extends Pane
       checkBoxes[i].setStyle ("-fx-opacity: 1");    // make disabled checkbox look normal
       checkBoxes[i].setFocusTraversable (false);
 
-      gridPane.getChildren ().add (checkBoxes[i]);
+      getChildren ().add (checkBoxes[i]);
 
       row++;
     }

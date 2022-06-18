@@ -4,7 +4,6 @@ import com.bytezone.wizardry.origin.Character;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
@@ -21,7 +20,7 @@ public class Attributes3Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (90, 50);
-    gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
+    setAllRowConstraints (6, DataPane.ROW_HEIGHT);           // make all rows the same height
 
     String[] labelText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
 

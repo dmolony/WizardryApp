@@ -5,7 +5,6 @@ import com.bytezone.wizardry.origin.CharacterParty;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
@@ -30,39 +29,38 @@ public class PartyPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (70, 40, 110, 60, 35, 50, 130, 100, 100);
+    setAllRowConstraints (7, DataPane.ROW_HEIGHT);           // make all rows the same height
 
     String[] partyLabels1 = { "Party", "Slogan" };
     String[] partyLabels2 = { "1", "2", "3", "4", "5", "6" };
-    //    gridPane.setGridLinesVisible (true);
-    gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
 
-    LabelPlacement lp7 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp7 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 5);
+    LabelPlacement lp7 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp7 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 5);
     textOut7 = createTextFields (partyLabels1, lp7, dp7);
 
-    LabelPlacement lp8 = new LabelPlacement (0, 3, HPos.RIGHT, 1);
+    LabelPlacement lp8 = new LabelPlacement (0, 2, HPos.RIGHT, 1);
     DataPlacement dp8 = new DataPlacement (1, 3, Pos.CENTER_RIGHT, 1);
     textOut8 = createTextFields (partyLabels2, lp8, dp8);
 
-    DataPlacement dp9 = new DataPlacement (2, 3, Pos.CENTER_LEFT, 1);
+    DataPlacement dp9 = new DataPlacement (2, 2, Pos.CENTER_LEFT, 1);
     textOut9 = createTextFields (6, dp9);
 
-    DataPlacement dp10 = new DataPlacement (3, 3, Pos.CENTER_LEFT, 1);
+    DataPlacement dp10 = new DataPlacement (3, 2, Pos.CENTER_LEFT, 1);
     textOut10 = createTextFields (6, dp10);
 
-    DataPlacement dp11 = new DataPlacement (4, 3, Pos.CENTER_RIGHT, 1);
+    DataPlacement dp11 = new DataPlacement (4, 2, Pos.CENTER_RIGHT, 1);
     textOut11 = createTextFields (6, dp11);
 
-    DataPlacement dp12 = new DataPlacement (5, 3, Pos.CENTER_RIGHT, 1);
+    DataPlacement dp12 = new DataPlacement (5, 2, Pos.CENTER_RIGHT, 1);
     textOut12 = createTextFields (6, dp12);
 
-    DataPlacement dp13 = new DataPlacement (6, 3, Pos.CENTER_LEFT, 1);
+    DataPlacement dp13 = new DataPlacement (6, 2, Pos.CENTER_LEFT, 1);
     textOut13 = createTextFields (6, dp13);
 
-    DataPlacement dp14 = new DataPlacement (7, 3, Pos.CENTER_LEFT, 1);
+    DataPlacement dp14 = new DataPlacement (7, 2, Pos.CENTER_LEFT, 1);
     textOut14 = createTextFields (6, dp14);
 
-    DataPlacement dp15 = new DataPlacement (8, 3, Pos.CENTER_LEFT, 1);
+    DataPlacement dp15 = new DataPlacement (8, 2, Pos.CENTER_LEFT, 1);
     textOut15 = createTextFields (6, dp15);
   }
 

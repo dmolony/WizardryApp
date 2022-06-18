@@ -76,14 +76,14 @@ public class EncounterPane extends DataPane
     if (false)
     {
       if (display != null)
-        gridPane.getChildren ().remove (display);
+        getChildren ().remove (display);
 
       if (wizardry.getScenarioId () < 3)
       {
         display = new Display (wizardry);
         GridPane.setConstraints (display, 7, 1);
         GridPane.setRowSpan (display, 12);
-        gridPane.getChildren ().add (display);
+        getChildren ().add (display);
       }
     }
   }

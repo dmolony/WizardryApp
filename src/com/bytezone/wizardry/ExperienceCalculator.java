@@ -68,11 +68,11 @@ public class ExperienceCalculator extends DataPane
       textOut[i].setAlignment (Pos.CENTER_RIGHT);
       GridPane.setHalignment (label, HPos.RIGHT);
 
-      gridPane.getChildren ().add (label);
+      getChildren ().add (label);
       if (i < textIn.length - 1)
-        gridPane.getChildren ().add (textIn[i]);
+        getChildren ().add (textIn[i]);
       if (i != HP_DICE && i != BREATHE)
-        gridPane.getChildren ().add (textOut[i]);
+        getChildren ().add (textOut[i]);
 
       textIn[i].setOnKeyTyped (e -> keyTyped (e));
     }

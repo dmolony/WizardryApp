@@ -6,7 +6,6 @@ import com.bytezone.wizardry.origin.Item;
 import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -28,8 +27,8 @@ public class BaggagePane extends DataPane
   public BaggagePane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 155, 20, 20, 20, 90);
-    gridPane.setPadding (new Insets (0, 0, 0, 0));      // trbl
+    setColumnConstraints (110, 145, 20, 20, 20, 90);
+    setAllRowConstraints (9, DataPane.ROW_HEIGHT);           // make all rows the same height
 
     // possessions headings
     createLabel ("Item", 1, 0, HPos.CENTER, 1);
@@ -43,9 +42,9 @@ public class BaggagePane extends DataPane
     for (int i = 0; i < possessionsText.length; i++)
       possessionsText[i] = "# " + (i + 1);
 
-    LabelPlacement lp4 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp4 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
-    textOut3 = createTextFields (possessionsText, lp4, dp4);
+    LabelPlacement lp = new LabelPlacement (0, 1, HPos.RIGHT, 1);
+    DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
+    textOut3 = createTextFields (possessionsText, lp, dp);
 
     // possessions eq/cu/id
     checkBox4 = createCheckBoxes (8, 2, 1);

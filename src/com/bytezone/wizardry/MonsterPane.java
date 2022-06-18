@@ -70,7 +70,7 @@ public class MonsterPane extends DataPane
     GridPane.setColumnSpan (canvas, 3);
     GridPane.setRowSpan (canvas, 7);
 
-    gridPane.getChildren ().add (canvas);
+    getChildren ().add (canvas);
 
     String[] label1Text = { "Name", "Plural", "Generic name", "Generic plural", "Monster class",
         "Partner", "Appear dice", "Hits dice", "Damage dice" };
