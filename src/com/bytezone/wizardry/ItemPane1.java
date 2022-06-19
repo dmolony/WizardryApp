@@ -32,7 +32,7 @@ public class ItemPane1 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145);
-    setAllRowConstraints (11, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setAllRowConstraints (11, getRowHeight ());     // make all rows the same height
 
     String[] label1Text = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
         "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };

@@ -25,7 +25,7 @@ public class CharacterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
-    setAllRowConstraints (26, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (26, getRowHeight ());           // make all rows the same height
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 

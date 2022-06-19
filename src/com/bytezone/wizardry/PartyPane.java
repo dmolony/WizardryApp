@@ -29,7 +29,7 @@ public class PartyPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (70, 40, 110, 60, 35, 50, 130, 100, 100);
-    setAllRowConstraints (7, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (7, getRowHeight ());           // make all rows the same height
 
     String[] partyLabels1 = { "Party", "Slogan" };
     String[] partyLabels2 = { "1", "2", "3", "4", "5", "6" };

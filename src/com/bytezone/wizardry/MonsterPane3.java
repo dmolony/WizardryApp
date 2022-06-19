@@ -25,7 +25,7 @@ public class MonsterPane3 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (300);
-    setAllRowConstraints (5, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setAllRowConstraints (5, getRowHeight ());     // make all rows the same height
 
     textOut1 = createTextFields (1, new DataPlacement (0, 0, Pos.CENTER_LEFT, 1));
     textOut2 = createTextFields (1, new DataPlacement (0, 1, Pos.CENTER_LEFT, 1));

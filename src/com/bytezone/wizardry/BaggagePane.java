@@ -28,7 +28,7 @@ public class BaggagePane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145, 20, 20, 20, 90);
-    setAllRowConstraints (9, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (9, getRowHeight ());           // make all rows the same height
 
     // possessions headings
     createLabel ("Item", 1, 0, HPos.CENTER, 1);

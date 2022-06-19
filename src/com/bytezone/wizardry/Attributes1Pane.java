@@ -40,7 +40,7 @@ public class Attributes1Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145);
-    setAllRowConstraints (15, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (15, getRowHeight ());           // make all rows the same height
 
     String[] labelText =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",

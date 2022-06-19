@@ -30,7 +30,7 @@ public class MonsterPane1 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145);
-    setAllRowConstraints (9, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setAllRowConstraints (9, getRowHeight ());     // make all rows the same height
 
     String[] label1Text = { "Name", "Plural", "Generic name", "Generic plural", "Monster class",
         "Partner", "Appear dice", "Hits dice", "Damage dice" };

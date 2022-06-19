@@ -29,7 +29,7 @@ public class Attributes2Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (90, 50);
-    setAllRowConstraints (8, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
 
     String[] labelText =
         { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };

@@ -20,7 +20,7 @@ public class Attributes3Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (90, 50);
-    setAllRowConstraints (6, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (6, getRowHeight ());           // make all rows the same height
 
     String[] labelText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
 

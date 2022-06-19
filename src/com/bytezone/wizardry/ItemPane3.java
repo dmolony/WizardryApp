@@ -19,7 +19,7 @@ public class ItemPane3 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 20);
-    setAllRowConstraints (8, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
 
     createLabel ("Resistance", 0, 0, HPos.RIGHT, 1);
 

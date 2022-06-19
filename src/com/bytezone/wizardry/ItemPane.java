@@ -25,7 +25,7 @@ public class ItemPane extends DataPane
     //    setPadding (defaultInsets);
 
     setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
-    setAllRowConstraints (20, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (20, getRowHeight ());           // make all rows the same height
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 

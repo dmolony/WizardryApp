@@ -20,17 +20,34 @@ import javafx.scene.layout.RowConstraints;
 public class DataPane extends GridPane
 // -----------------------------------------------------------------------------------//
 {
-  static final int ROW_HEIGHT = 26;
+  private static final int DEFAULT_ROW_HEIGHT = 25;
   static final Insets defaultInsets = new Insets (15, 10, 12, 10);
+  protected int rowHeight;
 
   // ---------------------------------------------------------------------------------//
   public DataPane ()
   // ---------------------------------------------------------------------------------//
   {
+    this (DEFAULT_ROW_HEIGHT);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public DataPane (int rowHeight)
+  // ---------------------------------------------------------------------------------//
+  {
+    this.rowHeight = rowHeight;
+
     setHgap (10);
     setVgap (3);
 
     setGridLinesVisible (false);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  protected int getRowHeight ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return rowHeight;
   }
 
   // ---------------------------------------------------------------------------------//

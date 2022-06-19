@@ -35,7 +35,7 @@ public class MonsterPane2 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 70);
-    setAllRowConstraints (14, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setAllRowConstraints (14, getRowHeight ());     // make all rows the same height
 
     String[] labelText = { "ID", "Mage level", "Priest level", "Magic resistance", "Partner odds",
         "Image", "Level drain", "Regen", "Experience", "Armour class", "Unique", "Breathe",

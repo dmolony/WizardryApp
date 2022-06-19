@@ -17,7 +17,7 @@ public class MonsterPane4 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 30);
-    setAllRowConstraints (8, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setAllRowConstraints (8, getRowHeight ());     // make all rows the same height
 
     createLabel ("Resistance", 0, 0, HPos.CENTER, 2);
     checkBoxes = createCheckBoxes (WizardryData.resistance, 0, 1);

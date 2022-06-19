@@ -20,7 +20,7 @@ public class MageSpellsPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (70, 30, 70, 30);
-    setAllRowConstraints (12, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setAllRowConstraints (12, getRowHeight ());           // make all rows the same height
 
     createLabel ("Mage spells", 1, 0, HPos.LEFT, 2);
 
