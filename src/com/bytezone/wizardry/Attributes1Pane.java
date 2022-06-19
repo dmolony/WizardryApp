@@ -40,7 +40,7 @@ public class Attributes1Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145);
-    setAllRowConstraints (15, getRowHeight ());           // make all rows the same height
+    setAllRowConstraints (16, getRowHeight ());           // make all rows the same height
 
     String[] labelText =
         { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
@@ -50,6 +50,22 @@ public class Attributes1Pane extends DataPane
     DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
 
     textOut = createTextFields (labelText, lp, dp);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getRows ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 16;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getColumns ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 2;
   }
 
   // ---------------------------------------------------------------------------------//

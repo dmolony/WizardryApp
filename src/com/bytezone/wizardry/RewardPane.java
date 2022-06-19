@@ -50,7 +50,6 @@ public class RewardPane extends DataPane
   public RewardPane ()
   // ---------------------------------------------------------------------------------//
   {
-
     String[] label1Text = { "Is chest" };
     String[] goldLabels = { "Probability", "# Dice", "Base", "Mult", "Gold min", "Gold max", };
     String[] itemLabels = { "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
@@ -81,6 +80,22 @@ public class RewardPane extends DataPane
 
     // traps
     traps = createCheckBoxes (WizardryData.trapType, 2, 0);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getRows ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 17;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getColumns ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 6;
   }
 
   // ---------------------------------------------------------------------------------//

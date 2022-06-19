@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 // -----------------------------------------------------------------------------------//
-public class DataPane extends GridPane
+public abstract class DataPane extends GridPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int DEFAULT_ROW_HEIGHT = 25;
@@ -41,6 +41,23 @@ public class DataPane extends GridPane
     setVgap (3);
 
     setGridLinesVisible (false);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public abstract int getRows ();
+  // ---------------------------------------------------------------------------------//
+
+  // ---------------------------------------------------------------------------------//
+  public abstract int getColumns ();
+  // ---------------------------------------------------------------------------------//
+
+  // ---------------------------------------------------------------------------------//
+  protected void setLayout (DataPane pane, int columns, int rows, int colSpan, int rowSpan)
+  // ---------------------------------------------------------------------------------//
+  {
+    GridPane.setConstraints (pane, columns, rows);
+    GridPane.setColumnSpan (pane, colSpan);
+    GridPane.setRowSpan (pane, rowSpan);
   }
 
   // ---------------------------------------------------------------------------------//

@@ -30,7 +30,7 @@ public class EncounterPane extends DataPane
   public EncounterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 80, 130, 80, 130, 80, 130, 570);
+    setColumnConstraints (110, 80, 130, 80, 130, 80, 130);
     setPadding (defaultInsets);
 
     String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range odds", "Extra ranges",
@@ -61,6 +61,22 @@ public class EncounterPane extends DataPane
     textOut2[3] = createTextFields (22, new DataPlacement (4, 6, Pos.CENTER_LEFT, 1));
     textOut2[4] = createTextFields (22, new DataPlacement (5, 6, Pos.CENTER_RIGHT, 1));
     textOut2[5] = createTextFields (22, new DataPlacement (6, 6, Pos.CENTER_LEFT, 1));
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getRows ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 27;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getColumns ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 7;
   }
 
   // ---------------------------------------------------------------------------------//

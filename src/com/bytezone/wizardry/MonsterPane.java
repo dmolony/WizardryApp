@@ -28,30 +28,16 @@ public class MonsterPane extends DataPane
   {
     canvas = new Canvas (280, 200);
 
-    setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
+    setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
     setAllRowConstraints (26, getRowHeight ());           // make all rows the same height
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 
-    GridPane.setConstraints (monsterPane1, 0, 0);
-    GridPane.setColumnSpan (monsterPane1, 2);
-    GridPane.setRowSpan (monsterPane1, 9);
-
-    GridPane.setConstraints (monsterPane2, 0, 10);
-    GridPane.setColumnSpan (monsterPane2, 2);
-    GridPane.setRowSpan (monsterPane2, 14);
-
-    GridPane.setConstraints (monsterPane3, 7, 21);
-    GridPane.setColumnSpan (monsterPane3, 2);
-    GridPane.setRowSpan (monsterPane3, 5);
-
-    GridPane.setConstraints (monsterPane4, 9, 10);
-    GridPane.setColumnSpan (monsterPane4, 2);
-    GridPane.setRowSpan (monsterPane4, 8);
-
-    GridPane.setConstraints (monsterPane5, 15, 10);
-    GridPane.setColumnSpan (monsterPane5, 2);
-    GridPane.setRowSpan (monsterPane5, 8);
+    setLayout (monsterPane1, 0, 0, 2, 9);
+    setLayout (monsterPane2, 0, 10, 2, 14);
+    setLayout (monsterPane3, 7, 21, 2, 5);
+    setLayout (monsterPane4, 9, 10, 2, 8);
+    setLayout (monsterPane5, 15, 10, 2, 8);
 
     GridPane.setConstraints (canvas, 10, 0);
     GridPane.setColumnSpan (canvas, 3);
@@ -59,6 +45,22 @@ public class MonsterPane extends DataPane
 
     getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3, monsterPane4, monsterPane5);
     getChildren ().add (canvas);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getRows ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 30;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getColumns ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 40;
   }
 
   // ---------------------------------------------------------------------------------//

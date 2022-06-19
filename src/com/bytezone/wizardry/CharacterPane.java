@@ -3,8 +3,6 @@ package com.bytezone.wizardry;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.WizardryData;
 
-import javafx.scene.layout.GridPane;
-
 // -----------------------------------------------------------------------------------//
 public class CharacterPane extends DataPane
 // -----------------------------------------------------------------------------------//
@@ -24,45 +22,38 @@ public class CharacterPane extends DataPane
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
+    setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
     setAllRowConstraints (26, getRowHeight ());           // make all rows the same height
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 
-    GridPane.setConstraints (attributes1Pane, 0, 0);
-    GridPane.setColumnSpan (attributes1Pane, 2);
-    GridPane.setRowSpan (attributes1Pane, 16);
-
-    GridPane.setConstraints (baggagePane, 0, 17);
-    GridPane.setColumnSpan (baggagePane, 10);
-    GridPane.setRowSpan (baggagePane, 16);
-
-    GridPane.setConstraints (attributes2Pane, 10, 8);
-    GridPane.setColumnSpan (attributes2Pane, 2);
-    GridPane.setRowSpan (attributes2Pane, 8);
-
-    GridPane.setConstraints (attributes3Pane, 10, 1);       // Strength/Agility etc
-    GridPane.setColumnSpan (attributes3Pane, 2);
-    GridPane.setRowSpan (attributes3Pane, 6);
-
-    GridPane.setConstraints (attributes4Pane, 16, 1);       // SaveVs
-    GridPane.setColumnSpan (attributes4Pane, 2);
-    GridPane.setRowSpan (attributes4Pane, 6);
-
-    GridPane.setConstraints (mageSpellsPane, 22, 0);
-    GridPane.setColumnSpan (mageSpellsPane, 2);
-    GridPane.setRowSpan (mageSpellsPane, 12);
-
-    GridPane.setConstraints (priestSpellsPane, 31, 0);
-    GridPane.setColumnSpan (priestSpellsPane, 2);
-    GridPane.setRowSpan (priestSpellsPane, 16);
-
-    GridPane.setConstraints (partyPane, 16, 18);
-    GridPane.setColumnSpan (partyPane, 2);
-    GridPane.setRowSpan (partyPane, 8);
+    setLayout (attributes1Pane, 0, 0, 2, 16);
+    setLayout (baggagePane, 0, 17, 10, 8);
+    setLayout (attributes2Pane, 10, 8, 2, 8);
+    setLayout (attributes3Pane, 10, 1, 2, 6);       // Strength/Agility etc
+    setLayout (attributes4Pane, 16, 1, 2, 6);       // SaveVs
+    setLayout (mageSpellsPane, 22, 0, 2, 12);
+    setLayout (priestSpellsPane, 31, 0, 2, 16);
+    setLayout (partyPane, 16, 18, 2, 8);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, mageSpellsPane, priestSpellsPane);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getRows ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return attributes1Pane.getRows () + baggagePane.getRows () + 1;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getColumns ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 40;
   }
 
   // ---------------------------------------------------------------------------------//

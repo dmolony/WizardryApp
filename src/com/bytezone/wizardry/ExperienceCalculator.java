@@ -43,8 +43,6 @@ public class ExperienceCalculator extends DataPane
   public ExperienceCalculator ()
   // ---------------------------------------------------------------------------------//
   {
-    //    super (wizardry, stage);
-
     setColumnConstraints (125, 60, 80);
 
     LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
@@ -78,6 +76,22 @@ public class ExperienceCalculator extends DataPane
     }
 
     monsters.getSelectionModel ().select (0);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getRows ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return labelText.length;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  @Override
+  public int getColumns ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return 3;
   }
 
   // ---------------------------------------------------------------------------------//
