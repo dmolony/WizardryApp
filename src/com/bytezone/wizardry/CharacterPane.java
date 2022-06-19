@@ -7,7 +7,7 @@ import com.bytezone.wizardry.data.WizardryData;
 public class CharacterPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private WizardryData wizardry;
+  //  private WizardryData wizardry;
 
   private PartyPane partyPane = new PartyPane ();
   private BaggagePane baggagePane = new BaggagePane ();
@@ -23,18 +23,19 @@ public class CharacterPane extends DataPane
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
-    setAllRowConstraints (26, getRowHeight ());           // make all rows the same height
+    setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
+    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
+
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 
     setLayout (attributes1Pane, 0, 0, 2, 16);
     setLayout (baggagePane, 0, 17, 6, 9);
-    setLayout (attributes2Pane, 16, 1, 2, 8);
-    setLayout (attributes3Pane, 10, 1, 2, 6);       // Strength/Agility etc
-    setLayout (attributes4Pane, 10, 8, 2, 6);       // SaveVs
-    setLayout (mageSpellsPane, 22, 0, 2, 12);
-    setLayout (priestSpellsPane, 31, 0, 2, 16);
+    setLayout (attributes2Pane, 9, 0, 2, 8);
+    setLayout (attributes3Pane, 14, 0, 2, 6);       // Strength/Agility etc
+    setLayout (attributes4Pane, 14, 7, 2, 6);       // SaveVs
+    setLayout (mageSpellsPane, 21, 0, 2, 12);
+    setLayout (priestSpellsPane, 30, 0, 2, 16);
     setLayout (partyPane, 15, 18, 2, 8);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
@@ -61,7 +62,7 @@ public class CharacterPane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
+    //    this.wizardry = wizardry;
 
     attributes1Pane.setWizardry (wizardry);
     attributes2Pane.setWizardry (wizardry);
