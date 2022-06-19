@@ -37,15 +37,15 @@ public class ItemPane extends DataPane
     GridPane.setColumnSpan (itemPane2, 2);
     GridPane.setRowSpan (itemPane2, 7);
 
-    GridPane.setConstraints (itemPane3, 11, 0);
+    GridPane.setConstraints (itemPane3, 10, 0);
     GridPane.setColumnSpan (itemPane3, 2);
     GridPane.setRowSpan (itemPane3, 8);
 
-    GridPane.setConstraints (itemPane4, 11, 10);
+    GridPane.setConstraints (itemPane4, 10, 10);
     GridPane.setColumnSpan (itemPane4, 2);
     GridPane.setRowSpan (itemPane4, 9);
 
-    GridPane.setConstraints (itemPane5, 18, 0);
+    GridPane.setConstraints (itemPane5, 16, 0);
     GridPane.setColumnSpan (itemPane5, 2);
     GridPane.setRowSpan (itemPane5, 15);
 
