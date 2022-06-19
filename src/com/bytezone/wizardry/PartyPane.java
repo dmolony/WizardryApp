@@ -29,7 +29,8 @@ public class PartyPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (70, 40, 110, 60, 35, 50, 130, 100, 100);
-    setAllRowConstraints (7, getRowHeight ());           // make all rows the same height
+    setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
+    //    setGridLinesVisible (true);
 
     String[] partyLabels1 = { "Party", "Slogan" };
     String[] partyLabels2 = { "1", "2", "3", "4", "5", "6" };
@@ -69,7 +70,7 @@ public class PartyPane extends DataPane
   public int getRows ()
   // ---------------------------------------------------------------------------------//
   {
-    return 7;
+    return 8;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -91,6 +92,9 @@ public class PartyPane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
+    if (wizardry.getScenarioId () != 4)
+      return;
+
     CharacterParty party = character.getParty ();
 
     setText (textOut7[0], party.getName ());

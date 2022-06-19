@@ -17,6 +17,7 @@ public class CharacterPane extends DataPane
   private Attributes4Pane attributes4Pane = new Attributes4Pane ();
   private MageSpellsPane mageSpellsPane = new MageSpellsPane ();
   private PriestSpellsPane priestSpellsPane = new PriestSpellsPane ();
+  private boolean partyPaneAdded;
 
   // ---------------------------------------------------------------------------------//
   public CharacterPane ()
@@ -28,13 +29,13 @@ public class CharacterPane extends DataPane
     setPadding (defaultInsets);
 
     setLayout (attributes1Pane, 0, 0, 2, 16);
-    setLayout (baggagePane, 0, 17, 10, 8);
-    setLayout (attributes2Pane, 10, 8, 2, 8);
+    setLayout (baggagePane, 0, 17, 6, 9);
+    setLayout (attributes2Pane, 16, 1, 2, 8);
     setLayout (attributes3Pane, 10, 1, 2, 6);       // Strength/Agility etc
-    setLayout (attributes4Pane, 16, 1, 2, 6);       // SaveVs
+    setLayout (attributes4Pane, 10, 8, 2, 6);       // SaveVs
     setLayout (mageSpellsPane, 22, 0, 2, 12);
     setLayout (priestSpellsPane, 31, 0, 2, 16);
-    setLayout (partyPane, 16, 18, 2, 8);
+    setLayout (partyPane, 15, 18, 2, 8);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, mageSpellsPane, priestSpellsPane);
@@ -69,15 +70,21 @@ public class CharacterPane extends DataPane
     mageSpellsPane.setWizardry (wizardry);
     priestSpellsPane.setWizardry (wizardry);
     baggagePane.setWizardry (wizardry);
+    partyPane.setWizardry (wizardry);
 
-    // party
     if (wizardry.getScenarioId () == 4)
     {
-      getChildren ().add (partyPane);
-      partyPane.setWizardry (wizardry);
+      if (!partyPaneAdded)
+      {
+        getChildren ().add (partyPane);
+        partyPaneAdded = true;
+      }
     }
-    else
+    else if (partyPaneAdded)
+    {
       getChildren ().remove (partyPane);
+      partyPaneAdded = false;
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -91,8 +98,6 @@ public class CharacterPane extends DataPane
     mageSpellsPane.update (character);
     priestSpellsPane.update (character);
     baggagePane.update (character);
-
-    if (wizardry.getScenarioId () == 4)
-      partyPane.update (character);
+    partyPane.update (character);
   }
 }
