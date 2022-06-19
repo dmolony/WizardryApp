@@ -1,11 +1,11 @@
 package com.bytezone.wizardry;
 
-import com.bytezone.wizardry.origin.Item;
-import com.bytezone.wizardry.origin.Reward;
-import com.bytezone.wizardry.origin.RewardDetails;
-import com.bytezone.wizardry.origin.RewardDetails.GoldReward;
-import com.bytezone.wizardry.origin.RewardDetails.ItemReward;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Item;
+import com.bytezone.wizardry.data.Reward;
+import com.bytezone.wizardry.data.RewardDetails;
+import com.bytezone.wizardry.data.RewardDetails.GoldReward;
+import com.bytezone.wizardry.data.RewardDetails.ItemReward;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

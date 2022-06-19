@@ -2,8 +2,8 @@ package com.bytezone.wizardry;
 
 import java.util.prefs.Preferences;
 
-import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Character;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

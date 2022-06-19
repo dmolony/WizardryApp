@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
-import com.bytezone.wizardry.origin.Monster;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Monster;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

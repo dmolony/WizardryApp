@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Random;
 
 import com.bytezone.wizardry.PartyManager;
-import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Monster;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Character;
+import com.bytezone.wizardry.data.MazeLevel;
+import com.bytezone.wizardry.data.Monster;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

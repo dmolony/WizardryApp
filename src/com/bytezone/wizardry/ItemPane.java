@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
-import com.bytezone.wizardry.origin.Item;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Item;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.scene.layout.GridPane;
 

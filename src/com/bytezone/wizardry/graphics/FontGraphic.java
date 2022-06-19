@@ -1,6 +1,6 @@
 package com.bytezone.wizardry.graphics;
 
-import com.bytezone.wizardry.origin.WizardryFont;
+import com.bytezone.wizardry.data.WizardryFont;
 
 import javafx.scene.canvas.GraphicsContext;
 

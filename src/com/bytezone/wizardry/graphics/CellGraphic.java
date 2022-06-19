@@ -1,19 +1,19 @@
 package com.bytezone.wizardry.graphics;
 
-import static com.bytezone.wizardry.origin.Walls.EAST;
-import static com.bytezone.wizardry.origin.Walls.NORTH;
-import static com.bytezone.wizardry.origin.Walls.SOUTH;
-import static com.bytezone.wizardry.origin.Walls.WEST;
-import static com.bytezone.wizardry.origin.Walls.Wall.DOOR;
-import static com.bytezone.wizardry.origin.Walls.Wall.HIDEDOOR;
-import static com.bytezone.wizardry.origin.Walls.Wall.WALL;
+import static com.bytezone.wizardry.data.Walls.EAST;
+import static com.bytezone.wizardry.data.Walls.NORTH;
+import static com.bytezone.wizardry.data.Walls.SOUTH;
+import static com.bytezone.wizardry.data.Walls.WEST;
+import static com.bytezone.wizardry.data.Walls.Wall.DOOR;
+import static com.bytezone.wizardry.data.Walls.Wall.HIDEDOOR;
+import static com.bytezone.wizardry.data.Walls.Wall.WALL;
 
 import com.bytezone.wizardry.Walker;
-import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.Walls;
-import com.bytezone.wizardry.origin.WizardryData.Direction;
+import com.bytezone.wizardry.data.Location;
+import com.bytezone.wizardry.data.MazeCell;
+import com.bytezone.wizardry.data.Special;
+import com.bytezone.wizardry.data.Walls;
+import com.bytezone.wizardry.data.WizardryData.Direction;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

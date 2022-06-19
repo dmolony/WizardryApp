@@ -11,9 +11,9 @@ import com.bytezone.appbase.AppBase;
 import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
-import com.bytezone.wizardry.origin.DiskFormatException;
-import com.bytezone.wizardry.origin.Wizardry;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.DiskFormatException;
+import com.bytezone.wizardry.data.Wizardry;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

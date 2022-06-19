@@ -1,8 +1,8 @@
 package com.bytezone.wizardry;
 
-import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.MazeLevel;
+import com.bytezone.wizardry.data.Special;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

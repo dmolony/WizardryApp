@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.WizardryData;
-import com.bytezone.wizardry.origin.WizardryData.Alignment;
-import com.bytezone.wizardry.origin.WizardryData.CharacterClass;
-import com.bytezone.wizardry.origin.WizardryData.CharacterStatus;
+import com.bytezone.wizardry.data.Character;
+import com.bytezone.wizardry.data.WizardryData;
+import com.bytezone.wizardry.data.WizardryData.Alignment;
+import com.bytezone.wizardry.data.WizardryData.CharacterClass;
+import com.bytezone.wizardry.data.WizardryData.CharacterStatus;
 
 // -----------------------------------------------------------------------------------//
 public class PartyManager

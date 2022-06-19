@@ -2,12 +2,12 @@ package com.bytezone.wizardry;
 
 import java.util.prefs.Preferences;
 
-import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.WizardryData;
-import com.bytezone.wizardry.origin.WizardryData.Direction;
+import com.bytezone.wizardry.data.Location;
+import com.bytezone.wizardry.data.MazeCell;
+import com.bytezone.wizardry.data.MazeLevel;
+import com.bytezone.wizardry.data.Special;
+import com.bytezone.wizardry.data.WizardryData;
+import com.bytezone.wizardry.data.WizardryData.Direction;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

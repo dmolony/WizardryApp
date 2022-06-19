@@ -1,10 +1,10 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.wizardry.data.Location;
+import com.bytezone.wizardry.data.MazeCell;
+import com.bytezone.wizardry.data.MazeLevel;
+import com.bytezone.wizardry.data.WizardryData;
 import com.bytezone.wizardry.graphics.CellGraphic;
-import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

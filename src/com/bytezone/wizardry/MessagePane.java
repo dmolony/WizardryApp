@@ -2,10 +2,10 @@ package com.bytezone.wizardry;
 
 import java.util.List;
 
-import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.Message;
-import com.bytezone.wizardry.origin.Special;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Location;
+import com.bytezone.wizardry.data.Message;
+import com.bytezone.wizardry.data.Special;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

@@ -1,6 +1,6 @@
 package com.bytezone.wizardry.graphics;
 
-import com.bytezone.wizardry.origin.WizardryImage;
+import com.bytezone.wizardry.data.WizardryImage;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

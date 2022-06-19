@@ -1,10 +1,10 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.wizardry.data.EnemyOdds;
+import com.bytezone.wizardry.data.MazeLevel;
+import com.bytezone.wizardry.data.Monster;
+import com.bytezone.wizardry.data.WizardryData;
 import com.bytezone.wizardry.graphics.Display;
-import com.bytezone.wizardry.origin.EnemyOdds;
-import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Monster;
-import com.bytezone.wizardry.origin.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

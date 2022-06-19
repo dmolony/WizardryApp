@@ -1,19 +1,19 @@
 package com.bytezone.wizardry;
 
-import static com.bytezone.wizardry.origin.Walls.EAST;
-import static com.bytezone.wizardry.origin.Walls.NORTH;
-import static com.bytezone.wizardry.origin.Walls.SOUTH;
-import static com.bytezone.wizardry.origin.Walls.WEST;
+import static com.bytezone.wizardry.data.Walls.EAST;
+import static com.bytezone.wizardry.data.Walls.NORTH;
+import static com.bytezone.wizardry.data.Walls.SOUTH;
+import static com.bytezone.wizardry.data.Walls.WEST;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-import com.bytezone.wizardry.origin.Location;
-import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.MazeLevel;
-import com.bytezone.wizardry.origin.Walls.Wall;
-import com.bytezone.wizardry.origin.WizardryData.Direction;
+import com.bytezone.wizardry.data.Location;
+import com.bytezone.wizardry.data.MazeCell;
+import com.bytezone.wizardry.data.MazeLevel;
+import com.bytezone.wizardry.data.Walls.Wall;
+import com.bytezone.wizardry.data.WizardryData.Direction;
 
 // -----------------------------------------------------------------------------------//
 public class Walker

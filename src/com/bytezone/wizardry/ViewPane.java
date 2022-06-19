@@ -1,12 +1,12 @@
 package com.bytezone.wizardry;
 
-import static com.bytezone.wizardry.origin.Walls.Wall.DOOR;
-import static com.bytezone.wizardry.origin.Walls.Wall.HIDEDOOR;
-import static com.bytezone.wizardry.origin.Walls.Wall.OPEN;
+import static com.bytezone.wizardry.data.Walls.Wall.DOOR;
+import static com.bytezone.wizardry.data.Walls.Wall.HIDEDOOR;
+import static com.bytezone.wizardry.data.Walls.Wall.OPEN;
 
-import com.bytezone.wizardry.origin.MazeCell;
-import com.bytezone.wizardry.origin.Walls.Wall;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.MazeCell;
+import com.bytezone.wizardry.data.Walls.Wall;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

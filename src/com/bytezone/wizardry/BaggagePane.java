@@ -1,9 +1,9 @@
 package com.bytezone.wizardry;
 
-import com.bytezone.wizardry.origin.Character;
-import com.bytezone.wizardry.origin.Character.Possession;
-import com.bytezone.wizardry.origin.Item;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Character;
+import com.bytezone.wizardry.data.Character.Possession;
+import com.bytezone.wizardry.data.Item;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

@@ -2,10 +2,10 @@ package com.bytezone.wizardry;
 
 import java.util.List;
 
-import com.bytezone.wizardry.origin.Monster;
-import com.bytezone.wizardry.origin.Reward;
-import com.bytezone.wizardry.origin.Reward.ItemRange;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Monster;
+import com.bytezone.wizardry.data.Reward;
+import com.bytezone.wizardry.data.Reward.ItemRange;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;

@@ -1,8 +1,8 @@
 package com.bytezone.wizardry;
 
 import com.bytezone.appbase.TextTabBase;
-import com.bytezone.wizardry.origin.Utility;
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.Utility;
+import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;

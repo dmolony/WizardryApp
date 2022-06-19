@@ -1,6 +1,6 @@
 package com.bytezone.wizardry;
 
-import com.bytezone.wizardry.origin.WizardryData;
+import com.bytezone.wizardry.data.WizardryData;
 
 // -----------------------------------------------------------------------------------//
 public interface ScenarioChangeListener
