@@ -50,19 +50,42 @@ public class MonsterPane extends DataPane
   private final Canvas canvas;
   private WizardryData wizardry;
 
+  private MonsterPane1 monsterPane1 = new MonsterPane1 ();
+  private MonsterPane2 monsterPane2 = new MonsterPane2 ();
+  private MonsterPane3 monsterPane3 = new MonsterPane3 ();
+  private MonsterPane4 monsterPane4 = new MonsterPane4 ();
+  private MonsterPane5 monsterPane5 = new MonsterPane5 ();
+
   // ---------------------------------------------------------------------------------//
   public MonsterPane ()
   // ---------------------------------------------------------------------------------//
   {
     canvas = new Canvas (280, 200);
 
-    setColumnConstraints (110, 90, 100, 30, 100, 30, 130);
+    //    setColumnConstraints (110, 90, 100, 30, 100, 30, 130);
+    //    setPadding (defaultInsets);
+    setAllColumnConstraints (40, 20);                         // 40 columns x 20 pixels
+    setAllRowConstraints (30, DataPane.ROW_HEIGHT);           // make all rows the same height
+    setGridLinesVisible (false);
     setPadding (defaultInsets);
 
-    GridPane.setConstraints (canvas, 4, 1);
+    GridPane.setConstraints (monsterPane1, 0, 0);
+    GridPane.setColumnSpan (monsterPane1, 2);
+    GridPane.setRowSpan (monsterPane1, 9);
+
+    GridPane.setConstraints (monsterPane2, 0, 10);
+    GridPane.setColumnSpan (monsterPane2, 2);
+    GridPane.setRowSpan (monsterPane2, 14);
+
+    GridPane.setConstraints (monsterPane3, 9, 21);
+    GridPane.setColumnSpan (monsterPane3, 2);
+    GridPane.setRowSpan (monsterPane3, 5);
+
+    GridPane.setConstraints (canvas, 30, 1);
     GridPane.setColumnSpan (canvas, 3);
     GridPane.setRowSpan (canvas, 7);
 
+    getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3);
     getChildren ().add (canvas);
 
     //    String[] label1Text = { "Name", "Plural", "Generic name", "Generic plural", "Monster class",
@@ -108,6 +131,12 @@ public class MonsterPane extends DataPane
     //    reset (checkBoxes1);
     //    reset (checkBoxes2);
 
+    monsterPane1.setWizardry (wizardry);
+    monsterPane2.setWizardry (wizardry);
+    monsterPane3.setWizardry (wizardry);
+    monsterPane4.setWizardry (wizardry);
+    monsterPane5.setWizardry (wizardry);
+
     GraphicsContext gc = canvas.getGraphicsContext2D ();
     gc.setFill (Color.BLACK);
     gc.fillRect (0, 0, canvas.getWidth (), canvas.getHeight ());
@@ -117,6 +146,12 @@ public class MonsterPane extends DataPane
   void update (Monster monster)
   // ---------------------------------------------------------------------------------//
   {
+    monsterPane1.update (monster);
+    monsterPane2.update (monster);
+    monsterPane3.update (monster);
+    monsterPane4.update (monster);
+    monsterPane5.update (monster);
+
     //    setText (textOut1[NAME], monster.name);
     //    setText (textOut1[NAME_PLURAL], monster.namePlural);
     //    setText (textOut1[GENERIC_NAME], monster.genericName);

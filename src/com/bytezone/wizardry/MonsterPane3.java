@@ -24,12 +24,12 @@ public class MonsterPane3 extends DataPane
   public MonsterPane3 ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 145);
-    setAllRowConstraints (11, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setColumnConstraints (300);
+    setAllRowConstraints (5, DataPane.ROW_HEIGHT);     // make all rows the same height
 
-    textOut5 = createTextFields (1, new DataPlacement (2, 21, Pos.CENTER_LEFT, 1));
-    textOut3 = createTextFields (1, new DataPlacement (2, 22, Pos.CENTER_LEFT, 1));
-    textOut4 = createTextFields (3, new DataPlacement (2, 23, Pos.CENTER_LEFT, 3));
+    textOut5 = createTextFields (1, new DataPlacement (0, 0, Pos.CENTER_LEFT, 1));
+    textOut3 = createTextFields (1, new DataPlacement (0, 1, Pos.CENTER_LEFT, 1));
+    textOut4 = createTextFields (3, new DataPlacement (0, 2, Pos.CENTER_LEFT, 1));
   }
 
   // ---------------------------------------------------------------------------------//
