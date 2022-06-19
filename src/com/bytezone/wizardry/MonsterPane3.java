@@ -14,9 +14,9 @@ import javafx.scene.control.TextField;
 public class MonsterPane3 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private final TextField[] textOut3;
-  private final TextField[] textOut4;
-  private final TextField[] textOut5;
+  private final TextField[] textOut1;         // breathe
+  private final TextField[] textOut2;         // wandering
+  private final TextField[] textOut3;         // lair
 
   private WizardryData wizardry;
 
@@ -27,9 +27,9 @@ public class MonsterPane3 extends DataPane
     setColumnConstraints (300);
     setAllRowConstraints (5, DataPane.ROW_HEIGHT);     // make all rows the same height
 
-    textOut5 = createTextFields (1, new DataPlacement (0, 0, Pos.CENTER_LEFT, 1));
-    textOut3 = createTextFields (1, new DataPlacement (0, 1, Pos.CENTER_LEFT, 1));
-    textOut4 = createTextFields (3, new DataPlacement (0, 2, Pos.CENTER_LEFT, 1));
+    textOut1 = createTextFields (1, new DataPlacement (0, 0, Pos.CENTER_LEFT, 1));
+    textOut2 = createTextFields (1, new DataPlacement (0, 1, Pos.CENTER_LEFT, 1));
+    textOut3 = createTextFields (3, new DataPlacement (0, 2, Pos.CENTER_LEFT, 1));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -38,16 +38,16 @@ public class MonsterPane3 extends DataPane
   {
     this.wizardry = wizardry;
 
+    reset (textOut1);
+    reset (textOut2);
     reset (textOut3);
-    reset (textOut4);
-    reset (textOut5);
   }
 
   // ---------------------------------------------------------------------------------//
   void update (Monster monster)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut5[0], monster.getBreatheEffect ());
+    setText (textOut1[0], monster.getBreatheEffect ());
 
     if (wizardry.getScenarioId () > 3)
       return;
@@ -55,11 +55,11 @@ public class MonsterPane3 extends DataPane
     List<Reward> rewards = wizardry.getRewards ();
 
     // wandering rewards
-    setText (textOut3[0], rewards.get (monster.rewardWandering).goldRange () + " GP");
+    setText (textOut2[0], rewards.get (monster.rewardWandering).goldRange () + " GP");
 
     // lair rewards
     for (int i = 0; i < 3; i++)
-      setText (textOut4[i], "");
+      setText (textOut3[i], "");
 
     Reward reward = rewards.get (monster.rewardLair);
 
@@ -72,16 +72,16 @@ public class MonsterPane3 extends DataPane
           break;
 
         if (itemRange.itemLo () == itemRange.itemHi ())
-          setText (textOut4[i], wizardry.getItems ().get (itemRange.itemLo ()));
+          setText (textOut3[i], wizardry.getItems ().get (itemRange.itemLo ()));
         else
         {
           String itemName1 = wizardry.getItemName (itemRange.itemLo ());
           String itemName2 = wizardry.getItemName (itemRange.itemHi ());
-          setText (textOut4[i], itemName1 + " : " + itemName2);
+          setText (textOut3[i], itemName1 + " : " + itemName2);
         }
       }
     }
     else
-      setText (textOut4[0], reward.goldRange () + " GP");
+      setText (textOut3[0], reward.goldRange () + " GP");
   }
 }

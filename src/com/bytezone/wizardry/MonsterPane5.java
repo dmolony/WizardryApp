@@ -10,7 +10,7 @@ import javafx.scene.control.CheckBox;
 public class MonsterPane5 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private final CheckBox[] checkBoxes2;
+  private final CheckBox[] checkBoxes;
 
   private WizardryData wizardry;
 
@@ -18,12 +18,11 @@ public class MonsterPane5 extends DataPane
   public MonsterPane5 ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 145);
-    setAllRowConstraints (11, DataPane.ROW_HEIGHT);     // make all rows the same height
+    setColumnConstraints (110, 30);
+    setAllRowConstraints (8, DataPane.ROW_HEIGHT);     // make all rows the same height
 
-    // properties
-    createLabel ("Property", 4, 10, HPos.RIGHT, 2);
-    checkBoxes2 = createCheckBoxes (WizardryData.property, 4, 11);
+    createLabel ("Property", 0, 0, HPos.CENTER, 2);
+    checkBoxes = createCheckBoxes (WizardryData.property, 0, 1);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -32,7 +31,7 @@ public class MonsterPane5 extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (checkBoxes2);
+    reset (checkBoxes);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -42,7 +41,7 @@ public class MonsterPane5 extends DataPane
     int property = monster.properties;
     for (int i = 0; i < WizardryData.property.length; i++)
     {
-      checkBoxes2[i].setSelected ((property & 0x01) != 0);
+      checkBoxes[i].setSelected ((property & 0x01) != 0);
       property >>>= 1;
     }
   }

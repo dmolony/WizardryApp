@@ -21,7 +21,7 @@ public class MonsterPane1 extends DataPane
   private static final int HP_DICE = 7;
   private static final int RECSN = 8;
 
-  private final TextField[] textOut1;
+  private final TextField[] textOut;
 
   private WizardryData wizardry;
 
@@ -35,9 +35,9 @@ public class MonsterPane1 extends DataPane
     String[] label1Text = { "Name", "Plural", "Generic name", "Generic plural", "Monster class",
         "Partner", "Appear dice", "Hits dice", "Damage dice" };
 
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 2);
-    textOut1 = createTextFields (label1Text, lp1, dp1);
+    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
+    textOut = createTextFields (label1Text, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -46,23 +46,23 @@ public class MonsterPane1 extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (textOut1);
+    reset (textOut);
   }
 
   // ---------------------------------------------------------------------------------//
   void update (Monster monster)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut1[NAME], monster.name);
-    setText (textOut1[NAME_PLURAL], monster.namePlural);
-    setText (textOut1[GENERIC_NAME], monster.genericName);
-    setText (textOut1[GENERIC_NAME_PLURAL], monster.genericNamePlural);
+    setText (textOut[NAME], monster.name);
+    setText (textOut[NAME_PLURAL], monster.namePlural);
+    setText (textOut[GENERIC_NAME], monster.genericName);
+    setText (textOut[GENERIC_NAME_PLURAL], monster.genericNamePlural);
 
-    setText (textOut1[MONSTER_CLASS], WizardryData.monsterClass[monster.monsterClass]);
+    setText (textOut[MONSTER_CLASS], WizardryData.monsterClass[monster.monsterClass]);
     if (wizardry.getScenarioId () <= 3)
-      setText (textOut1[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
-    setText (textOut1[GROUP_DICE], monster.groupSize.toString ());
-    setText (textOut1[HP_DICE], monster.hitPoints.toString ());
-    setText (textOut1[RECSN], monster.damageDiceText);
+      setText (textOut[PARTNER], wizardry.getMonsters ().get (monster.partnerId).name);
+    setText (textOut[GROUP_DICE], monster.groupSize.toString ());
+    setText (textOut[HP_DICE], monster.hitPoints.toString ());
+    setText (textOut[RECSN], monster.damageDiceText);
   }
 }

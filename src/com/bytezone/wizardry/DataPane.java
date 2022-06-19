@@ -29,10 +29,8 @@ public class DataPane extends GridPane
   {
     setHgap (10);
     setVgap (3);
-    //    setPadding (new Insets (15, 10, 12, 10));      // trbl
 
-    //    setAllRowConstraints (20, ROW_HEIGHT);           // make all rows the same height
-    setGridLinesVisible (true);
+    setGridLinesVisible (false);
   }
 
   // ---------------------------------------------------------------------------------//

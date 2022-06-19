@@ -37,9 +37,9 @@ public class ItemPane1 extends DataPane
     String[] label1Text = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
         "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
 
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    textOut = createTextFields (label1Text, lp1, dp1);
+    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
+    textOut = createTextFields (label1Text, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
