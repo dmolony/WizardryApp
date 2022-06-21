@@ -28,22 +28,24 @@ public class MonsterPane extends DataPane
   {
     canvas = new Canvas (280, 200);
 
-    setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
-    setAllRowConstraints (26, getRowHeight ());           // make all rows the same height
+    setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
+    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
+
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 
-    setLayout (monsterPane1, 0, 0, 2, 9);
-    setLayout (monsterPane2, 0, 10, 2, 14);
-    setLayout (monsterPane3, 7, 21, 2, 5);
-    setLayout (monsterPane4, 9, 10, 2, 8);
-    setLayout (monsterPane5, 15, 10, 2, 8);
+    setLayout (monsterPane1, 0, 0);
+    setLayout (monsterPane2, 0, 10);
+    setLayout (monsterPane3, 7, 21);
+    setLayout (monsterPane4, 9, 10);
+    setLayout (monsterPane5, 15, 10);
+
+    getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3, monsterPane4, monsterPane5);
 
     GridPane.setConstraints (canvas, 10, 0);
     GridPane.setColumnSpan (canvas, 3);
     GridPane.setRowSpan (canvas, 7);
 
-    getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3, monsterPane4, monsterPane5);
     getChildren ().add (canvas);
   }
 
@@ -52,7 +54,7 @@ public class MonsterPane extends DataPane
   public int getRows ()
   // ---------------------------------------------------------------------------------//
   {
-    return 30;
+    return monsterPane1.getRows () + monsterPane2.getRows () + 3;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -90,11 +92,11 @@ public class MonsterPane extends DataPane
     monsterPane4.update (monster);
     monsterPane5.update (monster);
 
-    if (wizardry.getScenarioId () > 3)
-      return;
-
-    ImageGraphic imageGraphic = new ImageGraphic (wizardry.getImage (monster.image));
-    imageGraphic.setColor (Color.WHITE);
-    imageGraphic.draw (canvas, 4);
+    if (wizardry.getScenarioId () <= 3)
+    {
+      ImageGraphic imageGraphic = new ImageGraphic (wizardry.getImage (monster.image));
+      imageGraphic.setColor (Color.WHITE);
+      imageGraphic.draw (canvas, 4);
+    }
   }
 }

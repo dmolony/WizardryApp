@@ -52,12 +52,12 @@ public abstract class DataPane extends GridPane
   // ---------------------------------------------------------------------------------//
 
   // ---------------------------------------------------------------------------------//
-  protected void setLayout (DataPane pane, int columns, int rows, int colSpan, int rowSpan)
+  protected void setLayout (DataPane pane, int column, int row)
   // ---------------------------------------------------------------------------------//
   {
-    GridPane.setConstraints (pane, columns, rows);
-    GridPane.setColumnSpan (pane, colSpan);
-    GridPane.setRowSpan (pane, rowSpan);
+    GridPane.setConstraints (pane, column, row);
+    GridPane.setColumnSpan (pane, 1);               // 0 gives an error, >1 is ignored
+    GridPane.setRowSpan (pane, pane.getRows ());
   }
 
   // ---------------------------------------------------------------------------------//

@@ -7,8 +7,6 @@ import com.bytezone.wizardry.data.WizardryData;
 public class CharacterPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  //  private WizardryData wizardry;
-
   private PartyPane partyPane = new PartyPane ();
   private BaggagePane baggagePane = new BaggagePane ();
   private Attributes1Pane attributes1Pane = new Attributes1Pane ();
@@ -29,14 +27,14 @@ public class CharacterPane extends DataPane
     setGridLinesVisible (false);
     setPadding (defaultInsets);
 
-    setLayout (attributes1Pane, 0, 0, 2, 16);
-    setLayout (baggagePane, 0, 17, 6, 9);
-    setLayout (attributes2Pane, 9, 0, 2, 8);
-    setLayout (attributes3Pane, 14, 0, 2, 6);       // Strength/Agility etc
-    setLayout (attributes4Pane, 14, 7, 2, 6);       // SaveVs
-    setLayout (mageSpellsPane, 21, 0, 2, 12);
-    setLayout (priestSpellsPane, 30, 0, 2, 16);
-    setLayout (partyPane, 15, 18, 2, 8);
+    setLayout (attributes1Pane, 0, 0);
+    setLayout (baggagePane, 0, 17);
+    setLayout (attributes2Pane, 9, 0);
+    setLayout (attributes3Pane, 14, 0);       // Strength/Agility etc
+    setLayout (attributes4Pane, 14, 7);       // SaveVs
+    setLayout (mageSpellsPane, 21, 0);
+    setLayout (priestSpellsPane, 30, 0);
+    setLayout (partyPane, 15, 18);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, mageSpellsPane, priestSpellsPane);
@@ -62,8 +60,6 @@ public class CharacterPane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    //    this.wizardry = wizardry;
-
     attributes1Pane.setWizardry (wizardry);
     attributes2Pane.setWizardry (wizardry);
     attributes3Pane.setWizardry (wizardry);

@@ -11,14 +11,15 @@ import javafx.scene.control.TextField;
 public class Attributes2Pane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int MAXLEVAC = 0;
-  private static final int CHAR_LEV = 1;
-  private static final int HP_LEFT = 2;
-  private static final int HP_MAX = 3;
-  private static final int HP_CALC_MD = 4;
-  private static final int AC = 5;
-  private static final int REGEN = 6;
-  private static final int SWING = 7;
+  private static final int ID = 0;
+  private static final int MAXLEVAC = 1;
+  private static final int CHAR_LEV = 2;
+  private static final int HP_LEFT = 3;
+  private static final int HP_MAX = 4;
+  private static final int HP_CALC_MD = 5;
+  private static final int AC = 6;
+  private static final int REGEN = 7;
+  private static final int SWING = 8;
 
   private TextField[] textOut;
 
@@ -32,7 +33,7 @@ public class Attributes2Pane extends DataPane
     setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
 
     String[] labelText =
-        { "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
+        { "ID", "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
 
     LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
     DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
@@ -44,7 +45,7 @@ public class Attributes2Pane extends DataPane
   public int getRows ()
   // ---------------------------------------------------------------------------------//
   {
-    return 8;
+    return 9;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -68,6 +69,7 @@ public class Attributes2Pane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
+    setText (textOut[ID], character.id);
     setText (textOut[MAXLEVAC], character.maxlevac);
     setText (textOut[CHAR_LEV], character.charlev);
     setText (textOut[HP_LEFT], character.hpLeft);
