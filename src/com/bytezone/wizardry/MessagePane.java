@@ -45,7 +45,7 @@ public class MessagePane extends DataPane
 
     String[] label3Text = { "Text" };
     LabelPlacement lp3 = new LabelPlacement (0, 4, HPos.RIGHT, 1);
-    DataPlacement2 dp3 = new DataPlacement2 (1, 4, Pos.CENTER_LEFT, 2, 18);
+    DataPlacement2 dp3 = new DataPlacement2 (1, 4, Pos.CENTER_LEFT, 2, 40);
     textOut3 = createTextArea (label3Text, lp3, dp3);
   }
 

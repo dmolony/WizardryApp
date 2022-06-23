@@ -12,15 +12,17 @@ import javafx.scene.control.TextField;
 public class PartyPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private TextField[] textOut7;
-  private TextField[] textOut8;
-  private TextField[] textOut9;
-  private TextField[] textOut10;
-  private TextField[] textOut11;
-  private TextField[] textOut12;
-  private TextField[] textOut13;
-  private TextField[] textOut14;
-  private TextField[] textOut15;
+  private TextField partyName;
+  private TextField slogan;
+
+  private TextField[] id;
+  private TextField[] characterName;
+  private TextField[] characterClass;
+  private TextField[] armourClass;
+  private TextField[] hitPoints;
+  private TextField[] attributes;
+  private TextField[] mageSpells;
+  private TextField[] priestSpells;
 
   private WizardryData wizardry;
 
@@ -32,37 +34,24 @@ public class PartyPane extends DataPane
     setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
     //    setGridLinesVisible (true);
 
-    String[] partyLabels1 = { "Party", "Slogan" };
-    String[] partyLabels2 = { "1", "2", "3", "4", "5", "6" };
+    String[] partyLabels = { "Party", "Slogan", "# 1", "# 2", "# 3", "# 4", "# 5", "# 6" };
+    createLabelsVertical (new LabelPlacement2 (partyLabels, 0, 0, HPos.RIGHT, 1));
 
-    LabelPlacement lp7 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp7 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 5);
-    textOut7 = createTextFields (partyLabels1, lp7, dp7);
+    DataLayout dataLayout1 = new DataLayout (1, 0, 6, Pos.CENTER_LEFT, 4);
+    DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_RIGHT);
 
-    LabelPlacement lp8 = new LabelPlacement (0, 2, HPos.RIGHT, 1);
-    DataPlacement dp8 = new DataPlacement (1, 3, Pos.CENTER_RIGHT, 1);
-    textOut8 = createTextFields (partyLabels2, lp8, dp8);
+    partyName = createTextField (dataLayout1);
+    dataLayout1.columnSpan = 5;
+    slogan = createTextField (dataLayout1);
 
-    DataPlacement dp9 = new DataPlacement (2, 2, Pos.CENTER_LEFT, 1);
-    textOut9 = createTextFields (6, dp9);
-
-    DataPlacement dp10 = new DataPlacement (3, 2, Pos.CENTER_LEFT, 1);
-    textOut10 = createTextFields (6, dp10);
-
-    DataPlacement dp11 = new DataPlacement (4, 2, Pos.CENTER_RIGHT, 1);
-    textOut11 = createTextFields (6, dp11);
-
-    DataPlacement dp12 = new DataPlacement (5, 2, Pos.CENTER_RIGHT, 1);
-    textOut12 = createTextFields (6, dp12);
-
-    DataPlacement dp13 = new DataPlacement (6, 2, Pos.CENTER_LEFT, 1);
-    textOut13 = createTextFields (6, dp13);
-
-    DataPlacement dp14 = new DataPlacement (7, 2, Pos.CENTER_LEFT, 1);
-    textOut14 = createTextFields (6, dp14);
-
-    DataPlacement dp15 = new DataPlacement (8, 2, Pos.CENTER_LEFT, 1);
-    textOut15 = createTextFields (6, dp15);
+    id = createTextFields (dataLayout2);
+    characterName = createTextFields (dataLayout2, Pos.CENTER_LEFT);
+    characterClass = createTextFields (dataLayout2);
+    armourClass = createTextFields (dataLayout2, Pos.CENTER_RIGHT);
+    hitPoints = createTextFields (dataLayout2);
+    attributes = createTextFields (dataLayout2, Pos.CENTER_LEFT);
+    mageSpells = createTextFields (dataLayout2);
+    priestSpells = createTextFields (dataLayout2);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -97,34 +86,48 @@ public class PartyPane extends DataPane
 
     CharacterParty party = character.getParty ();
 
-    setText (textOut7[0], party.getName ());
-    setText (textOut7[1], party.getMessage ());
+    if (party == null)                  // blank character
+    {
+      setText (partyName, "");
+      setText (slogan, "");
+      for (int i = 0; i < 6; i++)
+        reset (i);
+      return;
+    }
+
+    setText (partyName, party.getName ());
+    setText (slogan, party.getMessage ());
 
     int pos = 0;
     if (party.size () > 1)
       for (Character member : party)
       {
-        setText (textOut8[pos], member.id);
-        setText (textOut9[pos], member.name);
-        setText (textOut10[pos], member.getTypeString ());
-        setText (textOut11[pos], member.armourClass);
-        setText (textOut12[pos], member.hpLeft);
-        setText (textOut13[pos], member.getAttributeString ());
-        setText (textOut14[pos], member.getSpellsString (Character.MAGE_SPELLS));
-        setText (textOut15[pos], member.getSpellsString (Character.PRIEST_SPELLS));
+        setText (id[pos], member.id);
+        setText (characterName[pos], member.name);
+        setText (characterClass[pos], member.getTypeString ());
+        setText (armourClass[pos], member.armourClass);
+        setText (hitPoints[pos], member.hpLeft);
+        setText (attributes[pos], member.getAttributeString ());
+        setText (mageSpells[pos], member.getSpellsString (Character.MAGE_SPELLS));
+        setText (priestSpells[pos], member.getSpellsString (Character.PRIEST_SPELLS));
         pos++;
       }
 
     for (int i = pos; i < 6; i++)
-    {
-      setText (textOut8[i], "");
-      setText (textOut9[i], "");
-      setText (textOut10[i], "");
-      setText (textOut11[i], "");
-      setText (textOut12[i], "");
-      setText (textOut13[i], "");
-      setText (textOut14[i], "");
-      setText (textOut15[i], "");
-    }
+      reset (i);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void reset (int i)
+  // ---------------------------------------------------------------------------------//
+  {
+    setText (id[i], "");
+    setText (characterName[i], "");
+    setText (characterClass[i], "");
+    setText (armourClass[i], "");
+    setText (hitPoints[i], "");
+    setText (attributes[i], "");
+    setText (mageSpells[i], "");
+    setText (priestSpells[i], "");
   }
 }

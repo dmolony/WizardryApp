@@ -20,13 +20,13 @@ public class Attributes4Pane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (90, 50);
-    setAllRowConstraints (5, getRowHeight ());           // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());  // make all rows the same height
 
     String[] labelText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
+    assert getRows () == labelText.length;
 
-    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_RIGHT, 1);
-    textOut = createTextFields (labelText, lp, dp);
+    createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
+    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
   }
 
   // ---------------------------------------------------------------------------------//

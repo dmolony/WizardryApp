@@ -7,33 +7,22 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
-// -----------------------------------------------------------------------------------//
-public class Attributes2Pane extends DataPane
-// -----------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------//
+public class Attributes5Pane extends DataPane
+//-----------------------------------------------------------------------------------//
 {
-  private static final int ID = 0;
-  private static final int MAXLEVAC = 1;
-  private static final int CHAR_LEV = 2;
-  private static final int HP_LEFT = 3;
-  private static final int HP_MAX = 4;
-  private static final int HP_CALC_MD = 5;
-  private static final int AC = 6;
-  private static final int REGEN = 7;
-  private static final int SWING = 8;
-
   private TextField[] textOut;
 
   private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
-  public Attributes2Pane ()
+  public Attributes5Pane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (90, 50);
-    setAllRowConstraints (getRows (), getRowHeight ());      // make all rows the same height
+    setColumnConstraints (90, 70);
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
-    String[] labelText =
-        { "ID", "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
+    String[] labelText = { "Val 1", "Val 2", "Val 3", "Val 4", "Val 5", "Next" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
@@ -45,7 +34,7 @@ public class Attributes2Pane extends DataPane
   public int getRows ()
   // ---------------------------------------------------------------------------------//
   {
-    return 9;
+    return 6;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -69,14 +58,11 @@ public class Attributes2Pane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut[ID], character.id);
-    setText (textOut[MAXLEVAC], character.maxlevac);
-    setText (textOut[CHAR_LEV], character.charlev);
-    setText (textOut[HP_LEFT], character.hpLeft);
-    setText (textOut[HP_MAX], character.hpMax);
-    setText (textOut[HP_CALC_MD], character.hpCalCmd);
-    setText (textOut[AC], character.armourClass);
-    setText (textOut[REGEN], character.healPts);
-    setText (textOut[SWING], character.swingCount);
+    setText (textOut[0], character.unknown1);
+    setText (textOut[1], character.unknown2);
+    setText (textOut[2], character.unknown3);
+    setText (textOut[3], character.unknown4);
+    setText (textOut[4], character.unknown5);
+    setText (textOut[5], character.nextCharacterId);
   }
 }

@@ -174,13 +174,12 @@ public abstract class DataPane extends GridPane
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[totalFields];
-    int row = dataPos.row;
 
     for (int i = 0; i < totalFields; i++)
     {
       textOut[i] = new TextField ();
 
-      GridPane.setConstraints (textOut[i], dataPos.col, row);
+      GridPane.setConstraints (textOut[i], dataPos.col, dataPos.row + i);
       GridPane.setColumnSpan (textOut[i], dataPos.colSpan);
 
       textOut[i].setAlignment (dataPos.alignment);
@@ -188,9 +187,126 @@ public abstract class DataPane extends GridPane
       textOut[i].setFocusTraversable (false);
 
       getChildren ().add (textOut[i]);
+    }
+
+    return textOut;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextField[] createTextFields (String[] labelText, LabelPlacement labelPos, DataLayout dataLayout)
+  // ---------------------------------------------------------------------------------//
+  {
+    TextField[] textOut = new TextField[labelText.length];
+    int row = labelPos.row;
+
+    for (int i = 0; i < labelText.length; i++)
+    {
+      Label label = new Label (labelText[i]);
+      GridPane.setConstraints (label, labelPos.col, row);
+      GridPane.setColumnSpan (label, labelPos.colSpan);
+
+      textOut[i] = new TextField ();
+      textOut[i].setAlignment (dataLayout.alignment);
+      textOut[i].setEditable (false);
+      textOut[i].setFocusTraversable (false);
+
+      GridPane.setConstraints (textOut[i], dataLayout.column, row);
+      GridPane.setColumnSpan (textOut[i], dataLayout.columnSpan);
+
+      GridPane.setHalignment (label, labelPos.alignment);
+      getChildren ().addAll (label, textOut[i]);
 
       row++;
     }
+
+    dataLayout.column += dataLayout.columnSpan;
+
+    return textOut;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void createLabelsVertical (LabelPlacement2 labelPos)
+  // ---------------------------------------------------------------------------------//
+  {
+    for (int i = 0; i < labelPos.labels.length; i++)
+    {
+      Label label = new Label (labelPos.labels[i]);
+
+      GridPane.setConstraints (label, labelPos.col, labelPos.row + i);
+      GridPane.setColumnSpan (label, labelPos.colSpan);
+      GridPane.setHalignment (label, labelPos.alignment);
+
+      getChildren ().add (label);
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  void createLabelsHorizontal (LabelPlacement2 labelPos)
+  // ---------------------------------------------------------------------------------//
+  {
+    int column = labelPos.col;
+    for (int i = 0; i < labelPos.labels.length; i++)
+    {
+      Label label = new Label (labelPos.labels[i]);
+
+      GridPane.setConstraints (label, column, labelPos.row);
+      GridPane.setColumnSpan (label, labelPos.colSpan);
+      GridPane.setHalignment (label, labelPos.alignment);
+
+      getChildren ().add (label);
+      column += labelPos.colSpan;
+    }
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextField createTextField (DataLayout dataLayout)
+  // ---------------------------------------------------------------------------------//
+  {
+    TextField textField = new TextField ();
+
+    GridPane.setConstraints (textField, dataLayout.column, dataLayout.row);
+    GridPane.setColumnSpan (textField, dataLayout.columnSpan);
+
+    textField.setAlignment (dataLayout.alignment);
+    textField.setEditable (false);
+    textField.setFocusTraversable (false);
+
+    getChildren ().add (textField);
+
+    dataLayout.row++;
+
+    return textField;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextField[] createTextFields (DataLayout dataLayout, Pos alignment)
+  // ---------------------------------------------------------------------------------//
+  {
+    dataLayout.alignment = alignment;
+    return this.createTextFields (dataLayout);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  TextField[] createTextFields (DataLayout dataLayout)
+  // ---------------------------------------------------------------------------------//
+  {
+    TextField[] textOut = new TextField[dataLayout.rows];
+
+    for (int i = 0; i < dataLayout.rows; i++)
+    {
+      textOut[i] = new TextField ();
+
+      GridPane.setConstraints (textOut[i], dataLayout.column, dataLayout.row + i);
+      GridPane.setColumnSpan (textOut[i], dataLayout.columnSpan);
+
+      textOut[i].setAlignment (dataLayout.alignment);
+      textOut[i].setEditable (false);
+      textOut[i].setFocusTraversable (false);
+
+      getChildren ().add (textOut[i]);
+    }
+
+    dataLayout.column += dataLayout.columnSpan;     // next available column
 
     return textOut;
   }
@@ -214,6 +330,7 @@ public abstract class DataPane extends GridPane
 
       textArea.setEditable (false);
       textArea.setFocusTraversable (false);
+      textArea.setPrefRowCount (dataPos.rowSpan);
 
       GridPane.setHalignment (label, labelPos.alignment);
       getChildren ().addAll (label, textArea);
@@ -222,6 +339,31 @@ public abstract class DataPane extends GridPane
     }
 
     return textArea;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  CheckBox[] createCheckBoxes (DataLayout dataLayout)
+  // ---------------------------------------------------------------------------------//
+  {
+    CheckBox[] checkBoxes = new CheckBox[dataLayout.rows];
+
+    for (int i = 0; i < dataLayout.rows; i++)
+    {
+      checkBoxes[i] = new CheckBox ();
+
+      GridPane.setConstraints (checkBoxes[i], dataLayout.column, dataLayout.row + i);
+
+      checkBoxes[i].setDisable (true);
+      checkBoxes[i].setStyle ("-fx-opacity: 1");    // make disabled checkbox look normal
+      checkBoxes[i].setFocusTraversable (false);
+
+      GridPane.setHalignment (checkBoxes[i], HPos.CENTER);
+      getChildren ().add (checkBoxes[i]);
+    }
+
+    dataLayout.column += dataLayout.columnSpan;     // next available column
+
+    return checkBoxes;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -243,6 +385,7 @@ public abstract class DataPane extends GridPane
       checkBoxes[i].setFocusTraversable (false);
 
       GridPane.setHalignment (label, HPos.RIGHT);
+      GridPane.setHalignment (checkBoxes[i], HPos.CENTER);
       getChildren ().addAll (label, checkBoxes[i]);
 
       row++;
@@ -262,6 +405,7 @@ public abstract class DataPane extends GridPane
       checkBoxes[i] = new CheckBox ();
 
       GridPane.setConstraints (checkBoxes[i], col, row);
+      GridPane.setHalignment (checkBoxes[i], HPos.CENTER);
 
       checkBoxes[i].setDisable (true);
       checkBoxes[i].setStyle ("-fx-opacity: 1");    // make disabled checkbox look normal
@@ -352,6 +496,12 @@ public abstract class DataPane extends GridPane
 
   // ---------------------------------------------------------------------------------//
   public record LabelPlacement (int col, int row, HPos alignment, int colSpan)
+  // ---------------------------------------------------------------------------------//
+  {
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public record LabelPlacement2 (String[] labels, int col, int row, HPos alignment, int colSpan)
   // ---------------------------------------------------------------------------------//
   {
   }

@@ -14,12 +14,12 @@ import javafx.scene.control.TextField;
 public class BaggagePane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private TextField[] textOut3;
-  private TextField[] textOut4;
+  private TextField[] items;
+  private TextField[] values;
 
-  private CheckBox[] checkBox4;
-  private CheckBox[] checkBox5;
-  private CheckBox[] checkBox6;
+  private CheckBox[] equipped;
+  private CheckBox[] cursed;
+  private CheckBox[] identified;
 
   private WizardryData wizardry;
 
@@ -28,32 +28,25 @@ public class BaggagePane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145, 20, 20, 20, 90);
-    setAllRowConstraints (9, getRowHeight ());           // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
+    //    setGridLinesVisible (true);
 
-    // possessions headings
-    createLabel ("Item", 1, 0, HPos.CENTER, 1);
-    createLabel ("Eq", 2, 0, HPos.LEFT, 1);
-    createLabel ("Cu", 3, 0, HPos.LEFT, 1);
-    createLabel ("Id", 4, 0, HPos.LEFT, 1);
-    createLabel ("Value", 5, 0, HPos.CENTER, 1);
+    String[] headings = { "Item", "Eq", "Cu", "Id", "Value" };
 
-    // possessions
-    String[] possessionsText = new String[8];
-    for (int i = 0; i < possessionsText.length; i++)
-      possessionsText[i] = "# " + (i + 1);
+    String[] possessionLabels = new String[8];
+    for (int i = 0; i < possessionLabels.length; i++)
+      possessionLabels[i] = "# " + (i + 1);
 
-    LabelPlacement lp = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
-    textOut3 = createTextFields (possessionsText, lp, dp);
+    createLabelsHorizontal (new LabelPlacement2 (headings, 1, 0, HPos.CENTER, 1));
+    createLabelsVertical (new LabelPlacement2 (possessionLabels, 0, 1, HPos.RIGHT, 1));
 
-    // possessions eq/cu/id
-    checkBox4 = createCheckBoxes (8, 2, 1);
-    checkBox5 = createCheckBoxes (8, 3, 1);
-    checkBox6 = createCheckBoxes (8, 4, 1);
+    DataLayout dataLayout = new DataLayout (1, 1, possessionLabels.length, Pos.CENTER_LEFT);
 
-    // possessions value
-    DataPlacement dp6 = new DataPlacement (5, 1, Pos.CENTER_RIGHT, 1);
-    textOut4 = createTextFields (8, dp6);
+    items = createTextFields (dataLayout);
+    equipped = createCheckBoxes (dataLayout);
+    cursed = createCheckBoxes (dataLayout);
+    identified = createCheckBoxes (dataLayout);
+    values = createTextFields (dataLayout, Pos.CENTER_RIGHT);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -61,7 +54,7 @@ public class BaggagePane extends DataPane
   public int getRows ()
   // ---------------------------------------------------------------------------------//
   {
-    return 9;
+    return 9;        // 8 items + heading
   }
 
   // ---------------------------------------------------------------------------------//
@@ -78,11 +71,11 @@ public class BaggagePane extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (textOut3);
-    reset (textOut4);
-    reset (checkBox4);
-    reset (checkBox5);
-    reset (checkBox6);
+    reset (items);
+    reset (values);
+    reset (equipped);
+    reset (cursed);
+    reset (identified);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -102,36 +95,36 @@ public class BaggagePane extends DataPane
 
         if (possession.identified ())
         {
-          setText (textOut3[i], item.name);
-          setText (textOut4[i], item.price);    // formatted as number
+          setText (items[i], item.name);
+          setText (values[i], item.price);    // formatted as number
 
-          checkBox4[i].setSelected (possession.equipped ());
-          checkBox5[i].setSelected (possession.cursed ());
-          checkBox6[i].setSelected (true);
+          equipped[i].setSelected (possession.equipped ());
+          cursed[i].setSelected (possession.cursed ());
+          identified[i].setSelected (true);
 
-          checkBox5[i].setIndeterminate (false);
+          cursed[i].setIndeterminate (false);
         }
         else
         {
-          setText (textOut3[i], item.nameGeneric);
-          setText (textOut4[i], "?");           // formatted as text
+          setText (items[i], item.nameGeneric);
+          setText (values[i], "?");           // formatted as text
 
-          checkBox4[i].setSelected (false);
-          checkBox6[i].setSelected (false);
+          equipped[i].setSelected (false);
+          identified[i].setSelected (false);
 
-          checkBox5[i].setIndeterminate (true);
+          cursed[i].setIndeterminate (true);
         }
       }
       else
       {
-        setText (textOut3[i], "");
-        setText (textOut4[i], "");
+        setText (items[i], "");
+        setText (values[i], "");
 
-        checkBox4[i].setSelected (false);
-        checkBox5[i].setSelected (false);
-        checkBox6[i].setSelected (false);
+        equipped[i].setSelected (false);
+        cursed[i].setSelected (false);
+        identified[i].setSelected (false);
 
-        checkBox5[i].setIndeterminate (false);
+        cursed[i].setIndeterminate (false);
       }
   }
 }
