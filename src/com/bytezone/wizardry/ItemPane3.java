@@ -4,13 +4,14 @@ import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
 public class ItemPane3 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private CheckBox[] checkBoxes1;
+  private CheckBox[] checkBoxes;
 
   private WizardryData wizardry;
 
@@ -21,9 +22,11 @@ public class ItemPane3 extends DataPane
     setColumnConstraints (110, 20);
     setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
 
-    createLabel ("Resistance", 0, 0, HPos.RIGHT, 1);
+    createLabel ("Resistance", 0, 0, HPos.RIGHT, 2);
 
-    checkBoxes1 = createCheckBoxes (WizardryData.resistance, 0, 1);
+    createLabelsVertical (new LabelPlacement2 (WizardryData.resistance, 0, 1, HPos.RIGHT, 1));
+    checkBoxes =
+        createCheckBoxes (new DataLayout (1, 1, WizardryData.resistance.length, Pos.CENTER));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -48,7 +51,7 @@ public class ItemPane3 extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (checkBoxes1);
+    reset (checkBoxes);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -61,7 +64,7 @@ public class ItemPane3 extends DataPane
     int resistance = item.wepvsty3Flags;
     for (int i = 0; i < WizardryData.resistance.length; i++)
     {
-      checkBoxes1[i].setSelected ((resistance & 0x01) != 0);
+      checkBoxes[i].setSelected ((resistance & 0x01) != 0);
       resistance >>>= 1;
     }
   }

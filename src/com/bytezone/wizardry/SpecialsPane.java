@@ -20,34 +20,28 @@ public class SpecialsPane extends DataPane
   {
     int width = 63;
     setColumnConstraints (110, 120, width, width, width, width, 80, 40, 320);
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
 
-    // special squares
+    String[] headings = { "Square type", "Aux 0", "Aux 1", "Aux 2", "Occurs", "First location",
+        "Msg #", "Description" };
+    createLabelsHorizontal (new LabelPlacement2 (headings, 1, 0, HPos.CENTER, 1));
+
     String[] squaresText = new String[16];
     for (int i = 0; i < squaresText.length; i++)
       squaresText[i] = i + "";
+    createLabelsVertical (new LabelPlacement2 (squaresText, 0, 1, HPos.RIGHT, 1));
 
-    LabelPlacement lp1 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
-    textOut[0] = createTextFields (squaresText, lp1, dp1);
+    DataLayout dataLayout = new DataLayout (1, 1, 16, Pos.CENTER_LEFT);
 
-    textOut[1] = createTextFields (16, new DataPlacement (2, 1, Pos.CENTER_RIGHT, 1));
-    textOut[2] = createTextFields (16, new DataPlacement (3, 1, Pos.CENTER_RIGHT, 1));
-    textOut[3] = createTextFields (16, new DataPlacement (4, 1, Pos.CENTER_RIGHT, 1));
-    textOut[4] = createTextFields (16, new DataPlacement (5, 1, Pos.CENTER_RIGHT, 1));
-    textOut[5] = createTextFields (16, new DataPlacement (6, 1, Pos.CENTER_LEFT, 1));
-    textOut[6] = createTextFields (16, new DataPlacement (7, 1, Pos.CENTER_RIGHT, 1));
-    textOut[7] = createTextFields (16, new DataPlacement (8, 1, Pos.CENTER_LEFT, 1));
-
-    // headings
-    createLabel ("Square type", 1, 0, HPos.LEFT, 1);
-    createLabel ("Aux 0", 2, 0, HPos.LEFT, 1);
-    createLabel ("Aux 1", 3, 0, HPos.LEFT, 1);
-    createLabel ("Aux 2", 4, 0, HPos.LEFT, 1);
-    createLabel ("Occurs", 5, 0, HPos.LEFT, 1);
-    createLabel ("First location", 6, 0, HPos.LEFT, 1);
-    createLabel ("Msg #", 7, 0, HPos.LEFT, 1);
-    createLabel ("Description", 8, 0, HPos.LEFT, 1);
+    textOut[0] = createTextFields (dataLayout);
+    textOut[1] = createTextFields (dataLayout, Pos.CENTER_RIGHT);
+    textOut[2] = createTextFields (dataLayout);
+    textOut[3] = createTextFields (dataLayout);
+    textOut[4] = createTextFields (dataLayout);
+    textOut[5] = createTextFields (dataLayout, Pos.CENTER_LEFT);
+    textOut[6] = createTextFields (dataLayout, Pos.CENTER_RIGHT);
+    textOut[7] = createTextFields (dataLayout, Pos.CENTER_LEFT);
   }
 
   // ---------------------------------------------------------------------------------//

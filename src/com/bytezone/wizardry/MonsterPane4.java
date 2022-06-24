@@ -4,6 +4,7 @@ import com.bytezone.wizardry.data.Monster;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 public class MonsterPane4 extends DataPane
@@ -17,10 +18,13 @@ public class MonsterPane4 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 30);
-    setAllRowConstraints (8, getRowHeight ());     // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
     createLabel ("Resistance", 0, 0, HPos.CENTER, 2);
-    checkBoxes = createCheckBoxes (WizardryData.resistance, 0, 1);
+
+    createLabelsVertical (new LabelPlacement2 (WizardryData.resistance, 0, 1, HPos.RIGHT, 1));
+    checkBoxes =
+        createCheckBoxes (new DataLayout (1, 1, WizardryData.resistance.length, Pos.CENTER));
   }
 
   // ---------------------------------------------------------------------------------//

@@ -43,7 +43,7 @@ public class BaggagePane extends DataPane
     DataLayout dataLayout = new DataLayout (1, 1, possessionLabels.length, Pos.CENTER_LEFT);
 
     items = createTextFields (dataLayout);
-    equipped = createCheckBoxes (dataLayout);
+    equipped = createCheckBoxes (dataLayout, Pos.CENTER);
     cursed = createCheckBoxes (dataLayout);
     identified = createCheckBoxes (dataLayout);
     values = createTextFields (dataLayout, Pos.CENTER_RIGHT);

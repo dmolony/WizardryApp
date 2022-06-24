@@ -1,5 +1,6 @@
 package com.bytezone.wizardry;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 
 // -----------------------------------------------------------------------------------//
@@ -10,6 +11,7 @@ public class DataLayout
   int row;
   int rows;
   Pos alignment;
+  HPos hpos = HPos.CENTER;
   int columnSpan;
   String[] labels;
 
@@ -18,6 +20,14 @@ public class DataLayout
   // ---------------------------------------------------------------------------------//
   {
     this (column, row, rows, alignment, 1);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public DataLayout (int column, int row, int rows, HPos alignment)
+  // ---------------------------------------------------------------------------------//
+  {
+    this (column, row, rows, Pos.CENTER_LEFT, 1);
+    hpos = alignment;
   }
 
   // ---------------------------------------------------------------------------------//

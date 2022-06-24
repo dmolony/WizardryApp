@@ -342,6 +342,14 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
+  CheckBox[] createCheckBoxes (DataLayout dataLayout, Pos alignment)
+  // ---------------------------------------------------------------------------------//
+  {
+    dataLayout.alignment = alignment;
+    return createCheckBoxes (dataLayout);
+  }
+
+  // ---------------------------------------------------------------------------------//
   CheckBox[] createCheckBoxes (DataLayout dataLayout)
   // ---------------------------------------------------------------------------------//
   {
@@ -357,7 +365,7 @@ public abstract class DataPane extends GridPane
       checkBoxes[i].setStyle ("-fx-opacity: 1");    // make disabled checkbox look normal
       checkBoxes[i].setFocusTraversable (false);
 
-      GridPane.setHalignment (checkBoxes[i], HPos.CENTER);
+      GridPane.setHalignment (checkBoxes[i], dataLayout.hpos);
       getChildren ().add (checkBoxes[i]);
     }
 

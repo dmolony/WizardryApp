@@ -28,14 +28,14 @@ public class ItemPane2 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 45);
-    setAllRowConstraints (7, getRowHeight ());           // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
 
-    String[] label2Text =
+    String[] labelText =
         { "Id", "Special #", "AC", "To hit +", "# swings", "In store", "Regeneration" };
+    assert getRows () == labelText.length;
 
-    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_RIGHT, 1);
-    textOut = createTextFields (label2Text, lp, dp);
+    createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
+    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
   }
 
   // ---------------------------------------------------------------------------------//

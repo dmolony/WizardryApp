@@ -4,14 +4,15 @@ import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
 public class ItemPane5 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private CheckBox[] checkBoxes3;
-  private CheckBox[] checkBoxes4;
+  private CheckBox[] protect;
+  private CheckBox[] purpose;
 
   private WizardryData wizardry;
 
@@ -19,17 +20,17 @@ public class ItemPane5 extends DataPane
   public ItemPane5 ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 30, 100);
-    setAllRowConstraints (15, getRowHeight ());           // make all rows the same height
+    setColumnConstraints (110, 30, 30);
+    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
-    createLabel ("Protection vs", 0, 0, HPos.RIGHT, 2);
-    createLabel ("Purposed vs", 2, 0, HPos.LEFT, 2);
+    createLabel ("Protect", 0, 0, HPos.RIGHT, 2);
+    createLabel ("Vs", 2, 0, HPos.CENTER, 1);
 
-    // protection vs
-    checkBoxes3 = createCheckBoxes (WizardryData.monsterClass, 0, 1);
+    createLabelsVertical (new LabelPlacement2 (WizardryData.monsterClass, 0, 1, HPos.RIGHT, 1));
 
-    // purposed vs
-    checkBoxes4 = createCheckBoxes (checkBoxes3.length, 2, 1);
+    DataLayout dataLayout = new DataLayout (1, 1, WizardryData.monsterClass.length, Pos.CENTER);
+    protect = createCheckBoxes (dataLayout);
+    purpose = createCheckBoxes (dataLayout);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -54,8 +55,8 @@ public class ItemPane5 extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (checkBoxes3);
-    reset (checkBoxes4);
+    reset (protect);
+    reset (purpose);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -67,8 +68,8 @@ public class ItemPane5 extends DataPane
 
     for (int i = 0; i < WizardryData.monsterClass.length; i++)
     {
-      checkBoxes3[i].setSelected ((protection & 0x01) != 0);
-      checkBoxes4[i].setSelected ((purposed & 0x01) != 0);
+      protect[i].setSelected ((protection & 0x01) != 0);
+      purpose[i].setSelected ((purposed & 0x01) != 0);
 
       protection >>>= 1;
       purposed >>>= 1;

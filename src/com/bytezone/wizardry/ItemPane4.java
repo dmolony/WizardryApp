@@ -4,13 +4,14 @@ import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
 public class ItemPane4 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private CheckBox[] checkBoxes2;
+  private CheckBox[] checkBoxes;
 
   private WizardryData wizardry;
 
@@ -19,11 +20,13 @@ public class ItemPane4 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 20);
-    setAllRowConstraints (9, getRowHeight ());           // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
-    createLabel ("Can be used by", 0, 0, HPos.RIGHT, 1);
+    createLabel ("Equip", 0, 0, HPos.RIGHT, 2);
 
-    checkBoxes2 = createCheckBoxes (WizardryData.characterClass, 0, 1);
+    createLabelsVertical (new LabelPlacement2 (WizardryData.characterClass, 0, 1, HPos.RIGHT, 1));
+    checkBoxes =
+        createCheckBoxes (new DataLayout (1, 1, WizardryData.characterClass.length, Pos.CENTER));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -48,7 +51,7 @@ public class ItemPane4 extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (checkBoxes2);
+    reset (checkBoxes);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -61,7 +64,7 @@ public class ItemPane4 extends DataPane
     int characterClass = item.classUseFlags;
     for (int i = 0; i < WizardryData.characterClass.length; i++)
     {
-      checkBoxes2[i].setSelected ((characterClass & 0x01) != 0);
+      checkBoxes[i].setSelected ((characterClass & 0x01) != 0);
       characterClass >>>= 1;
     }
   }

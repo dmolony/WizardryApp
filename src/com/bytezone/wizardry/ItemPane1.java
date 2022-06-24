@@ -32,14 +32,14 @@ public class ItemPane1 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 145);
-    setAllRowConstraints (11, getRowHeight ());     // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
-    String[] label1Text = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
+    String[] labelText = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
         "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
+    assert getRows () == labelText.length;
 
-    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    textOut = createTextFields (label1Text, lp, dp);
+    createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
+    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
   }
 
   // ---------------------------------------------------------------------------------//

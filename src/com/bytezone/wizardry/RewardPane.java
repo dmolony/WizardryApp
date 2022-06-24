@@ -50,36 +50,31 @@ public class RewardPane extends DataPane
   public RewardPane ()
   // ---------------------------------------------------------------------------------//
   {
-    String[] label1Text = { "Is chest" };
-    String[] goldLabels = { "Probability", "# Dice", "Base", "Mult", "Gold min", "Gold max", };
-    String[] itemLabels = { "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
+    String[] labels = { "Is chest", "", "Probability", "# Dice", "Base", "Mult", "Gold min",
+        "Gold max", "", "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
         "Element", "Probability" };
 
     int width = 140;
-    setColumnConstraints (110, width, width, width, width, width, width);
+    setColumnConstraints (110, width, width, width, width, width);
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
+    //    setGridLinesVisible (true);
 
-    // basic attributes
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    textOut1 = createTextFields (label1Text, lp1, dp1);
+    createLabelsVertical (new LabelPlacement2 (labels, 0, 0, HPos.RIGHT, 1));
 
-    // gold reward
-    LabelPlacement lp3 = new LabelPlacement (0, 2, HPos.RIGHT, 1);
-    DataPlacement dp3 = new DataPlacement (1, 2, Pos.CENTER_LEFT, 1);
-    gold = createTextFields (goldLabels, lp3, dp3);
+    DataLayout dataLayout1 = new DataLayout (1, 0, 1, Pos.CENTER_LEFT);
+    textOut1 = createTextFields (dataLayout1);
 
-    // first item reward
-    LabelPlacement lp4 = new LabelPlacement (0, 9, HPos.RIGHT, 1);
-    DataPlacement dp4 = new DataPlacement (1, 9, Pos.CENTER_LEFT, 1);
-    items[0] = createTextFields (itemLabels, lp4, dp4);
+    DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_LEFT);
+    gold = createTextFields (dataLayout2);
 
-    // second  thru fourth item rewards
-    for (int i = 1; i < MAX_ITEMS; i++)
-      items[i] = createTextFields (8, new DataPlacement (i + 1, 9, Pos.CENTER_LEFT, 1));
+    DataLayout dataLayout3 = new DataLayout (1, 9, 8, Pos.CENTER_LEFT);
+    for (int i = 0; i < MAX_ITEMS; i++)
+      items[i] = createTextFields (dataLayout3);
 
     // traps
-    traps = createCheckBoxes (WizardryData.trapType, 2, 0);
+    createLabelsVertical (new LabelPlacement2 (WizardryData.trapType, 2, 0, HPos.RIGHT, 1));
+    traps = createCheckBoxes (new DataLayout (3, 0, WizardryData.trapType.length, HPos.LEFT));
   }
 
   // ---------------------------------------------------------------------------------//

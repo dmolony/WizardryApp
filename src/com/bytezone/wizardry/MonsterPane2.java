@@ -35,15 +35,19 @@ public class MonsterPane2 extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 70);
-    setAllRowConstraints (14, getRowHeight ());     // make all rows the same height
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
     String[] labelText = { "ID", "Mage level", "Priest level", "Magic resistance", "Partner odds",
         "Image", "Level drain", "Regen", "Experience", "Armour class", "Unique", "Breathe",
         "Wandering reward", "Lair reward" };
+    assert getRows () == labelText.length;
 
-    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_RIGHT, 1);
-    textOut = createTextFields (labelText, lp, dp);
+    createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
+    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
+
+    //    LabelPlacement lp = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    //    DataPlacement dp = new DataPlacement (1, 0, Pos.CENTER_RIGHT, 1);
+    //    textOut = createTextFields (labelText, lp, dp);
   }
 
   // ---------------------------------------------------------------------------------//
