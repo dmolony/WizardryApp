@@ -35,7 +35,7 @@ public class PartyPane extends DataPane
     //    setGridLinesVisible (true);
 
     String[] partyLabels = { "Party", "Slogan", "# 1", "# 2", "# 3", "# 4", "# 5", "# 6" };
-    createLabelsVertical (new LabelPlacement2 (partyLabels, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (partyLabels, 0, 0, HPos.RIGHT, 1));
 
     DataLayout dataLayout1 = new DataLayout (1, 0, 6, Pos.CENTER_LEFT, 4);
     DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_RIGHT);

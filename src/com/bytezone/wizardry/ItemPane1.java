@@ -38,7 +38,7 @@ public class ItemPane1 extends DataPane
         "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
     assert getRows () == labelText.length;
 
-    createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
   }
 

@@ -20,33 +20,27 @@ public class MessagePane extends DataPane
 
   TextField[] textOut1;
   TextField[] textOut2;
-  TextField[] textOut4;
+  TextField[] textOut3;
 
-  TextArea textOut3;
+  TextArea textArea;
 
   // ---------------------------------------------------------------------------------//
   public MessagePane ()
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 120, 310);
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
 
-    String[] label1Text = { "Used" };
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    textOut1 = createTextFields (label1Text, lp1, dp1);
+    String[] labels = { "Used", "Location 1", "Location 2", "Location 3", "Text" };
+    createLabelsVertical (new LabelPlacement (labels, 0, 0, HPos.RIGHT, 1));
 
-    String[] label2Text = { "Location 1", "Location 2", "Location 3" };
-    LabelPlacement lp2 = new LabelPlacement (0, 1, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (1, 1, Pos.CENTER_LEFT, 1);
-    textOut2 = createTextFields (label2Text, lp2, dp2);
+    textOut1 = createTextFields (new DataLayout (1, 0, 1, Pos.CENTER_LEFT));
+    DataLayout dataLayout = new DataLayout (1, 1, 3, Pos.CENTER_LEFT);
+    textOut2 = createTextFields (dataLayout);
+    textOut3 = createTextFields (dataLayout);
 
-    textOut4 = createTextFields (3, new DataPlacement (2, 1, Pos.CENTER_LEFT, 1));
-
-    String[] label3Text = { "Text" };
-    LabelPlacement lp3 = new LabelPlacement (0, 4, HPos.RIGHT, 1);
-    DataPlacement2 dp3 = new DataPlacement2 (1, 4, Pos.CENTER_LEFT, 2, 40);
-    textOut3 = createTextArea (label3Text, lp3, dp3);
+    textArea = createTextArea (new DataLayout (1, 4, 40, Pos.CENTER_LEFT, 2));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -73,9 +67,9 @@ public class MessagePane extends DataPane
 
     reset (textOut1);
     reset (textOut2);
-    reset (textOut4);
+    reset (textOut3);
 
-    textOut3.setText ("");
+    textArea.setText ("");
   }
 
   // ---------------------------------------------------------------------------------//
@@ -84,7 +78,7 @@ public class MessagePane extends DataPane
   {
     for (TextField textField : textOut2)
       textField.setText ("");
-    for (TextField textField : textOut4)
+    for (TextField textField : textOut3)
       textField.setText ("");
 
     List<Location> locations = message.getLocations ();
@@ -97,9 +91,9 @@ public class MessagePane extends DataPane
         setText (textOut2[i], locations.get (i));
         Special special = wizardry.getSpecial (locations.get (i));
         if (special != null)
-          setText (textOut4[i], special.getText ());
+          setText (textOut3[i], special.getText ());
       }
 
-    textOut3.setText (message.getText ());
+    textArea.setText (message.getText ());
   }
 }

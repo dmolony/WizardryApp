@@ -25,12 +25,12 @@ public class SpecialsPane extends DataPane
 
     String[] headings = { "Square type", "Aux 0", "Aux 1", "Aux 2", "Occurs", "First location",
         "Msg #", "Description" };
-    createLabelsHorizontal (new LabelPlacement2 (headings, 1, 0, HPos.CENTER, 1));
+    createLabelsHorizontal (new LabelPlacement (headings, 1, 0, HPos.CENTER, 1));
 
     String[] squaresText = new String[16];
     for (int i = 0; i < squaresText.length; i++)
       squaresText[i] = i + "";
-    createLabelsVertical (new LabelPlacement2 (squaresText, 0, 1, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (squaresText, 0, 1, HPos.RIGHT, 1));
 
     DataLayout dataLayout = new DataLayout (1, 1, 16, Pos.CENTER_LEFT);
 

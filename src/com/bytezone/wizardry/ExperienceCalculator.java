@@ -36,7 +36,7 @@ public class ExperienceCalculator extends DataPane
   TextField[] textIn = new TextField[labelText.length];
   TextField[] textOut = new TextField[labelText.length];
 
-  ComboBox<Monster> monsters = new ComboBox<> ();
+  ComboBox<Monster> monsters;
   WizardryData wizardry;        // this hasn't been set yet - NPE
 
   // ---------------------------------------------------------------------------------//
@@ -45,11 +45,13 @@ public class ExperienceCalculator extends DataPane
   {
     setColumnConstraints (125, 60, 80);
 
-    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
-    createComboBox ("Monster", monsters, wizardry.getMonsters (),
-        (options, oldValue, newValue) -> update (newValue), lp0, dp0);
-    GridPane.setColumnSpan (monsters, 2);
+    //    LabelPlacement lp0 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
+    //    DataPlacement dp0 = new DataPlacement (1, 0, Pos.CENTER_LEFT, 1);
+    createLabel ("Monster", 0, 0, HPos.RIGHT, 1);
+    monsters =
+        createComboBox (wizardry.getMonsters (), (options, oldValue, newValue) -> update (newValue),
+            new DataLayout (1, 0, 1, Pos.CENTER_LEFT));
+    //    GridPane.setColumnSpan (monsters, 2);
 
     for (int i = 0; i < textIn.length; i++)
     {

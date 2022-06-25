@@ -60,7 +60,7 @@ public class RewardPane extends DataPane
     setPadding (defaultInsets);
     //    setGridLinesVisible (true);
 
-    createLabelsVertical (new LabelPlacement2 (labels, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (labels, 0, 0, HPos.RIGHT, 1));
 
     DataLayout dataLayout1 = new DataLayout (1, 0, 1, Pos.CENTER_LEFT);
     textOut1 = createTextFields (dataLayout1);
@@ -73,7 +73,7 @@ public class RewardPane extends DataPane
       items[i] = createTextFields (dataLayout3);
 
     // traps
-    createLabelsVertical (new LabelPlacement2 (WizardryData.trapType, 2, 0, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (WizardryData.trapType, 2, 0, HPos.RIGHT, 1));
     traps = createCheckBoxes (new DataLayout (3, 0, WizardryData.trapType.length, HPos.LEFT));
   }
 

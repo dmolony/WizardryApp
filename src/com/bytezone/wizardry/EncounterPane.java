@@ -31,6 +31,7 @@ public class EncounterPane extends DataPane
   // ---------------------------------------------------------------------------------//
   {
     setColumnConstraints (110, 80, 130, 80, 130, 80, 130);
+    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
 
     String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range odds", "Extra ranges",
@@ -45,22 +46,22 @@ public class EncounterPane extends DataPane
       labels2[i * 2 + 1] = labels2[1];
     }
 
-    LabelPlacement lp1 = new LabelPlacement (0, 0, HPos.RIGHT, 1);
-    DataPlacement dp1 = new DataPlacement (1, 0, Pos.CENTER_RIGHT, 1);
-    textOut1[0] = createTextFields (labels1, lp1, dp1);
+    // upper block
+    createLabelsVertical (new LabelPlacement (labels1, 0, 0, HPos.RIGHT, 1));
 
-    textOut1[1] = createTextFields (6, new DataPlacement (3, 0, Pos.CENTER_RIGHT, 1));
-    textOut1[2] = createTextFields (6, new DataPlacement (5, 0, Pos.CENTER_RIGHT, 1));
+    textOut1[0] = createTextFields (new DataLayout (1, 0, 6, Pos.CENTER_RIGHT, 1));
+    textOut1[1] = createTextFields (new DataLayout (3, 0, 6, Pos.CENTER_RIGHT, 1));
+    textOut1[2] = createTextFields (new DataLayout (5, 0, 6, Pos.CENTER_RIGHT, 1));
 
-    LabelPlacement lp2 = new LabelPlacement (0, 6, HPos.RIGHT, 1);
-    DataPlacement dp2 = new DataPlacement (1, 6, Pos.CENTER_RIGHT, 1);
-    textOut2[0] = createTextFields (labels2, lp2, dp2);
+    // lower block
+    createLabelsVertical (new LabelPlacement (labels2, 0, 6, HPos.RIGHT, 1));
 
-    textOut2[1] = createTextFields (22, new DataPlacement (2, 6, Pos.CENTER_LEFT, 1));
-    textOut2[2] = createTextFields (22, new DataPlacement (3, 6, Pos.CENTER_RIGHT, 1));
-    textOut2[3] = createTextFields (22, new DataPlacement (4, 6, Pos.CENTER_LEFT, 1));
-    textOut2[4] = createTextFields (22, new DataPlacement (5, 6, Pos.CENTER_RIGHT, 1));
-    textOut2[5] = createTextFields (22, new DataPlacement (6, 6, Pos.CENTER_LEFT, 1));
+    DataLayout dataLayout = new DataLayout (1, 6, 22, Pos.CENTER_RIGHT, 1);
+    for (int i = 0; i < 5; i += 2)
+    {
+      textOut2[i] = createTextFields (dataLayout, Pos.CENTER_RIGHT);
+      textOut2[i + 1] = createTextFields (dataLayout, Pos.CENTER_LEFT);
+    }
   }
 
   // ---------------------------------------------------------------------------------//
@@ -158,8 +159,9 @@ public class EncounterPane extends DataPane
   {
     Monster minMonster = wizardry.getMonster (minEnemy);
     Monster maxMonster = wizardry.getMonster (maxEnemy);
+
     String minName = minMonster == null ? "?" : minMonster.name;
-    String maxName = maxMonster == null ? "?" : minMonster.name;
+    String maxName = maxMonster == null ? "?" : maxMonster.name;
 
     setText (textOut2[index1][index2], minEnemy + " : " + maxEnemy);
     setText (textOut2[index1 + 1][index2], minName);

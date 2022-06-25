@@ -47,7 +47,7 @@ public class Attributes1Pane extends DataPane
             "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
     assert getRows () == labelText.length;
 
-    createLabelsVertical (new LabelPlacement2 (labelText, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
   }
 

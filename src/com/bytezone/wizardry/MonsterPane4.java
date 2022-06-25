@@ -22,7 +22,7 @@ public class MonsterPane4 extends DataPane
 
     createLabel ("Resistance", 0, 0, HPos.CENTER, 2);
 
-    createLabelsVertical (new LabelPlacement2 (WizardryData.resistance, 0, 1, HPos.RIGHT, 1));
+    createLabelsVertical (new LabelPlacement (WizardryData.resistance, 0, 1, HPos.RIGHT, 1));
     checkBoxes =
         createCheckBoxes (new DataLayout (1, 1, WizardryData.resistance.length, Pos.CENTER));
   }
