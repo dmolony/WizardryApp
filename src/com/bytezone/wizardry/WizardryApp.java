@@ -36,7 +36,6 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   private static final String PREFS_FILE_NAME = "FileName";
 
   private final Menu menuFile = new Menu ("File");
-
   private final MenuItem openFileItem = new MenuItem ("Open file...");
   private final Menu recentFilesMenu = new Menu ("Recent files");
 

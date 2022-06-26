@@ -27,7 +27,7 @@ public class BaggagePane extends DataPane
   public BaggagePane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (110, 145, 20, 20, 20, 90);
+    setColumnConstraints (110, 155, 20, 20, 20, 80);
     setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
     //    setGridLinesVisible (true);
 

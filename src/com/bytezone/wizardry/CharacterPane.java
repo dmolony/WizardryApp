@@ -32,8 +32,8 @@ public class CharacterPane extends DataPane
     setLayout (baggagePane, 0, 17);
     setLayout (attributes2Pane, 9, 0);
     setLayout (attributes5Pane, 9, 10);       // Unknown
-    setLayout (attributes3Pane, 14, 0);       // Strength/Agility etc
-    setLayout (attributes4Pane, 14, 7);       // SaveVs
+    setLayout (attributes3Pane, 15, 0);       // Strength/Agility etc
+    setLayout (attributes4Pane, 15, 7);       // SaveVs
     setLayout (mageSpellsPane, 21, 0);
     setLayout (priestSpellsPane, 30, 0);
     setLayout (partyPane, 15, 18);

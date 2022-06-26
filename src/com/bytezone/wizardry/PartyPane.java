@@ -30,7 +30,7 @@ public class PartyPane extends DataPane
   public PartyPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (70, 40, 110, 60, 35, 50, 130, 100, 100);
+    setColumnConstraints (70, 40, 110, 60, 40, 50, 130, 100, 100);
     setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
     //    setGridLinesVisible (true);
 
