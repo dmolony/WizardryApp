@@ -94,12 +94,12 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void setAllColumnConstraints (int numColumns, int colWidth)
+  void setAllColumnConstraints (int colWidth)
   // ---------------------------------------------------------------------------------//
   {
     ColumnConstraints colConstraints = new ColumnConstraints (colWidth);
 
-    for (int i = 0; i < numColumns; i++)
+    for (int i = 0; i < getColumns (); i++)
       getColumnConstraints ().add (colConstraints);
   }
 
