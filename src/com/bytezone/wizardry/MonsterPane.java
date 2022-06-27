@@ -31,8 +31,7 @@ public class MonsterPane extends DataPane
     canvas = new Canvas (280, 200);
 
     setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
-
-    setPadding (defaultInsets);
+    setPadding (defaultInsets);                           // only the root pane has insets
 
     setLayout (monsterPane1, 0, 0);
     setLayout (monsterPane2, 0, 10);

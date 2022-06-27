@@ -3,8 +3,6 @@ package com.bytezone.wizardry;
 import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
-import javafx.scene.layout.GridPane;
-
 //-----------------------------------------------------------------------------------//
 public class ItemPane extends DataPane
 //-----------------------------------------------------------------------------------//
@@ -15,36 +13,20 @@ public class ItemPane extends DataPane
   private ItemPane4 itemPane4 = new ItemPane4 ();
   private ItemPane5 itemPane5 = new ItemPane5 ();
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public ItemPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (18, 40);
 
-    setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
-    setPadding (defaultInsets);
+    setAllColumnConstraints (getColumns (), 20);          // 40 columns x 20 pixels
+    setPadding (defaultInsets);                           // only the root pane has insets
 
-    GridPane.setConstraints (itemPane1, 0, 0);
-    GridPane.setColumnSpan (itemPane1, 2);
-    GridPane.setRowSpan (itemPane1, 11);
-
-    GridPane.setConstraints (itemPane2, 0, 12);
-    GridPane.setColumnSpan (itemPane2, 2);
-    GridPane.setRowSpan (itemPane2, 7);
-
-    GridPane.setConstraints (itemPane3, 10, 0);
-    GridPane.setColumnSpan (itemPane3, 2);
-    GridPane.setRowSpan (itemPane3, 8);
-
-    GridPane.setConstraints (itemPane4, 10, 10);
-    GridPane.setColumnSpan (itemPane4, 2);
-    GridPane.setRowSpan (itemPane4, 9);
-
-    GridPane.setConstraints (itemPane5, 16, 0);
-    GridPane.setColumnSpan (itemPane5, 2);
-    GridPane.setRowSpan (itemPane5, 15);
+    setLayout (itemPane1, 0, 0);
+    setLayout (itemPane2, 0, 12);
+    setLayout (itemPane3, 10, 0);
+    setLayout (itemPane4, 10, 10);
+    setLayout (itemPane5, 16, 0);
 
     getChildren ().addAll (itemPane1, itemPane2, itemPane3, itemPane4, itemPane5);
   }
@@ -53,8 +35,6 @@ public class ItemPane extends DataPane
   public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     itemPane1.setWizardry (wizardry);
     itemPane2.setWizardry (wizardry);
     itemPane3.setWizardry (wizardry);

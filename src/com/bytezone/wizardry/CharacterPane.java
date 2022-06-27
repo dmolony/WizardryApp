@@ -16,6 +16,7 @@ public class CharacterPane extends DataPane
   private Attributes5Pane attributes5Pane = new Attributes5Pane ();
   private MageSpellsPane mageSpellsPane = new MageSpellsPane ();
   private PriestSpellsPane priestSpellsPane = new PriestSpellsPane ();
+
   private boolean partyPaneAdded;
 
   // ---------------------------------------------------------------------------------//
@@ -24,8 +25,8 @@ public class CharacterPane extends DataPane
   {
     super (26, 40);         // rows, columns
 
-    setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
-    setPadding (defaultInsets);                           // only the root pane has insets
+    setAllColumnConstraints (getColumns (), 20);        // all columns 20 pixels wide
+    setPadding (defaultInsets);                         // only the root pane has insets
 
     setGridLinesVisible (false);
 
