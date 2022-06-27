@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 public class PartyPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
+  private static final int MAX_PARTY_SIZE = 6;
+
   private TextField partyName;
   private TextField slogan;
 
@@ -30,7 +32,8 @@ public class PartyPane extends DataPane
   public PartyPane ()
   // ---------------------------------------------------------------------------------//
   {
-    setColumnConstraints (70, 40, 110, 60, 40, 50, 130, 100, 100);
+    int[] widths = { 70, 40, 110, 60, 40, 50, 130, 100, 100 };
+    setColumnConstraints (widths);
     setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
     //    setGridLinesVisible (true);
 
@@ -90,7 +93,7 @@ public class PartyPane extends DataPane
     {
       setText (partyName, "");
       setText (slogan, "");
-      for (int i = 0; i < 6; i++)
+      for (int i = 0; i < MAX_PARTY_SIZE; i++)
         reset (i);
       return;
     }
@@ -98,22 +101,20 @@ public class PartyPane extends DataPane
     setText (partyName, party.getName ());
     setText (slogan, party.getMessage ());
 
-    int pos = 0;
-    if (party.size () > 1)
-      for (Character member : party)
-      {
-        setText (id[pos], member.id);
-        setText (characterName[pos], member.name);
-        setText (characterClass[pos], member.getTypeString ());
-        setText (armourClass[pos], member.armourClass);
-        setText (hitPoints[pos], member.hpLeft);
-        setText (attributes[pos], member.getAttributeString ());
-        setText (mageSpells[pos], member.getSpellsString (Character.MAGE_SPELLS));
-        setText (priestSpells[pos], member.getSpellsString (Character.PRIEST_SPELLS));
-        pos++;
-      }
+    for (int i = 0; i < party.size (); i++)
+    {
+      Character member = party.get (i);
+      setText (id[i], member.id);
+      setText (characterName[i], member.name);
+      setText (characterClass[i], member.getTypeString ());
+      setText (armourClass[i], member.armourClass);
+      setText (hitPoints[i], member.hpLeft);
+      setText (attributes[i], member.getAttributeString ());
+      setText (mageSpells[i], member.getSpellsString (Character.MAGE_SPELLS));
+      setText (priestSpells[i], member.getSpellsString (Character.PRIEST_SPELLS));
+    }
 
-    for (int i = pos; i < 6; i++)
+    for (int i = party.size (); i < MAX_PARTY_SIZE; i++)
       reset (i);
   }
 
