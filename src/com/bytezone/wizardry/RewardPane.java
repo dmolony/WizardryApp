@@ -50,15 +50,17 @@ public class RewardPane extends DataPane
   public RewardPane ()
   // ---------------------------------------------------------------------------------//
   {
-    String[] labels = { "Is chest", "", "Probability", "# Dice", "Base", "Mult", "Gold min",
-        "Gold max", "", "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
-        "Element", "Probability" };
+    super (17, 6);
 
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
     //    setGridLinesVisible (true);
+
+    String[] labels = { "Is chest", "", "Probability", "# Dice", "Base", "Mult", "Gold min",
+        "Gold max", "", "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
+        "Element", "Probability" };
 
     createLabelsVertical (new LabelPlacement (labels, 0, 0, HPos.RIGHT, 1));
 

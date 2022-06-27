@@ -22,26 +22,12 @@ public class MonsterPane3 extends DataPane
   public MonsterPane3 ()
   // ---------------------------------------------------------------------------------//
   {
+    super (5, 1);
+
     setColumnConstraints (300);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
     textOut = createTextFields (new DataLayout (0, 0, getRows (), Pos.CENTER_LEFT));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 5;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 1;
   }
 
   // ---------------------------------------------------------------------------------//

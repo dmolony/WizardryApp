@@ -19,6 +19,8 @@ public class MonsterPane5 extends DataPane
   public MonsterPane5 ()
   // ---------------------------------------------------------------------------------//
   {
+    super (8, 2);
+
     setColumnConstraints (110, 30);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
@@ -26,22 +28,6 @@ public class MonsterPane5 extends DataPane
 
     createLabelsVertical (new LabelPlacement (WizardryData.property, 0, 1, HPos.RIGHT, 1));
     checkBoxes = createCheckBoxes (new DataLayout (1, 1, WizardryData.property.length, Pos.CENTER));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 8;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 2;
   }
 
   // ---------------------------------------------------------------------------------//

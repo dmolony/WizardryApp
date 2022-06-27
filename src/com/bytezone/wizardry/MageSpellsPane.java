@@ -20,6 +20,8 @@ public class MageSpellsPane extends DataPane
   public MageSpellsPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (12, 4);
+
     setColumnConstraints (70, 30, 70, 30);
     setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
@@ -38,22 +40,6 @@ public class MageSpellsPane extends DataPane
 
     createLabelsVertical (new LabelPlacement (mageSpells2, 2, 1, HPos.RIGHT, 1));
     checkBox2 = createCheckBoxes (new DataLayout (3, 1, mageSpells2.length, Pos.CENTER));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 12;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 4;
   }
 
   // ---------------------------------------------------------------------------------//

@@ -27,6 +27,8 @@ public class BaggagePane extends DataPane
   public BaggagePane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (9, 6);
+
     setColumnConstraints (110, 155, 20, 20, 20, 80);
     setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
     //    setGridLinesVisible (true);
@@ -47,22 +49,6 @@ public class BaggagePane extends DataPane
     cursed = createCheckBoxes (dataLayout);
     identified = createCheckBoxes (dataLayout);
     values = createTextFields (dataLayout, Pos.CENTER_RIGHT);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 9;        // 8 items + heading
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 6;
   }
 
   // ---------------------------------------------------------------------------------//

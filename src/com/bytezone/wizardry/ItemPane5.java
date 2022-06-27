@@ -20,6 +20,8 @@ public class ItemPane5 extends DataPane
   public ItemPane5 ()
   // ---------------------------------------------------------------------------------//
   {
+    super (15, 3);
+
     setColumnConstraints (110, 30, 30);
     setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
@@ -31,22 +33,6 @@ public class ItemPane5 extends DataPane
     DataLayout dataLayout = new DataLayout (1, 1, WizardryData.monsterClass.length, Pos.CENTER);
     protect = createCheckBoxes (dataLayout);
     purpose = createCheckBoxes (dataLayout);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 15;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 3;
   }
 
   // ---------------------------------------------------------------------------------//

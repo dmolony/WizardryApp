@@ -19,6 +19,8 @@ public class ItemPane4 extends DataPane
   public ItemPane4 ()
   // ---------------------------------------------------------------------------------//
   {
+    super (9, 2);
+
     setColumnConstraints (110, 20);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
@@ -27,22 +29,6 @@ public class ItemPane4 extends DataPane
     createLabelsVertical (new LabelPlacement (WizardryData.characterClass, 0, 1, HPos.RIGHT, 1));
     checkBoxes =
         createCheckBoxes (new DataLayout (1, 1, WizardryData.characterClass.length, Pos.CENTER));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 9;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 2;
   }
 
   // ---------------------------------------------------------------------------------//

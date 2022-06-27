@@ -18,6 +18,8 @@ public class SpecialsPane extends DataPane
   public SpecialsPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (17, 9);
+
     int width = 63;
     setColumnConstraints (110, 120, width, width, width, width, 80, 40, 320);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height

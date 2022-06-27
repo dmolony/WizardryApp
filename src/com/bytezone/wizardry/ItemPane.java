@@ -21,6 +21,8 @@ public class ItemPane extends DataPane
   public ItemPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (18, 40);
+
     setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
     setAllRowConstraints (20, getRowHeight ());           // make all rows the same height
     setGridLinesVisible (false);
@@ -47,22 +49,6 @@ public class ItemPane extends DataPane
     GridPane.setRowSpan (itemPane5, 15);
 
     getChildren ().addAll (itemPane1, itemPane2, itemPane3, itemPane4, itemPane5);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 18;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 40;
   }
 
   // ---------------------------------------------------------------------------------//

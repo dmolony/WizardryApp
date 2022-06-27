@@ -22,6 +22,8 @@ public class CharacterPane extends DataPane
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (26, 40);         // rows, columns
+
     setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
     setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
     setPadding (defaultInsets);                           // only the root pane has insets
@@ -40,22 +42,6 @@ public class CharacterPane extends DataPane
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, mageSpellsPane, priestSpellsPane);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return attributes1Pane.getRows () + baggagePane.getRows () + 1;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 40;
   }
 
   // ---------------------------------------------------------------------------------//

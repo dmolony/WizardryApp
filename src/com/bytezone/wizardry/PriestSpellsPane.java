@@ -20,6 +20,8 @@ public class PriestSpellsPane extends DataPane
   public PriestSpellsPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (16, 4);
+
     setColumnConstraints (70, 30, 70, 30);
     setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
@@ -38,22 +40,6 @@ public class PriestSpellsPane extends DataPane
 
     createLabelsVertical (new LabelPlacement (priestSpells2, 2, 1, HPos.RIGHT, 1));
     checkBox2 = createCheckBoxes (new DataLayout (3, 1, priestSpells2.length, Pos.CENTER));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 16;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 4;
   }
 
   // ---------------------------------------------------------------------------------//

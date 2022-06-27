@@ -29,6 +29,8 @@ public class MonsterPane1 extends DataPane
   public MonsterPane1 ()
   // ---------------------------------------------------------------------------------//
   {
+    super (9, 2);
+
     setColumnConstraints (110, 145);
     setAllRowConstraints (9, getRowHeight ());     // make all rows the same height
 
@@ -38,22 +40,6 @@ public class MonsterPane1 extends DataPane
 
     createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 9;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 2;
   }
 
   // ---------------------------------------------------------------------------------//

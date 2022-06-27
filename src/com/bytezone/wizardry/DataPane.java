@@ -22,11 +22,16 @@ public abstract class DataPane extends GridPane
 {
   static final Insets defaultInsets = new Insets (15, 10, 15, 10);      // TRBL
   private int rowHeight = 25;
+  private final int rows;
+  private final int columns;
 
   // ---------------------------------------------------------------------------------//
-  public DataPane ()
+  public DataPane (int rows, int columns)
   // ---------------------------------------------------------------------------------//
   {
+    this.rows = rows;
+    this.columns = columns;
+
     setHgap (8);
     setVgap (3);
 
@@ -34,20 +39,33 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  public DataPane (int rowHeight)
+  public DataPane (int rows, int columns, int rowHeight)
   // ---------------------------------------------------------------------------------//
   {
-    this ();
+    this (rows, columns);
     this.rowHeight = rowHeight;
   }
 
   // ---------------------------------------------------------------------------------//
-  public abstract int getRows ();
+  public int getRows ()
   // ---------------------------------------------------------------------------------//
+  {
+    return rows;
+  }
 
   // ---------------------------------------------------------------------------------//
-  public abstract int getColumns ();
+  public int getColumns ()
   // ---------------------------------------------------------------------------------//
+  {
+    return columns;
+  }
+
+  // ---------------------------------------------------------------------------------//
+  protected int getRowHeight ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return rowHeight;
+  }
 
   // ---------------------------------------------------------------------------------//
   protected void setLayout (DataPane pane, int column, int row)
@@ -56,13 +74,6 @@ public abstract class DataPane extends GridPane
     GridPane.setConstraints (pane, column, row);
     GridPane.setColumnSpan (pane, 1);               // 0 gives an error, >1 is ignored
     GridPane.setRowSpan (pane, pane.getRows ());
-  }
-
-  // ---------------------------------------------------------------------------------//
-  protected int getRowHeight ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return rowHeight;
   }
 
   // ---------------------------------------------------------------------------------//

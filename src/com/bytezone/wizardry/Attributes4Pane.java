@@ -19,6 +19,8 @@ public class Attributes4Pane extends DataPane
   public Attributes4Pane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (5, 2);
+
     setColumnConstraints (90, 50);
     setAllRowConstraints (getRows (), getRowHeight ());  // make all rows the same height
 
@@ -27,22 +29,6 @@ public class Attributes4Pane extends DataPane
 
     createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 5;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 2;
   }
 
   // ---------------------------------------------------------------------------------//

@@ -31,6 +31,8 @@ public class ItemPane1 extends DataPane
   public ItemPane1 ()
   // ---------------------------------------------------------------------------------//
   {
+    super (11, 2);
+
     setColumnConstraints (110, 145);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
@@ -40,22 +42,6 @@ public class ItemPane1 extends DataPane
 
     createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 11;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 2;
   }
 
   // ---------------------------------------------------------------------------------//

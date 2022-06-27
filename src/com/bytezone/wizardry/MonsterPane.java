@@ -26,6 +26,8 @@ public class MonsterPane extends DataPane
   public MonsterPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (26, 40);
+
     canvas = new Canvas (280, 200);
 
     setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
@@ -47,22 +49,6 @@ public class MonsterPane extends DataPane
     GridPane.setRowSpan (canvas, 7);
 
     getChildren ().add (canvas);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return monsterPane1.getRows () + monsterPane2.getRows () + 3;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 40;
   }
 
   // ---------------------------------------------------------------------------------//

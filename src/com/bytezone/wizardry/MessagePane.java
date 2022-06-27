@@ -28,6 +28,8 @@ public class MessagePane extends DataPane
   public MessagePane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (16, 22);
+
     setColumnConstraints (110, 120, 310);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
@@ -41,22 +43,6 @@ public class MessagePane extends DataPane
     textOut3 = createTextFields (dataLayout);
 
     textArea = createTextArea (new DataLayout (1, 4, 40, Pos.CENTER_LEFT, 2));
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 16;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 22;
   }
 
   // ---------------------------------------------------------------------------------//

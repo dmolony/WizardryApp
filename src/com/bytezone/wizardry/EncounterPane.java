@@ -30,6 +30,8 @@ public class EncounterPane extends DataPane
   public EncounterPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (27, 7);
+
     setColumnConstraints (110, 80, 130, 80, 130, 80, 130);
     setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
@@ -62,22 +64,6 @@ public class EncounterPane extends DataPane
       textOut2[i] = createTextFields (dataLayout, Pos.CENTER_RIGHT);
       textOut2[i + 1] = createTextFields (dataLayout, Pos.CENTER_LEFT);
     }
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 27;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 7;
   }
 
   // ---------------------------------------------------------------------------------//

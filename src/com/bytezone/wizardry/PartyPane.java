@@ -32,6 +32,8 @@ public class PartyPane extends DataPane
   public PartyPane ()
   // ---------------------------------------------------------------------------------//
   {
+    super (8, 9);
+
     int[] widths = { 70, 40, 110, 60, 40, 50, 130, 100, 100 };
     setColumnConstraints (widths);
     setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
@@ -55,22 +57,6 @@ public class PartyPane extends DataPane
     attributes = createTextFields (dataLayout2, Pos.CENTER_LEFT);
     mageSpells = createTextFields (dataLayout2);
     priestSpells = createTextFields (dataLayout2);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 8;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 9;
   }
 
   // ---------------------------------------------------------------------------------//
