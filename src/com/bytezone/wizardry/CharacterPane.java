@@ -23,10 +23,10 @@ public class CharacterPane extends DataPane
   public CharacterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (26, 40);         // rows, columns
+    super (40, 26);                           // rows, columns
 
-    setAllColumnConstraints (20);        // all columns 20 pixels wide
-    setPadding (defaultInsets);          // only the root pane has insets
+    setAllColumnConstraints (20);             // all columns 20 pixels wide
+    setPadding (defaultInsets);               // only the root pane has insets
 
     setGridLinesVisible (false);
 

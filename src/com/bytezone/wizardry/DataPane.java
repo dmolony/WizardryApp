@@ -26,14 +26,14 @@ public abstract class DataPane extends GridPane
   private int columns;
 
   // ---------------------------------------------------------------------------------//
-  public DataPane (int rows, int columns)
+  public DataPane (int columns, int rows)
   // ---------------------------------------------------------------------------------//
   {
     init (rows, columns);
   }
 
   // ---------------------------------------------------------------------------------//
-  public DataPane (int rows, int columns, int rowHeight)
+  public DataPane (int columns, int rows, int rowHeight)
   // ---------------------------------------------------------------------------------//
   {
     this.rowHeight = rowHeight;

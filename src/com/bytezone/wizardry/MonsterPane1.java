@@ -29,7 +29,7 @@ public class MonsterPane1 extends DataPane
   public MonsterPane1 ()
   // ---------------------------------------------------------------------------------//
   {
-    super (9, 2);
+    super (2, 9);                             // columns, rows
 
     setColumnConstraints (110, 145);
 

@@ -19,7 +19,7 @@ public class Attributes5Pane extends DataPane
   public Attributes5Pane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (6, 2);
+    super (2, 6);                             // columns, rows
 
     setColumnConstraints (90, 70);
 

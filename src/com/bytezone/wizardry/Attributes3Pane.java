@@ -19,7 +19,7 @@ public class Attributes3Pane extends DataPane
   public Attributes3Pane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (6, 2);
+    super (2, 6);                             // columns, rows
 
     setColumnConstraints (90, 50);
 

@@ -50,7 +50,7 @@ public class RewardPane extends DataPane
   public RewardPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (17, 6);
+    super (6, 17);                             // columns, rows
 
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width);

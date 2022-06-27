@@ -22,7 +22,7 @@ public class MonsterPane3 extends DataPane
   public MonsterPane3 ()
   // ---------------------------------------------------------------------------------//
   {
-    super (5, 1);
+    super (1, 5);                             // columns, rows
 
     setColumnConstraints (300);
 

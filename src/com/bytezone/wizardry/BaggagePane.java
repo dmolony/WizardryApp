@@ -27,7 +27,7 @@ public class BaggagePane extends DataPane
   public BaggagePane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (9, 6);
+    super (6, 9);                             // columns, rows
 
     setColumnConstraints (110, 155, 20, 20, 20, 80);
 

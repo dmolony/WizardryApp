@@ -18,7 +18,7 @@ public class SpecialsPane extends DataPane
   public SpecialsPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (17, 9);
+    super (9, 17);                             // columns, rows
 
     int width = 63;
     setColumnConstraints (110, 120, width, width, width, width, 80, 40, 320);

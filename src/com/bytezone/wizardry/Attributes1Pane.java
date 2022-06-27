@@ -39,7 +39,7 @@ public class Attributes1Pane extends DataPane
   public Attributes1Pane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (16, 2);
+    super (2, 16);                              // columns, rows
 
     setColumnConstraints (110, 145);
 

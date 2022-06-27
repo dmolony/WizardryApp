@@ -19,7 +19,7 @@ public class ItemPane3 extends DataPane
   public ItemPane3 ()
   // ---------------------------------------------------------------------------------//
   {
-    super (8, 2);
+    super (2, 8);                             // columns, rows
 
     setColumnConstraints (110, 20);
 

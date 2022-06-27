@@ -31,7 +31,7 @@ public class ItemPane1 extends DataPane
   public ItemPane1 ()
   // ---------------------------------------------------------------------------------//
   {
-    super (11, 2);
+    super (2, 11);                             // columns, rows
 
     setColumnConstraints (110, 145);
 

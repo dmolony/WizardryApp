@@ -43,7 +43,7 @@ public class ExperienceCalculator extends DataPane
   public ExperienceCalculator ()
   // ---------------------------------------------------------------------------------//
   {
-    super (13, 3);
+    super (3, 13);                             // columns, rows
 
     setColumnConstraints (125, 60, 80);
 

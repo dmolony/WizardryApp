@@ -20,7 +20,7 @@ public class PriestSpellsPane extends DataPane
   public PriestSpellsPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (16, 4);
+    super (4, 16);                             // columns, rows
 
     setColumnConstraints (70, 30, 70, 30);
 

@@ -27,7 +27,7 @@ public class ItemPane2 extends DataPane
   public ItemPane2 ()
   // ---------------------------------------------------------------------------------//
   {
-    super (7, 2);
+    super (2, 7);                             // columns, rows
 
     setColumnConstraints (110, 45);
 

@@ -32,7 +32,7 @@ public class PartyPane extends DataPane
   public PartyPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (8, 9);
+    super (9, 8);                             // columns, rows
 
     int[] widths = { 70, 40, 110, 60, 40, 50, 130, 100, 100 };
     setColumnConstraints (widths);

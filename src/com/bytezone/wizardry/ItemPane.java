@@ -17,7 +17,7 @@ public class ItemPane extends DataPane
   public ItemPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (18, 40);
+    super (40, 18);                             // columns, rows
 
     setAllColumnConstraints (20);          // 40 columns x 20 pixels
     setPadding (defaultInsets);            // only the root pane has insets

@@ -29,7 +29,7 @@ public class Attributes2Pane extends DataPane
   public Attributes2Pane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (9, 2);
+    super (2, 9);                             // columns, rows
 
     setColumnConstraints (90, 50);
 

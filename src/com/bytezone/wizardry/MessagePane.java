@@ -28,7 +28,7 @@ public class MessagePane extends DataPane
   public MessagePane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (16, 22);
+    super (22, 16);                             // columns, rows
 
     setColumnConstraints (110, 120, 310);
     setPadding (defaultInsets);

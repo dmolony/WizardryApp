@@ -26,7 +26,7 @@ public class MonsterPane extends DataPane
   public MonsterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (26, 40);
+    super (40, 26);                             // columns, rows
 
     setAllColumnConstraints (20);          // all columns 20 pixels wide
     setPadding (defaultInsets);            // only the root pane has insets

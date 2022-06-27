@@ -30,7 +30,7 @@ public class EncounterPane extends DataPane
   public EncounterPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (27, 7);
+    super (7, 27);                             // columns, rows
 
     setColumnConstraints (110, 80, 130, 80, 130, 80, 130);
     setPadding (defaultInsets);

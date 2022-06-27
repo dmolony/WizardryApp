@@ -20,7 +20,7 @@ public class MageSpellsPane extends DataPane
   public MageSpellsPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (12, 4);
+    super (4, 12);                             // columns, rows
 
     setColumnConstraints (70, 30, 70, 30);
 

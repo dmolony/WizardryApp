@@ -20,7 +20,7 @@ public class ItemPane5 extends DataPane
   public ItemPane5 ()
   // ---------------------------------------------------------------------------------//
   {
-    super (15, 3);
+    super (3, 15);                             // columns, rows
 
     setColumnConstraints (110, 30, 30);
 
