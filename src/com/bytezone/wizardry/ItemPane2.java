@@ -30,7 +30,6 @@ public class ItemPane2 extends DataPane
     super (7, 2);
 
     setColumnConstraints (110, 45);
-    setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
 
     String[] labelText =
         { "Id", "Special #", "AC", "To hit +", "# swings", "In store", "Regeneration" };

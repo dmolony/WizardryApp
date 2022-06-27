@@ -24,8 +24,6 @@ public class ItemPane extends DataPane
     super (18, 40);
 
     setAllColumnConstraints (40, 20);                     // 40 columns x 20 pixels
-    setAllRowConstraints (20, getRowHeight ());           // make all rows the same height
-    setGridLinesVisible (false);
     setPadding (defaultInsets);
 
     GridPane.setConstraints (itemPane1, 0, 0);

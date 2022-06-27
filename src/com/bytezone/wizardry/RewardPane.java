@@ -54,9 +54,7 @@ public class RewardPane extends DataPane
 
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
-    //    setGridLinesVisible (true);
 
     String[] labels = { "Is chest", "", "Probability", "# Dice", "Base", "Mult", "Gold min",
         "Gold max", "", "Probability", "Item # range", "Item from", "Item to", "Size", "Max",

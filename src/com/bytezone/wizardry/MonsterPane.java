@@ -31,9 +31,7 @@ public class MonsterPane extends DataPane
     canvas = new Canvas (280, 200);
 
     setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
-    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
-    setGridLinesVisible (false);
     setPadding (defaultInsets);
 
     setLayout (monsterPane1, 0, 0);

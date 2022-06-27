@@ -22,11 +22,26 @@ public abstract class DataPane extends GridPane
 {
   static final Insets defaultInsets = new Insets (15, 10, 15, 10);      // TRBL
   private int rowHeight = 25;
-  private final int rows;
-  private final int columns;
+  private int rows;
+  private int columns;
 
   // ---------------------------------------------------------------------------------//
   public DataPane (int rows, int columns)
+  // ---------------------------------------------------------------------------------//
+  {
+    init (rows, columns);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public DataPane (int rows, int columns, int rowHeight)
+  // ---------------------------------------------------------------------------------//
+  {
+    this.rowHeight = rowHeight;
+    init (rows, columns);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  private void init (int rows, int columns)
   // ---------------------------------------------------------------------------------//
   {
     this.rows = rows;
@@ -36,14 +51,8 @@ public abstract class DataPane extends GridPane
     setVgap (3);
 
     setGridLinesVisible (false);
-  }
 
-  // ---------------------------------------------------------------------------------//
-  public DataPane (int rows, int columns, int rowHeight)
-  // ---------------------------------------------------------------------------------//
-  {
-    this (rows, columns);
-    this.rowHeight = rowHeight;
+    setAllRowConstraints (rows, rowHeight);     // make all rows the same height
   }
 
   // ---------------------------------------------------------------------------------//

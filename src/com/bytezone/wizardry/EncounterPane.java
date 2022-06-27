@@ -33,7 +33,6 @@ public class EncounterPane extends DataPane
     super (27, 7);
 
     setColumnConstraints (110, 80, 130, 80, 130, 80, 130);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
 
     String[] labels1 = { "Group odds", "Minimum", "Range size", "Extra range odds", "Extra ranges",

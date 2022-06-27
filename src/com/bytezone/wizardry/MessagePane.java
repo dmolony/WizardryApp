@@ -31,7 +31,6 @@ public class MessagePane extends DataPane
     super (16, 22);
 
     setColumnConstraints (110, 120, 310);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
 
     String[] labels = { "Used", "Location 1", "Location 2", "Location 3", "Text" };

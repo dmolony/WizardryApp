@@ -20,7 +20,6 @@ public class MonsterPane4 extends DataPane
     super (8, 2);
 
     setColumnConstraints (110, 30);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
     createLabel ("Resistance", 0, 0, HPos.CENTER, 2);
 

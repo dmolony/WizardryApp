@@ -36,8 +36,6 @@ public class PartyPane extends DataPane
 
     int[] widths = { 70, 40, 110, 60, 40, 50, 130, 100, 100 };
     setColumnConstraints (widths);
-    setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
-    //    setGridLinesVisible (true);
 
     String[] partyLabels = { "Party", "Slogan", "# 1", "# 2", "# 3", "# 4", "# 5", "# 6" };
     createLabelsVertical (new LabelPlacement (partyLabels, 0, 0, HPos.RIGHT, 1));

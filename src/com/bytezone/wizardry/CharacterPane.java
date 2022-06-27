@@ -25,7 +25,6 @@ public class CharacterPane extends DataPane
     super (26, 40);         // rows, columns
 
     setAllColumnConstraints (getColumns (), 20);          // all columns 20 pixels wide
-    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
     setPadding (defaultInsets);                           // only the root pane has insets
 
     setGridLinesVisible (false);

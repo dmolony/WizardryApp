@@ -22,7 +22,6 @@ public class ItemPane3 extends DataPane
     super (8, 2);
 
     setColumnConstraints (110, 20);
-    setAllRowConstraints (8, getRowHeight ());           // make all rows the same height
 
     createLabel ("Resistance", 0, 0, HPos.RIGHT, 2);
 

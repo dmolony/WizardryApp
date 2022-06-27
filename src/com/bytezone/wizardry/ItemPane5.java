@@ -23,7 +23,6 @@ public class ItemPane5 extends DataPane
     super (15, 3);
 
     setColumnConstraints (110, 30, 30);
-    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
     createLabel ("Protect", 0, 0, HPos.RIGHT, 2);
     createLabel ("Vs", 2, 0, HPos.CENTER, 1);

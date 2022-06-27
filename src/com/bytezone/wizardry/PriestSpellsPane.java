@@ -23,7 +23,6 @@ public class PriestSpellsPane extends DataPane
     super (16, 4);
 
     setColumnConstraints (70, 30, 70, 30);
-    setAllRowConstraints (getRows (), getRowHeight ());   // make all rows the same height
 
     createLabel ("Priest spells", 1, 0, HPos.LEFT, 2);
 

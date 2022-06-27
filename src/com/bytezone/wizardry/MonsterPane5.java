@@ -22,7 +22,6 @@ public class MonsterPane5 extends DataPane
     super (8, 2);
 
     setColumnConstraints (110, 30);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
     createLabel ("Property", 0, 0, HPos.CENTER, 2);
 

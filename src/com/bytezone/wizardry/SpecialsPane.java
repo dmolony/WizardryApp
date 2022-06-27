@@ -22,7 +22,6 @@ public class SpecialsPane extends DataPane
 
     int width = 63;
     setColumnConstraints (110, 120, width, width, width, width, 80, 40, 320);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
     setPadding (defaultInsets);
 
     String[] headings = { "Square type", "Aux 0", "Aux 1", "Aux 2", "Occurs", "First location",
@@ -44,22 +43,6 @@ public class SpecialsPane extends DataPane
     textOut[5] = createTextFields (dataLayout, Pos.CENTER_LEFT);
     textOut[6] = createTextFields (dataLayout, Pos.CENTER_RIGHT);
     textOut[7] = createTextFields (dataLayout, Pos.CENTER_LEFT);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getRows ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 17;
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public int getColumns ()
-  // ---------------------------------------------------------------------------------//
-  {
-    return 9;
   }
 
   // ---------------------------------------------------------------------------------//

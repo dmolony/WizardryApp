@@ -25,7 +25,6 @@ public class MonsterPane3 extends DataPane
     super (5, 1);
 
     setColumnConstraints (300);
-    setAllRowConstraints (getRows (), getRowHeight ());     // make all rows the same height
 
     textOut = createTextFields (new DataLayout (0, 0, getRows (), Pos.CENTER_LEFT));
   }

@@ -30,8 +30,6 @@ public class BaggagePane extends DataPane
     super (9, 6);
 
     setColumnConstraints (110, 155, 20, 20, 20, 80);
-    setAllRowConstraints (getRows (), getRowHeight ());    // make all rows the same height
-    //    setGridLinesVisible (true);
 
     String[] headings = { "Item", "Eq", "Cu", "Id", "Value" };
 
