@@ -20,27 +20,25 @@ import javafx.scene.layout.RowConstraints;
 public abstract class DataPane extends GridPane
 // -----------------------------------------------------------------------------------//
 {
-  private static final int DEFAULT_ROW_HEIGHT = 25;
-  static final Insets defaultInsets = new Insets (15, 10, 12, 10);
-  protected int rowHeight;
+  static final Insets defaultInsets = new Insets (15, 10, 15, 10);      // TRBL
+  private int rowHeight = 25;
 
   // ---------------------------------------------------------------------------------//
   public DataPane ()
   // ---------------------------------------------------------------------------------//
   {
-    this (DEFAULT_ROW_HEIGHT);
+    setHgap (8);
+    setVgap (3);
+
+    setGridLinesVisible (false);
   }
 
   // ---------------------------------------------------------------------------------//
   public DataPane (int rowHeight)
   // ---------------------------------------------------------------------------------//
   {
+    this ();
     this.rowHeight = rowHeight;
-
-    setHgap (10);
-    setVgap (3);
-
-    setGridLinesVisible (false);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -86,14 +84,6 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void setRowConstraints (int... height)
-  // ---------------------------------------------------------------------------------//
-  {
-    for (int i = 0; i < height.length; i++)
-      getRowConstraints ().add (new RowConstraints (height[i]));
-  }
-
-  // ---------------------------------------------------------------------------------//
   void setAllRowConstraints (int numRows, int rowHeight)
   // ---------------------------------------------------------------------------------//
   {
@@ -104,7 +94,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  <T> ComboBox<T> createComboBox (Collection<T> list, ChangeListener<T> listener,
+  protected <T> ComboBox<T> createComboBox (Collection<T> list, ChangeListener<T> listener,
       DataLayout dataLayout)
   // ---------------------------------------------------------------------------------//
   {
@@ -123,7 +113,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  Label createLabel (String labelText, int col, int row, HPos alignment, int span)
+  protected Label createLabel (String labelText, int col, int row, HPos alignment, int span)
   // ---------------------------------------------------------------------------------//
   {
     Label label = new Label (labelText);
@@ -138,7 +128,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void createLabelsVertical (LabelPlacement labelPos)
+  protected void createLabelsVertical (LabelPlacement labelPos)
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < labelPos.labels.length; i++)
@@ -154,7 +144,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void createLabelsHorizontal (LabelPlacement labelPos)
+  protected void createLabelsHorizontal (LabelPlacement labelPos)
   // ---------------------------------------------------------------------------------//
   {
     int column = labelPos.col;
@@ -172,7 +162,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField createTextField (DataLayout dataLayout)
+  protected TextField createTextField (DataLayout dataLayout)
   // ---------------------------------------------------------------------------------//
   {
     TextField textField = new TextField ();
@@ -192,7 +182,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] createTextFields (DataLayout dataLayout, Pos alignment)
+  protected TextField[] createTextFields (DataLayout dataLayout, Pos alignment)
   // ---------------------------------------------------------------------------------//
   {
     dataLayout.alignment = alignment;
@@ -200,7 +190,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextField[] createTextFields (DataLayout dataLayout)
+  protected TextField[] createTextFields (DataLayout dataLayout)
   // ---------------------------------------------------------------------------------//
   {
     TextField[] textOut = new TextField[dataLayout.rows];
@@ -225,7 +215,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  TextArea createTextArea (DataLayout dataLayout)
+  protected TextArea createTextArea (DataLayout dataLayout)
   // ---------------------------------------------------------------------------------//
   {
     TextArea textArea = new TextArea ();
@@ -244,7 +234,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  CheckBox[] createCheckBoxes (DataLayout dataLayout, Pos alignment)
+  protected CheckBox[] createCheckBoxes (DataLayout dataLayout, Pos alignment)
   // ---------------------------------------------------------------------------------//
   {
     dataLayout.alignment = alignment;
@@ -252,7 +242,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  CheckBox[] createCheckBoxes (DataLayout dataLayout)
+  protected CheckBox[] createCheckBoxes (DataLayout dataLayout)
   // ---------------------------------------------------------------------------------//
   {
     CheckBox[] checkBoxes = new CheckBox[dataLayout.rows];
@@ -277,7 +267,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  CheckBox[] createCheckBoxes (String[] labelText, int col, int row)
+  protected CheckBox[] createCheckBoxes (String[] labelText, int col, int row)
   // ---------------------------------------------------------------------------------//
   {
     CheckBox[] checkBoxes = new CheckBox[labelText.length];
@@ -305,7 +295,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  CheckBox[] createCheckBoxes (int total, int col, int row)
+  protected CheckBox[] createCheckBoxes (int total, int col, int row)
   // ---------------------------------------------------------------------------------//
   {
     CheckBox[] checkBoxes = new CheckBox[total];
@@ -346,7 +336,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void setText (TextField textField, Object object)
+  protected void setText (TextField textField, Object object)
   // ---------------------------------------------------------------------------------//
   {
     if (object == null)
@@ -356,49 +346,49 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void setText (TextField textField, boolean value)
+  protected void setText (TextField textField, boolean value)
   // ---------------------------------------------------------------------------------//
   {
     textField.setText (value ? "True" : "False");
   }
 
   // ---------------------------------------------------------------------------------//
-  void setTextYN (TextField textField, boolean value)
+  protected void setTextYN (TextField textField, boolean value)
   // ---------------------------------------------------------------------------------//
   {
     textField.setText (value ? "Yes" : "");
   }
 
   // ---------------------------------------------------------------------------------//
-  void setText (TextField textField, String text)
+  protected void setText (TextField textField, String text)
   // ---------------------------------------------------------------------------------//
   {
     textField.setText (text);
   }
 
   // ---------------------------------------------------------------------------------//
-  void setText (TextField textField, int value)
+  protected void setText (TextField textField, int value)
   // ---------------------------------------------------------------------------------//
   {
     textField.setText (getText (value));
   }
 
   // ---------------------------------------------------------------------------------//
-  void setText (TextField textField, long value)
+  protected void setText (TextField textField, long value)
   // ---------------------------------------------------------------------------------//
   {
     textField.setText (getText (value));
   }
 
   // ---------------------------------------------------------------------------------//
-  String getText (int value)
+  protected String getText (int value)
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,15d", value).trim ();
   }
 
   // ---------------------------------------------------------------------------------//
-  String getText (long value)
+  protected String getText (long value)
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,15d", value).trim ();
