@@ -28,8 +28,8 @@ public class MonsterPane extends DataPane
   {
     super (40, 26);                             // columns, rows
 
-    setAllColumnConstraints (20);          // all columns 20 pixels wide
-    setPadding (defaultInsets);            // only the root pane has insets
+    setAllColumnConstraints (20);               // all columns 20 pixels wide
+    setPadding (defaultInsets);                 // only the root pane has insets
 
     setLayout (monsterPane1, 0, 0);
     setLayout (monsterPane2, 0, 10);

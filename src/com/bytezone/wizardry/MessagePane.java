@@ -28,10 +28,11 @@ public class MessagePane extends DataPane
   public MessagePane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (22, 16);                             // columns, rows
+    super (3, 25);                             // columns, rows
 
     setColumnConstraints (110, 120, 310);
     setPadding (defaultInsets);
+    //    setGridLinesVisible (true);
 
     String[] labels = { "Used", "Location 1", "Location 2", "Location 3", "Text" };
     createLabelsVertical (labels, 0, 0, HPos.RIGHT);
@@ -41,7 +42,7 @@ public class MessagePane extends DataPane
     textOut2 = createTextFields (dataLayout);
     textOut3 = createTextFields (dataLayout);
 
-    textArea = createTextArea (new DataLayout (1, 4, 40, Pos.CENTER_LEFT, 2));
+    textArea = createTextArea (new DataLayout (1, 4, 21, Pos.CENTER_LEFT, 2));
   }
 
   // ---------------------------------------------------------------------------------//
