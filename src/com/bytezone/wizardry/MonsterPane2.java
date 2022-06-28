@@ -43,7 +43,7 @@ public class MonsterPane2 extends DataPane
         "Wandering reward", "Lair reward" };
     assert getRows () == labelText.length;
 
-    createLabelsVertical (labelText, 0, 0, HPos.RIGHT, 1);
+    createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
   }
 

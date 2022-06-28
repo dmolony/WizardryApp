@@ -25,7 +25,7 @@ public class MonsterPane5 extends DataPane
 
     createLabel ("Property", 0, 0, HPos.CENTER, 2);
 
-    createLabelsVertical (WizardryData.property, 0, 1, HPos.RIGHT, 1);
+    createLabelsVertical (WizardryData.property, 0, 1, HPos.RIGHT);
     checkBoxes = createCheckBoxes (new DataLayout (1, 1, WizardryData.property.length, Pos.CENTER));
   }
 

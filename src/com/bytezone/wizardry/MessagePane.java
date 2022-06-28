@@ -34,7 +34,7 @@ public class MessagePane extends DataPane
     setPadding (defaultInsets);
 
     String[] labels = { "Used", "Location 1", "Location 2", "Location 3", "Text" };
-    createLabelsVertical (labels, 0, 0, HPos.RIGHT, 1);
+    createLabelsVertical (labels, 0, 0, HPos.RIGHT);
 
     textOut1 = createTextFields (new DataLayout (1, 0, 1, Pos.CENTER_LEFT));
     DataLayout dataLayout = new DataLayout (1, 1, 3, Pos.CENTER_LEFT);

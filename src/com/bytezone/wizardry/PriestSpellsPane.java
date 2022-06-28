@@ -34,10 +34,10 @@ public class PriestSpellsPane extends DataPane
     for (int i = 0; i < priestSpells2.length; i++)
       priestSpells2[i] = WizardryData.spells[36 + i];
 
-    createLabelsVertical (priestSpells1, 0, 1, HPos.RIGHT, 1);
+    createLabelsVertical (priestSpells1, 0, 1, HPos.RIGHT);
     checkBox1 = createCheckBoxes (new DataLayout (1, 1, priestSpells1.length, Pos.CENTER));
 
-    createLabelsVertical (priestSpells2, 2, 1, HPos.RIGHT, 1);
+    createLabelsVertical (priestSpells2, 2, 1, HPos.RIGHT);
     checkBox2 = createCheckBoxes (new DataLayout (3, 1, priestSpells2.length, Pos.CENTER));
   }
 

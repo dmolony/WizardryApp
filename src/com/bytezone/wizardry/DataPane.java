@@ -148,8 +148,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  protected void createLabelsVertical (String[] labels, int column, int row, HPos alignment,
-      int columnSpan)
+  protected void createLabelsVertical (String[] labels, int column, int row, HPos alignment)
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < labels.length; i++)
@@ -157,7 +156,7 @@ public abstract class DataPane extends GridPane
       Label label = new Label (labels[i]);
 
       GridPane.setConstraints (label, column, row + i);
-      GridPane.setColumnSpan (label, columnSpan);
+      GridPane.setColumnSpan (label, 1);
       GridPane.setHalignment (label, alignment);
 
       getChildren ().add (label);
@@ -165,8 +164,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  protected void createLabelsHorizontal (String[] labels, int column, int row, HPos alignment,
-      int columnSpan)
+  protected void createLabelsHorizontal (String[] labels, int column, int row, HPos alignment)
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < labels.length; i++)
@@ -174,11 +172,11 @@ public abstract class DataPane extends GridPane
       Label label = new Label (labels[i]);
 
       GridPane.setConstraints (label, column, row);
-      GridPane.setColumnSpan (label, columnSpan);
+      GridPane.setColumnSpan (label, 1);
       GridPane.setHalignment (label, alignment);
 
       getChildren ().add (label);
-      column += columnSpan;
+      column++;
     }
   }
 

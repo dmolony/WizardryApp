@@ -26,7 +26,7 @@ public class Attributes3Pane extends DataPane
     String[] labelText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
     assert getRows () == labelText.length;
 
-    createLabelsVertical (labelText, 0, 0, HPos.RIGHT, 1);
+    createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
   }
 

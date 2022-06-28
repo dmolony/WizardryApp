@@ -27,7 +27,7 @@ public class ItemPane5 extends DataPane
     createLabel ("Protect", 0, 0, HPos.RIGHT, 2);
     createLabel ("Vs", 2, 0, HPos.CENTER, 1);
 
-    createLabelsVertical (WizardryData.monsterClass, 0, 1, HPos.RIGHT, 1);
+    createLabelsVertical (WizardryData.monsterClass, 0, 1, HPos.RIGHT);
 
     DataLayout dataLayout = new DataLayout (1, 1, WizardryData.monsterClass.length, Pos.CENTER);
     protect = createCheckBoxes (dataLayout);
