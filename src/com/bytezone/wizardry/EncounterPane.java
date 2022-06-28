@@ -48,14 +48,14 @@ public class EncounterPane extends DataPane
     }
 
     // upper block
-    createLabelsVertical (new LabelPlacement (labels1, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (labels1, 0, 0, HPos.RIGHT, 1);
 
     textOut1[0] = createTextFields (new DataLayout (1, 0, 6, Pos.CENTER_RIGHT, 1));
     textOut1[1] = createTextFields (new DataLayout (3, 0, 6, Pos.CENTER_RIGHT, 1));
     textOut1[2] = createTextFields (new DataLayout (5, 0, 6, Pos.CENTER_RIGHT, 1));
 
     // lower block
-    createLabelsVertical (new LabelPlacement (labels2, 0, 6, HPos.RIGHT, 1));
+    createLabelsVertical (labels2, 0, 6, HPos.RIGHT, 1);
 
     DataLayout dataLayout = new DataLayout (1, 6, 22, Pos.CENTER_RIGHT, 1);
     for (int i = 0; i < 5; i += 2)

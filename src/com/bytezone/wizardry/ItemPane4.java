@@ -25,7 +25,7 @@ public class ItemPane4 extends DataPane
 
     createLabel ("Equip", 0, 0, HPos.RIGHT, 2);
 
-    createLabelsVertical (new LabelPlacement (WizardryData.characterClass, 0, 1, HPos.RIGHT, 1));
+    createLabelsVertical (WizardryData.characterClass, 0, 1, HPos.RIGHT, 1);
     checkBoxes =
         createCheckBoxes (new DataLayout (1, 1, WizardryData.characterClass.length, Pos.CENTER));
   }

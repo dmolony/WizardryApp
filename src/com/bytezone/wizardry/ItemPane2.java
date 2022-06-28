@@ -35,7 +35,7 @@ public class ItemPane2 extends DataPane
         { "Id", "Special #", "AC", "To hit +", "# swings", "In store", "Regeneration" };
     assert getRows () == labelText.length;
 
-    createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (labelText, 0, 0, HPos.RIGHT, 1);
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
   }
 

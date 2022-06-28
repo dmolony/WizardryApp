@@ -26,7 +26,7 @@ public class Attributes5Pane extends DataPane
     String[] labelText = { "Val 1", "Val 2", "Val 3", "Val 4", "Val 5", "Next" };
     assert getRows () == labelText.length;
 
-    createLabelsVertical (new LabelPlacement (labelText, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (labelText, 0, 0, HPos.RIGHT, 1);
     textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
   }
 

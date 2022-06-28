@@ -31,8 +31,8 @@ public class SpecialsPane extends DataPane
     for (int i = 0; i < squaresText.length; i++)
       squaresText[i] = i + "";
 
-    createLabelsHorizontal (new LabelPlacement (headings, 1, 0, HPos.CENTER, 1));
-    createLabelsVertical (new LabelPlacement (squaresText, 0, 1, HPos.RIGHT, 1));
+    createLabelsHorizontal (headings, 1, 0, HPos.CENTER, 1);
+    createLabelsVertical (squaresText, 0, 1, HPos.RIGHT, 1);
 
     DataLayout dataLayout = new DataLayout (1, 1, 16, Pos.CENTER_LEFT);
 

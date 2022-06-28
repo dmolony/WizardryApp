@@ -60,7 +60,7 @@ public class RewardPane extends DataPane
         "Gold max", "", "Probability", "Item # range", "Item from", "Item to", "Size", "Max",
         "Element", "Probability" };
 
-    createLabelsVertical (new LabelPlacement (labels, 0, 0, HPos.RIGHT, 1));
+    createLabelsVertical (labels, 0, 0, HPos.RIGHT, 1);
 
     DataLayout dataLayout1 = new DataLayout (1, 0, 1, Pos.CENTER_LEFT);
     textOut1 = createTextFields (dataLayout1);
@@ -73,7 +73,7 @@ public class RewardPane extends DataPane
       items[i] = createTextFields (dataLayout3);
 
     // traps
-    createLabelsVertical (new LabelPlacement (WizardryData.trapType, 2, 0, HPos.RIGHT, 1));
+    createLabelsVertical (WizardryData.trapType, 2, 0, HPos.RIGHT, 1);
     traps = createCheckBoxes (new DataLayout (3, 0, WizardryData.trapType.length, HPos.LEFT));
   }
 

@@ -34,10 +34,10 @@ public class MageSpellsPane extends DataPane
     for (int i = 0; i < mageSpells2.length; i++)
       mageSpells2[i] = WizardryData.spells[11 + i];
 
-    createLabelsVertical (new LabelPlacement (mageSpells1, 0, 1, HPos.RIGHT, 1));
+    createLabelsVertical (mageSpells1, 0, 1, HPos.RIGHT, 1);
     checkBox1 = createCheckBoxes (new DataLayout (1, 1, mageSpells1.length, Pos.CENTER));
 
-    createLabelsVertical (new LabelPlacement (mageSpells2, 2, 1, HPos.RIGHT, 1));
+    createLabelsVertical (mageSpells2, 2, 1, HPos.RIGHT, 1);
     checkBox2 = createCheckBoxes (new DataLayout (3, 1, mageSpells2.length, Pos.CENTER));
   }
 

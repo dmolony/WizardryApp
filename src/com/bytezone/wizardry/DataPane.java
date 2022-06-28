@@ -29,7 +29,7 @@ public abstract class DataPane extends GridPane
   public DataPane (int columns, int rows)
   // ---------------------------------------------------------------------------------//
   {
-    init (rows, columns);
+    init (columns, rows);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -37,11 +37,11 @@ public abstract class DataPane extends GridPane
   // ---------------------------------------------------------------------------------//
   {
     this.rowHeight = rowHeight;
-    init (rows, columns);
+    init (columns, rows);
   }
 
   // ---------------------------------------------------------------------------------//
-  private void init (int rows, int columns)
+  private void init (int columns, int rows)
   // ---------------------------------------------------------------------------------//
   {
     this.rows = rows;
@@ -52,18 +52,28 @@ public abstract class DataPane extends GridPane
 
     setGridLinesVisible (false);
 
-    setAllRowConstraints (rows, rowHeight);     // make all rows the same height
+    setAllRowConstraints (rows, rowHeight);           // make all rows the same height
   }
 
   // ---------------------------------------------------------------------------------//
-  public int getRows ()
+  private void setAllRowConstraints (int numRows, int rowHeight)
+  // ---------------------------------------------------------------------------------//
+  {
+    RowConstraints rowConstraints = new RowConstraints (rowHeight);
+
+    for (int i = 0; i < numRows; i++)
+      getRowConstraints ().add (rowConstraints);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  protected int getRows ()
   // ---------------------------------------------------------------------------------//
   {
     return rows;
   }
 
   // ---------------------------------------------------------------------------------//
-  public int getColumns ()
+  protected int getColumns ()
   // ---------------------------------------------------------------------------------//
   {
     return columns;
@@ -86,7 +96,7 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void setColumnConstraints (int... width)
+  protected void setColumnConstraints (int... width)
   // ---------------------------------------------------------------------------------//
   {
     for (int i = 0; i < width.length; i++)
@@ -94,23 +104,13 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  void setAllColumnConstraints (int colWidth)
+  protected void setAllColumnConstraints (int colWidth)
   // ---------------------------------------------------------------------------------//
   {
     ColumnConstraints colConstraints = new ColumnConstraints (colWidth);
 
     for (int i = 0; i < getColumns (); i++)
       getColumnConstraints ().add (colConstraints);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  void setAllRowConstraints (int numRows, int rowHeight)
-  // ---------------------------------------------------------------------------------//
-  {
-    RowConstraints rowConstraints = new RowConstraints (rowHeight);
-
-    for (int i = 0; i < numRows; i++)
-      getRowConstraints ().add (rowConstraints);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -148,36 +148,37 @@ public abstract class DataPane extends GridPane
   }
 
   // ---------------------------------------------------------------------------------//
-  protected void createLabelsVertical (LabelPlacement labelPos)
+  protected void createLabelsVertical (String[] labels, int column, int row, HPos alignment,
+      int columnSpan)
   // ---------------------------------------------------------------------------------//
   {
-    for (int i = 0; i < labelPos.labels.length; i++)
+    for (int i = 0; i < labels.length; i++)
     {
-      Label label = new Label (labelPos.labels[i]);
+      Label label = new Label (labels[i]);
 
-      GridPane.setConstraints (label, labelPos.col, labelPos.row + i);
-      GridPane.setColumnSpan (label, labelPos.colSpan);
-      GridPane.setHalignment (label, labelPos.alignment);
+      GridPane.setConstraints (label, column, row + i);
+      GridPane.setColumnSpan (label, columnSpan);
+      GridPane.setHalignment (label, alignment);
 
       getChildren ().add (label);
     }
   }
 
   // ---------------------------------------------------------------------------------//
-  protected void createLabelsHorizontal (LabelPlacement labelPos)
+  protected void createLabelsHorizontal (String[] labels, int column, int row, HPos alignment,
+      int columnSpan)
   // ---------------------------------------------------------------------------------//
   {
-    int column = labelPos.col;
-    for (int i = 0; i < labelPos.labels.length; i++)
+    for (int i = 0; i < labels.length; i++)
     {
-      Label label = new Label (labelPos.labels[i]);
+      Label label = new Label (labels[i]);
 
-      GridPane.setConstraints (label, column, labelPos.row);
-      GridPane.setColumnSpan (label, labelPos.colSpan);
-      GridPane.setHalignment (label, labelPos.alignment);
+      GridPane.setConstraints (label, column, row);
+      GridPane.setColumnSpan (label, columnSpan);
+      GridPane.setHalignment (label, alignment);
 
       getChildren ().add (label);
-      column += labelPos.colSpan;
+      column += columnSpan;
     }
   }
 
@@ -412,11 +413,5 @@ public abstract class DataPane extends GridPane
   // ---------------------------------------------------------------------------------//
   {
     return String.format ("%,15d", value).trim ();
-  }
-
-  // ---------------------------------------------------------------------------------//
-  public record LabelPlacement (String[] labels, int col, int row, HPos alignment, int colSpan)
-  // ---------------------------------------------------------------------------------//
-  {
   }
 }

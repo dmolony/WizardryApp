@@ -37,8 +37,8 @@ public class BaggagePane extends DataPane
     for (int i = 0; i < possessionLabels.length; i++)
       possessionLabels[i] = "# " + (i + 1);
 
-    createLabelsHorizontal (new LabelPlacement (headings, 1, 0, HPos.CENTER, 1));
-    createLabelsVertical (new LabelPlacement (possessionLabels, 0, 1, HPos.RIGHT, 1));
+    createLabelsHorizontal (headings, 1, 0, HPos.CENTER, 1);
+    createLabelsVertical (possessionLabels, 0, 1, HPos.RIGHT, 1);
 
     DataLayout dataLayout = new DataLayout (1, 1, possessionLabels.length, Pos.CENTER_LEFT);
 
