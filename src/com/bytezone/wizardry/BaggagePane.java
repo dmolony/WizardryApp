@@ -1,5 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.DataLayout;
+import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.Character.Possession;
 import com.bytezone.wizardry.data.Item;

@@ -1,5 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.DataLayout;
+import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.CharacterParty;
 import com.bytezone.wizardry.data.WizardryData;
@@ -44,7 +46,7 @@ public class PartyPane extends DataPane
     DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_RIGHT);
 
     partyName = createTextField (dataLayout1);
-    dataLayout1.columnSpan = 5;
+    dataLayout1.setColumnSpan (5);
     slogan = createTextField (dataLayout1);
 
     id = createTextFields (dataLayout2);

@@ -1,5 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.DataLayout;
+import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.Reward;
 import com.bytezone.wizardry.data.RewardDetails;
@@ -39,7 +41,7 @@ public class RewardPane extends DataPane
 
   ComboBox<Reward> rewardsList = new ComboBox<> ();
 
-  TextField[] textOut;
+  TextField[] chest;
   TextField[] gold;
   TextField[][] items = new TextField[MAX_ITEMS][];
   CheckBox[] traps;
@@ -63,7 +65,7 @@ public class RewardPane extends DataPane
     createLabelsVertical (labels, 0, 0, HPos.RIGHT);
 
     DataLayout dataLayout1 = new DataLayout (1, 0, 1, Pos.CENTER_LEFT);
-    textOut = createTextFields (dataLayout1);
+    chest = createTextFields (dataLayout1);
 
     DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_LEFT);
     gold = createTextFields (dataLayout2);
@@ -99,7 +101,7 @@ public class RewardPane extends DataPane
   {
     this.wizardry = wizardry;
 
-    reset (textOut);
+    reset (chest);
     reset (gold);
 
     reset (traps);
@@ -137,7 +139,7 @@ public class RewardPane extends DataPane
     for (int j = 0; j < WizardryData.trapType.length; j++)
       traps[j].setSelected (false);
 
-    setText (textOut[IS_CHEST], reward.isChest);
+    setText (chest[IS_CHEST], reward.isChest);
 
     int itemCol = 0;
     for (int i = 0; i < reward.total; i++)

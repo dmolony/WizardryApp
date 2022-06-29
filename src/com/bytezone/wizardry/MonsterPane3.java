@@ -2,6 +2,8 @@ package com.bytezone.wizardry;
 
 import java.util.List;
 
+import com.bytezone.appbase.DataLayout;
+import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Monster;
 import com.bytezone.wizardry.data.Reward;
 import com.bytezone.wizardry.data.Reward.ItemRange;

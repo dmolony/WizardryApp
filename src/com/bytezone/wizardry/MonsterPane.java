@@ -1,5 +1,6 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Monster;
 import com.bytezone.wizardry.data.WizardryData;
 import com.bytezone.wizardry.graphics.ImageGraphic;

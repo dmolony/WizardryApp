@@ -1,5 +1,6 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
