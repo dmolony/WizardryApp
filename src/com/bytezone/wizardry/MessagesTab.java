@@ -33,7 +33,7 @@ public class MessagesTab extends WizardryTabBase
     layout.setCenter (messagePane);
 
     messages.setPrefWidth (LIST_WIDTH);
-    messages.setPlaceholder (new Label ("Messages not found"));
+    messages.setPlaceholder (new Label ("No Messages"));
 
     messages.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<Message> ()

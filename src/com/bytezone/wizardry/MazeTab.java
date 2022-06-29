@@ -65,7 +65,7 @@ public class MazeTab extends WizardryTabBase implements MovementListener
     layout.setRight (leftVBox);
 
     mazeLevels.setPrefWidth (LIST_WIDTH);
-    mazeLevels.setPlaceholder (new Label ("Maze levels not found"));
+    mazeLevels.setPlaceholder (new Label ("No Maze Levels"));
 
     mazeLevels.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<MazeLevel> ()

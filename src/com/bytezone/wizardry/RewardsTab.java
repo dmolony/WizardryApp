@@ -33,7 +33,7 @@ public class RewardsTab extends WizardryTabBase
     layout.setCenter (rewardPane);
 
     rewards.setPrefWidth (LIST_WIDTH);
-    rewards.setPlaceholder (new Label ("Rewards not found"));
+    rewards.setPlaceholder (new Label ("No Rewards"));
 
     rewards.getSelectionModel ().selectedItemProperty ().addListener (new ChangeListener<Reward> ()
     {

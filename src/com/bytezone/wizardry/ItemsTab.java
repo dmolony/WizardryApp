@@ -33,7 +33,7 @@ public class ItemsTab extends WizardryTabBase
     layout.setCenter (itemPane);
 
     items.setPrefWidth (LIST_WIDTH);
-    items.setPlaceholder (new Label ("Items not found"));
+    items.setPlaceholder (new Label ("No Items"));
 
     items.getSelectionModel ().selectedItemProperty ().addListener (new ChangeListener<Item> ()
     {

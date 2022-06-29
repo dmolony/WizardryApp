@@ -33,7 +33,7 @@ public class CharactersTab extends WizardryTabBase
     layout.setCenter (characterPane);
 
     characters.setPrefWidth (LIST_WIDTH);
-    characters.setPlaceholder (new Label ("The character roster is empty"));
+    characters.setPlaceholder (new Label ("No Characters"));
 
     characters.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<Character> ()

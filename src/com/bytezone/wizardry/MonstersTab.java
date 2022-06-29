@@ -33,7 +33,7 @@ public class MonstersTab extends WizardryTabBase
     layout.setCenter (monsterPane);
 
     monsters.setPrefWidth (LIST_WIDTH);
-    monsters.setPlaceholder (new Label ("Monsters not found"));
+    monsters.setPlaceholder (new Label ("No Monsters"));
 
     monsters.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<Monster> ()
