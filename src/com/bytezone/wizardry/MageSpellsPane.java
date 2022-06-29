@@ -16,8 +16,6 @@ public class MageSpellsPane extends DataPane
   private CheckBox[] checkBox1;
   private CheckBox[] checkBox2;
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public MageSpellsPane ()
   // ---------------------------------------------------------------------------------//
@@ -32,9 +30,9 @@ public class MageSpellsPane extends DataPane
     String[] mageSpells2 = new String[10];
 
     for (int i = 0; i < mageSpells1.length; i++)
-      mageSpells1[i] = WizardryData.spells[i];
+      mageSpells1[i] = WizardryData.spells[i];              // 0:10
     for (int i = 0; i < mageSpells2.length; i++)
-      mageSpells2[i] = WizardryData.spells[11 + i];
+      mageSpells2[i] = WizardryData.spells[11 + i];         // 11:20
 
     createLabelsVertical (mageSpells1, 0, 1, HPos.RIGHT);
     checkBox1 = createCheckBoxes (new DataLayout (1, 1, mageSpells1.length, Pos.CENTER));
@@ -47,8 +45,6 @@ public class MageSpellsPane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (checkBox1);
     reset (checkBox2);
   }
@@ -61,6 +57,6 @@ public class MageSpellsPane extends DataPane
       checkBox1[i].setSelected (character.spellsKnown[i]);
 
     for (int i = 0; i < checkBox2.length; i++)
-      checkBox2[i].setSelected (character.spellsKnown[i + checkBox1.length]);
+      checkBox2[i].setSelected (character.spellsKnown[i + 11]);
   }
 }

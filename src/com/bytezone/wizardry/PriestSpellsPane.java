@@ -16,8 +16,6 @@ public class PriestSpellsPane extends DataPane
   private CheckBox[] checkBox1;
   private CheckBox[] checkBox2;
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public PriestSpellsPane ()
   // ---------------------------------------------------------------------------------//
@@ -32,9 +30,9 @@ public class PriestSpellsPane extends DataPane
     String[] priestSpells2 = new String[14];
 
     for (int i = 0; i < priestSpells1.length; i++)
-      priestSpells1[i] = WizardryData.spells[21 + i];
+      priestSpells1[i] = WizardryData.spells[21 + i];         // 21:35
     for (int i = 0; i < priestSpells2.length; i++)
-      priestSpells2[i] = WizardryData.spells[36 + i];
+      priestSpells2[i] = WizardryData.spells[36 + i];         // 36:49
 
     createLabelsVertical (priestSpells1, 0, 1, HPos.RIGHT);
     checkBox1 = createCheckBoxes (new DataLayout (1, 1, priestSpells1.length, Pos.CENTER));
@@ -47,8 +45,6 @@ public class PriestSpellsPane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (checkBox1);
     reset (checkBox2);
   }
@@ -61,6 +57,6 @@ public class PriestSpellsPane extends DataPane
       checkBox1[i].setSelected (character.spellsKnown[i + 21]);
 
     for (int i = 0; i < checkBox2.length; i++)
-      checkBox2[i].setSelected (character.spellsKnown[i + checkBox1.length + 21]);
+      checkBox2[i].setSelected (character.spellsKnown[i + 36]);
   }
 }
