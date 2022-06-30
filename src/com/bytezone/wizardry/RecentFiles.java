@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
+import com.bytezone.appbase.SaveState;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
 
 // -----------------------------------------------------------------------------------//
-public class RecentFiles
+public class RecentFiles implements SaveState
 // -----------------------------------------------------------------------------------//
 {
   private static final String PREFS_FILE_NAME = "recentfiles";
@@ -28,19 +31,44 @@ public class RecentFiles
   }
 
   // ---------------------------------------------------------------------------------//
+  File chooseFile (String title)
+  // ---------------------------------------------------------------------------------//
+  {
+    FileChooser fileChooser = new FileChooser ();
+    fileChooser.setTitle (title);
+
+    String fileName = getLastFileName ();
+
+    if (fileName.isEmpty ())
+      fileChooser.setInitialDirectory (new File (System.getProperty ("user.home")));
+    else
+      fileChooser.setInitialDirectory (new File (fileName).getParentFile ());
+
+    File file = fileChooser.showOpenDialog (null);
+
+    if (file != null && file.getAbsolutePath ().equals (fileName))
+      return null;
+
+    return file;
+  }
+
+  // ---------------------------------------------------------------------------------//
   public String getLastFileName ()
   // ---------------------------------------------------------------------------------//
   {
     if (fileNames.size () > 0)
       return fileNames.get (0);
 
-    return null;
+    return "";
   }
 
   // ---------------------------------------------------------------------------------//
   public void addLastFileName (String lastFileName)
   // ---------------------------------------------------------------------------------//
   {
+    if (fileNames.size () > 0 && lastFileName.equals (fileNames.get (0)))
+      return;
+
     int index = -1;
     for (int i = 0; i < fileNames.size (); i++)
     {
@@ -59,6 +87,7 @@ public class RecentFiles
   }
 
   // ---------------------------------------------------------------------------------//
+  @Override
   public void save (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
@@ -73,6 +102,7 @@ public class RecentFiles
   }
 
   // ---------------------------------------------------------------------------------//
+  @Override
   public void restore (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
@@ -83,11 +113,14 @@ public class RecentFiles
       if (fileName.isEmpty ())
         break;
 
-      if (new File (fileName).exists ())
+      if (new File (fileName).exists () && !fileNames.contains (fileName))
         fileNames.add (fileName);
     }
 
     setMenuItems ();
+
+    if (fileNames.size () > 0)
+      notifyListeners (fileNames.get (0));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -114,8 +147,13 @@ public class RecentFiles
   // ---------------------------------------------------------------------------------//
   {
     MenuItem menuItem = (MenuItem) e.getSource ();
-    String fileName = (String) menuItem.getUserData ();
+    notifyListeners ((String) menuItem.getUserData ());
+  }
 
+  // ---------------------------------------------------------------------------------//
+  private void notifyListeners (String fileName)
+  // ---------------------------------------------------------------------------------//
+  {
     for (FileNameSelectedListener listener : listeners)
       listener.fileNameSelected (fileName);
   }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
-import com.bytezone.appbase.SaveState;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.data.DiskFormatException;
@@ -27,20 +26,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.FileChooser;
 
 // -----------------------------------------------------------------------------------//
-public class WizardryApp extends AppBase implements SaveState, FileNameSelectedListener
+public class WizardryApp extends AppBase implements FileNameSelectedListener
 // -----------------------------------------------------------------------------------//
 {
-  private static final String PREFS_FILE_NAME = "FileName";
-
   private final Menu menuFile = new Menu ("File");
   private final MenuItem openFileItem = new MenuItem ("Open file...");
   private final Menu recentFilesMenu = new Menu ("Recent files");
 
   private final RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
-  private String wizardryFileName = "";
   private WizardryData wizardry;
   private WizardryTabPane wizardryTabPane;
 
@@ -63,7 +58,8 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
     for (Tab tab : wizardryTabPane.getTabs ())
       addScenarioChangeListener ((ScenarioChangeListener) tab);
 
-    saveStateList.addAll (Arrays.asList (this, wizardryTabPane));
+    // recentFiles must be restored first
+    saveStateList.addAll (Arrays.asList (recentFiles, wizardryTabPane));
     recentFiles.addListener (this);
 
     return wizardryTabPane;
@@ -103,35 +99,20 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   private void getWizardryDisk ()
   // ---------------------------------------------------------------------------------//
   {
-    FileChooser fileChooser = new FileChooser ();
-    fileChooser.setTitle ("Select Wizardry Disk");
+    File file = recentFiles.chooseFile ("Select Wizardry Disk");
 
-    if (!wizardryFileName.isEmpty ())
-    {
-      File file = new File (wizardryFileName);
-      if (!file.exists () || !file.isFile ())
-        wizardryFileName = "";
-    }
-
-    if (wizardryFileName.isEmpty ())
-      fileChooser.setInitialDirectory (new File (System.getProperty ("user.home")));
-    else
-      fileChooser.setInitialDirectory (new File (wizardryFileName).getParentFile ());
-
-    File file = fileChooser.showOpenDialog (null);
-    if (file != null && file.isFile () && !file.getAbsolutePath ().equals (wizardryFileName))
-      setWizardryDisk (file.getAbsolutePath ());
+    if (file != null && file.isFile ())
+      fileNameSelected (file.getAbsolutePath ());
   }
 
   // ---------------------------------------------------------------------------------//
-  private void setWizardryDisk (String fileName)
+  @Override
+  public void fileNameSelected (String fileName)
   // ---------------------------------------------------------------------------------//
   {
     try
     {
       wizardry = Wizardry.getWizardryData (fileName);
-
-      wizardryFileName = fileName;
       recentFiles.addLastFileName (fileName);
 
       for (ScenarioChangeListener listener : listeners)
@@ -162,45 +143,11 @@ public class WizardryApp extends AppBase implements SaveState, FileNameSelectedL
   }
 
   // ---------------------------------------------------------------------------------//
-  @Override
-  public void fileNameSelected (String fileName)
-  // ---------------------------------------------------------------------------------//
-  {
-    setWizardryDisk (fileName);
-  }
-
-  // ---------------------------------------------------------------------------------//
   void addScenarioChangeListener (ScenarioChangeListener listener)
   // ---------------------------------------------------------------------------------//
   {
     if (!listeners.contains (listener))
       listeners.add (listener);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public void save (Preferences prefs)
-  // ---------------------------------------------------------------------------------//
-  {
-    prefs.put (PREFS_FILE_NAME, wizardryFileName);
-
-    recentFiles.save (prefs);
-  }
-
-  // ---------------------------------------------------------------------------------//
-  @Override
-  public void restore (Preferences prefs)
-  // ---------------------------------------------------------------------------------//
-  {
-    recentFiles.restore (prefs);
-
-    String fileName = prefs.get (PREFS_FILE_NAME, "");
-    if (!fileName.isEmpty ())
-    {
-      File file = new File (fileName);
-      if (file.exists () && file.isFile ())
-        setWizardryDisk (fileName);
-    }
   }
 
   // ---------------------------------------------------------------------------------//
