@@ -31,7 +31,7 @@ public class RecentFiles implements SaveState
   }
 
   // ---------------------------------------------------------------------------------//
-  File chooseFile (String title)
+  public File chooseFile (String title)
   // ---------------------------------------------------------------------------------//
   {
     FileChooser fileChooser = new FileChooser ();
