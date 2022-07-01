@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.prefs.Preferences;
 
 import com.bytezone.appbase.AppBase;
+import com.bytezone.appbase.RecentFiles;
+import com.bytezone.appbase.RecentFiles.FileNameSelectedListener;
 import com.bytezone.appbase.StatusBar;
-import com.bytezone.wizardry.RecentFiles.FileNameSelectedListener;
 import com.bytezone.wizardry.data.DiskFormatException;
 import com.bytezone.wizardry.data.Wizardry;
 import com.bytezone.wizardry.data.WizardryData;
