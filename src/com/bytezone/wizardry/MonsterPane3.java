@@ -52,7 +52,11 @@ public class MonsterPane3 extends DataPane
     List<Reward> rewards = wizardry.getRewards ();
 
     // wandering rewards
-    setText (textOut[1], rewards.get (monster.rewardWandering).goldRange () + " GP");
+    String range = rewards.get (monster.rewardWandering).goldRange ();
+    if (range.isEmpty ())
+      setText (textOut[1], "");
+    else
+      setText (textOut[1], rewards.get (monster.rewardWandering).goldRange () + " GP");
 
     // lair rewards
     for (int i = 0; i < 3; i++)
@@ -60,7 +64,8 @@ public class MonsterPane3 extends DataPane
 
     Reward reward = rewards.get (monster.rewardLair);
 
-    if (reward.isChest)
+    //    if (reward.isChest)
+    if (reward.itemRange (0) != null)       // Werdna has a reward but no chest
     {
       for (int i = 0; i < 3; i++)
       {

@@ -144,13 +144,13 @@ public class RewardPane extends DataPane
     int itemCol = 0;
     for (int i = 0; i < reward.total; i++)
     {
-      RewardDetails rewardOdds = reward.rewardDetails[i];
+      RewardDetails rewardDetails = reward.rewardDetails[i];
 
-      if (rewardOdds.goldReward != null)
+      if (rewardDetails.goldReward != null)
       {
-        GoldReward goldReward = rewardOdds.goldReward;
+        GoldReward goldReward = rewardDetails.goldReward;
 
-        setText (gold[GOLD_ODDS], rewardOdds.rewardPct + "%");
+        setText (gold[GOLD_ODDS], rewardDetails.rewardPct + "%");
         setText (gold[DICE_1], goldReward.dice1 ());
         setText (gold[MULTIPLIER], goldReward.base ());
         setText (gold[DICE_2], goldReward.dice2 ());
@@ -159,9 +159,9 @@ public class RewardPane extends DataPane
       }
       else
       {
-        ItemReward itemReward = rewardOdds.itemReward;
+        ItemReward itemReward = rewardDetails.itemReward;
 
-        setText (items[itemCol][ITEM_ODDS], rewardOdds.rewardPct + "%");
+        setText (items[itemCol][ITEM_ODDS], rewardDetails.rewardPct + "%");
         setText (items[itemCol][ITEM_NO], itemReward.item () + " : " + itemReward.getMax ());
         setText (items[itemCol][ITEM], wizardry.getItem (itemReward.item ()));
         setText (items[itemCol][SIZE], itemReward.size ());
