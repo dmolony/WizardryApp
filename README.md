@@ -31,15 +31,15 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 <img src="resources/maze.png" alt="drawing" width="900"/>
 
 ## Installation
-- Download and install [Java 18](https://jdk.java.net/18/) and [JavaFX 18](https://gluonhq.com/products/javafx/).
+- Download and install [Java 19](https://www.oracle.com/java/technologies/downloads/) and [JavaFX 19](https://gluonhq.com/products/javafx/).
 - Download [WizardryApp](https://github.com/dmolony/MazeWalker/releases).
 - Create executable run file.  
 
 #### MacOS or Linux shell file  
 
 ```
-/path/to/jdk-18.jdk/Contents/Home/bin/java        \
---module-path /path/to/javafx-sdk-18/lib          \
+/path/to/jdk-19.jdk/Contents/Home/bin/java        \
+--module-path /path/to/javafx-sdk-19/lib          \
 --add-modules=javafx.controls                     \
 -jar /path/to/WizardryApp.jar
 ```  
@@ -47,8 +47,8 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 #### Windows batch file  
 
 ```
-C:\path\to\jdk-18\bin\java.exe                    \
---module-path C:\path\to\javafx-sdk-18\lib        \
+C:\path\to\jdk-19\bin\java.exe                    \
+--module-path C:\path\to\javafx-sdk-19\lib        \
 --add-modules=javafx.controls                     \
 -jar C:\path\to\WizardryApp.jar
 ```
