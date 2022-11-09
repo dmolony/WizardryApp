@@ -32,7 +32,7 @@ public class CharacterPane extends DataPane
     setGridLinesVisible (false);
 
     setLayout (attributes1Pane, 0, 0);
-    setLayout (baggagePane, 0, 17);
+    setLayout (baggagePane, 0, 18);
     setLayout (attributes2Pane, 9, 0);
     setLayout (attributes5Pane, 9, 10);       // Unknown
     setLayout (attributes3Pane, 15, 0);       // Strength/Agility etc

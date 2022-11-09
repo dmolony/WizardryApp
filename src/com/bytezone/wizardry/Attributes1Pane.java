@@ -32,6 +32,7 @@ public class Attributes1Pane extends DataPane
   private static final int MAGE_TOTALS = 13;
   private static final int PRIEST_TOTALS = 14;
   private static final int MYSTERY = 15;
+  private static final int LOST_XYL = 16;
 
   private TextField[] textOut;
 
@@ -41,13 +42,13 @@ public class Attributes1Pane extends DataPane
   public Attributes1Pane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (2, 16);                              // columns, rows
+    super (2, 17);                              // columns, rows
 
-    setColumnConstraints (110, 145);
+    setColumnConstraints (110, 148);
 
-    String[] labelText =
-        { "Name", "Password", "Status", "Alignment", "Race", "Class", "Age (weeks)", "Awards",
-            "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage", "Priest", "Bit 0" };
+    String[] labelText = { "Name", "Password", "Status", "Alignment", "Race", "Class",
+        "Age (weeks)", "Awards", "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage",
+        "Priest", "Bit 0", "Lost XYL" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
@@ -83,5 +84,6 @@ public class Attributes1Pane extends DataPane
     setText (textOut[MAGE_TOTALS], character.getSpellsString (MAGE_SPELLS));
     setText (textOut[PRIEST_TOTALS], character.getSpellsString (PRIEST_SPELLS));
     setText (textOut[MYSTERY], character.mysteryBit);
+    setText (textOut[LOST_XYL], character.lostXYL.toString ());
   }
 }

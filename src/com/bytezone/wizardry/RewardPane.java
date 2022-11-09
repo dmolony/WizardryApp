@@ -32,12 +32,12 @@ public class RewardPane extends DataPane
 
   private static final int ITEM_ODDS = 0;
   private static final int ITEM_NO = 1;
-  private static final int ITEM = 2;
+  private static final int ITEM_MIN = 2;
   private static final int ITEM_MAX = 3;
   private static final int MIN = 4;
   private static final int SIZE = 5;
   private static final int MAX = 6;
-  private static final int ELEMENT = 7;
+  private static final int RANGE = 7;
   private static final int ITEM_ODDS_2 = 8;
 
   ComboBox<Reward> rewardsList = new ComboBox<> ();
@@ -128,12 +128,12 @@ public class RewardPane extends DataPane
     {
       setText (items[itemCol][ITEM_ODDS], "");
       setText (items[itemCol][ITEM_NO], "");
-      setText (items[itemCol][ITEM], "");
+      setText (items[itemCol][ITEM_MIN], "");
+      setText (items[itemCol][ITEM_MAX], "");
       setText (items[itemCol][MIN], "");
       setText (items[itemCol][SIZE], "");
       setText (items[itemCol][MAX], "");
-      setText (items[itemCol][ITEM_MAX], "");
-      setText (items[itemCol][ELEMENT], "");
+      setText (items[itemCol][RANGE], "");
       setText (items[itemCol][ITEM_ODDS_2], "");
     }
 
@@ -165,11 +165,11 @@ public class RewardPane extends DataPane
 
         setText (items[itemCol][ITEM_ODDS], rewardDetails.rewardPct + "%");
         setText (items[itemCol][ITEM_NO], itemReward.getMin () + " : " + itemReward.getMax ());
-        setText (items[itemCol][ITEM], wizardry.getItem (itemReward.getMin ()));
+        setText (items[itemCol][ITEM_MIN], wizardry.getItem (itemReward.getMin ()));
         setText (items[itemCol][MIN], itemReward.min ());
         setText (items[itemCol][SIZE], itemReward.size ());
         setText (items[itemCol][MAX], itemReward.max ());
-        setText (items[itemCol][ELEMENT], itemReward.range ());
+        setText (items[itemCol][RANGE], itemReward.range ());
         setText (items[itemCol][ITEM_ODDS_2], itemReward.odds () + "%");
 
         if (itemReward.getMin () != itemReward.getMax ())
