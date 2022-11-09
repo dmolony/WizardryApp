@@ -84,6 +84,8 @@ public class Attributes1Pane extends DataPane
     setText (textOut[MAGE_TOTALS], character.getSpellsString (MAGE_SPELLS));
     setText (textOut[PRIEST_TOTALS], character.getSpellsString (PRIEST_SPELLS));
     setText (textOut[MYSTERY], character.mysteryBit);
-    setText (textOut[LOST_XYL], character.lostXYL.toString ());
+
+    if (character.lostXYL != null)
+      setText (textOut[LOST_XYL], character.lostXYL.toString ());
   }
 }

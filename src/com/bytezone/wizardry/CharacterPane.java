@@ -39,7 +39,7 @@ public class CharacterPane extends DataPane
     setLayout (attributes4Pane, 15, 7);       // SaveVs
     setLayout (mageSpellsPane, 21, 0);
     setLayout (priestSpellsPane, 30, 0);
-    setLayout (partyPane, 15, 18);
+    setLayout (partyPane, 16, 19);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, mageSpellsPane, priestSpellsPane);
