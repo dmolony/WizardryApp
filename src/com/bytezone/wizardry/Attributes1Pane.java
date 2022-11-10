@@ -36,7 +36,7 @@ public class Attributes1Pane extends DataPane
 
   private TextField[] textOut;
 
-  private WizardryData wizardry;
+  //  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public Attributes1Pane ()
@@ -44,7 +44,7 @@ public class Attributes1Pane extends DataPane
   {
     super (2, 17);                              // columns, rows
 
-    setColumnConstraints (110, 148);
+    setColumnConstraints (110, 155);
 
     String[] labelText = { "Name", "Password", "Status", "Alignment", "Race", "Class",
         "Age (weeks)", "Awards", "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage",
@@ -59,7 +59,7 @@ public class Attributes1Pane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
+    //    this.wizardry = wizardry;
 
     reset (textOut);
   }
@@ -87,5 +87,7 @@ public class Attributes1Pane extends DataPane
 
     if (character.lostXYL != null)
       setText (textOut[LOST_XYL], character.lostXYL.toString ());
+
+    //    System.out.printf ("%-15s %s%n", character.name, character.lostXYL);
   }
 }
