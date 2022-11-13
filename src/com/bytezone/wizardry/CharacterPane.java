@@ -15,6 +15,7 @@ public class CharacterPane extends DataPane
   private Attributes3Pane attributes3Pane = new Attributes3Pane ();
   private Attributes4Pane attributes4Pane = new Attributes4Pane ();
   private Attributes5Pane attributes5Pane = new Attributes5Pane ();
+  private Attributes6Pane attributes6Pane = new Attributes6Pane ();
   private MageSpellsPane mageSpellsPane = new MageSpellsPane ();
   private PriestSpellsPane priestSpellsPane = new PriestSpellsPane ();
 
@@ -37,12 +38,13 @@ public class CharacterPane extends DataPane
     setLayout (attributes5Pane, 9, 10);       // Unknown
     setLayout (attributes3Pane, 15, 0);       // Strength/Agility etc
     setLayout (attributes4Pane, 15, 7);       // SaveVs
+    setLayout (attributes6Pane, 15, 13);       // SaveVs
     setLayout (mageSpellsPane, 21, 0);
     setLayout (priestSpellsPane, 30, 0);
     setLayout (partyPane, 16, 19);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
-        attributes4Pane, mageSpellsPane, priestSpellsPane);
+        attributes4Pane, attributes6Pane, mageSpellsPane, priestSpellsPane);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -54,6 +56,7 @@ public class CharacterPane extends DataPane
     attributes3Pane.setWizardry (wizardry);
     attributes4Pane.setWizardry (wizardry);
     attributes5Pane.setWizardry (wizardry);
+    attributes6Pane.setWizardry (wizardry);
     mageSpellsPane.setWizardry (wizardry);
     priestSpellsPane.setWizardry (wizardry);
     baggagePane.setWizardry (wizardry);
@@ -85,6 +88,7 @@ public class CharacterPane extends DataPane
     attributes3Pane.update (character);
     attributes4Pane.update (character);
     attributes5Pane.update (character);
+    attributes6Pane.update (character);
     mageSpellsPane.update (character);
     priestSpellsPane.update (character);
     baggagePane.update (character);
