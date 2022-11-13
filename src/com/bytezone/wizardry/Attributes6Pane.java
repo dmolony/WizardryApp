@@ -34,8 +34,6 @@ public class Attributes6Pane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    //    this.wizardry = wizardry;
-
     reset (textOut);
   }
 
