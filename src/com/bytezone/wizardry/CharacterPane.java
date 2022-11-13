@@ -34,14 +34,14 @@ public class CharacterPane extends DataPane
 
     setLayout (attributes1Pane, 0, 0);
     setLayout (baggagePane, 0, 18);
-    setLayout (attributes2Pane, 9, 0);
-    setLayout (attributes5Pane, 9, 10);       // Unknown
-    setLayout (attributes3Pane, 15, 0);       // Strength/Agility etc
-    setLayout (attributes4Pane, 15, 7);       // SaveVs
-    setLayout (attributes6Pane, 15, 13);       // SaveVs
-    setLayout (mageSpellsPane, 21, 0);
-    setLayout (priestSpellsPane, 30, 0);
-    setLayout (partyPane, 16, 19);
+    setLayout (attributes2Pane, 10, 0);
+    setLayout (attributes3Pane, 10, 10);       // Strength/Agility etc
+    setLayout (attributes4Pane, 15, 0);       // SaveVs
+    setLayout (attributes6Pane, 15, 6);       // WepVs
+    setLayout (attributes5Pane, 15, 10);      // Unknown
+    setLayout (mageSpellsPane, 23, 0);
+    setLayout (priestSpellsPane, 32, 0);
+    setLayout (partyPane, 15, 19);
 
     getChildren ().addAll (attributes1Pane, baggagePane, attributes2Pane, attributes3Pane,
         attributes4Pane, attributes6Pane, mageSpellsPane, priestSpellsPane);

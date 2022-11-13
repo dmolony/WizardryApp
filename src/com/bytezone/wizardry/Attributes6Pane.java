@@ -23,7 +23,7 @@ public class Attributes6Pane extends DataPane
 
     setColumnConstraints (90, 85);
 
-    String[] labelText = { "Wep vs Typ 1", "Wep vs Typ 2", "Wep vs Typ 3" };
+    String[] labelText = { "Wep vs 1", "Wep vs 2", "Wep vs 3" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
