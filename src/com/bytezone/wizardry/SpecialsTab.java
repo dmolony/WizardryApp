@@ -19,7 +19,7 @@ public class SpecialsTab extends WizardryTabBase
   private static final String PREFS_INDEX = "SpecialsIndex";
 
   private ListView<MazeLevel> mazeLevels = new ListView<> ();
-  private SpecialsPane specialsPane = new SpecialsPane ();
+  private SpecialsRootPane specialsPane = new SpecialsRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public SpecialsTab (String title, KeyCode keyCode)

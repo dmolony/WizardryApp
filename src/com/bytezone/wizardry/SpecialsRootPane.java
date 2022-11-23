@@ -11,13 +11,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 //-----------------------------------------------------------------------------------//
-public class SpecialsPane extends DataPane
+public class SpecialsRootPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
   TextField[][] textOut = new TextField[8][];
 
   // ---------------------------------------------------------------------------------//
-  public SpecialsPane ()
+  public SpecialsRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (9, 17);                             // columns, rows

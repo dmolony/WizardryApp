@@ -19,7 +19,7 @@ public class MessagesTab extends WizardryTabBase
   private static final String PREFS_INDEX = "MessagesIndex";
 
   private ListView<Message> messages = new ListView<> ();
-  private MessagePane messagePane = new MessagePane ();
+  private MessagesRootPane messagePane = new MessagesRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public MessagesTab (String title, KeyCode keyCode)

@@ -23,8 +23,6 @@ public class ItemPane2 extends DataPane
 
   private TextField[] textOut;
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public ItemPane2 ()
   // ---------------------------------------------------------------------------------//
@@ -45,8 +43,6 @@ public class ItemPane2 extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (textOut);
   }
 

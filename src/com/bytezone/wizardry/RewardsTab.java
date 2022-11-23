@@ -19,7 +19,7 @@ public class RewardsTab extends WizardryTabBase
   private static final String PREFS_INDEX = "RewardsIndex";
 
   private ListView<Reward> rewards = new ListView<> ();
-  private RewardPane rewardPane = new RewardPane ();
+  private RewardsRootPane rewardPane = new RewardsRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public RewardsTab (String title, KeyCode keyCode)

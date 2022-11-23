@@ -15,7 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class MessagePane extends DataPane
+public class MessagesRootPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private WizardryData wizardry;
@@ -27,7 +27,7 @@ public class MessagePane extends DataPane
   TextArea textArea;
 
   // ---------------------------------------------------------------------------------//
-  public MessagePane ()
+  public MessagesRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (3, 25);                             // columns, rows

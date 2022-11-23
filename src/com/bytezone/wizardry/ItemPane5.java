@@ -2,7 +2,6 @@ package com.bytezone.wizardry;
 
 import com.bytezone.appbase.DataLayout;
 import com.bytezone.appbase.DataPane;
-import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
@@ -15,8 +14,6 @@ public class ItemPane5 extends DataPane
 {
   private CheckBox[] protect;
   private CheckBox[] purpose;
-
-  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public ItemPane5 ()
@@ -40,18 +37,16 @@ public class ItemPane5 extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (protect);
     reset (purpose);
   }
 
   // ---------------------------------------------------------------------------------//
-  void update (Item item)
+  void update (int protection, int purposed)
   // ---------------------------------------------------------------------------------//
   {
-    int protection = item.wepvsty2Flags;
-    int purposed = item.wepvstyFlags;
+    //    int protection = item.wepvsty2Flags;
+    //    int purposed = item.wepvstyFlags;
 
     for (int i = 0; i < WizardryData.monsterClass.length; i++)
     {

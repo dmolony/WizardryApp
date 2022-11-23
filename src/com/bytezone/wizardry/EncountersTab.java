@@ -19,7 +19,7 @@ public class EncountersTab extends WizardryTabBase
   private static final String PREFS_INDEX = "EncountersIndex";
 
   private ListView<MazeLevel> mazeLevels = new ListView<> ();
-  private EncounterPane encounterPane = new EncounterPane ();
+  private EncountersRootPane encounterPane = new EncountersRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public EncountersTab (String title, KeyCode keyCode)

@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 // -----------------------------------------------------------------------------------//
-public class MonsterPane extends DataPane
+public class MonsterRootPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private final Canvas canvas;
@@ -20,11 +20,11 @@ public class MonsterPane extends DataPane
   private MonsterPane1 monsterPane1 = new MonsterPane1 ();
   private MonsterPane2 monsterPane2 = new MonsterPane2 ();
   private MonsterPane3 monsterPane3 = new MonsterPane3 ();
-  private MonsterPane4 monsterPane4 = new MonsterPane4 ();
+  private ResistancePane monsterPane4 = new ResistancePane ();
   private MonsterPane5 monsterPane5 = new MonsterPane5 ();
 
   // ---------------------------------------------------------------------------------//
-  public MonsterPane ()
+  public MonsterRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (40, 26);                             // columns, rows
@@ -73,7 +73,7 @@ public class MonsterPane extends DataPane
     monsterPane1.update (monster);
     monsterPane2.update (monster);
     monsterPane3.update (monster);
-    monsterPane4.update (monster);
+    monsterPane4.update (monster.resistance);
     monsterPane5.update (monster);
 
     if (wizardry.getScenarioId () <= 3)

@@ -19,7 +19,7 @@ public class MonstersTab extends WizardryTabBase
   private static final String PREFS_INDEX = "MonstersIndex";
 
   private ListView<Monster> monsters = new ListView<> ();
-  private MonsterPane monsterPane = new MonsterPane ();
+  private MonsterRootPane monsterPane = new MonsterRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public MonstersTab (String title, KeyCode keyCode)

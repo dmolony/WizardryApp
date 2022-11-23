@@ -16,7 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 //-----------------------------------------------------------------------------------//
-public class RewardPane extends DataPane
+public class RewardsRootPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
   private static final int MAX_ITEMS = 5;       // columns of data
@@ -50,7 +50,7 @@ public class RewardPane extends DataPane
   private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
-  public RewardPane ()
+  public RewardsRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (6, 18);                             // columns, rows

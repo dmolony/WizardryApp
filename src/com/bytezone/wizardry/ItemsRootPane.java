@@ -5,7 +5,7 @@ import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
 //-----------------------------------------------------------------------------------//
-public class ItemPane extends DataPane
+public class ItemsRootPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
   private ItemPane1 itemPane1 = new ItemPane1 ();
@@ -15,7 +15,7 @@ public class ItemPane extends DataPane
   private ItemPane5 itemPane5 = new ItemPane5 ();
 
   // ---------------------------------------------------------------------------------//
-  public ItemPane ()
+  public ItemsRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (40, 18);                             // columns, rows
@@ -49,8 +49,8 @@ public class ItemPane extends DataPane
   {
     itemPane1.update (item);
     itemPane2.update (item);
-    itemPane3.update (item);
+    itemPane3.update (item.wepvsty3Flags);
     itemPane4.update (item);
-    itemPane5.update (item);
+    itemPane5.update (item.wepvsty2Flags, item.wepvstyFlags);
   }
 }

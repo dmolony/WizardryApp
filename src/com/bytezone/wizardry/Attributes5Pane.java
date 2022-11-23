@@ -45,11 +45,11 @@ public class Attributes5Pane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut[0], character.unknown1);
-    setText (textOut[1], character.unknown2);
-    setText (textOut[2], character.unknown3);
-    setText (textOut[3], character.unknown4);
-    setText (textOut[4], character.unknown5);
+    //    setText (textOut[0], character.unknown1);
+    //    setText (textOut[1], character.unknown2);
+    //    setText (textOut[2], character.unknown3);
+    //    setText (textOut[3], character.unknown4);
+    //    setText (textOut[4], character.unknown5);
     setText (textOut[5], character.nextCharacterId);
   }
 }

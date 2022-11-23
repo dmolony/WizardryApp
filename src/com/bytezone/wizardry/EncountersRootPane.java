@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 //-----------------------------------------------------------------------------------//
-public class EncounterPane extends DataPane
+public class EncountersRootPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
   private static final int MAX_GROUPS = 3;
@@ -29,7 +29,7 @@ public class EncounterPane extends DataPane
   private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
-  public EncounterPane ()
+  public EncountersRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (7, 27);                             // columns, rows

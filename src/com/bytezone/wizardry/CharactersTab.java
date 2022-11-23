@@ -19,7 +19,7 @@ public class CharactersTab extends WizardryTabBase
   private static final String PREFS_INDEX = "CharactersIndex";
 
   private ListView<Character> characters = new ListView<> ();
-  private CharacterPane characterPane = new CharacterPane ();
+  private CharacterRootPane characterPane = new CharacterRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public CharactersTab (String title, KeyCode keyCode)

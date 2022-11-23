@@ -15,8 +15,6 @@ public class ItemPane4 extends DataPane
 {
   private CheckBox[] checkBoxes;
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public ItemPane4 ()
   // ---------------------------------------------------------------------------------//
@@ -36,8 +34,6 @@ public class ItemPane4 extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (checkBoxes);
   }
 

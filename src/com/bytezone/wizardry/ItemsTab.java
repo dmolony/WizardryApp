@@ -19,7 +19,7 @@ public class ItemsTab extends WizardryTabBase
   private static final String PREFS_INDEX = "ItemsIndex";
 
   private ListView<Item> items = new ListView<> ();
-  private ItemPane itemPane = new ItemPane ();
+  private ItemsRootPane itemPane = new ItemsRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public ItemsTab (String title, KeyCode keyCode)
