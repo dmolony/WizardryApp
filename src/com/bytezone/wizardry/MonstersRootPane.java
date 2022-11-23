@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 // -----------------------------------------------------------------------------------//
-public class MonsterRootPane extends DataPane
+public class MonstersRootPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private final Canvas canvas;
@@ -24,7 +24,7 @@ public class MonsterRootPane extends DataPane
   private MonsterPane5 monsterPane5 = new MonsterPane5 ();
 
   // ---------------------------------------------------------------------------------//
-  public MonsterRootPane ()
+  public MonstersRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (40, 26);                             // columns, rows

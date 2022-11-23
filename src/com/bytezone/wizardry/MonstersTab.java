@@ -19,7 +19,7 @@ public class MonstersTab extends WizardryTabBase
   private static final String PREFS_INDEX = "MonstersIndex";
 
   private ListView<Monster> monsters = new ListView<> ();
-  private MonsterRootPane monsterPane = new MonsterRootPane ();
+  private MonstersRootPane monstersRootPane = new MonstersRootPane ();
 
   // ---------------------------------------------------------------------------------//
   public MonstersTab (String title, KeyCode keyCode)
@@ -30,7 +30,7 @@ public class MonstersTab extends WizardryTabBase
     BorderPane layout = new BorderPane ();
     setContent (layout);
     layout.setLeft (monsters);
-    layout.setCenter (monsterPane);
+    layout.setCenter (monstersRootPane);
 
     monsters.setPrefWidth (LIST_WIDTH);
     monsters.setPlaceholder (new Label ("No Monsters"));
@@ -43,7 +43,7 @@ public class MonstersTab extends WizardryTabBase
               Monster new_val)
           {
             if (new_val != null)
-              monsterPane.update (new_val);
+              monstersRootPane.update (new_val);
           }
         });
   }
@@ -64,7 +64,7 @@ public class MonstersTab extends WizardryTabBase
   public void scenarioChanged (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    monsterPane.setWizardry (wizardry);
+    monstersRootPane.setWizardry (wizardry);
 
     monsters.getItems ().clear ();
     monsters.getItems ().addAll (wizardry.getMonsters ());

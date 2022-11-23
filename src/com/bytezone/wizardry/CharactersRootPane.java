@@ -5,7 +5,7 @@ import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.WizardryData;
 
 // -----------------------------------------------------------------------------------//
-public class CharacterRootPane extends DataPane
+public class CharactersRootPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private PartyPane partyPane = new PartyPane ();
@@ -24,7 +24,7 @@ public class CharacterRootPane extends DataPane
   private boolean partyPaneVisible;
 
   // ---------------------------------------------------------------------------------//
-  public CharacterRootPane ()
+  public CharactersRootPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (40, 26);                           // rows, columns
