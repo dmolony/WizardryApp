@@ -79,27 +79,14 @@ public class BaggagePane extends DataPane
           break;
         }
 
-        if (possession.identified ())
-        {
-          setText (items[i], item.name);
-          setText (values[i], item.price);    // formatted as number
+        setText (items[i], item.name);
+        setText (values[i], item.price);    // formatted as number
 
-          equipped[i].setSelected (possession.equipped ());
-          cursed[i].setSelected (possession.cursed ());
-          identified[i].setSelected (true);
+        equipped[i].setSelected (possession.equipped ());
+        cursed[i].setSelected (possession.cursed ());
+        identified[i].setSelected (possession.identified ());
 
-          cursed[i].setIndeterminate (false);
-        }
-        else
-        {
-          setText (items[i], item.nameGeneric);
-          setText (values[i], "?");           // formatted as text
-
-          equipped[i].setSelected (false);
-          identified[i].setSelected (false);
-
-          cursed[i].setIndeterminate (true);
-        }
+        cursed[i].setIndeterminate (false);
       }
       else
       {

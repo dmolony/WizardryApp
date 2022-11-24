@@ -50,6 +50,7 @@ public class Attributes5Pane extends DataPane
     //    setText (textOut[2], character.unknown3);
     //    setText (textOut[3], character.unknown4);
     //    setText (textOut[4], character.unknown5);
+
     setText (textOut[5], character.nextCharacterId);
   }
 }

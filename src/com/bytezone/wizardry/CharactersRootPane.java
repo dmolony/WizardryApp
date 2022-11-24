@@ -10,10 +10,11 @@ public class CharactersRootPane extends DataPane
 {
   private Attributes1Pane attributes1Pane = new Attributes1Pane ();
   private Attributes2Pane attributes2Pane = new Attributes2Pane ();
-  private Attributes3Pane attributes3Pane = new Attributes3Pane ();
-  private Attributes4Pane attributes4Pane = new Attributes4Pane ();
-  private Attributes6Pane attributes6Pane = new Attributes6Pane ();       // temp
+  private Attributes3Pane sipvalPane = new Attributes3Pane ();
 
+  private TempWepVsPane tempWepVsPane = new TempWepVsPane ();       // temp
+
+  private SavingThrowPane savingThrowPane = new SavingThrowPane ();
   private MonsterProtectPane monsterProtectPane = new MonsterProtectPane ();
   private ResistancePane resistancePane = new ResistancePane ();
 
@@ -40,11 +41,11 @@ public class CharactersRootPane extends DataPane
     setLayout (baggagePane, 0, 18);
 
     setLayout (attributes2Pane, 10, 0);
-    setLayout (attributes3Pane, 10, 10);      // Strength/Agility etc
+    setLayout (sipvalPane, 10, 10);           // Strength/Agility etc
 
     setLayout (resistancePane, 15, 0);        // resistance
-    setLayout (attributes6Pane, 15, 9);       // 3 WepVs values (temporary)
-    setLayout (attributes4Pane, 15, 12);      // SaveVs
+    setLayout (tempWepVsPane, 15, 9);         // 3 WepVs values (temporary)
+    setLayout (savingThrowPane, 15, 12);      // SaveVs
 
     setLayout (partyPane, 15, 19);            // only shown for scenario #4
 
@@ -52,8 +53,8 @@ public class CharactersRootPane extends DataPane
     setLayout (mageSpellsPane, 27, 0);
     setLayout (priestSpellsPane, 36, 0);
 
-    getChildren ().addAll (attributes1Pane, attributes2Pane, attributes3Pane, attributes4Pane,
-        attributes6Pane, monsterProtectPane, resistancePane, mageSpellsPane, priestSpellsPane,
+    getChildren ().addAll (attributes1Pane, attributes2Pane, sipvalPane, savingThrowPane,
+        tempWepVsPane, monsterProtectPane, resistancePane, mageSpellsPane, priestSpellsPane,
         baggagePane);
   }
 
@@ -63,9 +64,12 @@ public class CharactersRootPane extends DataPane
   {
     attributes1Pane.setWizardry (wizardry);
     attributes2Pane.setWizardry (wizardry);
-    attributes3Pane.setWizardry (wizardry);
-    attributes4Pane.setWizardry (wizardry);
-    attributes6Pane.setWizardry (wizardry);
+
+    sipvalPane.setWizardry (wizardry);
+    savingThrowPane.setWizardry (wizardry);
+
+    tempWepVsPane.setWizardry (wizardry);
+
     monsterProtectPane.setWizardry (wizardry);
     resistancePane.setWizardry (wizardry);
 
@@ -96,9 +100,9 @@ public class CharactersRootPane extends DataPane
   {
     attributes1Pane.update (character);
     attributes2Pane.update (character);
-    attributes3Pane.update (character);
-    attributes4Pane.update (character);
-    attributes6Pane.update (character);
+    sipvalPane.update (character);
+    savingThrowPane.update (character);
+    tempWepVsPane.update (character);
 
     monsterProtectPane.update (character.wep2[0] | character.wep2[1], character.wep1);
     resistancePane.update (character.wep3[0] | character.wep3[1]);

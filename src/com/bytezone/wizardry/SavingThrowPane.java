@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class Attributes4Pane extends DataPane
+public class SavingThrowPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private TextField[] textOut;
@@ -18,7 +18,7 @@ public class Attributes4Pane extends DataPane
   private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
-  public Attributes4Pane ()
+  public SavingThrowPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 5);                             // columns, rows

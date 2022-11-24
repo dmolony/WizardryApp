@@ -10,20 +10,20 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class Attributes6Pane extends DataPane
+public class TempWepVsPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private TextField[] textOut;
 
   // ---------------------------------------------------------------------------------//
-  public Attributes6Pane ()
+  public TempWepVsPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 3);                             // columns, rows
 
     setColumnConstraints (90, 85);
 
-    String[] labelText = { "Wep vs 1", "Wep vs 2", "Wep vs 3" };
+    String[] labelText = { "Resist", "Protect", "Vs" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
@@ -41,8 +41,8 @@ public class Attributes6Pane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    setText (textOut[0], character.wepVs1);
+    setText (textOut[2], character.wepVs1);
     setText (textOut[1], character.wepVs2);
-    setText (textOut[2], character.wepVs3);
+    setText (textOut[0], character.wepVs3);
   }
 }
