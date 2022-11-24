@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class ItemPane1 extends DataPane
+public class ItemAttributesPane1 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int NAME = 0;
@@ -30,7 +30,7 @@ public class ItemPane1 extends DataPane
   private TextField[] textOut;
 
   // ---------------------------------------------------------------------------------//
-  public ItemPane1 ()
+  public ItemAttributesPane1 ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 11);                             // columns, rows

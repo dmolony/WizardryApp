@@ -8,11 +8,11 @@ import com.bytezone.wizardry.data.WizardryData;
 public class ItemsRootPane extends DataPane
 //-----------------------------------------------------------------------------------//
 {
-  private ItemPane1 itemPane1 = new ItemPane1 ();
-  private ItemPane2 itemPane2 = new ItemPane2 ();
-  private ItemPane3 itemPane3 = new ItemPane3 ();
-  private ItemPane4 itemPane4 = new ItemPane4 ();
-  private ItemPane5 itemPane5 = new ItemPane5 ();
+  private ItemAttributesPane1 itemPane1 = new ItemAttributesPane1 ();
+  private ItemAttributesPane2 itemPane2 = new ItemAttributesPane2 ();
+  private ItemResistancePane itemPane3 = new ItemResistancePane ();
+  private ItemClassUsagePane itemPane4 = new ItemClassUsagePane ();
+  private MonsterProtectPane monsterProtectPane = new MonsterProtectPane ();
 
   // ---------------------------------------------------------------------------------//
   public ItemsRootPane ()
@@ -27,9 +27,9 @@ public class ItemsRootPane extends DataPane
     setLayout (itemPane2, 0, 12);
     setLayout (itemPane3, 10, 0);
     setLayout (itemPane4, 10, 10);
-    setLayout (itemPane5, 16, 0);
+    setLayout (monsterProtectPane, 16, 0);
 
-    getChildren ().addAll (itemPane1, itemPane2, itemPane3, itemPane4, itemPane5);
+    getChildren ().addAll (itemPane1, itemPane2, itemPane3, itemPane4, monsterProtectPane);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -40,7 +40,7 @@ public class ItemsRootPane extends DataPane
     itemPane2.setWizardry (wizardry);
     itemPane3.setWizardry (wizardry);
     itemPane4.setWizardry (wizardry);
-    itemPane5.setWizardry (wizardry);
+    monsterProtectPane.setWizardry (wizardry);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -51,6 +51,6 @@ public class ItemsRootPane extends DataPane
     itemPane2.update (item);
     itemPane3.update (item.wepvsty3Flags);
     itemPane4.update (item);
-    itemPane5.update (item.wepvsty2Flags, item.wepvstyFlags);
+    monsterProtectPane.update (item.wepvsty2Flags, item.wepvstyFlags);
   }
 }
