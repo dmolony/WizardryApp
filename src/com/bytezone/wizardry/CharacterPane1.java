@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.WizardryData;
 
@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class CharacterPane1 extends DataPane
+public class CharacterPane1 extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   static int MAGE_SPELLS = 0;
@@ -36,15 +36,13 @@ public class CharacterPane1 extends DataPane
 
   private TextField[] textOut;
 
-  //  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public CharacterPane1 ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 17);                              // columns, rows
 
-    setColumnConstraints (110, 155);
+    setColumnConstraints (70, 155);
 
     String[] labelText = { "Name", "Password", "Status", "Alignment", "Race", "Class",
         "Age (weeks)", "Awards", "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage",
@@ -59,8 +57,6 @@ public class CharacterPane1 extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    //    this.wizardry = wizardry;
-
     reset (textOut);
   }
 

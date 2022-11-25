@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.WizardryData;
 
@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class CharacterPane2 extends DataPane
+public class CharacterPane2 extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int ID = 0;
@@ -33,7 +33,7 @@ public class CharacterPane2 extends DataPane
   {
     super (2, 9);                             // columns, rows
 
-    setColumnConstraints (90, 50);
+    setColumnConstraints (70, 50);
 
     String[] labelText =
         { "ID", "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };

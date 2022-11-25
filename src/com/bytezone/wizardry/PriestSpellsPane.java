@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.WizardryData;
 
@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
-public class PriestSpellsPane extends DataPane
+public class PriestSpellsPane extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private CheckBox[] checkBox1;

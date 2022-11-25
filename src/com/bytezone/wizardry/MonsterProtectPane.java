@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
@@ -9,7 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
-public class MonsterProtectPane extends DataPane
+public class MonsterProtectPane extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private CheckBox[] protect;
@@ -21,7 +21,8 @@ public class MonsterProtectPane extends DataPane
   {
     super (3, 15);                             // columns, rows
 
-    setColumnConstraints (110, 30, 30);
+    //    setColumnConstraints (110, 30, 30);
+    setColumnConstraints (70, 30, 30);
 
     createLabel ("Protect", 0, 0, HPos.RIGHT, 2);
     createLabel ("Vs", 2, 0, HPos.CENTER, 1);

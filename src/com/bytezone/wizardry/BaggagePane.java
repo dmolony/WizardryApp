@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.Character.Possession;
 import com.bytezone.wizardry.data.Item;
@@ -13,7 +13,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class BaggagePane extends DataPane
+public class BaggagePane extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private TextField[] items;
@@ -31,7 +31,7 @@ public class BaggagePane extends DataPane
   {
     super (6, 9);                             // columns, rows
 
-    setColumnConstraints (110, 155, 20, 20, 20, 80);
+    setColumnConstraints (70, 155, 20, 20, 20, 80);
 
     String[] headings = { "Item", "Eq", "Cu", "Id", "Value" };
 

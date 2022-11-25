@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.CharacterParty;
 import com.bytezone.wizardry.data.WizardryData;
@@ -11,7 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class PartyPane extends DataPane
+public class PartyPane extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int MAX_PARTY_SIZE = 6;
@@ -36,7 +36,7 @@ public class PartyPane extends DataPane
   {
     super (9, 8);                             // columns, rows
 
-    int[] widths = { 90, 40, 110, 60, 40, 50, 130, 100, 100 };
+    int[] widths = { 70, 40, 110, 60, 40, 50, 130, 100, 100 };
     setColumnConstraints (widths);
 
     String[] partyLabels = { "Party", "Slogan", "# 1", "# 2", "# 3", "# 4", "# 5", "# 6" };
