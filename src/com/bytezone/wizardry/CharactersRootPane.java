@@ -8,9 +8,9 @@ import com.bytezone.wizardry.data.WizardryData;
 public class CharactersRootPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
-  private Attributes1Pane attributes1Pane = new Attributes1Pane ();
-  private Attributes2Pane attributes2Pane = new Attributes2Pane ();
-  private Attributes3Pane sipvalPane = new Attributes3Pane ();
+  private CharacterPane1 characterPane1 = new CharacterPane1 ();
+  private CharacterPane2 characterPane2 = new CharacterPane2 ();
+  private CharacterPane3 sipvalPane = new CharacterPane3 ();
 
   private TempWepVsPane tempWepVsPane = new TempWepVsPane ();       // temp
 
@@ -37,10 +37,10 @@ public class CharactersRootPane extends DataPane
 
     setGridLinesVisible (false);
 
-    setLayout (attributes1Pane, 0, 0);
+    setLayout (characterPane1, 0, 0);
     setLayout (baggagePane, 0, 18);
 
-    setLayout (attributes2Pane, 10, 0);
+    setLayout (characterPane2, 10, 0);
     setLayout (sipvalPane, 10, 10);           // Strength/Agility etc
 
     setLayout (resistancePane, 15, 0);        // resistance
@@ -53,7 +53,7 @@ public class CharactersRootPane extends DataPane
     setLayout (mageSpellsPane, 27, 0);
     setLayout (priestSpellsPane, 36, 0);
 
-    getChildren ().addAll (attributes1Pane, attributes2Pane, sipvalPane, savingThrowPane,
+    getChildren ().addAll (characterPane1, characterPane2, sipvalPane, savingThrowPane,
         tempWepVsPane, monsterProtectPane, resistancePane, mageSpellsPane, priestSpellsPane,
         baggagePane);
   }
@@ -62,8 +62,8 @@ public class CharactersRootPane extends DataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    attributes1Pane.setWizardry (wizardry);
-    attributes2Pane.setWizardry (wizardry);
+    characterPane1.setWizardry (wizardry);
+    characterPane2.setWizardry (wizardry);
 
     sipvalPane.setWizardry (wizardry);
     savingThrowPane.setWizardry (wizardry);
@@ -98,8 +98,8 @@ public class CharactersRootPane extends DataPane
   void update (Character character)
   // ---------------------------------------------------------------------------------//
   {
-    attributes1Pane.update (character);
-    attributes2Pane.update (character);
+    characterPane1.update (character);
+    characterPane2.update (character);
     sipvalPane.update (character);
     savingThrowPane.update (character);
     tempWepVsPane.update (character);

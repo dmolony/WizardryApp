@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class Attributes1Pane extends DataPane
+public class CharacterPane1 extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   static int MAGE_SPELLS = 0;
@@ -39,7 +39,7 @@ public class Attributes1Pane extends DataPane
   //  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
-  public Attributes1Pane ()
+  public CharacterPane1 ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 17);                              // columns, rows
