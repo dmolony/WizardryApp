@@ -15,15 +15,13 @@ public class CharacterPane3 extends BorderedDataPane
 {
   private TextField[] textOut;
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
   public CharacterPane3 ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 6);                             // columns, rows
 
-    setColumnConstraints (70, 50);
+    setColumnConstraints (50, 50);
 
     String[] labelText = { "Strength", "IQ", "Piety", "Vitality", "Agility", "Luck" };
     assert getRows () == labelText.length;
@@ -36,8 +34,6 @@ public class CharacterPane3 extends BorderedDataPane
   void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (textOut);
   }
 

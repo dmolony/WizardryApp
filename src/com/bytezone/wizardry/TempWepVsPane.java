@@ -21,7 +21,7 @@ public class TempWepVsPane extends DataPane
   {
     super (2, 3);                             // columns, rows
 
-    setColumnConstraints (90, 85);
+    setColumnConstraints (70, 85);
 
     String[] labelText = { "Resist", "Protect", "Vs" };
     assert getRows () == labelText.length;

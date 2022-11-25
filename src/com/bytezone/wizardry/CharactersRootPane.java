@@ -30,7 +30,7 @@ public class CharactersRootPane extends DataPane
   public CharactersRootPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (60, 26);                           // rows, columns
+    super (60, 30);                           // columns, rows
 
     setAllColumnConstraints (10);             // all columns 10 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets
@@ -43,15 +43,15 @@ public class CharactersRootPane extends DataPane
     setLayout (characterPane2, 15, 0);
     setLayout (sipvalPane, 15, 10);           // Strength/IQ/Piety/Vitality/Agility/Luck
 
-    setLayout (resistancePane, 24, 0);        // resistance
-    setLayout (savingThrowPane, 24, 10);      // SaveVs
-    setLayout (partyPane, 24, 19);            // only shown for scenario #4
+    setLayout (resistancePane, 23, 0);
+    setLayout (savingThrowPane, 23, 10);
+    setLayout (partyPane, 24, 18);            // only shown for scenario #4
 
-    setLayout (monsterProtectPane, 33, 0);    // protect/vs 
-    setLayout (mageSpellsPane, 43, 0);
-    setLayout (priestSpellsPane, 57, 0);
+    setLayout (monsterProtectPane, 31, 0);    // protect/vs 
+    setLayout (mageSpellsPane, 41, 0);
+    setLayout (priestSpellsPane, 55, 0);
 
-    setLayout (tempWepVsPane, 40, 13);         // 3 WepVs values (temporary)
+    setLayout (tempWepVsPane, 42, 13);         // 3 WepVs values (temporary)
 
     getChildren ().addAll (characterPane1, characterPane2, sipvalPane, savingThrowPane,
         tempWepVsPane, monsterProtectPane, resistancePane, mageSpellsPane, priestSpellsPane,

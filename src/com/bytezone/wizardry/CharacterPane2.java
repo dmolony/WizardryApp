@@ -33,10 +33,10 @@ public class CharacterPane2 extends BorderedDataPane
   {
     super (2, 9);                             // columns, rows
 
-    setColumnConstraints (70, 50);
+    setColumnConstraints (50, 50);
 
     String[] labelText =
-        { "ID", "Max lev AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
+        { "ID", "Max AC", "Level", "HP left", "Max HP", "HP calc", "AC", "Regen", "Swing" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);

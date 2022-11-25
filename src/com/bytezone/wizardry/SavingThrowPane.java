@@ -21,7 +21,7 @@ public class SavingThrowPane extends BorderedDataPane
   {
     super (2, 5);                             // columns, rows
 
-    setColumnConstraints (70, 50);
+    setColumnConstraints (50, 50);
 
     String[] labelText = { "Death", "Wand", "Breath", "Petrify", "Spell" };
     assert getRows () == labelText.length;
