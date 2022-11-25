@@ -41,12 +41,11 @@ public class CharactersRootPane extends DataPane
     setLayout (baggagePane, 0, 18);
 
     setLayout (characterPane2, 10, 0);
-    setLayout (sipvalPane, 10, 10);           // Strength/Agility etc
+    setLayout (sipvalPane, 10, 10);           // Strength/IQ/Piety/Vitality/Agility/Luck
 
     setLayout (resistancePane, 15, 0);        // resistance
     setLayout (tempWepVsPane, 15, 9);         // 3 WepVs values (temporary)
     setLayout (savingThrowPane, 15, 12);      // SaveVs
-
     setLayout (partyPane, 15, 19);            // only shown for scenario #4
 
     setLayout (monsterProtectPane, 20, 0);    // protect/vs 
