@@ -2,7 +2,6 @@ package com.bytezone.wizardry;
 
 import com.bytezone.appbase.DataLayout;
 import com.bytezone.appbase.DataPane;
-import com.bytezone.wizardry.data.Monster;
 import com.bytezone.wizardry.data.WizardryData;
 
 import javafx.geometry.HPos;
@@ -10,15 +9,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
-public class MonsterPane5 extends DataPane
+public class PropertyPane extends DataPane
 // -----------------------------------------------------------------------------------//
 {
   private final CheckBox[] checkBoxes;
 
-  private WizardryData wizardry;
-
   // ---------------------------------------------------------------------------------//
-  public MonsterPane5 ()
+  public PropertyPane ()
   // ---------------------------------------------------------------------------------//
   {
     super (2, 8);                             // columns, rows
@@ -35,16 +32,14 @@ public class MonsterPane5 extends DataPane
   public void setWizardry (WizardryData wizardry)
   // ---------------------------------------------------------------------------------//
   {
-    this.wizardry = wizardry;
-
     reset (checkBoxes);
   }
 
   // ---------------------------------------------------------------------------------//
-  void update (Monster monster)
+  void update (int property)
   // ---------------------------------------------------------------------------------//
   {
-    int property = monster.properties;
+    //    int property = monster.properties;
     for (int i = 0; i < WizardryData.property.length; i++)
     {
       checkBoxes[i].setSelected ((property & 0x01) != 0);

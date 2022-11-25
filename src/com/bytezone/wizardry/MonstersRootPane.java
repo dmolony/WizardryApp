@@ -20,8 +20,8 @@ public class MonstersRootPane extends DataPane
   private MonsterPane1 monsterPane1 = new MonsterPane1 ();
   private MonsterPane2 monsterPane2 = new MonsterPane2 ();
   private MonsterPane3 monsterPane3 = new MonsterPane3 ();
-  private ResistancePane monsterPane4 = new ResistancePane ();
-  private MonsterPane5 monsterPane5 = new MonsterPane5 ();
+  private ResistancePane resistancePane = new ResistancePane ();
+  private PropertyPane propertyPane = new PropertyPane ();
 
   // ---------------------------------------------------------------------------------//
   public MonstersRootPane ()
@@ -35,10 +35,10 @@ public class MonstersRootPane extends DataPane
     setLayout (monsterPane1, 0, 0);
     setLayout (monsterPane2, 0, 10);
     setLayout (monsterPane3, 7, 21);
-    setLayout (monsterPane4, 9, 10);
-    setLayout (monsterPane5, 15, 10);
+    setLayout (resistancePane, 9, 10);
+    setLayout (propertyPane, 15, 10);
 
-    getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3, monsterPane4, monsterPane5);
+    getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3, resistancePane, propertyPane);
 
     canvas = new Canvas (280, 200);
 
@@ -58,8 +58,8 @@ public class MonstersRootPane extends DataPane
     monsterPane1.setWizardry (wizardry);
     monsterPane2.setWizardry (wizardry);
     monsterPane3.setWizardry (wizardry);
-    monsterPane4.setWizardry (wizardry);
-    monsterPane5.setWizardry (wizardry);
+    resistancePane.setWizardry (wizardry);
+    propertyPane.setWizardry (wizardry);
 
     GraphicsContext gc = canvas.getGraphicsContext2D ();
     gc.setFill (Color.BLACK);
@@ -73,8 +73,8 @@ public class MonstersRootPane extends DataPane
     monsterPane1.update (monster);
     monsterPane2.update (monster);
     monsterPane3.update (monster);
-    monsterPane4.update (monster.resistance);
-    monsterPane5.update (monster);
+    resistancePane.update (monster.resistance);
+    propertyPane.update (monster.properties);
 
     if (wizardry.getScenarioId () <= 3)
     {
