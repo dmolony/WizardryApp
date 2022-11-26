@@ -83,7 +83,5 @@ public class CharacterPane1 extends BorderedDataPane
 
     if (character.lostXYL != null)
       setText (textOut[LOST_XYL], character.lostXYL.toString ());
-
-    //    System.out.printf ("%-15s %s%n", character.name, character.lostXYL);
   }
 }
