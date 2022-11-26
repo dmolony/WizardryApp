@@ -22,8 +22,8 @@ public class RewardsRootPane extends DataPane
     setAllColumnConstraints (10);             // all columns 10 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets
 
-    setLayout (rewardsGoldPane, 0, 2);
     setLayout (rewardsChestPane, 0, 0);
+    setLayout (rewardsGoldPane, 0, 2);
     setLayout (rewardsItemsPane, 0, 9);
     setLayout (rewardsTrapsPane, 30, 0);
 
