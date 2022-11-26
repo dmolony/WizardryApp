@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Item;
 import com.bytezone.wizardry.data.WizardryData;
 
@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 
 // -----------------------------------------------------------------------------------//
-public class ItemClassUsagePane extends DataPane
+public class ItemClassUsagePane extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private CheckBox[] checkBoxes;
@@ -21,7 +21,7 @@ public class ItemClassUsagePane extends DataPane
   {
     super (2, 9);                             // columns, rows
 
-    setColumnConstraints (110, 20);
+    setColumnConstraints (70, 30);
 
     createLabel ("Equip", 0, 0, HPos.RIGHT, 2);
 

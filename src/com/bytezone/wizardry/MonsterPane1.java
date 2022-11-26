@@ -1,7 +1,7 @@
 package com.bytezone.wizardry;
 
+import com.bytezone.appbase.BorderedDataPane;
 import com.bytezone.appbase.DataLayout;
-import com.bytezone.appbase.DataPane;
 import com.bytezone.wizardry.data.Monster;
 import com.bytezone.wizardry.data.WizardryData;
 
@@ -10,7 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 
 // -----------------------------------------------------------------------------------//
-public class MonsterPane1 extends DataPane
+public class MonsterPane1 extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
   private static final int NAME = 0;

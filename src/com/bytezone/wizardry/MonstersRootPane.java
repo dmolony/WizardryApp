@@ -29,20 +29,20 @@ public class MonstersRootPane extends DataPane
   {
     super (40, 26);                             // columns, rows
 
-    setAllColumnConstraints (20);               // all columns 20 pixels wide
+    setAllColumnConstraints (10);               // all columns 10 pixels wide
     setPadding (defaultInsets);                 // only the root pane has insets
 
     setLayout (monsterPane1, 0, 0);
     setLayout (monsterPane2, 0, 10);
-    setLayout (monsterPane3, 7, 21);
-    setLayout (resistancePane, 9, 10);
-    setLayout (propertyPane, 15, 10);
+    setLayout (monsterPane3, 12, 21);
+    setLayout (resistancePane, 13, 10);
+    setLayout (propertyPane, 21, 10);
 
     getChildren ().addAll (monsterPane1, monsterPane2, monsterPane3, resistancePane, propertyPane);
 
     canvas = new Canvas (280, 200);
 
-    GridPane.setConstraints (canvas, 10, 0);
+    GridPane.setConstraints (canvas, 17, 0);
     GridPane.setColumnSpan (canvas, 3);
     GridPane.setRowSpan (canvas, 7);
 

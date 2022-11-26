@@ -20,14 +20,14 @@ public class ItemsRootPane extends DataPane
   {
     super (40, 18);                             // columns, rows
 
-    setAllColumnConstraints (20);               // 40 columns x 20 pixels
+    setAllColumnConstraints (10);               // 40 columns x 10 pixels
     setPadding (defaultInsets);                 // only the root pane has insets
 
     setLayout (itemPane1, 0, 0);
     setLayout (itemPane2, 0, 12);
-    setLayout (resistancePane, 10, 0);
-    setLayout (itemPane4, 10, 10);
-    setLayout (monsterProtectPane, 16, 0);
+    setLayout (resistancePane, 17, 0);
+    setLayout (itemPane4, 17, 10);
+    setLayout (monsterProtectPane, 25, 0);
 
     getChildren ().addAll (itemPane1, itemPane2, resistancePane, itemPane4, monsterProtectPane);
   }
