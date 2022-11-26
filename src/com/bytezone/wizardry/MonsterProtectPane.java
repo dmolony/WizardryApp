@@ -21,8 +21,7 @@ public class MonsterProtectPane extends BorderedDataPane
   {
     super (3, 15);                             // columns, rows
 
-    //    setColumnConstraints (110, 30, 30);
-    setColumnConstraints (70, 30, 30);
+    setColumnConstraints (68, 30, 30);
 
     createLabel ("Protect", 0, 0, HPos.RIGHT, 2);
     createLabel ("Vs", 2, 0, HPos.CENTER, 1);

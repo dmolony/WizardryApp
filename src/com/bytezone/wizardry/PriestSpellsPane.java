@@ -22,7 +22,7 @@ public class PriestSpellsPane extends BorderedDataPane
   {
     super (4, 16);                             // columns, rows
 
-    setColumnConstraints (70, 30, 70, 30);
+    setColumnConstraints (66, 30, 66, 30);
 
     createLabel ("Priest spells", 1, 0, HPos.LEFT, 2);
 

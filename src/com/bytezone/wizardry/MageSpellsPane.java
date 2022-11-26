@@ -22,7 +22,7 @@ public class MageSpellsPane extends BorderedDataPane
   {
     super (4, 12);                             // columns, rows
 
-    setColumnConstraints (70, 30, 70, 30);
+    setColumnConstraints (66, 30, 66, 30);
 
     createLabel ("Mage spells", 1, 0, HPos.LEFT, 2);
 
