@@ -14,7 +14,7 @@ public class EncountersLabelsPane extends BorderedDataPane
   {
     super (1, 28);                              // columns, rows
 
-    setColumnConstraints (110);
+    setColumnConstraints (111);
 
     String[] labels = { "Group odds", "Minimum", "Range size", "Extra range odds", "Extra ranges",
         "Range offset", "Base range", "Odds", "", "", "", "", "", "", "", "", "", "", "", "", "",
@@ -22,7 +22,7 @@ public class EncountersLabelsPane extends BorderedDataPane
 
     for (int i = 0; i < 10; i++)
     {
-      labels[i * 2 + 8] = "Extra range " + i;
+      labels[i * 2 + 8] = "Extra range " + (i + 1);
       labels[i * 2 + 9] = labels[7];
     }
 
