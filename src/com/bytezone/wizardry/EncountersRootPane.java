@@ -17,7 +17,7 @@ public class EncountersRootPane extends DataPane
   public EncountersRootPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (50, 27);                           // columns, rows
+    super (50, 28);                           // columns, rows
 
     setAllColumnConstraints (5);              // all columns 5 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets
