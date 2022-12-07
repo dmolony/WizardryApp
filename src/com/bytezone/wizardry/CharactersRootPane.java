@@ -30,7 +30,7 @@ public class CharactersRootPane extends DataPane
   public CharactersRootPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (60, 30);                           // columns, rows
+    super (60, 31);                           // columns, rows
 
     setAllColumnConstraints (10);             // all columns 10 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets

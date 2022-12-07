@@ -193,6 +193,9 @@ public class Display extends Canvas
   private void drawOptions (GraphicsContext gc)
   // ---------------------------------------------------------------------------------//
   {
+    if (party.size () == 0)
+      return;
+
     int column = 13;
     int row = 6;
 

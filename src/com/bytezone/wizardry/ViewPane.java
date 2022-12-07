@@ -23,9 +23,9 @@ public class ViewPane extends Canvas implements MovementListener
   private static final int PANE_SIZE = 400;
   private static final int MIDDLE = 2;
   private static final int LEFT_1 = 1;
-  private static final int LEFT_2 = 0;
+  private static final int LEFT_2 = 0;        // not used
   private static final int RIGHT_1 = 3;
-  private static final int RIGHT_2 = 4;
+  private static final int RIGHT_2 = 4;       // not used
 
   WizardryData wizardry;
 

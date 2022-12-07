@@ -88,6 +88,7 @@ public class PartyManager
       roster.remove (ptr);
       return true;
     }
+
     return false;
   }
 
