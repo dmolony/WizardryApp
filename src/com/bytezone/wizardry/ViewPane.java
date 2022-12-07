@@ -27,6 +27,9 @@ public class ViewPane extends Canvas implements MovementListener
   private static final int RIGHT_1 = 3;
   private static final int RIGHT_2 = 4;       // not used
 
+  private static final boolean IGNORE_TELEPORT = false;
+  private static final boolean SHOW_TELEPORT = !IGNORE_TELEPORT;
+
   WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
@@ -56,9 +59,12 @@ public class ViewPane extends Canvas implements MovementListener
     gc.fillRect (0, 0, getWidth (), getHeight ());
     gc.setStroke (Color.BLACK);
 
+    MazeCell[][] view = walker.getView (IGNORE_TELEPORT);
+
     for (int distance = corners.length - 2; distance >= 0; distance--)
     {
-      MazeCell[] cells = walker.getCells (distance);
+      //      MazeCell[] cells = walker.getCells (distance);
+      MazeCell[] cells = view[distance];
 
       Wall wallLeft = walker.getCentreWall (cells[LEFT_1]);
       if (wallLeft != OPEN)
