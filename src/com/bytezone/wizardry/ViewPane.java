@@ -59,7 +59,7 @@ public class ViewPane extends Canvas implements MovementListener
     gc.fillRect (0, 0, getWidth (), getHeight ());
     gc.setStroke (Color.BLACK);
 
-    MazeCell[][] view = walker.getView (IGNORE_TELEPORT);
+    MazeCell[][] view = walker.getView (SHOW_TELEPORT);
 
     for (int distance = corners.length - 2; distance >= 0; distance--)
     {

@@ -117,8 +117,8 @@ public class MazeTab extends WizardryTabBase implements MovementListener
 
     for (int i = 0; i < levels; i++)
     {
-      walkers[i] = new Walker (wizardry.getMazeLevels ().get (i), Direction.NORTH,
-          new Location (i + 1, 0, 0));
+      walkers[i] =
+          new Walker (wizardry.getMazeLevels (), Direction.NORTH, new Location (i + 1, 0, 0));
       walkers[i].addWalkerListener (mazePane);
       walkers[i].addWalkerListener (viewPane);
       walkers[i].addWalkerListener (this);
