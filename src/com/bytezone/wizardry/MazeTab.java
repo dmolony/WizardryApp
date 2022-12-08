@@ -1,5 +1,6 @@
 package com.bytezone.wizardry;
 
+import java.util.List;
 import java.util.prefs.Preferences;
 
 import com.bytezone.wizardry.data.Location;
@@ -30,7 +31,7 @@ public class MazeTab extends WizardryTabBase implements MovementListener
 {
   private static final String PREFS_INDEX = "MazeIndex";
 
-  private ListView<MazeLevel> mazeLevels = new ListView<> ();
+  private ListView<MazeLevel> mazeLevelsListView = new ListView<> ();
 
   private MazePane mazePane = new MazePane ();
   private ViewPane viewPane = new ViewPane ();
@@ -42,7 +43,7 @@ public class MazeTab extends WizardryTabBase implements MovementListener
 
   private Text text = new Text ();
   private ScrollPane sp = new ScrollPane (text);
-  private VBox leftVBox = new VBox (10);
+  private VBox vBox = new VBox (10);
 
   private boolean initialising = true;
 
@@ -52,7 +53,7 @@ public class MazeTab extends WizardryTabBase implements MovementListener
   {
     super (title, keyCode);
 
-    leftVBox.setPadding (new Insets (10));
+    vBox.setPadding (new Insets (10));
 
     text.setFont (new Font ("Courier new", 14));
     sp.setStyle ("-fx-background-color:transparent;");
@@ -60,14 +61,20 @@ public class MazeTab extends WizardryTabBase implements MovementListener
     BorderPane layout = new BorderPane ();
     setContent (layout);
 
-    layout.setLeft (mazeLevels);
+    layout.setLeft (mazeLevelsListView);
     layout.setCenter (mazePane);
-    layout.setRight (leftVBox);
+    layout.setRight (vBox);
 
-    mazeLevels.setPrefWidth (LIST_WIDTH);
-    mazeLevels.setPlaceholder (new Label ("No Maze Levels"));
+    mazeLevelsListView.setPrefWidth (LIST_WIDTH);
+    mazeLevelsListView.setPlaceholder (new Label ("No Maze Levels"));
 
-    mazeLevels.getSelectionModel ().selectedItemProperty ()
+    mazePane.setOnMouseClicked (e -> mouseClick (e));
+    mazePane.setOnMouseEntered (e -> mazePane.setCursor (Cursor.HAND));
+    mazePane.setOnMouseExited (e -> mazePane.setCursor (Cursor.DEFAULT));
+
+    vBox.getChildren ().addAll (viewPane, sp);
+
+    mazeLevelsListView.getSelectionModel ().selectedItemProperty ()
         .addListener (new ChangeListener<MazeLevel> ()
         {
           @Override
@@ -104,30 +111,22 @@ public class MazeTab extends WizardryTabBase implements MovementListener
 
     mazePane.setWizardry (wizardry);
 
-    mazePane.setOnMouseClicked (e -> mouseClick (e));
-    mazePane.setOnMouseEntered (e -> mazePane.setCursor (Cursor.HAND));
-    mazePane.setOnMouseExited (e -> mazePane.setCursor (Cursor.DEFAULT));
+    List<MazeLevel> mazeLevels = wizardry.getMazeLevels ();
+    walkers = new Walker[mazeLevels.size ()];
 
-    leftVBox.getChildren ().clear ();
-    leftVBox.getChildren ().addAll (viewPane, sp);
-
-    int levels = wizardry.getMazeLevels ().size ();
-    walkers = new Walker[levels];
-
-    for (int i = 0; i < levels; i++)
+    for (int i = 0; i < walkers.length; i++)
     {
-      walkers[i] =
-          new Walker (wizardry.getMazeLevels (), Direction.NORTH, new Location (i + 1, 0, 0));
+      walkers[i] = new Walker (mazeLevels, Direction.NORTH, new Location (i + 1, 0, 0));
       walkers[i].addWalkerListener (mazePane);
       walkers[i].addWalkerListener (viewPane);
       walkers[i].addWalkerListener (this);
     }
 
-    mazeLevels.getItems ().clear ();
-    mazeLevels.getItems ().addAll (wizardry.getMazeLevels ());
+    mazeLevelsListView.getItems ().clear ();
+    mazeLevelsListView.getItems ().addAll (mazeLevels);
 
     if (!initialising)
-      mazeLevels.getSelectionModel ().select (0);
+      mazeLevelsListView.getSelectionModel ().select (0);
 
     refresh ();
   }
@@ -214,7 +213,7 @@ public class MazeTab extends WizardryTabBase implements MovementListener
   public void save (Preferences prefs)
   // ---------------------------------------------------------------------------------//
   {
-    int index = mazeLevels.getSelectionModel ().getSelectedIndex ();
+    int index = mazeLevelsListView.getSelectionModel ().getSelectedIndex ();
     prefs.putInt (PREFS_INDEX, index);
 
     for (Walker walker : walkers)
@@ -233,7 +232,7 @@ public class MazeTab extends WizardryTabBase implements MovementListener
       walker.restore (prefs);
 
     int index = prefs.getInt (PREFS_INDEX, -1);
-    mazeLevels.getSelectionModel ().select (index < 0 ? 0 : index);
+    mazeLevelsListView.getSelectionModel ().select (index < 0 ? 0 : index);
 
     initialising = false;
   }
