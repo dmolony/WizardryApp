@@ -148,6 +148,50 @@ public class CellGraphic
   }
 
   // ---------------------------------------------------------------------------------//
+  public void drawLost (MazeCell mazeCell)
+  // ---------------------------------------------------------------------------------//
+  {
+    Location location = mazeCell.getLocation ();
+
+    int top = (19 - location.getRow ()) * CELL_SIZE + INSET;
+    int left = location.getColumn () * CELL_SIZE + INSET;
+
+    gc.setFill (Color.BLACK);
+    gc.fillOval (left + 14, top + 2, 10, 10);                     // head
+
+    gc.setStroke (Color.BLACK);
+    gc.setLineWidth (2);
+
+    gc.strokeLine (left + 19, top + 10, left + 19, top + 26);     // torso
+
+    gc.strokeLine (left + 13, top + 18, left + 25, top + 18);     // arms
+
+    gc.strokeLine (left + 19, top + 26, left + 14, top + 34);     // left leg
+    gc.strokeLine (left + 19, top + 26, left + 24, top + 34);     // right leg
+
+    gc.setLineWidth (1);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public void drawTarget (MazeCell mazeCell)
+  // ---------------------------------------------------------------------------------//
+  {
+    Location location = mazeCell.getLocation ();
+
+    int top = (19 - location.getRow ()) * CELL_SIZE + INSET;
+    int left = location.getColumn () * CELL_SIZE + INSET;
+
+    gc.setFill (Color.GREEN);
+    gc.fillOval (left + 12, top + 12, 14, 14);
+
+    gc.setFill (Color.LIGHTGRAY);
+    gc.fillOval (left + 15, top + 15, 8, 8);
+
+    gc.setFill (Color.GREEN);
+    gc.fillOval (left + 17, top + 17, 4, 4);
+  }
+
+  // ---------------------------------------------------------------------------------//
   public void drawWalker (Walker walker)
   // ---------------------------------------------------------------------------------//
   {

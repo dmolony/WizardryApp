@@ -80,8 +80,6 @@ public class CharacterPane1 extends BorderedDataPane
     setText (textOut[MAGE_TOTALS], character.getSpellsString (MAGE_SPELLS));
     setText (textOut[PRIEST_TOTALS], character.getSpellsString (PRIEST_SPELLS));
     setText (textOut[MYSTERY], character.mysteryBit);
-
-    if (character.lostXYL != null)
-      setText (textOut[LOST_XYL], character.lostXYL.toString ());
+    setText (textOut[LOST_XYL], character.isLost () ? character.lostXYL.toString () : "");
   }
 }
