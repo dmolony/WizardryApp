@@ -1,10 +1,5 @@
 package com.bytezone.wizardry;
 
-import static com.bytezone.wizardry.data.Walls.EAST;
-import static com.bytezone.wizardry.data.Walls.NORTH;
-import static com.bytezone.wizardry.data.Walls.SOUTH;
-import static com.bytezone.wizardry.data.Walls.WEST;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
@@ -99,6 +94,7 @@ public class Walker
           view[distance][4] = level.getMazeCell (column, row + 2);
           break;
       }
+
       currentLocation.move (direction);
       if (checkTeleport)
         currentLocation = checkTeleport (currentLocation);
@@ -125,39 +121,28 @@ public class Walker
   Wall getLeftWall (MazeCell cell)
   // ---------------------------------------------------------------------------------//
   {
-    return switch (direction)
-    {
-      case NORTH -> cell.getWalls ().wall (WEST);
-      case SOUTH -> cell.getWalls ().wall (EAST);
-      case EAST -> cell.getWalls ().wall (NORTH);
-      case WEST -> cell.getWalls ().wall (SOUTH);
-    };
+    return cell.getLeftWall (direction);
   }
 
   // ---------------------------------------------------------------------------------//
   Wall getRightWall (MazeCell cell)
   // ---------------------------------------------------------------------------------//
   {
-    return switch (direction)
-    {
-      case NORTH -> cell.getWalls ().wall (EAST);
-      case SOUTH -> cell.getWalls ().wall (WEST);
-      case EAST -> cell.getWalls ().wall (SOUTH);
-      case WEST -> cell.getWalls ().wall (NORTH);
-    };
+    return cell.getRightWall (direction);
   }
 
   // ---------------------------------------------------------------------------------//
   Wall getCentreWall (MazeCell cell)
   // ---------------------------------------------------------------------------------//
   {
-    return switch (direction)
-    {
-      case NORTH -> cell.getWalls ().wall (NORTH);
-      case SOUTH -> cell.getWalls ().wall (SOUTH);
-      case EAST -> cell.getWalls ().wall (EAST);
-      case WEST -> cell.getWalls ().wall (WEST);
-    };
+    return cell.getCentreWall (direction);
+  }
+
+  // ---------------------------------------------------------------------------------//
+  public Direction getDirection ()
+  // ---------------------------------------------------------------------------------//
+  {
+    return direction;
   }
 
   // ---------------------------------------------------------------------------------//

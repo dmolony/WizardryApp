@@ -103,7 +103,6 @@ public class MazeTab extends WizardryTabBase implements MovementListener
     this.wizardry = wizardry;
 
     mazePane.setWizardry (wizardry);
-    viewPane.setWizardry (wizardry);
 
     mazePane.setOnMouseClicked (e -> mouseClick (e));
     mazePane.setOnMouseEntered (e -> mazePane.setCursor (Cursor.HAND));

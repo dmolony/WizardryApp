@@ -6,7 +6,7 @@ import static com.bytezone.wizardry.data.Walls.Wall.OPEN;
 
 import com.bytezone.wizardry.data.MazeCell;
 import com.bytezone.wizardry.data.Walls.Wall;
-import com.bytezone.wizardry.data.WizardryData;
+import com.bytezone.wizardry.data.WizardryData.Direction;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,16 +21,13 @@ public class ViewPane extends Canvas implements MovementListener
   private static final int[] doors = { 25, 20, 15, 10, 8, 6, 4, 2 };
   private static final int[] vGaps = { 20, 18, 16, 12, 10, 6, 5, 4 };
   private static final int PANE_SIZE = 400;
+
+  private static final int LEFT = 1;
   private static final int MIDDLE = 2;
-  private static final int LEFT_1 = 1;
-  private static final int LEFT_2 = 0;        // not used
-  private static final int RIGHT_1 = 3;
-  private static final int RIGHT_2 = 4;       // not used
+  private static final int RIGHT = 3;
 
   private static final boolean IGNORE_TELEPORT = false;
   private static final boolean SHOW_TELEPORT = !IGNORE_TELEPORT;
-
-  WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public ViewPane ()
@@ -44,13 +41,6 @@ public class ViewPane extends Canvas implements MovementListener
   }
 
   // ---------------------------------------------------------------------------------//
-  public void setWizardry (WizardryData wizardry)
-  // ---------------------------------------------------------------------------------//
-  {
-    this.wizardry = wizardry;
-  }
-
-  // ---------------------------------------------------------------------------------//
   @Override
   public void walkerMoved (Walker walker)
   // ---------------------------------------------------------------------------------//
@@ -60,35 +50,29 @@ public class ViewPane extends Canvas implements MovementListener
     gc.setStroke (Color.BLACK);
 
     MazeCell[][] view = walker.getView (SHOW_TELEPORT);
+    Direction direction = walker.getDirection ();
 
     for (int distance = corners.length - 2; distance >= 0; distance--)
     {
-      //      MazeCell[] cells = walker.getCells (distance);
       MazeCell[] cells = view[distance];
 
-      Wall wallLeft = walker.getCentreWall (cells[LEFT_1]);
+      Wall wallLeft = cells[LEFT].getCentreWall (direction);
       if (wallLeft != OPEN)
         drawCentre (gc, distance, -1, wallLeft);
 
-      Wall wallCentre = walker.getCentreWall (cells[MIDDLE]);
+      Wall wallCentre = cells[MIDDLE].getCentreWall (direction);
       if (wallCentre != OPEN)
         drawCentre (gc, distance, 0, wallCentre);
 
-      Wall wallRight = walker.getCentreWall (cells[RIGHT_1]);
+      Wall wallRight = cells[RIGHT].getCentreWall (direction);
       if (wallRight != OPEN)
         drawCentre (gc, distance, 1, wallRight);
 
-      //      if (walker.getLeftWall (cells[LEFT_1]) != OPEN)
-      //        drawLeft (gc, distance, -1);
-
-      wallLeft = walker.getLeftWall (cells[MIDDLE]);
+      wallLeft = cells[MIDDLE].getLeftWall (direction);
       if (wallLeft != OPEN)
         drawLeft (gc, distance, 0, wallLeft);
 
-      //      if (walker.getRightWall (cells[RIGHT_1]) != OPEN)
-      //        drawRight (gc, distance, 1);
-
-      wallRight = walker.getRightWall (cells[MIDDLE]);
+      wallRight = cells[MIDDLE].getRightWall (direction);
       if (wallRight != OPEN)
         drawRight (gc, distance, 0, wallRight);
     }
