@@ -3,6 +3,7 @@ package com.bytezone.wizardry;
 import java.util.List;
 import java.util.prefs.Preferences;
 
+import com.bytezone.wizardry.data.Character;
 import com.bytezone.wizardry.data.Location;
 import com.bytezone.wizardry.data.MazeCell;
 import com.bytezone.wizardry.data.MazeLevel;
@@ -166,6 +167,14 @@ public class MazeTab extends WizardryTabBase implements MovementListener
 
     if (currentMazeCell.isLair ())
       description.append ("\n\nLAIR");
+
+    Location here = currentMazeCell.getLocation ();
+    if (wizardry.hasLostCharacter (here))
+    {
+      description.append ("\n\nLost characters:");
+      for (Character character : wizardry.getLostCharacters (here))
+        description.append ("\n  " + character.name);
+    }
 
     text.setText (description.toString ());
   }

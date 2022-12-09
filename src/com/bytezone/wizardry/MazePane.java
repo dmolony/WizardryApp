@@ -51,13 +51,6 @@ public class MazePane extends Canvas implements MovementListener
 
     teleportLocations = wizardry.getTeleportLocations ();
     lostCharacterLocations = wizardry.getLostCharacterLocations ();
-
-    //    System.out.println ("Teleport");
-    //    for (Location location : wizardry.getTeleportLocations ())
-    //      System.out.println (location);
-    //    System.out.println ("Lost");
-    //    for (Location location : wizardry.getLostCharacterLocations ())
-    //      System.out.println (location);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -116,18 +109,12 @@ public class MazePane extends Canvas implements MovementListener
   private void updateCellSymbols (MazeCell mazeCell)
   // ---------------------------------------------------------------------------------//
   {
-    int row = mazeCell.getLocation ().getRow ();
-    int col = mazeCell.getLocation ().getColumn ();
-    int level = mazeCell.getLocation ().getLevel ();
-
     for (Location location : lostCharacterLocations)
-      if (location.getLevel () == level && location.getRow () == row
-          && location.getColumn () == col)
+      if (location.equals (mazeCell.getLocation ()))
         cellGraphic.drawLost (mazeCell);
 
     for (Location location : teleportLocations)
-      if (location.getLevel () == level && location.getRow () == row
-          && location.getColumn () == col)
+      if (location.equals (mazeCell.getLocation ()))
         cellGraphic.drawTarget (mazeCell);
   }
 }
