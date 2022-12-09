@@ -1,8 +1,5 @@
 package com.bytezone.wizardry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bytezone.wizardry.data.Location;
 import com.bytezone.wizardry.data.MazeCell;
 import com.bytezone.wizardry.data.MazeLevel;
@@ -24,8 +21,7 @@ public class MazePane extends Canvas implements MovementListener
 
   private CellGraphic cellGraphic = new CellGraphic (getGraphicsContext2D ());
 
-  private List<Location> teleportLocations = new ArrayList<> ();
-  private List<Location> lostCharacterLocations = new ArrayList<> ();
+  private WizardryData wizardry;
 
   // ---------------------------------------------------------------------------------//
   public MazePane ()
@@ -49,8 +45,7 @@ public class MazePane extends Canvas implements MovementListener
       gc.fillRect (0, 0, getWidth (), getHeight ());
     }
 
-    teleportLocations = wizardry.getTeleportLocations ();
-    lostCharacterLocations = wizardry.getLostCharacterLocations ();
+    this.wizardry = wizardry;
   }
 
   // ---------------------------------------------------------------------------------//
@@ -109,12 +104,10 @@ public class MazePane extends Canvas implements MovementListener
   private void updateCellSymbols (MazeCell mazeCell)
   // ---------------------------------------------------------------------------------//
   {
-    for (Location location : lostCharacterLocations)
-      if (location.equals (mazeCell.getLocation ()))
-        cellGraphic.drawLost (mazeCell);
+    if (wizardry.hasLostCharacter (mazeCell.getLocation ()))
+      cellGraphic.drawLost (mazeCell);
 
-    for (Location location : teleportLocations)
-      if (location.equals (mazeCell.getLocation ()))
-        cellGraphic.drawTarget (mazeCell);
+    if (wizardry.isTeleportTarget (mazeCell.getLocation ()))
+      cellGraphic.drawTarget (mazeCell);
   }
 }
