@@ -55,7 +55,7 @@ public class MazePane extends Canvas implements MovementListener
     int row = (int) ((getHeight () - y - MazeCell.INSET) / MazeCell.CELL_SIZE);
     int column = (int) ((x - MazeCell.INSET) / MazeCell.CELL_SIZE);
 
-    return new Location (0, column, row);
+    return new Location (currentLevel, column, row);
   }
 
   // ---------------------------------------------------------------------------------//
@@ -65,14 +65,14 @@ public class MazePane extends Canvas implements MovementListener
   {
     GraphicsContext gc = getGraphicsContext2D ();
 
-    if (currentLevel == walker.location.getLevel ())
+    if (currentLevel == walker.location.getLevel ())      // redraw old location
     {
       MazeCell cell =
           walker.mazeLevel.getMazeCell (new Location (currentLevel, currentColumn, currentRow));
       cellGraphic.draw (cell);
       updateCellSymbols (cell);
     }
-    else
+    else                                                  // draw the whole maze
     {
       currentLevel = walker.location.getLevel ();
       gc.setFill (Color.LIGHTGRAY);
@@ -81,7 +81,7 @@ public class MazePane extends Canvas implements MovementListener
       update (walker.mazeLevel);
     }
 
-    cellGraphic.drawWalker (walker);
+    cellGraphic.drawWalker (walker);                      // draw new location
 
     currentRow = walker.location.getRow ();
     currentColumn = walker.location.getColumn ();
