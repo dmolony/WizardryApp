@@ -168,12 +168,12 @@ public class MazeTab extends WizardryTabBase implements MovementListener
     if (currentMazeCell.isLair ())
       description.append ("\n\nLAIR");
 
-    Location here = currentMazeCell.getLocation ();
-    if (wizardry.hasLostCharacter (here))
+    Location location = currentMazeCell.getLocation ();
+    if (wizardry.hasLostCharacter (location))
     {
       description.append ("\n\nLost characters:");
-      for (Character character : wizardry.getLostCharacters (here))
-        description.append ("\n  " + character.name);
+      for (Character character : wizardry.getLostCharacters (location))
+        description.append (String.format ("%n %-15s %s", character.name, character.status));
     }
 
     text.setText (description.toString ());

@@ -5,6 +5,7 @@ import com.bytezone.appbase.DataLayout;
 import com.bytezone.wizardry.data.MazeLevel;
 import com.bytezone.wizardry.data.Special;
 import com.bytezone.wizardry.data.WizardryData;
+import com.bytezone.wizardry.data.WizardryData.Square;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -63,14 +64,20 @@ public class SpecialsTablePane extends BorderedDataPane
     {
       Special special = mazeLevel.getSpecial (i);
 
-      setText (textOut[0][i], special.square);
-      setText (textOut[1][i], special.aux[0]);
-      setText (textOut[2][i], special.aux[1]);
-      setText (textOut[3][i], special.aux[2]);
-      setText (textOut[4][i], special.locations.size ());
-      setText (textOut[5][i], special.getLocationText ());
-      setText (textOut[6][i], special.isMessage () ? special.aux[1] : "");
-      setText (textOut[7][i], special.getText ());
+      if (special.square == Square.NORMAL && special.locations.size () == 0)
+        for (int j = 0; j < textOut.length; j++)
+          setText (textOut[j][i], "");
+      else
+      {
+        setText (textOut[0][i], special.square);
+        setText (textOut[1][i], special.aux[0]);
+        setText (textOut[2][i], special.aux[1]);
+        setText (textOut[3][i], special.aux[2]);
+        setText (textOut[4][i], special.locations.size ());
+        setText (textOut[5][i], special.getLocationText ());
+        setText (textOut[6][i], special.isMessage () ? special.aux[1] : "");
+        setText (textOut[7][i], special.getText ());
+      }
     }
   }
 }
