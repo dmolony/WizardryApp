@@ -17,9 +17,9 @@ public class EncountersRootPane extends DataPane
   private static final Random random = new Random ();
 
   private EncountersLabelsPane encountersLabels = new EncountersLabelsPane ();
-  private EncountersHeader encountersHeader1 = new EncountersHeader (1);
-  private EncountersHeader encountersHeader2 = new EncountersHeader (2);
-  private EncountersHeader encountersHeader3 = new EncountersHeader (3);
+  //  private EncountersHeader encountersHeader1 = new EncountersHeader (1);
+  //  private EncountersHeader encountersHeader2 = new EncountersHeader (2);
+  //  private EncountersHeader encountersHeader3 = new EncountersHeader (3);
 
   private EncountersTable encountersTable0 = new EncountersTable (0);
   private EncountersTable encountersTable1 = new EncountersTable (1);
@@ -36,19 +36,20 @@ public class EncountersRootPane extends DataPane
     setAllColumnConstraints (5);              // all columns 5 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets
 
-    setLayout (encountersLabels, 0, 1);
-    setLayout (encountersHeader1, 10, 0);
-    setLayout (encountersHeader2, 29, 0);
-    setLayout (encountersHeader3, 48, 0);
+    setLayout (encountersLabels, 0, 0);
+    //    setLayout (encountersHeader1, 10, 0);
+    //    setLayout (encountersHeader2, 29, 0);
+    //    setLayout (encountersHeader3, 48, 0);
 
-    setLayout (encountersTable0, 10, 1);
-    setLayout (encountersTable1, 29, 1);
-    setLayout (encountersTable2, 48, 1);
+    setLayout (encountersTable0, 10, 0);
+    setLayout (encountersTable1, 29, 0);
+    setLayout (encountersTable2, 48, 0);
 
     setGridLinesVisible (false);
 
-    getChildren ().addAll (encountersLabels, encountersHeader1, encountersHeader2,
-        encountersHeader3, encountersTable0, encountersTable1, encountersTable2);
+    getChildren ().addAll (encountersLabels,//
+        //        encountersHeader1, encountersHeader2, encountersHeader3, //
+        encountersTable0, encountersTable1, encountersTable2);
   }
 
   // ---------------------------------------------------------------------------------//
