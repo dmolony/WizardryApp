@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 public class SpecialsTablePane extends BorderedDataPane
 // -----------------------------------------------------------------------------------//
 {
+  private static final int WIDTH = 63;
+
   TextField[][] textOut = new TextField[8][];
 
   // ---------------------------------------------------------------------------------//
@@ -23,8 +25,7 @@ public class SpecialsTablePane extends BorderedDataPane
   {
     super (9, 17);                              // columns, rows
 
-    int width = 63;
-    setColumnConstraints (30, 85, width, width, width, width, 80, 40, 320);
+    setColumnConstraints (30, 85, WIDTH, WIDTH, WIDTH, WIDTH, 80, 40, 320);
 
     String[] headings = { "Square type", "Aux 0", "Aux 1", "Aux 2", "Occurs", "First location",
         "Msg #", "Description" };
