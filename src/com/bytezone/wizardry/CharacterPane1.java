@@ -72,7 +72,7 @@ public class CharacterPane1 extends BorderedDataPane
     setText (textOut[CLASS], character.characterClass);
     setText (textOut[AGE], getText (character.age));
     setText (textOut[AWARDS], character.awards);
-    setText (textOut[IN_MAZE], character.inMaze ? "** OUT **" : "");
+    setText (textOut[IN_MAZE], character.inMaze);
     setText (textOut[GOLD], character.gold);
     setText (textOut[EXPERIENCE], character.experience);
     setText (textOut[CRIT], character.crithitm);
