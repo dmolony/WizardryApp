@@ -100,7 +100,6 @@ public class MazeTab extends WizardryTabBase implements MovementListener
       return;
 
     setValid (true);
-
   }
 
   // ---------------------------------------------------------------------------------//
