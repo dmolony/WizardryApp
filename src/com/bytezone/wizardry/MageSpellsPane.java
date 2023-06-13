@@ -35,10 +35,12 @@ public class MageSpellsPane extends BorderedDataPane
       mageSpells2[i] = WizardryData.spells[11 + i];         // 11:20
 
     createLabelsVertical (mageSpells1, 0, 1, HPos.RIGHT);
-    checkBox1 = createCheckBoxes (new DataLayout (1, 1, mageSpells1.length, Pos.CENTER));
+    checkBox1 =
+        createCheckBoxes (new DataLayout (1, 1, mageSpells1.length, Pos.CENTER, false));
 
     createLabelsVertical (mageSpells2, 2, 1, HPos.RIGHT);
-    checkBox2 = createCheckBoxes (new DataLayout (3, 1, mageSpells2.length, Pos.CENTER));
+    checkBox2 =
+        createCheckBoxes (new DataLayout (3, 1, mageSpells2.length, Pos.CENTER, false));
   }
 
   // ---------------------------------------------------------------------------------//

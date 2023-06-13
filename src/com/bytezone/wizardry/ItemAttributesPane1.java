@@ -37,12 +37,13 @@ public class ItemAttributesPane1 extends BorderedDataPane
 
     setColumnConstraints (110, 145);
 
-    String[] labelText = { "Name", "Generic name", "Kind", "Alignment", "Cursed", "Auto kill",
-        "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
+    String[] labelText = { "Name", "Generic name", "Kind", "Alignment", "Cursed",
+        "Auto kill", "Decay odds", "Decay to", "Damage dice", "Spell", "Value" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
-    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
+    textOut =
+        createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT, false));
   }
 
   // ---------------------------------------------------------------------------------//

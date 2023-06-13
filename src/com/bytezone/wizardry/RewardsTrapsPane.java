@@ -23,7 +23,8 @@ public class RewardsTrapsPane extends BorderedDataPane
     setColumnConstraints (90, 30);
 
     createLabelsVertical (WizardryData.trapType, 0, 0, HPos.RIGHT);
-    traps = createCheckBoxes (new DataLayout (1, 0, WizardryData.trapType.length, HPos.LEFT));
+    traps = createCheckBoxes (
+        new DataLayout (1, 0, WizardryData.trapType.length, HPos.LEFT, false));
     assert getRows () == traps.length;
   }
 

@@ -23,8 +23,8 @@ public class ResistancePane extends BorderedDataPane
     createLabel ("Resistance", 0, 0, HPos.CENTER, 2);
 
     createLabelsVertical (WizardryData.resistance, 0, 1, HPos.RIGHT);
-    checkBoxes =
-        createCheckBoxes (new DataLayout (1, 1, WizardryData.resistance.length, Pos.CENTER));
+    checkBoxes = createCheckBoxes (
+        new DataLayout (1, 1, WizardryData.resistance.length, Pos.CENTER, false));
   }
 
   // ---------------------------------------------------------------------------------//

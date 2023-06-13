@@ -41,13 +41,13 @@ public class RewardsItemsPane extends BorderedDataPane
     int width = 140;
     setColumnConstraints (110, width, width, width, width, width);
 
-    String[] labels = { "Probability", "Item # range", "Item from", "Item to", "Min", "Size", "Max",
-        "Range", "Odds" };
+    String[] labels = { "Probability", "Item # range", "Item from", "Item to", "Min",
+        "Size", "Max", "Range", "Odds" };
     assert getRows () == labels.length;
 
     createLabelsVertical (labels, 0, 0, HPos.RIGHT);
 
-    DataLayout dataLayout3 = new DataLayout (1, 0, 9, Pos.CENTER_LEFT);
+    DataLayout dataLayout3 = new DataLayout (1, 0, 9, Pos.CENTER_LEFT, false);
     for (int i = 0; i < MAX_ITEMS; i++)
       items[i] = createTextFields (dataLayout3);
   }
@@ -90,7 +90,8 @@ public class RewardsItemsPane extends BorderedDataPane
         ItemReward itemReward = rewardDetails.itemReward;
 
         setText (items[itemCol][ITEM_ODDS], rewardDetails.rewardPct + "%");
-        setText (items[itemCol][ITEM_NO], itemReward.getMin () + " : " + itemReward.getMax ());
+        setText (items[itemCol][ITEM_NO],
+            itemReward.getMin () + " : " + itemReward.getMax ());
         setText (items[itemCol][ITEM_MIN], wizardry.getItem (itemReward.getMin ()));
         setText (items[itemCol][MIN], itemReward.min ());
         setText (items[itemCol][SIZE], itemReward.size ());

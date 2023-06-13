@@ -35,10 +35,12 @@ public class PriestSpellsPane extends BorderedDataPane
       priestSpells2[i] = WizardryData.spells[36 + i];         // 36:49
 
     createLabelsVertical (priestSpells1, 0, 1, HPos.RIGHT);
-    checkBox1 = createCheckBoxes (new DataLayout (1, 1, priestSpells1.length, Pos.CENTER));
+    checkBox1 =
+        createCheckBoxes (new DataLayout (1, 1, priestSpells1.length, Pos.CENTER, false));
 
     createLabelsVertical (priestSpells2, 2, 1, HPos.RIGHT);
-    checkBox2 = createCheckBoxes (new DataLayout (3, 1, priestSpells2.length, Pos.CENTER));
+    checkBox2 =
+        createCheckBoxes (new DataLayout (3, 1, priestSpells2.length, Pos.CENTER, false));
   }
 
   // ---------------------------------------------------------------------------------//

@@ -29,7 +29,8 @@ public class CharacterPane4 extends DataPane
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
-    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT));
+    textOut =
+        createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_RIGHT, false));
   }
 
   // ---------------------------------------------------------------------------------//

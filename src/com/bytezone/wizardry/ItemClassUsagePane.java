@@ -26,8 +26,8 @@ public class ItemClassUsagePane extends BorderedDataPane
     createLabel ("Equip", 0, 0, HPos.RIGHT, 2);
 
     createLabelsVertical (WizardryData.characterClass, 0, 1, HPos.RIGHT);
-    checkBoxes =
-        createCheckBoxes (new DataLayout (1, 1, WizardryData.characterClass.length, Pos.CENTER));
+    checkBoxes = createCheckBoxes (
+        new DataLayout (1, 1, WizardryData.characterClass.length, Pos.CENTER, false));
   }
 
   // ---------------------------------------------------------------------------------//

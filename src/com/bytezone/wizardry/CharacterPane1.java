@@ -45,12 +45,13 @@ public class CharacterPane1 extends BorderedDataPane
     setColumnConstraints (70, 155);
 
     String[] labelText = { "Name", "Password", "Status", "Alignment", "Race", "Class",
-        "Age (weeks)", "Awards", "In maze", "Gold", "Experience", "Crit", "HP dam dice", "Mage",
-        "Priest", "Bit 0", "Lost XYL" };
+        "Age (weeks)", "Awards", "In maze", "Gold", "Experience", "Crit", "HP dam dice",
+        "Mage", "Priest", "Bit 0", "Lost XYL" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
-    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
+    textOut =
+        createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT, false));
   }
 
   // ---------------------------------------------------------------------------------//

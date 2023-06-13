@@ -27,8 +27,8 @@ public class SpecialsTablePane extends BorderedDataPane
 
     setColumnConstraints (30, 85, WIDTH, WIDTH, WIDTH, WIDTH, 80, 40, 320);
 
-    String[] headings = { "Square type", "Aux 0", "Aux 1", "Aux 2", "Occurs", "First location",
-        "Msg #", "Description" };
+    String[] headings = { "Square type", "Aux 0", "Aux 1", "Aux 2", "Occurs",
+        "First location", "Msg #", "Description" };
 
     String[] squaresText = new String[16];
     for (int i = 0; i < squaresText.length; i++)
@@ -37,7 +37,7 @@ public class SpecialsTablePane extends BorderedDataPane
     createLabelsHorizontal (headings, 1, 0, HPos.CENTER);
     createLabelsVertical (squaresText, 0, 1, HPos.RIGHT);
 
-    DataLayout dataLayout = new DataLayout (1, 1, 16, Pos.CENTER_LEFT);
+    DataLayout dataLayout = new DataLayout (1, 1, 16, Pos.CENTER_LEFT, false);
 
     textOut[0] = createTextFields (dataLayout);
     textOut[1] = createTextFields (dataLayout, Pos.CENTER_RIGHT);

@@ -39,11 +39,12 @@ public class PartyPane extends BorderedDataPane
     int[] widths = { 70, 40, 110, 60, 40, 50, 130, 100, 100 };
     setColumnConstraints (widths);
 
-    String[] partyLabels = { "Party", "Slogan", "# 1", "# 2", "# 3", "# 4", "# 5", "# 6" };
+    String[] partyLabels =
+        { "Party", "Slogan", "# 1", "# 2", "# 3", "# 4", "# 5", "# 6" };
     createLabelsVertical (partyLabels, 0, 0, HPos.RIGHT);
 
-    DataLayout dataLayout1 = new DataLayout (1, 0, 6, Pos.CENTER_LEFT, 4);
-    DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_RIGHT);
+    DataLayout dataLayout1 = new DataLayout (1, 0, 6, Pos.CENTER_LEFT, 4, false);
+    DataLayout dataLayout2 = new DataLayout (1, 2, 6, Pos.CENTER_RIGHT, false);
 
     partyName = createTextField (dataLayout1);
     dataLayout1.setColumnSpan (5);

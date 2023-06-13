@@ -36,7 +36,7 @@ public class RewardsGoldPane extends BorderedDataPane
     createLabelsVertical (labels, 0, 0, HPos.RIGHT);
     assert getRows () == labels.length;
 
-    DataLayout dataLayout2 = new DataLayout (1, 0, 6, Pos.CENTER_LEFT);
+    DataLayout dataLayout2 = new DataLayout (1, 0, 6, Pos.CENTER_LEFT, false);
     gold = createTextFields (dataLayout2);
   }
 

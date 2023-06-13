@@ -31,9 +31,9 @@ public class ExperienceCalculator extends DataPane
   private static final int ABILITY = 11;
   private static final int TOTAL = 12;
 
-  String[] labelText =
-      { "HP # dice", "HP # sides", "Breathe", "Armour class", "Damage # dice", "Mage level",
-          "Priest level", "Level drain", "Regen", "Resist 1", "Resist 2", "Abilities", "Total" };
+  String[] labelText = { "HP # dice", "HP # sides", "Breathe", "Armour class",
+      "Damage # dice", "Mage level", "Priest level", "Level drain", "Regen", "Resist 1",
+      "Resist 2", "Abilities", "Total" };
 
   TextField[] textIn = new TextField[labelText.length];
   TextField[] textOut = new TextField[labelText.length];
@@ -50,9 +50,9 @@ public class ExperienceCalculator extends DataPane
     setColumnConstraints (125, 60, 80);
 
     createLabel ("Monster", 0, 0, HPos.RIGHT, 1);
-    monsters =
-        createComboBox (wizardry.getMonsters (), (options, oldValue, newValue) -> update (newValue),
-            new DataLayout (1, 0, 1, Pos.CENTER_LEFT));
+    monsters = createComboBox (wizardry.getMonsters (),
+        (options, oldValue, newValue) -> update (newValue),
+        new DataLayout (1, 0, 1, Pos.CENTER_LEFT, false));
 
     for (int i = 0; i < textIn.length; i++)
     {
@@ -151,7 +151,8 @@ public class ExperienceCalculator extends DataPane
       }
     }
 
-    int expHitPoints = values[HP_DICE] * values[HP_SIDES] * (values[BREATHE] == 0 ? 20 : 40);
+    int expHitPoints =
+        values[HP_DICE] * values[HP_SIDES] * (values[BREATHE] == 0 ? 20 : 40);
     int expAc = 40 * (11 - values[AC]);
 
     int expMage = getBonus (35, values[MAGE_LEVEL]);
@@ -160,14 +161,14 @@ public class ExperienceCalculator extends DataPane
     int expHeal = getBonus (90, values[HEAL]);
 
     int expDamage = values[RECSN] <= 1 ? 0 : getBonus (30, values[RECSN]);
-    int expUnaffect =
-        values[MAGIC_RESISTANCE] == 0 ? 0 : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
+    int expUnaffect = values[MAGIC_RESISTANCE] == 0 ? 0
+        : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
 
     int expFlags1 = getBonus (35, Integer.bitCount (values[RESISTANCE] & 0x7E));    // 6 bits
     int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));       // 7 bits
 
-    int total = expHitPoints + expAc + expMage + expPriest + expDrain + expHeal + expDamage
-        + expUnaffect + expFlags1 + expFlags2;
+    int total = expHitPoints + expAc + expMage + expPriest + expDrain + expHeal
+        + expDamage + expUnaffect + expFlags1 + expFlags2;
 
     textOut[HP_SIDES].setText (getText (expHitPoints));
     textOut[AC].setText (getText (expAc));

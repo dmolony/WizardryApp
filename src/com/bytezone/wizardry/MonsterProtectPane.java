@@ -28,7 +28,8 @@ public class MonsterProtectPane extends BorderedDataPane
 
     createLabelsVertical (WizardryData.monsterClass, 0, 1, HPos.RIGHT);
 
-    DataLayout dataLayout = new DataLayout (1, 1, WizardryData.monsterClass.length, Pos.CENTER);
+    DataLayout dataLayout =
+        new DataLayout (1, 1, WizardryData.monsterClass.length, Pos.CENTER, false);
     protect = createCheckBoxes (dataLayout);
     purpose = createCheckBoxes (dataLayout);
   }

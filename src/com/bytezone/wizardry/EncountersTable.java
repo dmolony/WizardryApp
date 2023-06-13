@@ -29,8 +29,8 @@ public class EncountersTable extends BorderedDataPane
 
     setColumnConstraints (80, 140);
 
-    textOut1 = createTextFields (new DataLayout (0, 0, 28, Pos.CENTER_RIGHT, 1));
-    textOut2 = createTextFields (new DataLayout (1, 6, 22, Pos.CENTER_LEFT, 1));
+    textOut1 = createTextFields (new DataLayout (0, 0, 28, Pos.CENTER_RIGHT, 1, false));
+    textOut2 = createTextFields (new DataLayout (1, 6, 22, Pos.CENTER_LEFT, 1, false));
   }
 
   // ---------------------------------------------------------------------------------//

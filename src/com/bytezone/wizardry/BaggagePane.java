@@ -42,7 +42,8 @@ public class BaggagePane extends BorderedDataPane
     createLabelsHorizontal (headings, 1, 0, HPos.CENTER);
     createLabelsVertical (possessionLabels, 0, 1, HPos.RIGHT);
 
-    DataLayout dataLayout = new DataLayout (1, 1, possessionLabels.length, Pos.CENTER_LEFT);
+    DataLayout dataLayout =
+        new DataLayout (1, 1, possessionLabels.length, Pos.CENTER_LEFT, false);
 
     items = createTextFields (dataLayout);
     equipped = createCheckBoxes (dataLayout, Pos.CENTER);

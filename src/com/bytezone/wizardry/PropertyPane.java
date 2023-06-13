@@ -25,7 +25,8 @@ public class PropertyPane extends BorderedDataPane
     createLabel ("Property", 0, 0, HPos.CENTER, 2);
 
     createLabelsVertical (WizardryData.property, 0, 1, HPos.RIGHT);
-    checkBoxes = createCheckBoxes (new DataLayout (1, 1, WizardryData.property.length, Pos.CENTER));
+    checkBoxes = createCheckBoxes (
+        new DataLayout (1, 1, WizardryData.property.length, Pos.CENTER, false));
   }
 
   // ---------------------------------------------------------------------------------//

@@ -28,7 +28,8 @@ public class MonsterPane3 extends BorderedDataPane
 
     setColumnConstraints (300);
 
-    textOut = createTextFields (new DataLayout (0, 0, getRows (), Pos.CENTER_LEFT));
+    textOut =
+        createTextFields (new DataLayout (0, 0, getRows (), Pos.CENTER_LEFT, false));
   }
 
   // ---------------------------------------------------------------------------------//

@@ -40,13 +40,14 @@ public class MonsterPane2 extends BorderedDataPane
 
     setColumnConstraints (110, 70);
 
-    String[] labelText = { "ID", "Mage level", "Priest level", "Magic resistance", "Partner odds",
-        "Image", "Level drain", "Regen", "Experience", "Armour class", "Unique", "Breathe",
-        "Wandering reward", "Lair reward" };
+    String[] labelText = { "ID", "Mage level", "Priest level", "Magic resistance",
+        "Partner odds", "Image", "Level drain", "Regen", "Experience", "Armour class",
+        "Unique", "Breathe", "Wandering reward", "Lair reward" };
     assert getRows () == labelText.length;
 
     createLabelsVertical (labelText, 0, 0, HPos.RIGHT);
-    textOut = createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT));
+    textOut =
+        createTextFields (new DataLayout (1, 0, getRows (), Pos.CENTER_LEFT, false));
   }
 
   // ---------------------------------------------------------------------------------//

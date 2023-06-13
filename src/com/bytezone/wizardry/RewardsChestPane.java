@@ -28,7 +28,7 @@ public class RewardsChestPane extends BorderedDataPane
     String[] labels = { "Is chest" };
     createLabelsVertical (labels, 0, 0, HPos.RIGHT);
 
-    DataLayout dataLayout1 = new DataLayout (1, 0, 1, Pos.CENTER_LEFT);
+    DataLayout dataLayout1 = new DataLayout (1, 0, 1, Pos.CENTER_LEFT, false);
     chest = createTextFields (dataLayout1);
   }
 
