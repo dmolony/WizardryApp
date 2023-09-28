@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="WizardryApp" default="jar" basedir=".">
+
+  <property name="srcDir" location="src" />
+  <property name="binDir" location="bin" />
+  <property name="jarFolder" location="${user.home}/Dropbox/Java" />
+  <property name="jarFile" location="${jarFolder}/WizardryApp.jar" />
+
+  <target name="version">
+    <echo>WizardryApp.jar</echo>
+    <echo>${ant.version}</echo>
+    <echo>Java/JVM version: ${ant.java.version}</echo>
+    <echo>Java/JVM detail version: ${java.version}</echo>
+  </target>
+
+  <target name="init" depends="version">
+    <delete file="${binDir}/*.class" />
+    <delete file="${jarFile}" />
+  </target>
+
+  <target name="compile" depends="init">
+    <javac debug="on" srcdir="${srcDir}" destdir="${binDir}" includeantruntime="false">
+      <classpath>
+        <pathelement location="." />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="${jarFile}">
+      <fileset dir="${binDir}" />
+      <zipfileset src="${jarFolder}/WizardryData.jar" />
+      <zipfileset src="${jarFolder}/AppBase.jar" />
+      <manifest>
+        <attribute name="Main-Class" value="com.bytezone.wizardry.WizardryApp" />
+      </manifest>
+    </jar>
+  </target>
+
+</project>
