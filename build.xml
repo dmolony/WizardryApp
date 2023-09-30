@@ -4,8 +4,8 @@
 
   <property name="srcDir" location="src" />
   <property name="binDir" location="bin" />
-  <property name="jarFolder" location="${user.home}/Dropbox/Java" />
-  <property name="jarFile" location="${jarFolder}/WizardryApp.jar" />
+  <property name="jarDir" location="${user.home}/Dropbox/Java" />
+  <property name="jarFile" location="${jarDir}/WizardryApp.jar" />
 
   <target name="version">
     <echo>WizardryApp.jar</echo>
@@ -30,8 +30,8 @@
   <target name="jar" depends="compile">
     <jar destfile="${jarFile}">
       <fileset dir="${binDir}" />
-      <zipfileset src="${jarFolder}/WizardryData.jar" />
-      <zipfileset src="${jarFolder}/AppBase.jar" />
+      <zipfileset src="${jarDir}/WizardryData.jar" />
+      <zipfileset src="${jarDir}/AppBase.jar" />
       <manifest>
         <attribute name="Main-Class" value="com.bytezone.wizardry.WizardryApp" />
       </manifest>
