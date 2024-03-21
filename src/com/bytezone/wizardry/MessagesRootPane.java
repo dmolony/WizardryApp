@@ -14,7 +14,7 @@ public class MessagesRootPane extends DataPane
   public MessagesRootPane ()
   // ---------------------------------------------------------------------------------//
   {
-    super (3, 25);                             // columns, rows
+    super (3, 25);                            // columns, rows
 
     setAllColumnConstraints (10);             // all columns 10 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets
