@@ -2,7 +2,7 @@
 Cross-platform utility to examine Wizardry disk images. Currently works on the first three scenarios.
 
 ## Instructions
-Select a tab to display the various Wizardry components
+Use the File menu to open an existing Wizardry Scenario disk image. Select a tab to display the various Wizardry components
 
 ## Screens
 ### Characters
@@ -31,9 +31,9 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 <img src="resources/maze.png" alt="drawing" width="900"/>
 
 ## Installation
-- Download and install [Java 19](https://www.oracle.com/java/technologies/downloads/) and [JavaFX 19](https://gluonhq.com/products/javafx/).
-- Download [WizardryApp](https://github.com/dmolony/MazeWalker/releases).
-- Create executable run file.  
+- Download and install the latest [JDK](https://www.oracle.com/java/technologies/downloads/) and [JavaFX](https://gluonhq.com/products/javafx/) binaries.
+- Download [WizardryApp](https://github.com/dmolony/WizardryApp/releases).
+- Create executable run file as follows:  
 
 #### MacOS or Linux shell file  
 
