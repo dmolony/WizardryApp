@@ -55,3 +55,7 @@ C:\path\to\jdk-19\bin\java.exe                    \
 
 #### Hints
 The first line in each of the above shell files can usually be shortened to 'java   \\' as it's just the command to execute java on your system. The second line must be the path to wherever you placed the javafx download.
+
+## Wizardry 4
+There is limited support for the fourth scenario.
+<img src="resources/wiz4 characters.png" alt="drawing" width="900"/>
