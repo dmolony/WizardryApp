@@ -38,8 +38,8 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 #### MacOS or Linux shell file  
 
 ```
-/path/to/jdk-19.jdk/Contents/Home/bin/java        \
---module-path /path/to/javafx-sdk-19/lib          \
+/path/to/jdk/Contents/Home/bin/java               \
+--module-path /path/to/javafx-sdk/lib             \
 --add-modules=javafx.controls                     \
 -jar /path/to/WizardryApp.jar
 ```  
@@ -47,8 +47,8 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 #### Windows batch file  
 
 ```
-C:\path\to\jdk-19\bin\java.exe                    \
---module-path C:\path\to\javafx-sdk-19\lib        \
+C:\path\to\jdk\bin\java.exe                       \
+--module-path C:\path\to\javafx-sdk\lib           \
 --add-modules=javafx.controls                     \
 -jar C:\path\to\WizardryApp.jar
 ```
