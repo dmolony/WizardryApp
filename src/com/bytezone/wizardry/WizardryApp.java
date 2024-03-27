@@ -12,8 +12,8 @@ import com.bytezone.appbase.RecentFiles;
 import com.bytezone.appbase.RecentFiles.FileNameSelectedListener;
 import com.bytezone.appbase.StatusBar;
 import com.bytezone.wizardry.data.DiskFormatException;
-import com.bytezone.wizardry.data.Wizardry;
 import com.bytezone.wizardry.data.WizardryData;
+import com.bytezone.wizardry.data.WizardryDisk;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -37,7 +37,7 @@ public class WizardryApp extends AppBase implements FileNameSelectedListener
   private final Menu recentFilesMenu = new Menu ("Recent files");
 
   private final RecentFiles recentFiles = new RecentFiles (recentFilesMenu);
-  private WizardryData wizardry;
+  private WizardryData wizardryData;
   private WizardryTabPane wizardryTabPane;
 
   private List<ScenarioChangeListener> listeners = new ArrayList<> ();
@@ -73,7 +73,8 @@ public class WizardryApp extends AppBase implements FileNameSelectedListener
   {
     menu.getItems ().add (menuItem);
     menuItem.setOnAction (event);
-    menuItem.setAccelerator (new KeyCodeCombination (keyCode, KeyCombination.SHORTCUT_DOWN));
+    menuItem
+        .setAccelerator (new KeyCodeCombination (keyCode, KeyCombination.SHORTCUT_DOWN));
   }
 
   // ---------------------------------------------------------------------------------//
@@ -113,13 +114,19 @@ public class WizardryApp extends AppBase implements FileNameSelectedListener
   {
     try
     {
-      wizardry = Wizardry.getWizardryData (fileName);
+      WizardryDisk disk = new WizardryDisk (fileName);
+
+      if (disk == null)
+        throw new DiskFormatException ("Not a Wizardry disk: " + fileName);
+
+      wizardryData = disk.getWizardryData ();
+
       recentFiles.addLastFileName (fileName);
 
       for (ScenarioChangeListener listener : listeners)
-        listener.scenarioChanged (wizardry);
+        listener.scenarioChanged (wizardryData);
 
-      primaryStage.setTitle (wizardry.getScenarioName ());
+      primaryStage.setTitle (wizardryData.getScenarioName ());
     }
     catch (DiskFormatException | FileNotFoundException e)
     {
