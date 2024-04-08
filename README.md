@@ -31,7 +31,7 @@ Navigate around the maze using the A/W/S/D keys. To go directly to a particular 
 <img src="resources/maze.png" alt="drawing" width="900"/>
 
 ## Installation
-- Download and install the latest [JDK](https://www.oracle.com/java/technologies/downloads/) and [JavaFX](https://gluonhq.com/products/javafx/) binaries.
+- Download and install the latest [JDK and JavaFX](https://jdk.java.net/) binaries.
 - Download [WizardryApp](https://github.com/dmolony/WizardryApp/releases).
 - Create executable run file as follows:  
 
