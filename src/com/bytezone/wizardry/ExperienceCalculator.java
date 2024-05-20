@@ -164,8 +164,8 @@ public class ExperienceCalculator extends DataPane
     int expUnaffect = values[MAGIC_RESISTANCE] == 0 ? 0
         : getBonus (40, (values[MAGIC_RESISTANCE] / 10 + 1));
 
-    int expFlags1 = getBonus (35, Integer.bitCount (values[RESISTANCE] & 0x7E));    // 6 bits
-    int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));       // 7 bits
+    int expFlags1 = getBonus (35, Integer.bitCount (values[RESISTANCE] & 0x7E)); // 6 bits
+    int expFlags2 = getBonus (40, Integer.bitCount (values[ABILITY] & 0x7F));    // 7 bits
 
     int total = expHitPoints + expAc + expMage + expPriest + expDrain + expHeal
         + expDamage + expUnaffect + expFlags1 + expFlags2;
