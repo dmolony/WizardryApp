@@ -35,7 +35,7 @@ public class CharactersRootPane extends DataPane
     setAllColumnConstraints (10);             // all columns 10 pixels wide
     setPadding (defaultInsets);               // only the root pane has insets
 
-    setGridLinesVisible (false);
+    //    setGridLinesVisible (false);
 
     setLayout (characterPane1, 0, 0);
     setLayout (baggagePane, 0, 18);
@@ -55,7 +55,8 @@ public class CharactersRootPane extends DataPane
 
     getChildren ().addAll (characterPane1, characterPane2, sipvalPane, savingThrowPane,
         //        tempWepVsPane, //
-        monsterProtectPane, resistancePane, mageSpellsPane, priestSpellsPane, baggagePane);
+        monsterProtectPane, resistancePane, mageSpellsPane, priestSpellsPane,
+        baggagePane);
   }
 
   // ---------------------------------------------------------------------------------//
